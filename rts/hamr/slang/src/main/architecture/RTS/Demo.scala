@@ -23,8 +23,8 @@ object Demo extends App {
   def defaultScheduler(): Scheduler = {
     //return Schedulers.getRoundRobinScheduler(None())
     return Schedulers.getStaticScheduler(
-      Schedulers.defaultStaticSchedule,
-      Schedulers.defaultDomainToBridgeIdMap,
+      CustStaticSchedule.staticSchedule,
+      CustStaticSchedule.domainToBridgeIdMap,
       CustStaticSchedule.threadNickNames,
       HamrVision.getCommandProvider())
   }
