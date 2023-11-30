@@ -2,8 +2,8 @@
 
 package isolette.Devices
 
-import isolette._
 import org.sireum._
+import isolette._
 
 // This file will not be overwritten so is safe to edit
 object Temperature_Sensor_impl_temperature_sensor_cpi_thermostat {

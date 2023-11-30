@@ -2,8 +2,8 @@
 
 package isolette.Regulate
 
-import isolette.Isolette_Data_Model.Failure_Flag_impl
 import org.sireum._
+import isolette.Isolette_Data_Model.Failure_Flag_impl
 import isolette._
 
 // This file will not be overwritten so is safe to edit

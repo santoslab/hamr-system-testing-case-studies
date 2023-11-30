@@ -2,9 +2,9 @@
 
 package isolette.Devices
 
+import org.sireum._
 import isolette.Isolette_Environment.Heat
 import isolette._
-import org.sireum._
 
 // This file will not be overwritten so is safe to edit
 object Heat_Source_impl_heat_source_cpi_heat_controller {

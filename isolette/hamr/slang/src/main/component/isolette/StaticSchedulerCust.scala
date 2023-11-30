@@ -1,9 +1,9 @@
 // #Sireum
 package isolette
 
+import org.sireum._
 import art.scheduling.static.Schedule
 import art.scheduling.static.Schedule._
-import org.sireum._
 
 
 object StaticSchedulerCust {
