@@ -725,6 +725,42 @@ class SystemTestsCat extends SystemTestSuite {
 
     Art.finalizePhase(scheduler)
   }
+
+  test("Internal Failure -- Heat Control Off") {
+    Art.initializePhase(scheduler)
+
+    compute(ISZ(Hstep(2)))
+
+    compute(ISZ(RunToThread("RegMRI")))
+
+    val upperDesiredTempWstatus: TempWstatus_impl = TempWstatus_impl(101f, ValueStatus.Valid)
+    val lowerDesiredTempWstatus: TempWstatus_impl = TempWstatus_impl(99f, ValueStatus.Valid)
+    val currentTempWstatus: TempWstatus_impl = TempWstatus_impl(98f, ValueStatus.Valid)
+    val internal_failure: Failure_Flag_impl = Failure_Flag_impl(T)
+
+    val mode: Regulator_Mode.Type = Regulator_Mode.Normal_Regulator_Mode
+
+    RegMRI.put_concrete_inputs(
+      api_upper_desired_tempWstatus = upperDesiredTempWstatus,
+      api_lower_desired_tempWstatus = lowerDesiredTempWstatus,
+      api_current_tempWstatus = currentTempWstatus,
+      api_regulator_mode = mode
+    )
+
+    RegMRM.put_internal_failure(internal_failure)
+    RegMRM.put_current_tempWstatus(currentTempWstatus)
+
+    RegMHS.put_current_tempWstatus(currentTempWstatus)
+
+
+    compute(ISZ(Hstep(1)))
+
+
+    assert(RegMHS.get_api_heat_control() == On_Off.Off) //TODO: The test is failing when it should not
+
+    Art.finalizePhase(scheduler)
+  }
+
   test("Fail Mode -- Heat Control Off") {
     Art.initializePhase(scheduler)
 
