@@ -1,7 +1,7 @@
 // #Sireum
 // @formatter:off
 
-// This file is auto-generated from Heat.scala, Interface_Interaction.scala, PhysicalTemp_impl.scala, ValueStatus.scala, TempWstatus_impl.scala, On_Off.scala, Status.scala, Temp_impl.scala, Regulator_Mode.scala, Failure_Flag_impl.scala, Monitor_Mode.scala, Base_Types.scala, Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface__Containers.scala, Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source__Containers.scala, Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode__Containers.scala, Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure__Containers.scala, Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface__Containers.scala, Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm__Containers.scala, Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode__Containers.scala, Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure__Containers.scala, operator_interface_thread_impl_operator_interface_oip_oit__Containers.scala, Temperature_Sensor_impl_temperature_sensor_cpi_thermostat__Containers.scala, Heat_Source_impl_heat_source_cpi_heat_controller__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala
+// This file is auto-generated from Heat.scala, Interface_Interaction.scala, PhysicalTemp_impl.scala, ValueStatus.scala, TempWstatus_impl.scala, On_Off.scala, Status.scala, Temp_impl.scala, Regulator_Mode.scala, Failure_Flag_impl.scala, Monitor_Mode.scala, Base_Types.scala, Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface__Containers.scala, Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source__Containers.scala, Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode__Containers.scala, Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure__Containers.scala, Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface__Containers.scala, Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm__Containers.scala, Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode__Containers.scala, Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure__Containers.scala, operator_interface_thread_impl_operator_interface_oip_oit__Containers.scala, Temperature_Sensor_impl_temperature_sensor_cpi_thermostat__Containers.scala, Heat_Source_impl_heat_source_cpi_heat_controller__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala, Regulate_Subsystem_Containers.scala
 
 package isolette
 
@@ -956,6 +956,24 @@ object JSON {
     @pure def print_artEmpty(o: art.Empty): ST = {
       return printObject(ISZ(
         ("type", st""""art.Empty"""")
+      ))
+    }
+
+    @pure def printsystem_testsrstRegulate_Subsystem_Inputs_Container(o: system_tests.rst.Regulate_Subsystem_Inputs_Container): ST = {
+      return printObject(ISZ(
+        ("type", st""""system_tests.rst.Regulate_Subsystem_Inputs_Container""""),
+        ("lowerDesiredTempWStatus", printIsolette_Data_ModelTempWstatus_impl(o.lowerDesiredTempWStatus)),
+        ("upperDesiredTempWStatus", printIsolette_Data_ModelTempWstatus_impl(o.upperDesiredTempWStatus)),
+        ("currentTempWStatus", printIsolette_Data_ModelTempWstatus_impl(o.currentTempWStatus)),
+        ("mode", printIsolette_Data_ModelRegulator_ModeType(o.mode)),
+        ("internalFailure", printIsolette_Data_ModelFailure_Flag_impl(o.internalFailure))
+      ))
+    }
+
+    @pure def printsystem_testsrstRegulate_Subsystem_Outputs_Container(o: system_tests.rst.Regulate_Subsystem_Outputs_Container): ST = {
+      return printObject(ISZ(
+        ("type", st""""system_tests.rst.Regulate_Subsystem_Outputs_Container""""),
+        ("heat_control", printIsolette_Data_ModelOn_OffType(o.heat_control))
       ))
     }
 
@@ -2743,6 +2761,48 @@ object JSON {
         parser.parseObjectType("art.Empty")
       }
       return art.Empty()
+    }
+
+    def parsesystem_testsrstRegulate_Subsystem_Inputs_Container(): system_tests.rst.Regulate_Subsystem_Inputs_Container = {
+      val r = parsesystem_testsrstRegulate_Subsystem_Inputs_ContainerT(F)
+      return r
+    }
+
+    def parsesystem_testsrstRegulate_Subsystem_Inputs_ContainerT(typeParsed: B): system_tests.rst.Regulate_Subsystem_Inputs_Container = {
+      if (!typeParsed) {
+        parser.parseObjectType("system_tests.rst.Regulate_Subsystem_Inputs_Container")
+      }
+      parser.parseObjectKey("lowerDesiredTempWStatus")
+      val lowerDesiredTempWStatus = parseIsolette_Data_ModelTempWstatus_impl()
+      parser.parseObjectNext()
+      parser.parseObjectKey("upperDesiredTempWStatus")
+      val upperDesiredTempWStatus = parseIsolette_Data_ModelTempWstatus_impl()
+      parser.parseObjectNext()
+      parser.parseObjectKey("currentTempWStatus")
+      val currentTempWStatus = parseIsolette_Data_ModelTempWstatus_impl()
+      parser.parseObjectNext()
+      parser.parseObjectKey("mode")
+      val mode = parseIsolette_Data_ModelRegulator_ModeType()
+      parser.parseObjectNext()
+      parser.parseObjectKey("internalFailure")
+      val internalFailure = parseIsolette_Data_ModelFailure_Flag_impl()
+      parser.parseObjectNext()
+      return system_tests.rst.Regulate_Subsystem_Inputs_Container(lowerDesiredTempWStatus, upperDesiredTempWStatus, currentTempWStatus, mode, internalFailure)
+    }
+
+    def parsesystem_testsrstRegulate_Subsystem_Outputs_Container(): system_tests.rst.Regulate_Subsystem_Outputs_Container = {
+      val r = parsesystem_testsrstRegulate_Subsystem_Outputs_ContainerT(F)
+      return r
+    }
+
+    def parsesystem_testsrstRegulate_Subsystem_Outputs_ContainerT(typeParsed: B): system_tests.rst.Regulate_Subsystem_Outputs_Container = {
+      if (!typeParsed) {
+        parser.parseObjectType("system_tests.rst.Regulate_Subsystem_Outputs_Container")
+      }
+      parser.parseObjectKey("heat_control")
+      val heat_control = parseIsolette_Data_ModelOn_OffType()
+      parser.parseObjectNext()
+      return system_tests.rst.Regulate_Subsystem_Outputs_Container(heat_control)
     }
 
     def eof(): B = {
@@ -4541,6 +4601,42 @@ object JSON {
       return r
     }
     val r = to(s, f_artEmpty _)
+    return r
+  }
+
+  def fromsystem_testsrstRegulate_Subsystem_Inputs_Container(o: system_tests.rst.Regulate_Subsystem_Inputs_Container, isCompact: B): String = {
+    val st = Printer.printsystem_testsrstRegulate_Subsystem_Inputs_Container(o)
+    if (isCompact) {
+      return st.renderCompact
+    } else {
+      return st.render
+    }
+  }
+
+  def tosystem_testsrstRegulate_Subsystem_Inputs_Container(s: String): Either[system_tests.rst.Regulate_Subsystem_Inputs_Container, Json.ErrorMsg] = {
+    def fsystem_testsrstRegulate_Subsystem_Inputs_Container(parser: Parser): system_tests.rst.Regulate_Subsystem_Inputs_Container = {
+      val r = parser.parsesystem_testsrstRegulate_Subsystem_Inputs_Container()
+      return r
+    }
+    val r = to(s, fsystem_testsrstRegulate_Subsystem_Inputs_Container _)
+    return r
+  }
+
+  def fromsystem_testsrstRegulate_Subsystem_Outputs_Container(o: system_tests.rst.Regulate_Subsystem_Outputs_Container, isCompact: B): String = {
+    val st = Printer.printsystem_testsrstRegulate_Subsystem_Outputs_Container(o)
+    if (isCompact) {
+      return st.renderCompact
+    } else {
+      return st.render
+    }
+  }
+
+  def tosystem_testsrstRegulate_Subsystem_Outputs_Container(s: String): Either[system_tests.rst.Regulate_Subsystem_Outputs_Container, Json.ErrorMsg] = {
+    def fsystem_testsrstRegulate_Subsystem_Outputs_Container(parser: Parser): system_tests.rst.Regulate_Subsystem_Outputs_Container = {
+      val r = parser.parsesystem_testsrstRegulate_Subsystem_Outputs_Container()
+      return r
+    }
+    val r = to(s, fsystem_testsrstRegulate_Subsystem_Outputs_Container _)
     return r
   }
 

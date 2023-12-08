@@ -1,7 +1,7 @@
 // #Sireum
 // @formatter:off
 
-// This file is auto-generated from Heat.scala, Interface_Interaction.scala, PhysicalTemp_impl.scala, ValueStatus.scala, TempWstatus_impl.scala, On_Off.scala, Status.scala, Temp_impl.scala, Regulator_Mode.scala, Failure_Flag_impl.scala, Monitor_Mode.scala, Base_Types.scala, Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface__Containers.scala, Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source__Containers.scala, Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode__Containers.scala, Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure__Containers.scala, Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface__Containers.scala, Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm__Containers.scala, Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode__Containers.scala, Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure__Containers.scala, operator_interface_thread_impl_operator_interface_oip_oit__Containers.scala, Temperature_Sensor_impl_temperature_sensor_cpi_thermostat__Containers.scala, Heat_Source_impl_heat_source_cpi_heat_controller__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala
+// This file is auto-generated from Heat.scala, Interface_Interaction.scala, PhysicalTemp_impl.scala, ValueStatus.scala, TempWstatus_impl.scala, On_Off.scala, Status.scala, Temp_impl.scala, Regulator_Mode.scala, Failure_Flag_impl.scala, Monitor_Mode.scala, Base_Types.scala, Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface__Containers.scala, Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source__Containers.scala, Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode__Containers.scala, Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure__Containers.scala, Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface__Containers.scala, Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm__Containers.scala, Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode__Containers.scala, Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure__Containers.scala, operator_interface_thread_impl_operator_interface_oip_oit__Containers.scala, Temperature_Sensor_impl_temperature_sensor_cpi_thermostat__Containers.scala, Heat_Source_impl_heat_source_cpi_heat_controller__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala, Regulate_Subsystem_Containers.scala
 
 package isolette
 
@@ -162,6 +162,10 @@ object MsgPack {
     val DevicesHeat_Source_impl_heat_source_cpi_heat_controller_PostState_Container_PS: Z = 42
 
     val _artEmpty: Z = 43
+
+    val system_testsrstRegulate_Subsystem_Inputs_Container: Z = 44
+
+    val system_testsrstRegulate_Subsystem_Outputs_Container: Z = 45
 
   }
 
@@ -880,6 +884,20 @@ object MsgPack {
 
     def write_artEmpty(o: art.Empty): Unit = {
       writer.writeZ(Constants._artEmpty)
+    }
+
+    def writesystem_testsrstRegulate_Subsystem_Inputs_Container(o: system_tests.rst.Regulate_Subsystem_Inputs_Container): Unit = {
+      writer.writeZ(Constants.system_testsrstRegulate_Subsystem_Inputs_Container)
+      writeIsolette_Data_ModelTempWstatus_impl(o.lowerDesiredTempWStatus)
+      writeIsolette_Data_ModelTempWstatus_impl(o.upperDesiredTempWStatus)
+      writeIsolette_Data_ModelTempWstatus_impl(o.currentTempWStatus)
+      writeIsolette_Data_ModelRegulator_ModeType(o.mode)
+      writeIsolette_Data_ModelFailure_Flag_impl(o.internalFailure)
+    }
+
+    def writesystem_testsrstRegulate_Subsystem_Outputs_Container(o: system_tests.rst.Regulate_Subsystem_Outputs_Container): Unit = {
+      writer.writeZ(Constants.system_testsrstRegulate_Subsystem_Outputs_Container)
+      writeIsolette_Data_ModelOn_OffType(o.heat_control)
     }
 
     def result: ISZ[U8] = {
@@ -2361,6 +2379,36 @@ object MsgPack {
         reader.expectZ(Constants._artEmpty)
       }
       return art.Empty()
+    }
+
+    def readsystem_testsrstRegulate_Subsystem_Inputs_Container(): system_tests.rst.Regulate_Subsystem_Inputs_Container = {
+      val r = readsystem_testsrstRegulate_Subsystem_Inputs_ContainerT(F)
+      return r
+    }
+
+    def readsystem_testsrstRegulate_Subsystem_Inputs_ContainerT(typeParsed: B): system_tests.rst.Regulate_Subsystem_Inputs_Container = {
+      if (!typeParsed) {
+        reader.expectZ(Constants.system_testsrstRegulate_Subsystem_Inputs_Container)
+      }
+      val lowerDesiredTempWStatus = readIsolette_Data_ModelTempWstatus_impl()
+      val upperDesiredTempWStatus = readIsolette_Data_ModelTempWstatus_impl()
+      val currentTempWStatus = readIsolette_Data_ModelTempWstatus_impl()
+      val mode = readIsolette_Data_ModelRegulator_ModeType()
+      val internalFailure = readIsolette_Data_ModelFailure_Flag_impl()
+      return system_tests.rst.Regulate_Subsystem_Inputs_Container(lowerDesiredTempWStatus, upperDesiredTempWStatus, currentTempWStatus, mode, internalFailure)
+    }
+
+    def readsystem_testsrstRegulate_Subsystem_Outputs_Container(): system_tests.rst.Regulate_Subsystem_Outputs_Container = {
+      val r = readsystem_testsrstRegulate_Subsystem_Outputs_ContainerT(F)
+      return r
+    }
+
+    def readsystem_testsrstRegulate_Subsystem_Outputs_ContainerT(typeParsed: B): system_tests.rst.Regulate_Subsystem_Outputs_Container = {
+      if (!typeParsed) {
+        reader.expectZ(Constants.system_testsrstRegulate_Subsystem_Outputs_Container)
+      }
+      val heat_control = readIsolette_Data_ModelOn_OffType()
+      return system_tests.rst.Regulate_Subsystem_Outputs_Container(heat_control)
     }
 
   }
@@ -3857,6 +3905,36 @@ object MsgPack {
       return r
     }
     val r = to(data, f_artEmpty _)
+    return r
+  }
+
+  def fromsystem_testsrstRegulate_Subsystem_Inputs_Container(o: system_tests.rst.Regulate_Subsystem_Inputs_Container, pooling: B): ISZ[U8] = {
+    val w = Writer.Default(MessagePack.writer(pooling))
+    w.writesystem_testsrstRegulate_Subsystem_Inputs_Container(o)
+    return w.result
+  }
+
+  def tosystem_testsrstRegulate_Subsystem_Inputs_Container(data: ISZ[U8]): Either[system_tests.rst.Regulate_Subsystem_Inputs_Container, MessagePack.ErrorMsg] = {
+    def fsystem_testsrstRegulate_Subsystem_Inputs_Container(reader: Reader): system_tests.rst.Regulate_Subsystem_Inputs_Container = {
+      val r = reader.readsystem_testsrstRegulate_Subsystem_Inputs_Container()
+      return r
+    }
+    val r = to(data, fsystem_testsrstRegulate_Subsystem_Inputs_Container _)
+    return r
+  }
+
+  def fromsystem_testsrstRegulate_Subsystem_Outputs_Container(o: system_tests.rst.Regulate_Subsystem_Outputs_Container, pooling: B): ISZ[U8] = {
+    val w = Writer.Default(MessagePack.writer(pooling))
+    w.writesystem_testsrstRegulate_Subsystem_Outputs_Container(o)
+    return w.result
+  }
+
+  def tosystem_testsrstRegulate_Subsystem_Outputs_Container(data: ISZ[U8]): Either[system_tests.rst.Regulate_Subsystem_Outputs_Container, MessagePack.ErrorMsg] = {
+    def fsystem_testsrstRegulate_Subsystem_Outputs_Container(reader: Reader): system_tests.rst.Regulate_Subsystem_Outputs_Container = {
+      val r = reader.readsystem_testsrstRegulate_Subsystem_Outputs_Container()
+      return r
+    }
+    val r = to(data, fsystem_testsrstRegulate_Subsystem_Outputs_Container _)
     return r
   }
 

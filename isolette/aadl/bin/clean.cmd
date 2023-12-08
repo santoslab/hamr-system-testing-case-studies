@@ -24,8 +24,11 @@ val slangDir = hamrDir / "slang"
 val toKeep = ops.ISZOps(ISZ(
   (slangDir / ".idea"),
   (slangDir / "bin" / "run-logika.cmd"),
+  (slangDir / "bin" / "sergen_sys.cmd"),
+  (slangDir / "bin" / "slangcheck_sys.cmd"),
   (slangDir / "src" / "main" / "architecture" / "isolette" / "Demo.scala"),
   (slangDir / "src" / "main" / "component"),
+  (slangDir / "src" / "main" / "util" / "isolette" / "system_tests"),
   (slangDir / "src" / "test" / "bridge"),
   (slangDir / "src" / "test" / "system")
 ))

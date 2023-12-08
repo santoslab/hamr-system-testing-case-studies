@@ -49,13 +49,14 @@ val files: ISZ[String] = ISZ("../src/main/data/isolette/Isolette_Environment/Hea
                              "../src/main/data/isolette/Devices/Heat_Source_impl_heat_source_cpi_heat_controller__Containers.scala",
                              "../src/main/util/isolette/runtimemonitor/ObservationKind.scala",
                              "../src/main/art/art/DataContent.scala",
-                             "../src/main/data/isolette/Aux_Types.scala")
+                             "../src/main/data/isolette/Aux_Types.scala",
+
+  "../src/main/util/isolette/system_tests/rst/Regulate_Subsystem_Containers.scala"
+)
 
 val toolargs: String = st"${(files, " ")}".render
 
 (Os.slashDir.up / "src" / "main" / "util" / "isolette").mkdirAll()
 
-proc"$sireum proyek slangcheck -p isolette -o ${Os.slashDir.up}/src/main/util/isolette ${Os.slashDir.up} $toolargs".at(Os.slashDir).console.runCheck()
-
-// call to the tools version of SlangCheck which does not invoke Tipe
-//proc"$sireum tools slangcheck generator -p isolette -o ${Os.slashDir.up}/src/main/util/isolette $toolargs".at(Os.slashDir).console.runCheck()
+//proc"$sireum proyek slangcheck -p isolette -o ${Os.slashDir.up}/src/main/util/isolette ${Os.slashDir.up} $toolargs".at(Os.slashDir).console.runCheck()
+proc"$sireum tools slangcheck generator -p isolette -o ${Os.slashDir.up}/src/main/util/isolette $toolargs".at(Os.slashDir).console.runCheck()
