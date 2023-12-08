@@ -3,7 +3,8 @@ package s
 
 import org.sireum.Cli.SireumProyekSlangcheckOption
 import org.sireum._
-import org.sireum.lang.symbol.TypeInfo
+import org.sireum.lang.ast.Typed
+import org.sireum.lang.symbol.{Resolver, TypeInfo}
 import org.sireum.lang.tipe.TypeHierarchy
 import org.sireum.logika.Config
 import org.sireum.logika.Config.StrictPureMode
@@ -38,6 +39,28 @@ object SystemTestArtifactGen extends App {
     reporter.printMessages()
 
     return res + (if (reporter.hasError) 100 else 0)
+  }
+
+  @pure def astTypedNameString(packageName: ISZ[String], t: Typed): ST = {
+    t match {
+      case atn: Typed.Name => return Resolver.typeNameString(packageName, atn.ids)
+      case _ => halt(s"Need to handle $t")
+    }
+  }
+
+  @pure def astTypedName(packageName: ISZ[String], t: Typed): ST = {
+
+    t match {
+      case atn: Typed.Name => return Resolver.typeName(packageName, atn.ids)
+      case _ => halt(s"Need to handle $t")
+    }
+  }
+
+  def builtIn(typed: Typed): B = {
+    typed match {
+      case Typed.Name(ISZ("org", "sireum", _), _) => return T
+      case _ => return F
+    }
   }
 
   def run(projectRoot: Os.Path, containerUris: ISZ[String], reporter: Reporter): Z = {
@@ -109,7 +132,9 @@ object SystemTestArtifactGen extends App {
       var nextEntriesViaProfile: ISZ[ST] = ISZ()
       for (v <- entry.vars.entries) {
         val typ = v._2.typedOpt.get.asInstanceOf[org.sireum.lang.ast.Typed.Name]
-        val nextMethodName = st"next${(ops.ISZOps(typ.ids).drop(1), "")}".render
+        val typeName = astTypedNameString(ISZ(basePackageName), typ)
+
+        val nextMethodName = s"next$typeName"
 
         freshLibs = freshLibs :+ st"${v._1} = ${simpleUtilName}.freshRandomLib"
         profileEntries = profileEntries :+ st"var ${v._1} : RandomLib"
@@ -123,7 +148,7 @@ object SystemTestArtifactGen extends App {
             |package ${packageName}
             |
             |import org.sireum._
-            |import isolette._
+            |import ${basePackageName}._
             |import org.sireum.Random.Impl.Xoshiro256
             |
             |$doNotEdit
