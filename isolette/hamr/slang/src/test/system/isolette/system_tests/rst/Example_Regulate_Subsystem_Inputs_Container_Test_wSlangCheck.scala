@@ -46,7 +46,7 @@ class Example_Regulate_Subsystem_Inputs_Container_Test_wSlangCheck
 
   val testMatrix: Map[String, TestRow] = Map.empty ++ ISZ(
     "testFamilyName" ~> TestRow(
-      testMethod = NameProvider("Schema-Name", ((input_container: Any, output_container: Any) => T).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Schema-Name", ((input_container: Any, property_function: Any) => T).asInstanceOf[(Any, Any) => B]),
       profile =getDefaultProfile,
       preStateCheck = ((container: Any) => T).asInstanceOf[Any => B],
       property = NameProvider("Property-Name", ((input_container: Any, output_container: Any) => T).asInstanceOf[(Any, Any) => B])

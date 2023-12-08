@@ -8,7 +8,7 @@ import isolette._
 object TestIt_Example_Regulate_Subsystem_Outputs_Container_DSC_Test_Harness extends App {
 
   override def main(args: ISZ[String]): Z = {
-    System.setProperty("TEST_FAMILY_NAME", "<key from testMatrix>")
+    System.setProperty("TEST_FAMILY_NAME", "testFamilyName")
 
     val instance = new Example_Regulate_Subsystem_Outputs_Container_DSC_Test_Harness()
 

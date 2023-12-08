@@ -1,5 +1,3 @@
-// #Sireum
-
 package isolette.system_tests.rst
 
 import org.sireum._
