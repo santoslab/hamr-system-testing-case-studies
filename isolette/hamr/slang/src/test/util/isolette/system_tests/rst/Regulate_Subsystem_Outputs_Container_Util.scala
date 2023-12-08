@@ -1,5 +1,3 @@
-// #Sireum
-
 package isolette.system_tests.rst
 
 import org.sireum._
@@ -10,11 +8,13 @@ import org.sireum.Random.Impl.Xoshiro256
 
 object Regulate_Subsystem_Outputs_Container_Util {
 
-  def freshRandomLib: RandomLib = {
-    return RandomLib(Random.Gen64Impl(Xoshiro256.createSeed(Regulate_Subsystem_Outputs_Container_UtilI.getSeed)))
+  def getSeed: U64 = {
+    val rand = new java.util.Random()
+    rand.setSeed(rand.nextLong())
+    return U64(rand.nextLong())
   }
-}
 
-@ext object Regulate_Subsystem_Outputs_Container_UtilI {
-  def getSeed: U64 = $
+  def freshRandomLib: RandomLib = {
+    return RandomLib(Random.Gen64Impl(Xoshiro256.createSeed(getSeed)))
+  }
 }

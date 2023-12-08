@@ -1,5 +1,3 @@
-// #Sireum
-
 package isolette.system_tests.rst
 
 import org.sireum._
@@ -23,7 +21,17 @@ object Regulate_Subsystem_Outputs_Container_Profile {
 
   // nextH will return None() if SlangCheck is unable to satisfy a field's filter
   def nextH(profile: Regulate_Subsystem_Outputs_Container_Profile): Option[Regulate_Subsystem_Outputs_Container] = {
-    return Regulate_Subsystem_Outputs_Container_ProfileI.next(profile)
+    try {
+      return Some(Regulate_Subsystem_Outputs_Container (
+        heat_control = profile.heat_control.nextIsolette_Data_ModelOn_OffType(),
+        display_temperature = profile.display_temperature.nextIsolette_Data_ModelTemp_impl(),
+        regulator_status = profile.regulator_status.nextIsolette_Data_ModelStatusType(),
+        mode = profile.mode.nextIsolette_Data_ModelRegulator_ModeType()))
+    } catch {
+      case e: AssertionError =>
+        // SlangCheck was unable to satisfy a datatype's filter
+        return None()
+    }
   }
 
   def getDefaultProfile: Regulate_Subsystem_Outputs_Container_Profile = {
@@ -40,11 +48,7 @@ object Regulate_Subsystem_Outputs_Container_Profile {
   }
 }
 
-@ext object Regulate_Subsystem_Outputs_Container_ProfileI {
-  def next(profile: Regulate_Subsystem_Outputs_Container_Profile): Option[Regulate_Subsystem_Outputs_Container] = $
-}
-
-@record class Regulate_Subsystem_Outputs_Container_Profile (
+case class Regulate_Subsystem_Outputs_Container_Profile (
   var name: String,
   var numTests: Z,
   var numTestVectorGenRetries: Z,
@@ -52,5 +56,15 @@ object Regulate_Subsystem_Outputs_Container_Profile {
   var heat_control : RandomLib,
   var display_temperature : RandomLib,
   var regulator_status : RandomLib,
-  var mode : RandomLib
-)
+  var mode : RandomLib) extends org.sireum.$internal.MutableMarker {
+
+  override def $clonable: Boolean = F
+
+  override def $clonable_=(b: Boolean): org.sireum.$internal.MutableMarker = this
+
+  override def $owned: Boolean = F
+
+  override def $owned_=(b: Boolean): org.sireum.$internal.MutableMarker = this
+
+  override def $clone: org.sireum.$internal.MutableMarker = this
+}

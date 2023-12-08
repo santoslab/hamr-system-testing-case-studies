@@ -325,6 +325,7 @@ object SystemTestArtifactGen extends App {
       t6.writeOver(slangCheckTrait.render)
       reporter.info(None(), toolName, s"Wrote: ${t6}")
 
+
       val exampleSlangCheckPath = packagePath :+ s"Example_${simpleContainerName}_Test_wSlangCheck"
       val exampleSlangCheckName = st"${(exampleSlangCheckPath, ".")}".render
       val simpleExampleSlangCheckName = ops.ISZOps(exampleSlangCheckPath).last
@@ -380,7 +381,7 @@ object SystemTestArtifactGen extends App {
             |    "testFamilyName" ~> TestRow(
             |      testMethod = NameProvider("Schema-Name", ((input_container: Any, property_function: Any) => T).asInstanceOf[(Any, Any) => B]),
             |      profile =getDefaultProfile,
-            |      preStateCheck = ((container: Any) => T).asInstanceOf[Any => B],
+            |      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
             |      property = NameProvider("Property-Name", ((input_container: Any, output_container: Any) => T).asInstanceOf[(Any, Any) => B])
             |    )
             |  )
@@ -420,6 +421,14 @@ object SystemTestArtifactGen extends App {
             |        }
             |      }
             |    }
+            |  }
+            |
+            |  // a pre-state container filter could prove useful/necessary in order to
+            |  // ensure that the values in the container will satisfy the assume/requires clause
+            |  // of a component in the system that will receive those values
+            |  def examplePreStateContainerFilter(container: ${simpleContainerName}): B = {
+            |    // e.g. return container.low < container.high
+            |    return T
             |  }
             |}"""
 
