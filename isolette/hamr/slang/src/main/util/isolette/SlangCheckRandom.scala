@@ -933,52 +933,14 @@ Regulate_Subsystem_Containers.scala
       halt("Requirements too strict to generate")
     }
 
-  // ============= String ===================
-
-  def get_Config_String: Config_String
-  def set_Config_String(config: Config_String): RandomLib
-
   def nextString(): String = {
-
-    var length: Z = gen.nextZBetween(get_Config_String.minSize, get_Config_String.maxSize)
+    val length: Z = gen.nextZBetween(0, get_numElement)
     var str: String = ""
     for(r <- 0 until length){
-      str = s"${str}${nextC().string}"
+      str = s"${str}${gen.nextC().string}"
     }
 
-    if(get_Config_String.attempts >= 0) {
-      for (i <- 0 to get_Config_String.attempts) {
-        if(get_Config_String.filter(str)) {
-          return str
-        }
-        if(get_Config_String.verbose) {
-          println(s"Retrying for failing value: $str")
-        }
-
-        length = gen.nextZBetween(get_Config_String.minSize, get_Config_String.maxSize)
-        str = ""
-        for (r <- 0 until length) {
-          str = s"${str}${nextC().string}"
-        }
-      }
-    } else {
-      while(T) {
-        if (get_Config_String.filter(str)) {
-          return str
-        }
-        if (get_Config_String.verbose) {
-          println(s"Retrying for failing value: $str")
-        }
-
-        length = gen.nextZBetween(get_Config_String.minSize, get_Config_String.maxSize)
-        str = ""
-        for (r <- 0 until length) {
-          str = s"${str}${nextC().string}"
-        }
-      }
-    }
-    assert(F, "Requirements too strict to generate")
-    halt("Requirements too strict to generate")
+    return str
   }
 
   // ============= art.DataContent ===================
@@ -1851,54 +1813,6 @@ Regulate_Subsystem_Containers.scala
        }
        value = nextString()
        v = Base_Types.String_Payload(value)
-     }
-    }
-
-    assert(F, "Requirements too strict to generate")
-    halt("Requirements too strict to generate")
-  }
-
-  //=================== ISZ[B] =====================
-  def get_Config_ISZB: Config_ISZB
-  def set_Config_ISZB(config: Config_ISZB): RandomLib
-
-  def nextISZB(): ISZ[B] = {
-
-    var length: Z = gen.nextZBetween(0, get_numElement)
-    var v: ISZ[B] = ISZ()
-    for (r <- 0 until length) {
-      v = v :+ nextB()
-    }
-
-    if(get_Config_ISZB.attempts >= 0) {
-     for(i <- 0 to get_Config_ISZB.attempts) {
-        if(get_Config_ISZB.filter(v)) {
-          return v
-        }
-        if (get_Config_ISZB.verbose) {
-          println(s"Retrying for failing value: $v")
-        }
-
-        length = gen.nextZBetween(0, get_numElement)
-        v = ISZ()
-        for (r <- 0 until length) {
-           v = v :+ nextB()
-        }
-     }
-    } else {
-     while(T) {
-       if(get_Config_ISZB.filter(v)) {
-         return v
-       }
-       if (get_Config_ISZB.verbose) {
-         println(s"Retrying for failing value: $v")
-       }
-
-       length = gen.nextZBetween(0, get_numElement)
-       v = ISZ()
-       for (r <- 0 until length) {
-          v = v :+ nextB()
-       }
      }
     }
 
@@ -6098,8 +6012,11 @@ Regulate_Subsystem_Containers.scala
 
   def nextsystem_testsrstRegulate_Subsystem_Outputs_Container(): system_tests.rst.Regulate_Subsystem_Outputs_Container = {
     var heat_control: Isolette_Data_Model.On_Off.Type = nextIsolette_Data_ModelOn_OffType()
+    var display_temperature: Isolette_Data_Model.Temp_impl = nextIsolette_Data_ModelTemp_impl()
+    var regulator_status: Isolette_Data_Model.Status.Type = nextIsolette_Data_ModelStatusType()
+    var mode: Isolette_Data_Model.Regulator_Mode.Type = nextIsolette_Data_ModelRegulator_ModeType()
 
-    var v: system_tests.rst.Regulate_Subsystem_Outputs_Container = system_tests.rst.Regulate_Subsystem_Outputs_Container(heat_control)
+    var v: system_tests.rst.Regulate_Subsystem_Outputs_Container = system_tests.rst.Regulate_Subsystem_Outputs_Container(heat_control, display_temperature, regulator_status, mode)
 
     if(get_Config_system_testsrstRegulate_Subsystem_Outputs_Container.attempts >= 0) {
      for(i <- 0 to get_Config_system_testsrstRegulate_Subsystem_Outputs_Container.attempts) {
@@ -6110,7 +6027,10 @@ Regulate_Subsystem_Containers.scala
           println(s"Retrying for failing value: $v")
         }
         heat_control = nextIsolette_Data_ModelOn_OffType()
-        v = system_tests.rst.Regulate_Subsystem_Outputs_Container(heat_control)
+        display_temperature = nextIsolette_Data_ModelTemp_impl()
+        regulator_status = nextIsolette_Data_ModelStatusType()
+        mode = nextIsolette_Data_ModelRegulator_ModeType()
+        v = system_tests.rst.Regulate_Subsystem_Outputs_Container(heat_control, display_temperature, regulator_status, mode)
      }
     } else {
      while(T) {
@@ -6121,7 +6041,10 @@ Regulate_Subsystem_Containers.scala
          println(s"Retrying for failing value: $v")
        }
        heat_control = nextIsolette_Data_ModelOn_OffType()
-       v = system_tests.rst.Regulate_Subsystem_Outputs_Container(heat_control)
+       display_temperature = nextIsolette_Data_ModelTemp_impl()
+       regulator_status = nextIsolette_Data_ModelStatusType()
+       mode = nextIsolette_Data_ModelRegulator_ModeType()
+       v = system_tests.rst.Regulate_Subsystem_Outputs_Container(heat_control, display_temperature, regulator_status, mode)
      }
     }
 
@@ -6129,6 +6052,17 @@ Regulate_Subsystem_Containers.scala
     halt("Requirements too strict to generate")
   }
 
+  //=================== ISZ[B] =====================
+
+  def nextISZB(): ISZ[B] = {
+    val length: Z = gen.nextZBetween(0, get_numElement)
+    var temp: ISZ[B] = ISZ()
+    for (r <- 0 until length) {
+      temp = temp :+ nextB()
+    }
+
+    return temp
+  }
 }
 
 @record class RandomLib(val gen: org.sireum.Random.Gen) extends RandomLibI {
@@ -6145,19 +6079,6 @@ Regulate_Subsystem_Containers.scala
 
   def set_numElement(s: Z): Unit ={
     numElem = s
-  }
-
-  // ============= String =============
-
-  def alwaysTrue_String(v: String): B = {return T}
-
-  var config_String: Config_String = Config_String(0, numElem, 100, _verbose, alwaysTrue_String _)
-
-  def get_Config_String: Config_String = {return config_String}
-
-  def set_Config_String(config: Config_String): RandomLib = {
-    config_String = config
-    return this
   }
 
   // ============= Z ===================
@@ -6515,17 +6436,6 @@ Regulate_Subsystem_Containers.scala
 
   def set_Config_Base_TypesString_Payload(config: Config_Base_TypesString_Payload): RandomLib ={
     config_Base_TypesString_Payload = config
-    return this
-  }
-
-  // ============= ISZ[B] ===================
-  def alwaysTrue_ISZB(v: ISZ[B]): B = {return T}
-
-  var config_ISZB: Config_ISZB = Config_ISZB(0, 20, 100, _verbose, alwaysTrue_ISZB _)
-  def get_Config_ISZB: Config_ISZB = {return config_ISZB}
-
-  def set_Config_ISZB(config: Config_ISZB): RandomLib ={
-    config_ISZB = config
     return this
   }
 

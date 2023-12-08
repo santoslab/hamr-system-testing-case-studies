@@ -973,7 +973,10 @@ object JSON {
     @pure def printsystem_testsrstRegulate_Subsystem_Outputs_Container(o: system_tests.rst.Regulate_Subsystem_Outputs_Container): ST = {
       return printObject(ISZ(
         ("type", st""""system_tests.rst.Regulate_Subsystem_Outputs_Container""""),
-        ("heat_control", printIsolette_Data_ModelOn_OffType(o.heat_control))
+        ("heat_control", printIsolette_Data_ModelOn_OffType(o.heat_control)),
+        ("display_temperature", printIsolette_Data_ModelTemp_impl(o.display_temperature)),
+        ("regulator_status", printIsolette_Data_ModelStatusType(o.regulator_status)),
+        ("mode", printIsolette_Data_ModelRegulator_ModeType(o.mode))
       ))
     }
 
@@ -2802,7 +2805,16 @@ object JSON {
       parser.parseObjectKey("heat_control")
       val heat_control = parseIsolette_Data_ModelOn_OffType()
       parser.parseObjectNext()
-      return system_tests.rst.Regulate_Subsystem_Outputs_Container(heat_control)
+      parser.parseObjectKey("display_temperature")
+      val display_temperature = parseIsolette_Data_ModelTemp_impl()
+      parser.parseObjectNext()
+      parser.parseObjectKey("regulator_status")
+      val regulator_status = parseIsolette_Data_ModelStatusType()
+      parser.parseObjectNext()
+      parser.parseObjectKey("mode")
+      val mode = parseIsolette_Data_ModelRegulator_ModeType()
+      parser.parseObjectNext()
+      return system_tests.rst.Regulate_Subsystem_Outputs_Container(heat_control, display_temperature, regulator_status, mode)
     }
 
     def eof(): B = {

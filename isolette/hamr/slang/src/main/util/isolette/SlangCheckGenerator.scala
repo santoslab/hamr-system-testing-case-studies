@@ -64,25 +64,6 @@ Regulate_Subsystem_Containers.scala
 
 */
 
-@record class Gen_String(param: RandomLibI) extends MJen[String] {
-  override def generate(f: String => Jen.Action): Jen.Action = {
-    var continue = Jen.Continue
-    while (T) {
-
-      continue = f(param.nextString())
-
-      if (!continue) {
-        return Jen.End
-      }
-    }
-    return continue
-  }
-
-  override def string: String = {
-    return s""
-  }
-}
-
 @record class Gen_Z(param: RandomLibI) extends MJen[Z] {
   override def generate(f: Z => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
@@ -660,25 +641,6 @@ Regulate_Subsystem_Containers.scala
     while (T) {
 
       continue = f(param.nextBase_TypesString_Payload())
-
-      if (!continue) {
-        return Jen.End
-      }
-    }
-    return continue
-  }
-
-  override def string: String = {
-    return s""
-  }
-}
-
-@record class Gen_ISZB(param: RandomLibI) extends MJen[ISZ[B]] {
-  override def generate(f: ISZ[B] => Jen.Action): Jen.Action = {
-    var continue = Jen.Continue
-    while (T) {
-
-      continue = f(param.nextISZB())
 
       if (!continue) {
         return Jen.End

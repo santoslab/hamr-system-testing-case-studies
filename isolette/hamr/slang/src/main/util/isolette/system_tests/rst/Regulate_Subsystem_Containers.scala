@@ -14,4 +14,7 @@ import isolette.Isolette_Data_Model._
 
                                                     val internalFailure: Failure_Flag_impl)
 
-@datatype class Regulate_Subsystem_Outputs_Container(val heat_control: On_Off.Type)
+@datatype class Regulate_Subsystem_Outputs_Container(val heat_control: On_Off.Type,
+                                                     val display_temperature: Temp_impl,
+                                                     val regulator_status: Status.Type,
+                                                     val mode: Regulator_Mode.Type)

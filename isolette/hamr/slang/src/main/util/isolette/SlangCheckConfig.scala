@@ -63,7 +63,7 @@ Aux_Types.scala
 Regulate_Subsystem_Containers.scala
 
 */
-@datatype class Config_String(minSize: Z, maxSize: Z, attempts: Z, verbose: B, filter: String => B) {}
+
 @datatype class Config_Z(low: Option[Z], high: Option[Z], attempts: Z, verbose: B, filter: Z => B) {}
 
 @datatype class Config_B(attempts: Z, verbose: B, filter: B => B) {}
@@ -125,8 +125,6 @@ Regulate_Subsystem_Containers.scala
 @datatype class Config_Base_TypesCharacter_Payload(attempts: Z, verbose: B, filter: Base_Types.Character_Payload => B) {}
 
 @datatype class Config_Base_TypesString_Payload(attempts: Z, verbose: B, filter: Base_Types.String_Payload => B) {}
-
-@datatype class Config_ISZB(minSize: Z, maxSize: Z, attempts: Z, verbose: B, filter: ISZ[B] => B) {}
 
 @datatype class Config_Base_TypesBits_Payload(attempts: Z, verbose: B, filter: Base_Types.Bits_Payload => B) {}
 

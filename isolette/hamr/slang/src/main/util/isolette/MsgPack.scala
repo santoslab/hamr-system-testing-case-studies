@@ -898,6 +898,9 @@ object MsgPack {
     def writesystem_testsrstRegulate_Subsystem_Outputs_Container(o: system_tests.rst.Regulate_Subsystem_Outputs_Container): Unit = {
       writer.writeZ(Constants.system_testsrstRegulate_Subsystem_Outputs_Container)
       writeIsolette_Data_ModelOn_OffType(o.heat_control)
+      writeIsolette_Data_ModelTemp_impl(o.display_temperature)
+      writeIsolette_Data_ModelStatusType(o.regulator_status)
+      writeIsolette_Data_ModelRegulator_ModeType(o.mode)
     }
 
     def result: ISZ[U8] = {
@@ -2408,7 +2411,10 @@ object MsgPack {
         reader.expectZ(Constants.system_testsrstRegulate_Subsystem_Outputs_Container)
       }
       val heat_control = readIsolette_Data_ModelOn_OffType()
-      return system_tests.rst.Regulate_Subsystem_Outputs_Container(heat_control)
+      val display_temperature = readIsolette_Data_ModelTemp_impl()
+      val regulator_status = readIsolette_Data_ModelStatusType()
+      val mode = readIsolette_Data_ModelRegulator_ModeType()
+      return system_tests.rst.Regulate_Subsystem_Outputs_Container(heat_control, display_temperature, regulator_status, mode)
     }
 
   }
