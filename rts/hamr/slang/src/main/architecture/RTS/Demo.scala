@@ -2,8 +2,8 @@
 
 package RTS
 
-import RTS.runtimemonitor.{GumboXRuntimeMonitor, HamrVision}
 import org.sireum._
+import RTS.runtimemonitor.{GumboXRuntimeMonitor, HamrVision}
 import art.scheduling.Scheduler
 
 // This file will not be overwritten so is safe to edit
