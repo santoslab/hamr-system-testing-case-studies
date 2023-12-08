@@ -48,7 +48,7 @@ class Example_Regulate_Subsystem_Outputs_Container_Test_wSlangCheck
     "testFamilyName" ~> TestRow(
       testMethod = NameProvider("Schema-Name", ((input_container: Any, property_function: Any) => T).asInstanceOf[(Any, Any) => B]),
       profile =getDefaultProfile,
-      preStateCheck = ((container: Any) => T).asInstanceOf[Any => B],
+      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
       property = NameProvider("Property-Name", ((input_container: Any, output_container: Any) => T).asInstanceOf[(Any, Any) => B])
     )
   )
@@ -88,5 +88,13 @@ class Example_Regulate_Subsystem_Outputs_Container_Test_wSlangCheck
         }
       }
     }
+  }
+
+  // a pre-state container filter could prove useful/necessary in order to
+  // ensure that the values in the container will satisfy the assume/requires clause
+  // of a component in the system that will receive those values
+  def examplePreStateContainerFilter(container: Regulate_Subsystem_Outputs_Container): B = {
+    // e.g. return container.low < container.high
+    return T
   }
 }
