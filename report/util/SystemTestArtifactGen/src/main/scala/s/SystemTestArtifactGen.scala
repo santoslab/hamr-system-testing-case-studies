@@ -51,6 +51,7 @@ object SystemTestArtifactGen extends App {
   @pure def astTypedName(packageName: ISZ[String], t: Typed): ST = {
 
     t match {
+      case atn: Typed.Name if builtIn(atn) => st"${ops.ISZOps(atn.ids).last}"
       case atn: Typed.Name => return Resolver.typeName(packageName, atn.ids)
       case _ => halt(s"Need to handle $t")
     }
@@ -132,9 +133,9 @@ object SystemTestArtifactGen extends App {
       var nextEntriesViaProfile: ISZ[ST] = ISZ()
       for (v <- entry.vars.entries) {
         val typ = v._2.typedOpt.get.asInstanceOf[org.sireum.lang.ast.Typed.Name]
-        val typeName = astTypedNameString(ISZ(basePackageName), typ)
+        val typeName = st"${(astTypedName(ISZ(basePackageName), typ), "")}"
 
-        val nextMethodName = s"next$typeName"
+        val nextMethodName = st"next$typeName"
 
         freshLibs = freshLibs :+ st"${v._1} = ${simpleUtilName}.freshRandomLib"
         profileEntries = profileEntries :+ st"var ${v._1} : RandomLib"

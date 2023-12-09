@@ -5,6 +5,23 @@ import org.sireum.message.Reporter
 
 class Tests extends org.sireum.test.TestSuite {
 
+  "rts" in {
+    val root: Os.Path = Os.path(implicitly[sourcecode.File].value).up.up.up.up.up.up.up.up / "rts" / "hamr" / "slang"
+
+    println(root)
+
+    val containers: ISZ[String] = ISZ(
+      "src/main/util/RTS/system_tests/Containers.scala"
+    )
+
+    val reporter = Reporter.create
+    val result = s.SystemTestArtifactGen.run(root, containers, reporter)
+
+    reporter.printMessages()
+
+    assert(result == 0 && !reporter.hasError)
+  }
+
   "isolette" in {
     val root: Os.Path = Os.path(implicitly[sourcecode.File].value).up.up.up.up.up.up.up.up / "isolette" / "hamr" / "slang"
 
