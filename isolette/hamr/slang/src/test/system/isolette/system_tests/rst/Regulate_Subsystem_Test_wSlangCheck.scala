@@ -5,6 +5,7 @@ import art.scheduling.static._
 import isolette._
 import org.sireum._
 import isolette.Isolette_Data_Model._
+import isolette.Regulate.Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface.ROUND
 import isolette.Regulate.{Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_SystemTestAPI => RegMHS, Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_SystemTestAPI => RegMRI, Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode_SystemTestAPI => RegMRM}
 
 class Regulate_Subsystem_Test_wSlangCheck
@@ -101,6 +102,18 @@ class Regulate_Subsystem_Test_wSlangCheck
     preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
     property = NameProvider("Failing; Error Condition => Heat Off", (sysProp_ErrorConditionHeatOff _).asInstanceOf[(Any, Any) => B])
   ),
+    // ======================
+    //  Output: Display Temp
+    //=======================
+
+    // observe any failure condition (combining the input failures and internal failures above)
+    "DisplayTemp; Normal" ~> TestRow(
+      testMethod = NameProvider("1HP", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = validRanges,
+      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
+      property = NameProvider("DisplayTemp; Normal", (sysProp_NormalDisplayTemp _).asInstanceOf[(Any, Any) => B])
+    ),
+    
     // ======================
     //  Output (Internal State Update): Mode Transition Properties
     //=======================
@@ -483,6 +496,21 @@ class Regulate_Subsystem_Test_wSlangCheck
     val desiredCondition = (outputs_container.heat_control == On_Off.Off)
     return (triggerCondition ->: desiredCondition)
   }
+
+  // ===========================  Display Temperature Properties ========================
+
+  // Note:  This property specifies that if the mode is normal at the start of the
+  //  hyperperiod, then the display temperature at the end of the hyper-period is equal
+  //  to the current temperature at the end of the hyper-period.
+  //
+  // I (John) am not 100% convinced this is how we would want to formalize this property.
+  def sysProp_NormalDisplayTemp(inputs_container: Regulate_Subsystem_Inputs_Container,
+                               outputs_container: Regulate_Subsystem_Outputs_Container): B = {
+    val triggerCondition = (inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+    val desiredCondition = (outputs_container.display_temperature ==  ROUND(inputs_container.currentTempWStatus.value))
+    return (triggerCondition ->: desiredCondition)
+  }
+
 
   // ===========================  Mode Implication Properties ===========================
   //
