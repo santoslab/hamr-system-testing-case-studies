@@ -18,9 +18,9 @@ class Example_Actuation_Subsystem_Outputs_Container_Test_wSlangCheck
   //       abstract method
   //var scheduler: StaticScheduler = Schedulers.getStaticSchedulerH(MNone())
   var scheduler: StaticScheduler = Schedulers.getStaticScheduler(
-    CustStaticSchedule.staticSchedule,
-    CustStaticSchedule.domainToBridgeIdMap,
-    CustStaticSchedule.threadNickNames,
+    Schedulers.defaultStaticSchedule,
+    Schedulers.defaultDomainToBridgeIdMap,
+    Schedulers.threadNickNames,
     ISZCommandProvider(ISZ()))
 
   def compute(isz: ISZ[Command]): Unit = {
@@ -32,7 +32,7 @@ class Example_Actuation_Subsystem_Outputs_Container_Test_wSlangCheck
   override def beforeEach(): Unit = {
 
     // uncomment the following to disable the various guis and to suppress the log streams
-    disableLogsAndGuis()
+    //disableLogsAndGuis()
 
     super.beforeEach()
   }
