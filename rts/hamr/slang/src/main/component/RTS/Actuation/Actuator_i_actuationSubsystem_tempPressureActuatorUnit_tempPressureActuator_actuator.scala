@@ -54,6 +54,7 @@ object Actuator_i_actuationSubsystem_tempPressureActuatorUnit_tempPressureActuat
     val manualInput: Base_Types.Boolean = api.get_manualActuatorInput().get
 
     // ToDo: Check the cry source to match variables and document
+    // val output: Base_Types.Boolean = F  // seed error
     val output: Base_Types.Boolean = input | manualInput
 
     // put calculated value on output data port

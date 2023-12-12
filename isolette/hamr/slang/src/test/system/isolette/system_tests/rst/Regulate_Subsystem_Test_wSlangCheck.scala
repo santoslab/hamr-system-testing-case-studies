@@ -113,7 +113,7 @@ class Regulate_Subsystem_Test_wSlangCheck
       preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
       property = NameProvider("DisplayTemp; Normal", (sysProp_NormalDisplayTemp _).asInstanceOf[(Any, Any) => B])
     ),
-    
+
     // ======================
     //  Output (Internal State Update): Mode Transition Properties
     //=======================

@@ -1,7 +1,7 @@
 // #Sireum
 // @formatter:off
 
-// This file is auto-generated from Base_Types.scala, InstrumentationMockThread_i_instrumentationMock_instrumentationMockThread__Containers.scala, EventControlMockThread_i_eventControlMock_eventControlMockThread__Containers.scala, ActuatorsMockThread_i_actuatorsMock_actuatorsMockThread__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit1_temperatureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit1_pressureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit1_saturationLogic_coincidenceLogic__Containers.scala, OrLogic_i_actuationSubsystem_actuationUnit1_tempPressureTripOut_orLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit2_temperatureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit2_pressureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit2_saturationLogic_coincidenceLogic__Containers.scala, OrLogic_i_actuationSubsystem_actuationUnit2_tempPressureTripOut_orLogic__Containers.scala, OrLogic_i_actuationSubsystem_tempPressureActuatorUnit_actuateTempPressureActuator_orLogic__Containers.scala, Actuator_i_actuationSubsystem_tempPressureActuatorUnit_tempPressureActuator_actuator__Containers.scala, OrLogic_i_actuationSubsystem_saturationActuatorUnit_actuateSaturationActuator_orLogic__Containers.scala, Actuator_i_actuationSubsystem_saturationActuatorUnit_saturationActuator_actuator__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala
+// This file is auto-generated from Base_Types.scala, InstrumentationMockThread_i_instrumentationMock_instrumentationMockThread__Containers.scala, EventControlMockThread_i_eventControlMock_eventControlMockThread__Containers.scala, ActuatorsMockThread_i_actuatorsMock_actuatorsMockThread__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit1_temperatureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit1_pressureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit1_saturationLogic_coincidenceLogic__Containers.scala, OrLogic_i_actuationSubsystem_actuationUnit1_tempPressureTripOut_orLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit2_temperatureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit2_pressureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit2_saturationLogic_coincidenceLogic__Containers.scala, OrLogic_i_actuationSubsystem_actuationUnit2_tempPressureTripOut_orLogic__Containers.scala, OrLogic_i_actuationSubsystem_tempPressureActuatorUnit_actuateTempPressureActuator_orLogic__Containers.scala, Actuator_i_actuationSubsystem_tempPressureActuatorUnit_tempPressureActuator_actuator__Containers.scala, OrLogic_i_actuationSubsystem_saturationActuatorUnit_actuateSaturationActuator_orLogic__Containers.scala, Actuator_i_actuationSubsystem_saturationActuatorUnit_saturationActuator_actuator__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala, Containers.scala
 
 package RTS
 
@@ -164,6 +164,10 @@ object MsgPack {
     val ActuationActuator_i_actuationSubsystem_saturationActuatorUnit_saturationActuator_actuator_PostState_Container_PS: Z = 43
 
     val _artEmpty: Z = 44
+
+    val system_testsActuation_Subsystem_Inputs_Container: Z = 45
+
+    val system_testsActuation_Subsystem_Outputs_Container: Z = 46
 
   }
 
@@ -947,6 +951,42 @@ object MsgPack {
 
     def write_artEmpty(o: art.Empty): Unit = {
       writer.writeZ(Constants._artEmpty)
+    }
+
+    def writesystem_testsActuation_Subsystem_Inputs_Container(o: system_tests.Actuation_Subsystem_Inputs_Container): Unit = {
+      writer.writeZ(Constants.system_testsActuation_Subsystem_Inputs_Container)
+      writer.writeB(o.au1_temp_coincidenceLogic_channel1)
+      writer.writeB(o.au1_temp_coincidenceLogic_channel2)
+      writer.writeB(o.au1_temp_coincidenceLogic_channel3)
+      writer.writeB(o.au1_temp_coincidenceLogic_channel4)
+      writer.writeB(o.au1_press_coincidenceLogic_channel1)
+      writer.writeB(o.au1_press_coincidenceLogic_channel2)
+      writer.writeB(o.au1_press_coincidenceLogic_channel3)
+      writer.writeB(o.au1_press_coincidenceLogic_channel4)
+      writer.writeB(o.au1_satlogic_coincidenceLogic_channel1)
+      writer.writeB(o.au1_satlogic_coincidenceLogic_channel2)
+      writer.writeB(o.au1_satlogic_coincidenceLogic_channel3)
+      writer.writeB(o.au1_satlogic_coincidenceLogic_channel4)
+      writer.writeB(o.au2_temp_coincidenceLogic_channel1)
+      writer.writeB(o.au2_temp_coincidenceLogic_channel2)
+      writer.writeB(o.au2_temp_coincidenceLogic_channel3)
+      writer.writeB(o.au2_temp_coincidenceLogic_channel4)
+      writer.writeB(o.au2_press_coincidenceLogic_channel1)
+      writer.writeB(o.au2_press_coincidenceLogic_channel2)
+      writer.writeB(o.au2_press_coincidenceLogic_channel3)
+      writer.writeB(o.au2_press_coincidenceLogic_channel4)
+      writer.writeB(o.au2_satlogic_coincidenceLogic_channel1)
+      writer.writeB(o.au2_satlogic_coincidenceLogic_channel2)
+      writer.writeB(o.au2_satlogic_coincidenceLogic_channel3)
+      writer.writeB(o.au2_satlogic_coincidenceLogic_channel4)
+      writer.writeB(o.tempPressManualActuatorInput)
+      writer.writeB(o.satManualActuatorInput)
+    }
+
+    def writesystem_testsActuation_Subsystem_Outputs_Container(o: system_tests.Actuation_Subsystem_Outputs_Container): Unit = {
+      writer.writeZ(Constants.system_testsActuation_Subsystem_Outputs_Container)
+      writer.writeB(o.TPAU_tempPressA_actuator_output)
+      writer.writeB(o.SAU_satActuator_actuator)
     }
 
     def result: ISZ[U8] = {
@@ -2542,6 +2582,58 @@ object MsgPack {
         reader.expectZ(Constants._artEmpty)
       }
       return art.Empty()
+    }
+
+    def readsystem_testsActuation_Subsystem_Inputs_Container(): system_tests.Actuation_Subsystem_Inputs_Container = {
+      val r = readsystem_testsActuation_Subsystem_Inputs_ContainerT(F)
+      return r
+    }
+
+    def readsystem_testsActuation_Subsystem_Inputs_ContainerT(typeParsed: B): system_tests.Actuation_Subsystem_Inputs_Container = {
+      if (!typeParsed) {
+        reader.expectZ(Constants.system_testsActuation_Subsystem_Inputs_Container)
+      }
+      val au1_temp_coincidenceLogic_channel1 = reader.readB()
+      val au1_temp_coincidenceLogic_channel2 = reader.readB()
+      val au1_temp_coincidenceLogic_channel3 = reader.readB()
+      val au1_temp_coincidenceLogic_channel4 = reader.readB()
+      val au1_press_coincidenceLogic_channel1 = reader.readB()
+      val au1_press_coincidenceLogic_channel2 = reader.readB()
+      val au1_press_coincidenceLogic_channel3 = reader.readB()
+      val au1_press_coincidenceLogic_channel4 = reader.readB()
+      val au1_satlogic_coincidenceLogic_channel1 = reader.readB()
+      val au1_satlogic_coincidenceLogic_channel2 = reader.readB()
+      val au1_satlogic_coincidenceLogic_channel3 = reader.readB()
+      val au1_satlogic_coincidenceLogic_channel4 = reader.readB()
+      val au2_temp_coincidenceLogic_channel1 = reader.readB()
+      val au2_temp_coincidenceLogic_channel2 = reader.readB()
+      val au2_temp_coincidenceLogic_channel3 = reader.readB()
+      val au2_temp_coincidenceLogic_channel4 = reader.readB()
+      val au2_press_coincidenceLogic_channel1 = reader.readB()
+      val au2_press_coincidenceLogic_channel2 = reader.readB()
+      val au2_press_coincidenceLogic_channel3 = reader.readB()
+      val au2_press_coincidenceLogic_channel4 = reader.readB()
+      val au2_satlogic_coincidenceLogic_channel1 = reader.readB()
+      val au2_satlogic_coincidenceLogic_channel2 = reader.readB()
+      val au2_satlogic_coincidenceLogic_channel3 = reader.readB()
+      val au2_satlogic_coincidenceLogic_channel4 = reader.readB()
+      val tempPressManualActuatorInput = reader.readB()
+      val satManualActuatorInput = reader.readB()
+      return system_tests.Actuation_Subsystem_Inputs_Container(au1_temp_coincidenceLogic_channel1, au1_temp_coincidenceLogic_channel2, au1_temp_coincidenceLogic_channel3, au1_temp_coincidenceLogic_channel4, au1_press_coincidenceLogic_channel1, au1_press_coincidenceLogic_channel2, au1_press_coincidenceLogic_channel3, au1_press_coincidenceLogic_channel4, au1_satlogic_coincidenceLogic_channel1, au1_satlogic_coincidenceLogic_channel2, au1_satlogic_coincidenceLogic_channel3, au1_satlogic_coincidenceLogic_channel4, au2_temp_coincidenceLogic_channel1, au2_temp_coincidenceLogic_channel2, au2_temp_coincidenceLogic_channel3, au2_temp_coincidenceLogic_channel4, au2_press_coincidenceLogic_channel1, au2_press_coincidenceLogic_channel2, au2_press_coincidenceLogic_channel3, au2_press_coincidenceLogic_channel4, au2_satlogic_coincidenceLogic_channel1, au2_satlogic_coincidenceLogic_channel2, au2_satlogic_coincidenceLogic_channel3, au2_satlogic_coincidenceLogic_channel4, tempPressManualActuatorInput, satManualActuatorInput)
+    }
+
+    def readsystem_testsActuation_Subsystem_Outputs_Container(): system_tests.Actuation_Subsystem_Outputs_Container = {
+      val r = readsystem_testsActuation_Subsystem_Outputs_ContainerT(F)
+      return r
+    }
+
+    def readsystem_testsActuation_Subsystem_Outputs_ContainerT(typeParsed: B): system_tests.Actuation_Subsystem_Outputs_Container = {
+      if (!typeParsed) {
+        reader.expectZ(Constants.system_testsActuation_Subsystem_Outputs_Container)
+      }
+      val TPAU_tempPressA_actuator_output = reader.readB()
+      val SAU_satActuator_actuator = reader.readB()
+      return system_tests.Actuation_Subsystem_Outputs_Container(TPAU_tempPressA_actuator_output, SAU_satActuator_actuator)
     }
 
   }
@@ -4173,6 +4265,36 @@ object MsgPack {
       return r
     }
     val r = to(data, f_artEmpty _)
+    return r
+  }
+
+  def fromsystem_testsActuation_Subsystem_Inputs_Container(o: system_tests.Actuation_Subsystem_Inputs_Container, pooling: B): ISZ[U8] = {
+    val w = Writer.Default(MessagePack.writer(pooling))
+    w.writesystem_testsActuation_Subsystem_Inputs_Container(o)
+    return w.result
+  }
+
+  def tosystem_testsActuation_Subsystem_Inputs_Container(data: ISZ[U8]): Either[system_tests.Actuation_Subsystem_Inputs_Container, MessagePack.ErrorMsg] = {
+    def fsystem_testsActuation_Subsystem_Inputs_Container(reader: Reader): system_tests.Actuation_Subsystem_Inputs_Container = {
+      val r = reader.readsystem_testsActuation_Subsystem_Inputs_Container()
+      return r
+    }
+    val r = to(data, fsystem_testsActuation_Subsystem_Inputs_Container _)
+    return r
+  }
+
+  def fromsystem_testsActuation_Subsystem_Outputs_Container(o: system_tests.Actuation_Subsystem_Outputs_Container, pooling: B): ISZ[U8] = {
+    val w = Writer.Default(MessagePack.writer(pooling))
+    w.writesystem_testsActuation_Subsystem_Outputs_Container(o)
+    return w.result
+  }
+
+  def tosystem_testsActuation_Subsystem_Outputs_Container(data: ISZ[U8]): Either[system_tests.Actuation_Subsystem_Outputs_Container, MessagePack.ErrorMsg] = {
+    def fsystem_testsActuation_Subsystem_Outputs_Container(reader: Reader): system_tests.Actuation_Subsystem_Outputs_Container = {
+      val r = reader.readsystem_testsActuation_Subsystem_Outputs_Container()
+      return r
+    }
+    val r = to(data, fsystem_testsActuation_Subsystem_Outputs_Container _)
     return r
   }
 

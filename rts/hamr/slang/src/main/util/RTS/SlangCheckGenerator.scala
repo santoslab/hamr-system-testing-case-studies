@@ -46,26 +46,9 @@ DataContent.scala
 
 Aux_Types.scala
 
+Containers.scala
+
 */
-
-@record class Gen_String(param: RandomLibI) extends MJen[String] {
-  override def generate(f: String => Jen.Action): Jen.Action = {
-    var continue = Jen.Continue
-    while (T) {
-
-      continue = f(param.nextString())
-
-      if (!continue) {
-        return Jen.End
-      }
-    }
-    return continue
-  }
-
-  override def string: String = {
-    return s""
-  }
-}
 
 @record class Gen_Z(param: RandomLibI) extends MJen[Z] {
   override def generate(f: Z => Jen.Action): Jen.Action = {
@@ -2139,25 +2122,6 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_ISZB(param: RandomLibI) extends MJen[ISZ[B]] {
-  override def generate(f: ISZ[B] => Jen.Action): Jen.Action = {
-    var continue = Jen.Continue
-    while (T) {
-
-      continue = f(param.nextISZB())
-
-      if (!continue) {
-        return Jen.End
-      }
-    }
-    return continue
-  }
-
-  override def string: String = {
-    return s""
-  }
-}
-
 @record class Gen_Base_TypesBits_Payload(param: RandomLibI) extends MJen[Base_Types.Bits_Payload] {
   override def generate(f: Base_Types.Bits_Payload => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
@@ -2411,6 +2375,44 @@ Aux_Types.scala
     while (T) {
 
       continue = f(param.nextruntimemonitorObservationKindType())
+
+      if (!continue) {
+        return Jen.End
+      }
+    }
+    return continue
+  }
+
+  override def string: String = {
+    return s""
+  }
+}
+
+@record class Gen_system_testsActuation_Subsystem_Inputs_Container(param: RandomLibI) extends MJen[system_tests.Actuation_Subsystem_Inputs_Container] {
+  override def generate(f: system_tests.Actuation_Subsystem_Inputs_Container => Jen.Action): Jen.Action = {
+    var continue = Jen.Continue
+    while (T) {
+
+      continue = f(param.nextsystem_testsActuation_Subsystem_Inputs_Container())
+
+      if (!continue) {
+        return Jen.End
+      }
+    }
+    return continue
+  }
+
+  override def string: String = {
+    return s""
+  }
+}
+
+@record class Gen_system_testsActuation_Subsystem_Outputs_Container(param: RandomLibI) extends MJen[system_tests.Actuation_Subsystem_Outputs_Container] {
+  override def generate(f: system_tests.Actuation_Subsystem_Outputs_Container => Jen.Action): Jen.Action = {
+    var continue = Jen.Continue
+    while (T) {
+
+      continue = f(param.nextsystem_testsActuation_Subsystem_Outputs_Container())
 
       if (!continue) {
         return Jen.End

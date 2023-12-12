@@ -1,7 +1,7 @@
 // #Sireum
 // @formatter:off
 
-// This file is auto-generated from Base_Types.scala, InstrumentationMockThread_i_instrumentationMock_instrumentationMockThread__Containers.scala, EventControlMockThread_i_eventControlMock_eventControlMockThread__Containers.scala, ActuatorsMockThread_i_actuatorsMock_actuatorsMockThread__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit1_temperatureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit1_pressureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit1_saturationLogic_coincidenceLogic__Containers.scala, OrLogic_i_actuationSubsystem_actuationUnit1_tempPressureTripOut_orLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit2_temperatureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit2_pressureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit2_saturationLogic_coincidenceLogic__Containers.scala, OrLogic_i_actuationSubsystem_actuationUnit2_tempPressureTripOut_orLogic__Containers.scala, OrLogic_i_actuationSubsystem_tempPressureActuatorUnit_actuateTempPressureActuator_orLogic__Containers.scala, Actuator_i_actuationSubsystem_tempPressureActuatorUnit_tempPressureActuator_actuator__Containers.scala, OrLogic_i_actuationSubsystem_saturationActuatorUnit_actuateSaturationActuator_orLogic__Containers.scala, Actuator_i_actuationSubsystem_saturationActuatorUnit_saturationActuator_actuator__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala
+// This file is auto-generated from Base_Types.scala, InstrumentationMockThread_i_instrumentationMock_instrumentationMockThread__Containers.scala, EventControlMockThread_i_eventControlMock_eventControlMockThread__Containers.scala, ActuatorsMockThread_i_actuatorsMock_actuatorsMockThread__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit1_temperatureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit1_pressureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit1_saturationLogic_coincidenceLogic__Containers.scala, OrLogic_i_actuationSubsystem_actuationUnit1_tempPressureTripOut_orLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit2_temperatureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit2_pressureLogic_coincidenceLogic__Containers.scala, CoincidenceLogic_i_actuationSubsystem_actuationUnit2_saturationLogic_coincidenceLogic__Containers.scala, OrLogic_i_actuationSubsystem_actuationUnit2_tempPressureTripOut_orLogic__Containers.scala, OrLogic_i_actuationSubsystem_tempPressureActuatorUnit_actuateTempPressureActuator_orLogic__Containers.scala, Actuator_i_actuationSubsystem_tempPressureActuatorUnit_tempPressureActuator_actuator__Containers.scala, OrLogic_i_actuationSubsystem_saturationActuatorUnit_actuateSaturationActuator_orLogic__Containers.scala, Actuator_i_actuationSubsystem_saturationActuatorUnit_saturationActuator_actuator__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala, Containers.scala
 
 package RTS
 
@@ -985,6 +985,46 @@ object JSON {
     @pure def print_artEmpty(o: art.Empty): ST = {
       return printObject(ISZ(
         ("type", st""""art.Empty"""")
+      ))
+    }
+
+    @pure def printsystem_testsActuation_Subsystem_Inputs_Container(o: system_tests.Actuation_Subsystem_Inputs_Container): ST = {
+      return printObject(ISZ(
+        ("type", st""""system_tests.Actuation_Subsystem_Inputs_Container""""),
+        ("au1_temp_coincidenceLogic_channel1", printB(o.au1_temp_coincidenceLogic_channel1)),
+        ("au1_temp_coincidenceLogic_channel2", printB(o.au1_temp_coincidenceLogic_channel2)),
+        ("au1_temp_coincidenceLogic_channel3", printB(o.au1_temp_coincidenceLogic_channel3)),
+        ("au1_temp_coincidenceLogic_channel4", printB(o.au1_temp_coincidenceLogic_channel4)),
+        ("au1_press_coincidenceLogic_channel1", printB(o.au1_press_coincidenceLogic_channel1)),
+        ("au1_press_coincidenceLogic_channel2", printB(o.au1_press_coincidenceLogic_channel2)),
+        ("au1_press_coincidenceLogic_channel3", printB(o.au1_press_coincidenceLogic_channel3)),
+        ("au1_press_coincidenceLogic_channel4", printB(o.au1_press_coincidenceLogic_channel4)),
+        ("au1_satlogic_coincidenceLogic_channel1", printB(o.au1_satlogic_coincidenceLogic_channel1)),
+        ("au1_satlogic_coincidenceLogic_channel2", printB(o.au1_satlogic_coincidenceLogic_channel2)),
+        ("au1_satlogic_coincidenceLogic_channel3", printB(o.au1_satlogic_coincidenceLogic_channel3)),
+        ("au1_satlogic_coincidenceLogic_channel4", printB(o.au1_satlogic_coincidenceLogic_channel4)),
+        ("au2_temp_coincidenceLogic_channel1", printB(o.au2_temp_coincidenceLogic_channel1)),
+        ("au2_temp_coincidenceLogic_channel2", printB(o.au2_temp_coincidenceLogic_channel2)),
+        ("au2_temp_coincidenceLogic_channel3", printB(o.au2_temp_coincidenceLogic_channel3)),
+        ("au2_temp_coincidenceLogic_channel4", printB(o.au2_temp_coincidenceLogic_channel4)),
+        ("au2_press_coincidenceLogic_channel1", printB(o.au2_press_coincidenceLogic_channel1)),
+        ("au2_press_coincidenceLogic_channel2", printB(o.au2_press_coincidenceLogic_channel2)),
+        ("au2_press_coincidenceLogic_channel3", printB(o.au2_press_coincidenceLogic_channel3)),
+        ("au2_press_coincidenceLogic_channel4", printB(o.au2_press_coincidenceLogic_channel4)),
+        ("au2_satlogic_coincidenceLogic_channel1", printB(o.au2_satlogic_coincidenceLogic_channel1)),
+        ("au2_satlogic_coincidenceLogic_channel2", printB(o.au2_satlogic_coincidenceLogic_channel2)),
+        ("au2_satlogic_coincidenceLogic_channel3", printB(o.au2_satlogic_coincidenceLogic_channel3)),
+        ("au2_satlogic_coincidenceLogic_channel4", printB(o.au2_satlogic_coincidenceLogic_channel4)),
+        ("tempPressManualActuatorInput", printB(o.tempPressManualActuatorInput)),
+        ("satManualActuatorInput", printB(o.satManualActuatorInput))
+      ))
+    }
+
+    @pure def printsystem_testsActuation_Subsystem_Outputs_Container(o: system_tests.Actuation_Subsystem_Outputs_Container): ST = {
+      return printObject(ISZ(
+        ("type", st""""system_tests.Actuation_Subsystem_Outputs_Container""""),
+        ("TPAU_tempPressA_actuator_output", printB(o.TPAU_tempPressA_actuator_output)),
+        ("SAU_satActuator_actuator", printB(o.SAU_satActuator_actuator))
       ))
     }
 
@@ -2798,6 +2838,114 @@ object JSON {
         parser.parseObjectType("art.Empty")
       }
       return art.Empty()
+    }
+
+    def parsesystem_testsActuation_Subsystem_Inputs_Container(): system_tests.Actuation_Subsystem_Inputs_Container = {
+      val r = parsesystem_testsActuation_Subsystem_Inputs_ContainerT(F)
+      return r
+    }
+
+    def parsesystem_testsActuation_Subsystem_Inputs_ContainerT(typeParsed: B): system_tests.Actuation_Subsystem_Inputs_Container = {
+      if (!typeParsed) {
+        parser.parseObjectType("system_tests.Actuation_Subsystem_Inputs_Container")
+      }
+      parser.parseObjectKey("au1_temp_coincidenceLogic_channel1")
+      val au1_temp_coincidenceLogic_channel1 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au1_temp_coincidenceLogic_channel2")
+      val au1_temp_coincidenceLogic_channel2 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au1_temp_coincidenceLogic_channel3")
+      val au1_temp_coincidenceLogic_channel3 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au1_temp_coincidenceLogic_channel4")
+      val au1_temp_coincidenceLogic_channel4 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au1_press_coincidenceLogic_channel1")
+      val au1_press_coincidenceLogic_channel1 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au1_press_coincidenceLogic_channel2")
+      val au1_press_coincidenceLogic_channel2 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au1_press_coincidenceLogic_channel3")
+      val au1_press_coincidenceLogic_channel3 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au1_press_coincidenceLogic_channel4")
+      val au1_press_coincidenceLogic_channel4 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au1_satlogic_coincidenceLogic_channel1")
+      val au1_satlogic_coincidenceLogic_channel1 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au1_satlogic_coincidenceLogic_channel2")
+      val au1_satlogic_coincidenceLogic_channel2 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au1_satlogic_coincidenceLogic_channel3")
+      val au1_satlogic_coincidenceLogic_channel3 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au1_satlogic_coincidenceLogic_channel4")
+      val au1_satlogic_coincidenceLogic_channel4 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au2_temp_coincidenceLogic_channel1")
+      val au2_temp_coincidenceLogic_channel1 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au2_temp_coincidenceLogic_channel2")
+      val au2_temp_coincidenceLogic_channel2 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au2_temp_coincidenceLogic_channel3")
+      val au2_temp_coincidenceLogic_channel3 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au2_temp_coincidenceLogic_channel4")
+      val au2_temp_coincidenceLogic_channel4 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au2_press_coincidenceLogic_channel1")
+      val au2_press_coincidenceLogic_channel1 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au2_press_coincidenceLogic_channel2")
+      val au2_press_coincidenceLogic_channel2 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au2_press_coincidenceLogic_channel3")
+      val au2_press_coincidenceLogic_channel3 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au2_press_coincidenceLogic_channel4")
+      val au2_press_coincidenceLogic_channel4 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au2_satlogic_coincidenceLogic_channel1")
+      val au2_satlogic_coincidenceLogic_channel1 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au2_satlogic_coincidenceLogic_channel2")
+      val au2_satlogic_coincidenceLogic_channel2 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au2_satlogic_coincidenceLogic_channel3")
+      val au2_satlogic_coincidenceLogic_channel3 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("au2_satlogic_coincidenceLogic_channel4")
+      val au2_satlogic_coincidenceLogic_channel4 = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("tempPressManualActuatorInput")
+      val tempPressManualActuatorInput = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("satManualActuatorInput")
+      val satManualActuatorInput = parser.parseB()
+      parser.parseObjectNext()
+      return system_tests.Actuation_Subsystem_Inputs_Container(au1_temp_coincidenceLogic_channel1, au1_temp_coincidenceLogic_channel2, au1_temp_coincidenceLogic_channel3, au1_temp_coincidenceLogic_channel4, au1_press_coincidenceLogic_channel1, au1_press_coincidenceLogic_channel2, au1_press_coincidenceLogic_channel3, au1_press_coincidenceLogic_channel4, au1_satlogic_coincidenceLogic_channel1, au1_satlogic_coincidenceLogic_channel2, au1_satlogic_coincidenceLogic_channel3, au1_satlogic_coincidenceLogic_channel4, au2_temp_coincidenceLogic_channel1, au2_temp_coincidenceLogic_channel2, au2_temp_coincidenceLogic_channel3, au2_temp_coincidenceLogic_channel4, au2_press_coincidenceLogic_channel1, au2_press_coincidenceLogic_channel2, au2_press_coincidenceLogic_channel3, au2_press_coincidenceLogic_channel4, au2_satlogic_coincidenceLogic_channel1, au2_satlogic_coincidenceLogic_channel2, au2_satlogic_coincidenceLogic_channel3, au2_satlogic_coincidenceLogic_channel4, tempPressManualActuatorInput, satManualActuatorInput)
+    }
+
+    def parsesystem_testsActuation_Subsystem_Outputs_Container(): system_tests.Actuation_Subsystem_Outputs_Container = {
+      val r = parsesystem_testsActuation_Subsystem_Outputs_ContainerT(F)
+      return r
+    }
+
+    def parsesystem_testsActuation_Subsystem_Outputs_ContainerT(typeParsed: B): system_tests.Actuation_Subsystem_Outputs_Container = {
+      if (!typeParsed) {
+        parser.parseObjectType("system_tests.Actuation_Subsystem_Outputs_Container")
+      }
+      parser.parseObjectKey("TPAU_tempPressA_actuator_output")
+      val TPAU_tempPressA_actuator_output = parser.parseB()
+      parser.parseObjectNext()
+      parser.parseObjectKey("SAU_satActuator_actuator")
+      val SAU_satActuator_actuator = parser.parseB()
+      parser.parseObjectNext()
+      return system_tests.Actuation_Subsystem_Outputs_Container(TPAU_tempPressA_actuator_output, SAU_satActuator_actuator)
     }
 
     def eof(): B = {
@@ -4758,6 +4906,42 @@ object JSON {
       return r
     }
     val r = to(s, f_artEmpty _)
+    return r
+  }
+
+  def fromsystem_testsActuation_Subsystem_Inputs_Container(o: system_tests.Actuation_Subsystem_Inputs_Container, isCompact: B): String = {
+    val st = Printer.printsystem_testsActuation_Subsystem_Inputs_Container(o)
+    if (isCompact) {
+      return st.renderCompact
+    } else {
+      return st.render
+    }
+  }
+
+  def tosystem_testsActuation_Subsystem_Inputs_Container(s: String): Either[system_tests.Actuation_Subsystem_Inputs_Container, Json.ErrorMsg] = {
+    def fsystem_testsActuation_Subsystem_Inputs_Container(parser: Parser): system_tests.Actuation_Subsystem_Inputs_Container = {
+      val r = parser.parsesystem_testsActuation_Subsystem_Inputs_Container()
+      return r
+    }
+    val r = to(s, fsystem_testsActuation_Subsystem_Inputs_Container _)
+    return r
+  }
+
+  def fromsystem_testsActuation_Subsystem_Outputs_Container(o: system_tests.Actuation_Subsystem_Outputs_Container, isCompact: B): String = {
+    val st = Printer.printsystem_testsActuation_Subsystem_Outputs_Container(o)
+    if (isCompact) {
+      return st.renderCompact
+    } else {
+      return st.render
+    }
+  }
+
+  def tosystem_testsActuation_Subsystem_Outputs_Container(s: String): Either[system_tests.Actuation_Subsystem_Outputs_Container, Json.ErrorMsg] = {
+    def fsystem_testsActuation_Subsystem_Outputs_Container(parser: Parser): system_tests.Actuation_Subsystem_Outputs_Container = {
+      val r = parser.parsesystem_testsActuation_Subsystem_Outputs_Container()
+      return r
+    }
+    val r = to(s, fsystem_testsActuation_Subsystem_Outputs_Container _)
     return r
   }
 
