@@ -36,7 +36,7 @@ object Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm {
     lastCmd = Isolette_Data_Model.On_Off.Off
     //  REQ-MA-1: If the Monitor Mode is INIT, the Alarm Control shall be set
     //    to Off.
-    api.put_alarm_control(Isolette_Data_Model.On_Off.Off)
+    api.put_alarm_control(lastCmd)
 
     //api.logInfo(s"Sent on alarm_control: ${Isolette_Data_Model.On_Off.Off}")
   }

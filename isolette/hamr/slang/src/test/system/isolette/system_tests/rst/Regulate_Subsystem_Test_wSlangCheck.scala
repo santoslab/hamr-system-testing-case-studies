@@ -355,7 +355,10 @@ class Regulate_Subsystem_Test_wSlangCheck
     val api_regulator_status = RegMRI.get_api_regulator_status()
     val mode = RegMRM.get_api_regulator_mode()
     val output_container = Regulate_Subsystem_Outputs_Container(
-      api_heat_control, api_display_temp, api_regulator_status, mode)
+      heat_control = api_heat_control,
+      display_temperature = api_display_temp,
+      regulator_status = api_regulator_status,
+      mode = mode)
 
 
 

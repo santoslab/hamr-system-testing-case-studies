@@ -28,9 +28,11 @@ object Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mo
         // END INITIALIZES ENSURES
       )
     )
-    // example api usage
-    api.put_monitor_mode(Isolette_Data_Model.Monitor_Mode.Init_Monitor_Mode)
+    // have to reset state variables when system testing otherwise they'll may
+    // get 'stuck', e.g. once failed, always failed
+    lastMonitorMode = Isolette_Data_Model.Monitor_Mode.Init_Monitor_Mode
 
+    api.put_monitor_mode(lastMonitorMode)
     //api.logInfo(s"Sent on monitor_mode: ${Isolette_Data_Model.Monitor_Mode.Init_Monitor_Mode}")
   }
 
