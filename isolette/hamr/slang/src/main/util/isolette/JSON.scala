@@ -1,7 +1,7 @@
 // #Sireum
 // @formatter:off
 
-// This file is auto-generated from Heat.scala, Interface_Interaction.scala, PhysicalTemp_impl.scala, ValueStatus.scala, TempWstatus_impl.scala, On_Off.scala, Status.scala, Temp_impl.scala, Regulator_Mode.scala, Failure_Flag_impl.scala, Monitor_Mode.scala, Base_Types.scala, Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface__Containers.scala, Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source__Containers.scala, Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode__Containers.scala, Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure__Containers.scala, Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface__Containers.scala, Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm__Containers.scala, Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode__Containers.scala, Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure__Containers.scala, operator_interface_thread_impl_operator_interface_oip_oit__Containers.scala, Temperature_Sensor_impl_temperature_sensor_cpi_thermostat__Containers.scala, Heat_Source_impl_heat_source_cpi_heat_controller__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala, Regulate_Subsystem_Containers.scala
+// This file is auto-generated from Heat.scala, Interface_Interaction.scala, PhysicalTemp_impl.scala, ValueStatus.scala, TempWstatus_impl.scala, On_Off.scala, Status.scala, Temp_impl.scala, Regulator_Mode.scala, Failure_Flag_impl.scala, Monitor_Mode.scala, Base_Types.scala, Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface__Containers.scala, Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source__Containers.scala, Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode__Containers.scala, Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure__Containers.scala, Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface__Containers.scala, Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm__Containers.scala, Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode__Containers.scala, Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure__Containers.scala, operator_interface_thread_impl_operator_interface_oip_oit__Containers.scala, Temperature_Sensor_impl_temperature_sensor_cpi_thermostat__Containers.scala, Heat_Source_impl_heat_source_cpi_heat_controller__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala, Regulate_Subsystem_Containers.scala, Monitor_Subsystem_Containers.scala
 
 package isolette
 
@@ -977,6 +977,26 @@ object JSON {
         ("display_temperature", printIsolette_Data_ModelTemp_impl(o.display_temperature)),
         ("regulator_status", printIsolette_Data_ModelStatusType(o.regulator_status)),
         ("mode", printIsolette_Data_ModelRegulator_ModeType(o.mode))
+      ))
+    }
+
+    @pure def printsystem_testsmonitor1Monitor_Subsystem_Inputs_Container(o: system_tests.monitor1.Monitor_Subsystem_Inputs_Container): ST = {
+      return printObject(ISZ(
+        ("type", st""""system_tests.monitor1.Monitor_Subsystem_Inputs_Container""""),
+        ("lowerAlarmTempWStatus", printIsolette_Data_ModelTempWstatus_impl(o.lowerAlarmTempWStatus)),
+        ("upperAlarmTempWStatus", printIsolette_Data_ModelTempWstatus_impl(o.upperAlarmTempWStatus)),
+        ("currentTempWStatus", printIsolette_Data_ModelTempWstatus_impl(o.currentTempWStatus)),
+        ("monitor_mode", printIsolette_Data_ModelMonitor_ModeType(o.monitor_mode)),
+        ("internalFailure", printIsolette_Data_ModelFailure_Flag_impl(o.internalFailure))
+      ))
+    }
+
+    @pure def printsystem_testsmonitor1Monitor_Subsystem_Outputs_Container(o: system_tests.monitor1.Monitor_Subsystem_Outputs_Container): ST = {
+      return printObject(ISZ(
+        ("type", st""""system_tests.monitor1.Monitor_Subsystem_Outputs_Container""""),
+        ("monitor_status", printIsolette_Data_ModelStatusType(o.monitor_status)),
+        ("alarm_control", printIsolette_Data_ModelOn_OffType(o.alarm_control)),
+        ("monitor_mode", printIsolette_Data_ModelMonitor_ModeType(o.monitor_mode))
       ))
     }
 
@@ -2817,6 +2837,54 @@ object JSON {
       return system_tests.rst.Regulate_Subsystem_Outputs_Container(heat_control, display_temperature, regulator_status, mode)
     }
 
+    def parsesystem_testsmonitor1Monitor_Subsystem_Inputs_Container(): system_tests.monitor1.Monitor_Subsystem_Inputs_Container = {
+      val r = parsesystem_testsmonitor1Monitor_Subsystem_Inputs_ContainerT(F)
+      return r
+    }
+
+    def parsesystem_testsmonitor1Monitor_Subsystem_Inputs_ContainerT(typeParsed: B): system_tests.monitor1.Monitor_Subsystem_Inputs_Container = {
+      if (!typeParsed) {
+        parser.parseObjectType("system_tests.monitor1.Monitor_Subsystem_Inputs_Container")
+      }
+      parser.parseObjectKey("lowerAlarmTempWStatus")
+      val lowerAlarmTempWStatus = parseIsolette_Data_ModelTempWstatus_impl()
+      parser.parseObjectNext()
+      parser.parseObjectKey("upperAlarmTempWStatus")
+      val upperAlarmTempWStatus = parseIsolette_Data_ModelTempWstatus_impl()
+      parser.parseObjectNext()
+      parser.parseObjectKey("currentTempWStatus")
+      val currentTempWStatus = parseIsolette_Data_ModelTempWstatus_impl()
+      parser.parseObjectNext()
+      parser.parseObjectKey("monitor_mode")
+      val monitor_mode = parseIsolette_Data_ModelMonitor_ModeType()
+      parser.parseObjectNext()
+      parser.parseObjectKey("internalFailure")
+      val internalFailure = parseIsolette_Data_ModelFailure_Flag_impl()
+      parser.parseObjectNext()
+      return system_tests.monitor1.Monitor_Subsystem_Inputs_Container(lowerAlarmTempWStatus, upperAlarmTempWStatus, currentTempWStatus, monitor_mode, internalFailure)
+    }
+
+    def parsesystem_testsmonitor1Monitor_Subsystem_Outputs_Container(): system_tests.monitor1.Monitor_Subsystem_Outputs_Container = {
+      val r = parsesystem_testsmonitor1Monitor_Subsystem_Outputs_ContainerT(F)
+      return r
+    }
+
+    def parsesystem_testsmonitor1Monitor_Subsystem_Outputs_ContainerT(typeParsed: B): system_tests.monitor1.Monitor_Subsystem_Outputs_Container = {
+      if (!typeParsed) {
+        parser.parseObjectType("system_tests.monitor1.Monitor_Subsystem_Outputs_Container")
+      }
+      parser.parseObjectKey("monitor_status")
+      val monitor_status = parseIsolette_Data_ModelStatusType()
+      parser.parseObjectNext()
+      parser.parseObjectKey("alarm_control")
+      val alarm_control = parseIsolette_Data_ModelOn_OffType()
+      parser.parseObjectNext()
+      parser.parseObjectKey("monitor_mode")
+      val monitor_mode = parseIsolette_Data_ModelMonitor_ModeType()
+      parser.parseObjectNext()
+      return system_tests.monitor1.Monitor_Subsystem_Outputs_Container(monitor_status, alarm_control, monitor_mode)
+    }
+
     def eof(): B = {
       val r = parser.eof()
       return r
@@ -4649,6 +4717,42 @@ object JSON {
       return r
     }
     val r = to(s, fsystem_testsrstRegulate_Subsystem_Outputs_Container _)
+    return r
+  }
+
+  def fromsystem_testsmonitor1Monitor_Subsystem_Inputs_Container(o: system_tests.monitor1.Monitor_Subsystem_Inputs_Container, isCompact: B): String = {
+    val st = Printer.printsystem_testsmonitor1Monitor_Subsystem_Inputs_Container(o)
+    if (isCompact) {
+      return st.renderCompact
+    } else {
+      return st.render
+    }
+  }
+
+  def tosystem_testsmonitor1Monitor_Subsystem_Inputs_Container(s: String): Either[system_tests.monitor1.Monitor_Subsystem_Inputs_Container, Json.ErrorMsg] = {
+    def fsystem_testsmonitor1Monitor_Subsystem_Inputs_Container(parser: Parser): system_tests.monitor1.Monitor_Subsystem_Inputs_Container = {
+      val r = parser.parsesystem_testsmonitor1Monitor_Subsystem_Inputs_Container()
+      return r
+    }
+    val r = to(s, fsystem_testsmonitor1Monitor_Subsystem_Inputs_Container _)
+    return r
+  }
+
+  def fromsystem_testsmonitor1Monitor_Subsystem_Outputs_Container(o: system_tests.monitor1.Monitor_Subsystem_Outputs_Container, isCompact: B): String = {
+    val st = Printer.printsystem_testsmonitor1Monitor_Subsystem_Outputs_Container(o)
+    if (isCompact) {
+      return st.renderCompact
+    } else {
+      return st.render
+    }
+  }
+
+  def tosystem_testsmonitor1Monitor_Subsystem_Outputs_Container(s: String): Either[system_tests.monitor1.Monitor_Subsystem_Outputs_Container, Json.ErrorMsg] = {
+    def fsystem_testsmonitor1Monitor_Subsystem_Outputs_Container(parser: Parser): system_tests.monitor1.Monitor_Subsystem_Outputs_Container = {
+      val r = parser.parsesystem_testsmonitor1Monitor_Subsystem_Outputs_Container()
+      return r
+    }
+    val r = to(s, fsystem_testsmonitor1Monitor_Subsystem_Outputs_Container _)
     return r
   }
 

@@ -51,7 +51,8 @@ val files: ISZ[String] = ISZ("../src/main/data/isolette/Isolette_Environment/Hea
                              "../src/main/art/art/DataContent.scala",
                              "../src/main/data/isolette/Aux_Types.scala",
 
-  "../src/main/util/isolette/system_tests/rst/Regulate_Subsystem_Containers.scala"
+  "../src/main/util/isolette/system_tests/rst/Regulate_Subsystem_Containers.scala",
+  "../src/main/util/isolette/system_tests/monitor1/Monitor_Subsystem_Containers.scala"
 )
 
 val toolargs: String = st"${(files, " ")}".render
