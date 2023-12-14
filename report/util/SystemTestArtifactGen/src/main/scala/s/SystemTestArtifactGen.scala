@@ -666,7 +666,8 @@ object SystemTestArtifactGen extends App {
             |
             |val lines = ops.StringOps(results.out ).split(c => c == '\n')
             |
-            |var commands : ISZ[ST] = ISZ()
+            |var runners: ISZ[ST] = ISZ()
+            |var commands: ISZ[ST] = ISZ()
             |var i = 0
             |while(i < lines.size) {
             |  val jenkinsArgs = lines(i)
@@ -691,16 +692,23 @@ object SystemTestArtifactGen extends App {
             |
             |  val temp = Os.temp()
             |  temp.writeOver(json.s)
-            |  commands = commands :+ st${tq}DSC_RUNNER_DIR = s"$${dsc_runner_dir.string}${tq}"
-            |  commands = commands :+ st${tq}DSC_TESTER_DIR = s"$${dsc_tester_dir.string}${tq}"
-            |  commands = commands :+ st${tq}// create the result directories for $${testFamilyName} on the test server and upload the json file${tq}
-            |  commands = commands :+ st${tq}proc"ssh $${proxyJump} santos_jenkins@$${testServer} mkdir -p $$$${DSC_RUNNER_DIR}".echo.console.runCheck()${tq}
-            |  commands = commands :+ st${tq}proc"ssh $${proxyJump} santos_jenkins@$${testServer} mkdir -p $$$${DSC_TESTER_DIR}".echo.console.runCheck()${tq}
-            |  commands = commands :+ st${tq}proc"scp $$proxyJump $${temp} santos_jenkins@$${testServer}:$${dsc_runner_dir.up}/testRow.json".echo.runCheck()${tq}
-            |  commands = commands :+ st${tq}proc"scp $$proxyJump $${temp} santos_jenkins@$${testServer}:$${dsc_tester_dir.up}/testRow.json".echo.runCheck()${tq}
-            |  commands = commands :+ st${tq}// trigger $${testFamilyName} tests on jenkins${tq}
-            |  commands = commands :+ st${tq}proc"$$$$CURL_PREFIX $${jenkinsArgs} --data DSC_RUNNER_DIR=$$$${DSC_RUNNER_DIR} --data DSC_TESTER_DIR=$$$${DSC_TESTER_DIR} --data DSC_JAR_LOC=$$jarFileDest --data DSC_TEST_SERVER=$${testServer} --data DSC_PREFIX=$${DSC_PREFIX}".echo.console.runCheck()${tq}
-            |  commands = commands :+ st""
+            |
+            |  runners = runners :+ st"val run_$${testFamilyName}: B = T"
+            |
+            |  commands = commands :+
+            |    st${tq}if(run_$${testFamilyName}) {
+            |        |  // $${testFamilyName}
+            |        |  DSC_RUNNER_DIR = s"$${dsc_runner_dir.string}"
+            |        |  DSC_TESTER_DIR = s"$${dsc_tester_dir.string}"
+            |        |  // create the result directories for $${testFamilyName} on the test server and upload the json file
+            |        |  proc"ssh $${proxyJump} santos_jenkins@$${testServer} mkdir -p $$$${DSC_RUNNER_DIR}".echo.console.runCheck()
+            |        |  proc"ssh $${proxyJump} santos_jenkins@$${testServer} mkdir -p $$$${DSC_TESTER_DIR}".echo.console.runCheck()
+            |        |  proc"scp $$proxyJump $${temp} santos_jenkins@$${testServer}:$${dsc_runner_dir.up}/testRow.json".echo.runCheck()
+            |        |  proc"scp $$proxyJump $${temp} santos_jenkins@$${testServer}:$${dsc_tester_dir.up}/testRow.json".echo.runCheck()
+            |        |  // trigger $${testFamilyName} tests on jenkins
+            |        |  proc"$$$$CURL_PREFIX $${jenkinsArgs} --data DSC_RUNNER_DIR=$$$${DSC_RUNNER_DIR} --data DSC_TESTER_DIR=$$$${DSC_TESTER_DIR} --data DSC_JAR_LOC=$$jarFileDest --data DSC_TEST_SERVER=$${testServer} --data DSC_PREFIX=$${DSC_PREFIX}".echo.console.runCheck()
+            |        |}
+            |        |${tq}
             |
             |  i = i + 2
             |}
@@ -717,6 +725,8 @@ object SystemTestArtifactGen extends App {
             |      |val CURL_PREFIX=s"$$curlPrefix"
             |      |var DSC_RUNNER_DIR=""
             |      |var DSC_TESTER_DIR=""
+            |      |
+            |      |$${(runners, "\n")}
             |      |
             |      |$${(commands, "\n")}
             |      |${tq}

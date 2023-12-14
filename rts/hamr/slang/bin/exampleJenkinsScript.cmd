@@ -63,7 +63,8 @@ assert(results.ok)
 
 val lines = ops.StringOps(results.out ).split(c => c == '\n')
 
-var commands : ISZ[ST] = ISZ()
+var runners: ISZ[ST] = ISZ()
+var commands: ISZ[ST] = ISZ()
 var i = 0
 while(i < lines.size) {
   val jenkinsArgs = lines(i)
@@ -82,21 +83,29 @@ while(i < lines.size) {
     // the report from one DSC_PROJECT_NAME/DSC_SIMPLE_NAME may no longer be mergeable as it's line numbers no
     // longer match what's in the freshly built jar -- ie. probably need to rerun everything for DSC_PROJECT_NAME
     val serverJarLoc = dsc_tester_dir.up.up.up / jarFile.name
+    proc"ssh $proxyJump santos_jenkins@${testServer} mkdir -p ${serverJarLoc.up}".echo.runCheck()
     proc"scp $proxyJump ${jarFile} santos_jenkins@${testServer}:${serverJarLoc}".echo.runCheck()
   }
 
   val temp = Os.temp()
   temp.writeOver(json.s)
-  commands = commands :+ st"""DSC_RUNNER_DIR = s"${dsc_runner_dir.string}""""
-  commands = commands :+ st"""DSC_TESTER_DIR = s"${dsc_tester_dir.string}""""
-  commands = commands :+ st"""// create the result directories for ${testFamilyName} on the test server and upload the json file"""
-  commands = commands :+ st"""proc"ssh ${proxyJump} santos_jenkins@${testServer} mkdir -p $${DSC_RUNNER_DIR}".echo.console.runCheck()"""
-  commands = commands :+ st"""proc"ssh ${proxyJump} santos_jenkins@${testServer} mkdir -p $${DSC_TESTER_DIR}".echo.console.runCheck()"""
-  commands = commands :+ st"""proc"scp $proxyJump ${temp} santos_jenkins@${testServer}:${dsc_runner_dir.up}/testRow.json".echo.runCheck()"""
-  commands = commands :+ st"""proc"scp $proxyJump ${temp} santos_jenkins@${testServer}:${dsc_tester_dir.up}/testRow.json".echo.runCheck()"""
-  commands = commands :+ st"""// trigger ${testFamilyName} tests on jenkins"""
-  commands = commands :+ st"""proc"$$CURL_PREFIX ${jenkinsArgs} --data DSC_RUNNER_DIR=$${DSC_RUNNER_DIR} --data DSC_TESTER_DIR=$${DSC_TESTER_DIR} --data DSC_JAR_LOC=$jarFileDest --data DSC_TEST_SERVER=${testServer} --data DSC_PREFIX=${DSC_PREFIX}".echo.console.runCheck()"""
-  commands = commands :+ st""
+
+  runners = runners :+ st"val run_${testFamilyName}: B = T"
+
+  commands = commands :+
+    st"""if(run_${testFamilyName}) {
+        |  // ${testFamilyName}
+        |  DSC_RUNNER_DIR = s"${dsc_runner_dir.string}"
+        |  DSC_TESTER_DIR = s"${dsc_tester_dir.string}"
+        |  // create the result directories for ${testFamilyName} on the test server and upload the json file
+        |  proc"ssh ${proxyJump} santos_jenkins@${testServer} mkdir -p $${DSC_RUNNER_DIR}".echo.console.runCheck()
+        |  proc"ssh ${proxyJump} santos_jenkins@${testServer} mkdir -p $${DSC_TESTER_DIR}".echo.console.runCheck()
+        |  proc"scp $proxyJump ${temp} santos_jenkins@${testServer}:${dsc_runner_dir.up}/testRow.json".echo.runCheck()
+        |  proc"scp $proxyJump ${temp} santos_jenkins@${testServer}:${dsc_tester_dir.up}/testRow.json".echo.runCheck()
+        |  // trigger ${testFamilyName} tests on jenkins
+        |  proc"$$CURL_PREFIX ${jenkinsArgs} --data DSC_RUNNER_DIR=$${DSC_RUNNER_DIR} --data DSC_TESTER_DIR=$${DSC_TESTER_DIR} --data DSC_JAR_LOC=$jarFileDest --data DSC_TEST_SERVER=${testServer} --data DSC_PREFIX=${DSC_PREFIX}".echo.console.runCheck()
+        |}
+        |"""
 
   i = i + 2
 }
@@ -113,6 +122,8 @@ val batch =
       |val CURL_PREFIX=s"$curlPrefix"
       |var DSC_RUNNER_DIR=""
       |var DSC_TESTER_DIR=""
+      |
+      |${(runners, "\n")}
       |
       |${(commands, "\n")}
       |"""
