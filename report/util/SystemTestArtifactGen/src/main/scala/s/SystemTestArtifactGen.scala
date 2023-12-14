@@ -451,7 +451,7 @@ object SystemTestArtifactGen extends App {
             |              if (!testRow.preStateCheck(container)) {
             |                // retry
             |              } else {
-            |                testRow.testMethod.function(container, testRow.property.function)
+            |                assert(testRow.testMethod.function(container, testRow.property.function))
             |                retry = F
             |              }
             |            case _ =>

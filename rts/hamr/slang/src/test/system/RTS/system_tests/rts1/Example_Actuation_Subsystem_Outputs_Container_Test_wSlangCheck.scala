@@ -86,7 +86,7 @@ class Example_Actuation_Subsystem_Outputs_Container_Test_wSlangCheck
               if (!testRow.preStateCheck(container)) {
                 // retry
               } else {
-                testRow.testMethod.function(container, testRow.property.function)
+                assert(testRow.testMethod.function(container, testRow.property.function))
                 retry = F
               }
             case _ =>
