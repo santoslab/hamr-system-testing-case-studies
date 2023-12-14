@@ -205,13 +205,6 @@ class Regulate_Subsystem_Test_wSlangCheck
       preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
       property = NameProvider("Mode Impl: Failed => Heat Off", (sysProp_FailedModeImpliesHeatOff _).asInstanceOf[(Any, Any) => B])
     )
-
-     // Regulator Status Output
-     // ToDo: these need a 2 HP property schema
-
-     // Display Temperature Output
-     // ToDo: these need a 2 HP property schema
-
   )
 
   for (testRow <- testMatrix.entries) {
@@ -245,7 +238,7 @@ class Regulate_Subsystem_Test_wSlangCheck
               if (!testRow.preStateCheck(container)) {
                 // retry
               } else {
-                testRow.testMethod.function(container, testRow.property.function)
+                assert(testRow.testMethod.function(container, testRow.property.function))
                 retry = F
               }
             case _ =>
@@ -530,7 +523,7 @@ class Regulate_Subsystem_Test_wSlangCheck
   def sysProp_NormalDisplayTemp(inputs_container: Regulate_Subsystem_Inputs_Container,
                                 outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition = (inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.display_temperature == ROUND(inputs_container.currentTempWStatus.value))
+    val desiredCondition = (outputs_container.display_temperature.value == ROUND(inputs_container.currentTempWStatus.value))
     return (triggerCondition ->: desiredCondition)
   }
 
