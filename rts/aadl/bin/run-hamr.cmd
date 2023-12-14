@@ -33,6 +33,12 @@ val osate: Os.Path = Os.env("OSATE_HOME") match {
     halt("")
 }
 
+if (!osate.exists) {
+  eprintln("Please install FMIDE (e.g. '$SIREUM_HOME/bin/install/fmide.cmd') or OSATE (e.g. 'sireum hamr phantom -u')")
+  Os.exit(1)
+  halt("")
+}
+
 val osireum = ISZ(osate.string, "-nosplash", "--launcher.suppressErrors", "-data", "@user.home/.sireum", "-application", "org.sireum.aadl.osate.cli")
 
 if(Os.cliArgs.size > 1) {

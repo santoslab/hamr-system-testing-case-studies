@@ -295,16 +295,21 @@ object SystemTestArtifactGen extends App {
             |
             |${doNotEdit}
             |
-            |trait ${simpleSlangCheckTraitName}
-            |  extends SystemTestSuite {
+            |object ${simpleSlangCheckTraitName} {
             |
             |  case class NameProvider(name: String,
             |                          function: (Any, Any) => B)
             |
             |  case class TestRow(testMethod: NameProvider,
+            |                     testDescription: String,
             |                     profile: ${simpleProfileName},
             |                     preStateCheck: (Any => B),
             |                     property: NameProvider)
+            |}
+            |
+            |trait ${simpleSlangCheckTraitName}
+            |  extends SystemTestSuite {
+            |
             |
             |  def next(profile: ${simpleProfileName}): Option[${simpleContainerName}] = {
             |    return ${simpleProfileName}.nextH(profile)
@@ -356,6 +361,7 @@ object SystemTestArtifactGen extends App {
       val exampleSlangCheckName = st"${(exampleSlangCheckPath, ".")}".render
       val simpleExampleSlangCheckName = ops.ISZOps(exampleSlangCheckPath).last
 
+      val tq = "\"\"\""
       val exampleSlangCheck =
         st"""package $packageName
             |
@@ -363,6 +369,7 @@ object SystemTestArtifactGen extends App {
             |import art.scheduling.static._
             |import art.Art
             |import ${basePackageName}._
+            |import ${slangCheckTraitFQName}.{NameProvider, TestRow}
             |
             |$doNotEdit
             |
@@ -405,6 +412,7 @@ object SystemTestArtifactGen extends App {
             |
             |  val testMatrix: Map[String, TestRow] = Map.empty ++ ISZ(
             |    "testFamilyName" ~> TestRow(
+            |      testDescription = "test-description",
             |      testMethod = NameProvider("Schema-Name", ((input_container: Any, property_function: Any) => T).asInstanceOf[(Any, Any) => B]),
             |      profile =getDefaultProfile,
             |      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
@@ -418,6 +426,11 @@ object SystemTestArtifactGen extends App {
             |
             |  def genTestName(testFamilyName: String, testRow: TestRow): String = {
             |    return s"$${testFamilyName}: $${testRow.testMethod.name}: $${testRow.property.name}: $${testRow.profile.name}"
+            |  }
+            |
+            |  def genTestNameJson(testFamilyName: String, testRow: TestRow): String = {
+            |    @strictpure def p(str: String): ST = Json.Printer.printString(str)
+            |    return st${tq}{"testFamilyName" : $${p(testFamilyName)}, "testDescription" : $${p(testRow.testDescription)}, "testMethodName": $${p(testRow.testMethod.name)}, "property" : $${p(testRow.property.name)}, "profile" : $${p(testRow.profile.name)}}${tq}".render
             |  }
             |
             |  def run(testFamilyName: String, testRow: TestRow): Unit = {
@@ -468,27 +481,50 @@ object SystemTestArtifactGen extends App {
       val simpleExampleDSCName = ops.ISZOps(exampleDSCPath).last
 
       val exampleDSCImpl =
-        st"""package ${packageName}
+        st"""package $packageName
             |
             |import org.sireum._
             |import ${basePackageName}._
+            |import ${slangCheckTraitFQName}.TestRow
             |
             |$doNotEdit
             |
-            |object TestIt_${simpleExampleDSCName} extends App {
+            |object ${simpleExampleDSCName} extends App {
             |
+            |  // main generates the Jenkins build parameters string and the JSON serialized testRow information
             |  override def main(args: ISZ[String]): Z = {
-            |    System.setProperty("TEST_FAMILY_NAME", "<key from testMatrix>")
+            |    val projectName = "${basePackageName}"
+            |
+            |    var args: ISZ[(String, String)] = ISZ()
+            |
+            |    args = args :+ ("DSC_TIMEOUT", s"$$$$DSC_TIMEOUT")
+            |
+            |    args = args :+ ("DSC_PROJECT_NAME", projectName)
             |
             |    val instance = new ${simpleExampleDSCName}()
             |
-            |    // simulate DSC calling next
-            |    val container = instance.next()
+            |    val runnerClassName = ops.StringOps(instance.getClass.getName).replaceAllLiterally("$$", "")
+            |    val runnerSimpleName = ops.StringOps(instance.getClass.getSimpleName).replaceAllLiterally("$$", "")
             |
-            |    // simulate DSC calling test
-            |    val result = instance.test(container)
+            |    args = args :+ ("DSC_RUNNER_SIMPLE_NAME", runnerSimpleName)
+            |    args = args :+ ("DSC_RUNNER_CLASS_NAME", runnerClassName)
             |
-            |    return if(result) 0 else 1
+            |    val families: ISZ[(String, TestRow)] = instance.testMatrix.entries
+            |
+            |    for (e <- families) {
+            |      val familyName = e._1
+            |
+            |      assert (!ops.StringOps(familyName).contains(" "), s"keys cannot contain spaces: $$familyName")
+            |
+            |      val fargs = args :+ ("DSC_TEST_FAMILY_NAME", familyName)
+            |
+            |      val data = for(f <- fargs) yield s"--data $${f._1}=$${f._2}"
+            |      val command = st"$${(data, " ")}"
+            |
+            |      println(command.render)
+            |      println(instance.genTestNameJson(e._1, e._2))
+            |    }
+            |    return 0
             |  }
             |}
             |
@@ -505,14 +541,19 @@ object SystemTestArtifactGen extends App {
             |    val testId = getTestId()
             |    val testRow = testMatrix.get(testId).get
             |
-            |    println(genTestName(testId, testRow))
+            |    if (verbose) {
+            |      println(genTestName(testId, testRow))
+            |    }
             |
             |    disableLogsAndGuis()
             |
             |    super.beforeEach()
             |
             |    if (!testRow.preStateCheck(o)) {
-            |      println(s"Didn't pass pre state check $${o}")
+            |
+            |      if (verbose) {
+            |        println(s"  Didn't pass pre state check $${o}")
+            |      }
             |
             |      DSC_RecordUnsatPre.report(toCompactJson(o))
             |
@@ -523,20 +564,23 @@ object SystemTestArtifactGen extends App {
             |
             |      this.afterEach()
             |
+            |      if (verbose) {
+            |        println(s"  $${result}")
+            |      }
             |      return result
             |    }
             |  }
             |
             |  def getTestId(): String = {
-            |    Os.prop("TEST_FAMILY_NAME") match {
+            |    Os.prop("DSC_TEST_FAMILY_NAME") match {
             |      case Some(v) => return v
             |      case _ =>
-            |        Os.env("TEST_FAMILY_NAME") match {
+            |        Os.env("DSC_TEST_FAMILY_NAME") match {
             |          case Some(v) => return v
             |          case _ =>
             |        }
             |    }
-            |    halt("TEST_FAMILY_NAME not defined")
+            |    halt("DSC_TEST_FAMILY_NAME not defined")
             |  }
             |
             |  override def string: String = toString
@@ -556,7 +600,134 @@ object SystemTestArtifactGen extends App {
       t5.writeOver(exampleDSCImpl.render)
       reporter.info(None(), toolName, s"Wrote: ${t5}")
 
+      val exampleJenkinsScript =
+        st"""// #Sireum
+            |
+            |import org.sireum._
+            |
+            |val homeBin: Os.Path = Os.slashDir
+            |val home: Os.Path = homeBin.up
+            |
+            |val sireumHome = Os.path(Os.env("SIREUM_HOME").get)
+            |val sireumBin = sireumHome / "bin"
+            |val sireum: Os.Path = sireumBin / (if (Os.isWin) "sireum.bat" else "sireum")
+            |
+            |$doNotEdit
+            |
+            |val firewall: B = F // set to T in order to tunnel, need to also turn on VPN if off-campus
+            |val rebuild: B = F
+            |
+            |val testServer="e2206hm02.cs.ksu.edu"
+            |
+            |val DSC_PREFIX="dsc_sys" // name of the root artifacts directory on testServer
+            |
+            |val FQ_DSC_NAME = "${exampleDSCFQName}"
+            |
+            |val DSC_PROJECT_NAME = ops.ISZOps(ops.StringOps(FQ_DSC_NAME).split(c => c == '.')).first
+            |
+            |val DSC_SIMPLE_NAME = ops.ISZOps(ops.StringOps(FQ_DSC_NAME).split(c => c == '.')).last
+            |
+            |val DSC_SERVER_ROOT_DIR = Os.path("/opt") / "santos" / "jenkins" / DSC_PREFIX
+            |
+            |//////////////////////////////////////////////////////////////////////////////////////
+            |// BOILER PLATE
+            |//////////////////////////////////////////////////////////////////////////////////////
+            |
+            |val proxyJump = if (firewall) "-J santos_jenkins@linux.cs.ksu.edu" else ""
+            |
+            |if (rebuild) {
+            |  proc"$$sireum proyek tipe $${Os.slashDir.up}".echo.console.runCheck()
+            |  proc"$$sireum proyek assemble -m $$FQ_DSC_NAME --include-sources --include-tests $${Os.slashDir.up}".echo.console.runCheck()
+            |}
+            |
+            |val jarFile = Os.slashDir.up / "out" / "slang" / "assemble" / "slang.jar"
+            |assert (jarFile.exists, s"Need to build $${jarFile}")
+            |
+            |val jarFileDir = s"$${DSC_PREFIX}/$${DSC_PROJECT_NAME}/$${DSC_SIMPLE_NAME}"
+            |val jarFileDest = s"$$jarFileDir/$${jarFile.name}"
+            |
+            |// upload the jar to the department's file server so that's it's accessible to
+            |// all the linux servers
+            |proc"ssh santos_jenkins@linux.cs.ksu.edu mkdir -p $$jarFileDir".echo.runCheck()
+            |proc"scp $${jarFile} santos_jenkins@linux.cs.ksu.edu:$${jarFileDest}".echo.runCheck()
+            |
+            |// upload the jar to test server -- it's expected we'll use a non-cs hosted machine
+            |// like the mac mini's during the testing phase as they are much faster than the old
+            |// linux servers. Non-hosted means they're not connected to the department file system
+            |proc"ssh $$proxyJump santos_jenkins@$${testServer} mkdir -p $$jarFileDir".echo.runCheck()
+            |proc"scp $$proxyJump $${jarFile} santos_jenkins@$${testServer}:$${jarFileDest}".echo.runCheck()
+            |
+            |var curlPrefix = st"curl https://jenkins.cs.ksu.edu/job/0DSC_system_testing_start/buildWithParameters --user $$$${jenkinsUserId}:$$$${jenkinsToken}"
+            |
+            |// get the test info by calling the App associated
+            |// with the DSC test harness (i.e. the app should be the jar's main method)
+            |val results = proc"java -jar $${jarFile}".echo.console.run()
+            |assert(results.ok)
+            |
+            |val lines = ops.StringOps(results.out ).split(c => c == '\n')
+            |
+            |var commands : ISZ[ST] = ISZ()
+            |var i = 0
+            |while(i < lines.size) {
+            |  val jenkinsArgs = lines(i)
+            |  val json = ops.StringOps(lines(i + 1))
+            |  val jsonPrefix: String = "{\"testFamilyName\" : \""
+            |  assert(json.startsWith(jsonPrefix))
+            |
+            |  val testFamilyName = json.substring(jsonPrefix.size, json.indexOfFrom('"', jsonPrefix.size + 1))
+            |
+            |  val dsc_runner_dir = DSC_SERVER_ROOT_DIR / "dsc_runner" / DSC_PROJECT_NAME / DSC_SIMPLE_NAME / testFamilyName / "$$DSC_TIMEOUT"
+            |  val dsc_tester_dir = DSC_SERVER_ROOT_DIR / "dsc_tester" / DSC_PROJECT_NAME / DSC_SIMPLE_NAME / testFamilyName / "$$DSC_TIMEOUT"
+            |
+            |  if (i == 0) {
+            |    // put the jar file into the DSC_PROJECT_NAME directory on the test server so that it can be used to merge
+            |    // reports. This implies that making changes to the behavior code or the gumbo contract of a component means
+            |    // the report from one DSC_PROJECT_NAME/DSC_SIMPLE_NAME may no longer be mergeable as it's line numbers no
+            |    // longer match what's in the freshly built jar -- ie. probably need to rerun everything for DSC_PROJECT_NAME
+            |    val serverJarLoc = dsc_tester_dir.up.up.up / jarFile.name
+            |    proc"ssh $$proxyJump santos_jenkins@$${testServer} mkdir -p $${serverJarLoc.up}".echo.runCheck()
+            |    proc"scp $$proxyJump $${jarFile} santos_jenkins@$${testServer}:$${serverJarLoc}".echo.runCheck()
+            |  }
+            |
+            |  val temp = Os.temp()
+            |  temp.writeOver(json.s)
+            |  commands = commands :+ st${tq}DSC_RUNNER_DIR = s"$${dsc_runner_dir.string}${tq}"
+            |  commands = commands :+ st${tq}DSC_TESTER_DIR = s"$${dsc_tester_dir.string}${tq}"
+            |  commands = commands :+ st${tq}// create the result directories for $${testFamilyName} on the test server and upload the json file${tq}
+            |  commands = commands :+ st${tq}proc"ssh $${proxyJump} santos_jenkins@$${testServer} mkdir -p $$$${DSC_RUNNER_DIR}".echo.console.runCheck()${tq}
+            |  commands = commands :+ st${tq}proc"ssh $${proxyJump} santos_jenkins@$${testServer} mkdir -p $$$${DSC_TESTER_DIR}".echo.console.runCheck()${tq}
+            |  commands = commands :+ st${tq}proc"scp $$proxyJump $${temp} santos_jenkins@$${testServer}:$${dsc_runner_dir.up}/testRow.json".echo.runCheck()${tq}
+            |  commands = commands :+ st${tq}proc"scp $$proxyJump $${temp} santos_jenkins@$${testServer}:$${dsc_tester_dir.up}/testRow.json".echo.runCheck()${tq}
+            |  commands = commands :+ st${tq}// trigger $${testFamilyName} tests on jenkins${tq}
+            |  commands = commands :+ st${tq}proc"$$$$CURL_PREFIX $${jenkinsArgs} --data DSC_RUNNER_DIR=$$$${DSC_RUNNER_DIR} --data DSC_TESTER_DIR=$$$${DSC_TESTER_DIR} --data DSC_JAR_LOC=$$jarFileDest --data DSC_TEST_SERVER=$${testServer} --data DSC_PREFIX=$${DSC_PREFIX}".echo.console.runCheck()${tq}
+            |  commands = commands :+ st""
+            |
+            |  i = i + 2
+            |}
+            |
+            |val batch =
+            |  st${tq}// #Sireum
+            |      |
+            |      |import org.sireum._
+            |      |
+            |      |val DSC_TIMEOUT = Os.env("DSC_TIMEOUT").get
+            |      |val jenkinsUserId = Os.env("JENKINS_USER_ID").get
+            |      |val jenkinsToken = Os.env("JENKINS_TOKEN").get
+            |      |
+            |      |val CURL_PREFIX=s"$$curlPrefix"
+            |      |var DSC_RUNNER_DIR=""
+            |      |var DSC_TESTER_DIR=""
+            |      |
+            |      |$${(commands, "\n")}
+            |      |${tq}
+            |
+            |(Os.slashDir / "batch.cmd").writeOver(batch.render)
+            |(Os.slashDir / "batch.cmd").chmod("700")
+            |"""
 
+      val t5_5 = projectRoot / "bin" / "exampleJenkinsScript.cmd"
+      t5_5.writeOver(exampleJenkinsScript.render)
+      t5_5.chmod("770")
     } // end of for loop
     return 0
   }

@@ -49,7 +49,7 @@ Aux_Types.scala
 Containers.scala
 
 */
-
+@datatype class Config_String(minSize: Z, maxSize: Z, attempts: Z, verbose: B, filter: String => B) {}
 @datatype class Config_Z(low: Option[Z], high: Option[Z], attempts: Z, verbose: B, filter: Z => B) {}
 
 @datatype class Config_B(attempts: Z, verbose: B, filter: B => B) {}
@@ -268,6 +268,8 @@ Containers.scala
 
 @datatype class Config_Base_TypesString_Payload(attempts: Z, verbose: B, filter: Base_Types.String_Payload => B) {}
 
+@datatype class Config_ISZB(minSize: Z, maxSize: Z, attempts: Z, verbose: B, filter: ISZ[B] => B) {}
+
 @datatype class Config_Base_TypesBits_Payload(attempts: Z, verbose: B, filter: Base_Types.Bits_Payload => B) {}
 
 @datatype class Config_EventControlEventControlMockThread_i_eventControlMock_eventControlMockThread_PreState_Container(attempts: Z, verbose: B, additiveTypeFiltering: B, typeFilter: ISZ[EventControlEventControlMockThread_i_eventControlMock_eventControlMockThread_PreState_Container_DataTypeId.Type], filter: EventControl.EventControlMockThread_i_eventControlMock_eventControlMockThread_PreState_Container => B) {}
@@ -296,8 +298,8 @@ Containers.scala
 
 @datatype class Config_runtimemonitorObservationKindType(attempts: Z, verbose: B, filter: runtimemonitor.ObservationKind.Type => B) {}
 
-@datatype class Config_system_testsActuation_Subsystem_Inputs_Container(attempts: Z, verbose: B, filter: system_tests.Actuation_Subsystem_Inputs_Container => B) {}
+@datatype class Config_system_testsrts1Actuation_Subsystem_Inputs_Container(attempts: Z, verbose: B, filter: system_tests.rts1.Actuation_Subsystem_Inputs_Container => B) {}
 
-@datatype class Config_system_testsActuation_Subsystem_Outputs_Container(attempts: Z, verbose: B, filter: system_tests.Actuation_Subsystem_Outputs_Container => B) {}
+@datatype class Config_system_testsrts1Actuation_Subsystem_Outputs_Container(attempts: Z, verbose: B, filter: system_tests.rts1.Actuation_Subsystem_Outputs_Container => B) {}
 
 

@@ -1,0 +1,2507 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="f0de3f48-ab95-4787-8b41-cba7b23cea73" manual="true">
+    <element uuid="519676a1-ee9c-439d-8f0b-ca60a8d01583" manual="true">
+      <element uuid="72bbc868-1f66-4ad9-b976-3162b0b98633" manual="true">
+        <element uuid="69ab008d-6479-46f6-8744-388b0c957d1c" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>LEVEL</seg>
+        </bo>
+        <bendpoints>
+          <point x="1138.68359375" y="117.99993896484375"/>
+          <point x="1138.68359375" y="157.99993896484375"/>
+          <point x="264.0001220703125" y="157.99993896484375"/>
+          <point x="264.0001220703125" y="1148.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="d1a1385e-9b10-4fc9-b680-11e6ba6d0d99" manual="true">
+        <element uuid="8b328407-5c5a-483a-9ebd-492df945fd8a" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>LEVEL_FAILURE_ACK</seg>
+        </bo>
+        <bendpoints>
+          <point x="1388.68359375" y="2907.99951171875"/>
+          <point x="1388.68359375" y="3667.99951171875"/>
+          <point x="284.0001220703125" y="3667.99951171875"/>
+          <point x="284.0001220703125" y="3077.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="5331439e-bbf5-4659-9397-81d4ae7958f4" manual="true">
+        <element uuid="ef60e625-5c1d-4d0f-bca9-822936209329" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>LEVEL_FAILURE_DETECTION</seg>
+        </bo>
+        <bendpoints>
+          <point x="1198.68359375" y="2058.000244140625"/>
+          <point x="1198.68359375" y="1958.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="9ae95376-d0fa-41ae-bd00-027edbb6373f" manual="true">
+        <element uuid="7ed88e00-9d19-4309-93ad-055fc997325e" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>LEVEL_REPAIRED</seg>
+        </bo>
+        <bendpoints>
+          <point x="1478.68359375" y="3457.99951171875"/>
+          <point x="1478.68359375" y="3777.99951171875"/>
+          <point x="244.0001220703125" y="3777.99951171875"/>
+          <point x="244.0001220703125" y="3137.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="0352c5cf-8a53-4b0f-a2ba-3fd47bd56ffe" manual="true">
+        <element uuid="9bad2ae6-53af-44cd-9d68-7e0d5a13affc" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>LEVEL_REPAIRED_ACK</seg>
+        </bo>
+        <bendpoints>
+          <point x="1148.68359375" y="1758.000244140625"/>
+          <point x="1148.68359375" y="1708.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="096d5293-7a3a-4b07-9e6a-a4015651320d" manual="true">
+        <element uuid="64c79f73-44c0-4a32-ae38-56af5c878970" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>OP_MODE_0</seg>
+        </bo>
+        <bendpoints>
+          <point x="1268.68359375" y="2358.000244140625"/>
+          <point x="1268.68359375" y="877.9999389648438"/>
+        </bendpoints>
+      </element>
+      <element uuid="1e2f43f7-43d2-4bdc-b6b2-8f93d60f5f3d" manual="true">
+        <element uuid="e91b701d-7a6b-4e33-984a-a9976e10d8b9" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>OP_MODE_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="1268.68359375" y="2358.000244140625"/>
+          <point x="1268.68359375" y="597.9999389648438"/>
+        </bendpoints>
+      </element>
+      <element uuid="3095b4a0-6416-4d59-b235-dff0a1f75552" manual="true">
+        <element uuid="997db460-dee6-45bd-baa3-cb7fea192f09" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>OP_MODE_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1268.68359375" y="2358.000244140625"/>
+          <point x="1268.68359375" y="3737.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="69166f64-4a6e-4555-863e-efa8d1bb8850" manual="true">
+        <element uuid="873cfb1f-b4c7-41fb-b6bf-39af57815694" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>OP_MODE_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="1268.68359375" y="2358.000244140625"/>
+          <point x="1268.68359375" y="4067.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="15527cb9-dc84-4e93-8d65-4b734bc80f5d" manual="true">
+        <element uuid="b07715cf-cc90-4e59-b2e0-e84e4ca3502d" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>OP_MODE_4</seg>
+        </bo>
+        <bendpoints>
+          <point x="1268.68359375" y="2358.000244140625"/>
+          <point x="1268.68359375" y="1208.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="01bd3a18-493f-4dd6-b27e-57e996bae6c2" manual="true">
+        <element uuid="f7bb1917-ec3e-4822-9694-6003ab15ec26" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>OP_MODE_5</seg>
+        </bo>
+        <bendpoints>
+          <point x="1268.68359375" y="2358.000244140625"/>
+          <point x="1268.68359375" y="267.99993896484375"/>
+        </bendpoints>
+      </element>
+      <element uuid="f40fae4b-1811-49e1-bd20-55bdbf7ac7ee" manual="true">
+        <element uuid="e3e8c4cd-751c-4b5d-b27f-0bb2d801857a" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>OP_MODE_6</seg>
+        </bo>
+        <bendpoints>
+          <point x="1268.68359375" y="2358.000244140625"/>
+          <point x="1268.68359375" y="4347.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="ac0c1108-54c7-492a-bef7-307e288b9e9d" manual="true">
+        <element uuid="2d73d8b6-907e-4a20-89fa-3b2052257ffa" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>OP_MODE_7</seg>
+        </bo>
+        <bendpoints>
+          <point x="1268.68359375" y="2358.000244140625"/>
+          <point x="1268.68359375" y="2208.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="23bd9f11-a1db-43fb-aa98-bba3c63c3d3f" manual="true">
+        <element uuid="ab6c6171-64c6-427b-ad3e-9c3214b8cb44" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>OPEN_PUMP_0</seg>
+        </bo>
+        <bendpoints>
+          <point x="1148.68359375" y="1148.0"/>
+          <point x="1148.68359375" y="497.99993896484375"/>
+        </bendpoints>
+      </element>
+      <element uuid="2b71750d-e9b6-4b44-ab8d-4354e427f0a8" manual="true">
+        <element uuid="7b8a1694-c588-4f5d-b4d2-fda7b4c716f2" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>OPEN_PUMP_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="1248.68359375" y="1398.000244140625"/>
+          <point x="1248.68359375" y="3687.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="e4667e55-b438-4827-80b7-a243b3638ad1" manual="true">
+        <element uuid="2ce295be-8319-487e-9de7-6cd0381ae126" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>OPEN_PUMP_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1138.68359375" y="1248.0"/>
+          <point x="1138.68359375" y="3967.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="b5a15ac9-0e55-4919-aa26-ff8f41537c88" manual="true">
+        <element uuid="c95031ef-53d7-4679-a1fc-a67847a149cc" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>OPEN_PUMP_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="1158.68359375" y="1198.0"/>
+          <point x="1158.68359375" y="1108.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="6e6f05c1-90a2-4b08-9bba-eb6fa51e3c68" manual="true">
+        <element uuid="d299da95-8ef0-4e56-a2e5-ffb6b4c77530" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>P_C_FAIL_ACK_0</seg>
+        </bo>
+        <bendpoints>
+          <point x="1458.68359375" y="3357.99951171875"/>
+          <point x="1458.68359375" y="3757.99951171875"/>
+          <point x="204.0001220703125" y="3757.99951171875"/>
+          <point x="204.0001220703125" y="2717.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="97e41a1c-ca93-4d7e-849a-eeb17d56e15b" manual="true">
+        <element uuid="b0c2f787-f7c5-463b-8bbc-8292b70899dd" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>P_C_FAIL_ACK_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="1328.68359375" y="2558.000244140625"/>
+          <point x="1328.68359375" y="3597.99951171875"/>
+          <point x="264.0001220703125" y="3597.99951171875"/>
+          <point x="264.0001220703125" y="2837.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="1920a9c4-f509-4b96-8007-7d9adff584a8" manual="true">
+        <element uuid="fe02ac6c-5124-4d04-8334-bce07e3face6" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>P_C_FAIL_ACK_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1368.68359375" y="2807.99951171875"/>
+          <point x="1368.68359375" y="3647.99951171875"/>
+          <point x="274.0001220703125" y="3647.99951171875"/>
+          <point x="274.0001220703125" y="2897.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="82351dc5-a7ef-4d8d-9d57-5dcd0063c01c" manual="true">
+        <element uuid="54801f9f-5800-4927-8033-e6dcd18bad82" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>P_C_FAIL_ACK_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="1318.68359375" y="2508.000244140625"/>
+          <point x="1318.68359375" y="3587.99951171875"/>
+          <point x="304.0001220703125" y="3587.99951171875"/>
+          <point x="304.0001220703125" y="3017.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="c828fd5c-e478-4f21-80ec-060058ac56e2" manual="true">
+        <element uuid="e4d1adb4-5f30-4514-ba78-2e144f87e473" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>P_C_R_A_0</seg>
+        </bo>
+        <bendpoints>
+          <point x="1188.68359375" y="1998.000244140625"/>
+          <point x="1188.68359375" y="1908.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="18495d66-ff00-4b6c-9541-9010f0a2ca3f" manual="true">
+        <element uuid="1512acee-43f9-43a3-aa86-03ffcf584e6e" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>P_C_R_A_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="1168.68359375" y="1878.000244140625"/>
+          <point x="1168.68359375" y="1808.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="ade8d337-176a-42f0-a714-6b3a07145efc" manual="true">
+        <element uuid="c09136ea-62db-44c0-bc7f-ded58aace066" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>P_C_R_A_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1158.68359375" y="1818.000244140625"/>
+          <point x="1158.68359375" y="1758.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="c2d29e52-a2d6-49b8-bf23-bddf68ba0cf3" manual="true">
+        <element uuid="045837d4-260c-4aed-a167-986ae5ffd83f" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>P_C_R_A_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="1178.68359375" y="1938.000244140625"/>
+          <point x="1178.68359375" y="1858.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="c8a5126f-eeb8-4c71-a788-088005753b35" manual="true">
+        <element uuid="3aad80ae-4e96-4216-8af6-ce9f6b5126d2" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PHYSICAL_UNITS_READY_0</seg>
+        </bo>
+        <bendpoints>
+          <point x="1138.68359375" y="677.9999389648438"/>
+          <point x="1138.68359375" y="1017.9999389648438"/>
+          <point x="254.0001220703125" y="1017.9999389648438"/>
+          <point x="254.0001220703125" y="3317.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="0220dcde-a33c-4cad-b09b-9f6e173351e9" manual="true">
+        <element uuid="a61f3e16-e846-4367-ba5b-0964ceb89bcb" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PHYSICAL_UNITS_READY_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="1498.68359375" y="397.99993896484375"/>
+          <point x="1498.68359375" y="437.99993896484375"/>
+          <point x="224.0001220703125" y="437.99993896484375"/>
+          <point x="224.0001220703125" y="1818.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="b9e3078d-5a67-4c4b-b7f4-7b6cfc84af3d" manual="true">
+        <element uuid="985d0a47-97c9-48b2-956a-842c5195c7a1" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PHYSICAL_UNITS_READY_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1498.68359375" y="3887.99951171875"/>
+          <point x="1498.68359375" y="3847.99951171875"/>
+          <point x="74.0001220703125" y="3847.99951171875"/>
+          <point x="74.0001220703125" y="1758.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="c57bd11b-9083-45c7-bd9e-20b5ce957453" manual="true">
+        <element uuid="765ccb19-fc59-4343-8054-4178fc119974" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PHYSICAL_UNITS_READY_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="84.0001220703125" y="4167.99951171875"/>
+          <point x="84.0001220703125" y="1938.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="c946fb50-301c-45bc-986f-0a3bda76374b" manual="true">
+        <element uuid="b3a11569-4aef-4c50-a75a-7ca20315ccea" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PHYSICAL_UNITS_READY_4</seg>
+        </bo>
+        <bendpoints>
+          <point x="1508.68359375" y="1007.9999389648438"/>
+          <point x="1508.68359375" y="1048.0"/>
+          <point x="284.0001220703125" y="1048.0"/>
+          <point x="284.0001220703125" y="1878.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="22f34232-da74-46bc-b445-8e2882d70ded" manual="true">
+        <element uuid="e0e297b6-f233-498c-98d2-1c74cc548aea" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PHYSICAL_UNITS_READY_5</seg>
+        </bo>
+        <bendpoints>
+          <point x="44.0001220703125" y="167.99993896484375"/>
+          <point x="44.0001220703125" y="2358.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="d931fae4-f800-4c6c-ba18-552775a401b9" manual="true">
+        <element uuid="7323d87e-ca66-4505-9198-371bcee0fa09" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PHYSICAL_UNITS_READY_6</seg>
+        </bo>
+        <bendpoints>
+          <point x="64.0001220703125" y="4397.99951171875"/>
+          <point x="64.0001220703125" y="1698.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="8d0f0b3e-94b0-42f1-b245-8e121b256196" manual="true">
+        <element uuid="6fc3924b-b705-46a1-a76d-ea9919fb2633" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PROGRAM_READY_0</seg>
+        </bo>
+        <bendpoints>
+          <point x="1488.68359375" y="1348.000244140625"/>
+          <point x="1488.68359375" y="827.9999389648438"/>
+        </bendpoints>
+      </element>
+      <element uuid="5f602e01-47a0-4359-8acc-7f68393fea87" manual="true">
+        <element uuid="9d763bc9-35df-4895-9a81-4f023ac90060" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PROGRAM_READY_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="1488.68359375" y="1348.000244140625"/>
+          <point x="1488.68359375" y="217.99993896484375"/>
+        </bendpoints>
+      </element>
+      <element uuid="2787003e-89cd-4650-822d-045192205961" manual="true">
+        <element uuid="b4a5ef7c-b7d9-492d-b9bc-fbca254063b3" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PROGRAM_READY_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1488.68359375" y="1348.000244140625"/>
+          <point x="1488.68359375" y="547.9999389648438"/>
+        </bendpoints>
+      </element>
+      <element uuid="d8ac1d8d-1d8d-4546-b410-b4fdc3a4bf67" manual="true">
+        <element uuid="9b08f702-bfb2-47c2-98b5-3596b0909fa9" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PROGRAM_READY_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="1488.68359375" y="1348.000244140625"/>
+          <point x="1488.68359375" y="3637.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="fa9334bb-9042-49d8-9185-8114d1786745" manual="true">
+        <element uuid="57daef6d-52bf-4cf8-b867-59c560b5b42a" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PROGRAM_READY_4</seg>
+        </bo>
+        <bendpoints>
+          <point x="1488.68359375" y="1348.000244140625"/>
+          <point x="1488.68359375" y="4017.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="d17a2a42-bb5d-4f47-9696-5417f7a41d00" manual="true">
+        <element uuid="6b22d746-fa02-417a-b4ed-4be97895c6aa" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PROGRAM_READY_5</seg>
+        </bo>
+        <bendpoints>
+          <point x="1488.68359375" y="1348.000244140625"/>
+          <point x="1488.68359375" y="1158.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="ae5dcdf6-f585-4e28-9b65-9437355f2b6d" manual="true">
+        <element uuid="a504e3e7-bf02-4c26-8cc8-87eeaf8304da" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PROGRAM_READY_6</seg>
+        </bo>
+        <bendpoints>
+          <point x="1488.68359375" y="1348.000244140625"/>
+          <point x="1488.68359375" y="4297.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="4d84150b-9174-4564-a39b-ad809a428fcf" manual="true">
+        <element uuid="2f4bf1b9-54fd-49d6-b4ee-6ff346395cbd" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_C_FAILURE_DET_0</seg>
+        </bo>
+      </element>
+      <element uuid="e7707f8a-0807-4ce4-8a6a-ee7545c98d91" manual="true">
+        <element uuid="d1772e8c-e83d-464f-8045-9a597102d1fa" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_C_FAILURE_DET_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="1498.68359375" y="1578.000244140625"/>
+          <point x="1498.68359375" y="1558.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="8e69cc4a-ecae-49ee-99a5-ccd489d94ae6" manual="true">
+        <element uuid="560753cb-17c5-4b89-b4ae-4d4b1f5e29b4" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_C_FAILURE_DET_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1498.68359375" y="1638.000244140625"/>
+          <point x="1498.68359375" y="1608.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="5dd7d581-c942-4cc6-9332-5512b22f431e" manual="true">
+        <element uuid="81b66581-4ceb-4069-81df-1e8095db88fb" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_C_FAILURE_DET_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="1498.68359375" y="1698.000244140625"/>
+          <point x="1498.68359375" y="1658.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="73bb51e3-5002-4ee4-b420-dab8a53129a7" manual="true">
+        <element uuid="285ece4d-b335-4270-a3bd-8461e0ebdff1" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_C_REPAIRED_0</seg>
+        </bo>
+        <bendpoints>
+          <point x="1428.68359375" y="3157.99951171875"/>
+          <point x="1428.68359375" y="3717.99951171875"/>
+          <point x="104.0001220703125" y="3717.99951171875"/>
+          <point x="104.0001220703125" y="1578.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="e444e0b0-7cde-457a-8b89-2cff549dd9cf" manual="true">
+        <element uuid="156635fc-a92f-4a60-aa06-96b600a705ca" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_C_REPAIRED_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="1148.68359375" y="3257.99951171875"/>
+          <point x="1148.68359375" y="3737.99951171875"/>
+          <point x="114.0001220703125" y="3737.99951171875"/>
+          <point x="114.0001220703125" y="1638.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="a8f5b1c2-0156-4e56-a0da-7e9992e1f8e0" manual="true">
+        <element uuid="379989eb-0fca-4a7d-bbb2-ea8c3cc1d146" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_C_REPAIRED_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1408.68359375" y="3057.99951171875"/>
+          <point x="1408.68359375" y="3697.99951171875"/>
+          <point x="94.0001220703125" y="3697.99951171875"/>
+          <point x="94.0001220703125" y="1458.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="ea592493-e1a0-4531-ab39-1e5221b3d7e9" manual="true">
+        <element uuid="5fc1ed2e-3580-45c9-9b8c-597e6a3fd15e" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_C_REPAIRED_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="1338.68359375" y="2607.99951171875"/>
+          <point x="1338.68359375" y="3607.99951171875"/>
+          <point x="214.0001220703125" y="3607.99951171875"/>
+          <point x="214.0001220703125" y="1518.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="3b6c7b46-cb16-49f7-a88e-3eb4726a21e8" manual="true">
+        <element uuid="5124f6ba-b947-4cce-9ddd-462772719e8e" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_CONTROL_STATE_0</seg>
+        </bo>
+        <bendpoints>
+          <point x="1138.68359375" y="347.99993896484375"/>
+          <point x="1138.68359375" y="427.99993896484375"/>
+          <point x="34.0001220703125" y="427.99993896484375"/>
+          <point x="34.0001220703125" y="3437.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="c0eb8013-66a7-458a-8029-cfdae23bfdd2" manual="true">
+        <element uuid="353d9bf2-a520-4e98-b57d-b54e76e894d7" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_CONTROL_STATE_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="324.0001220703125" y="3787.99951171875"/>
+          <point x="324.0001220703125" y="3377.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="fd555145-ffcd-4439-8d4b-0aabe03a0806" manual="true">
+        <element uuid="ee7c9f87-5426-4db7-922f-4a8fa02f8fb0" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_CONTROL_STATE_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1498.68359375" y="4217.99951171875"/>
+          <point x="1498.68359375" y="4177.99951171875"/>
+          <point x="334.0001220703125" y="4177.99951171875"/>
+          <point x="334.0001220703125" y="3557.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="e5caf94e-28b8-4a3c-b8c3-360d5d048604" manual="true">
+        <element uuid="902d64d8-0d45-404b-95cb-61c76406aeb9" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_CONTROL_STATE_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="1498.68359375" y="957.9999389648438"/>
+          <point x="1498.68359375" y="1038.0"/>
+          <point x="24.0001220703125" y="1038.0"/>
+          <point x="24.0001220703125" y="3497.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="c503488e-e32c-4a9c-a450-e61370a57864" manual="true">
+        <element uuid="a85100c1-2684-42ff-8738-887a896f8e0e" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_FAILURE_ACK_0</seg>
+        </bo>
+        <bendpoints>
+          <point x="1398.68359375" y="2957.99951171875"/>
+          <point x="1398.68359375" y="3677.99951171875"/>
+          <point x="144.0001220703125" y="3677.99951171875"/>
+          <point x="144.0001220703125" y="2178.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="fafc8c10-ac36-4e77-a0b8-1862ef1edab4" manual="true">
+        <element uuid="33fb0030-e464-4709-aff5-2dab60d8128b" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_FAILURE_ACK_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="1378.68359375" y="2857.99951171875"/>
+          <point x="1378.68359375" y="3657.99951171875"/>
+          <point x="174.0001220703125" y="3657.99951171875"/>
+          <point x="174.0001220703125" y="2418.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="18a0511b-5a20-42a2-9f2a-65cff28b7118" manual="true">
+        <element uuid="57f0212c-3e28-498d-83b0-caa165b278f3" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_FAILURE_ACK_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1258.68359375" y="2757.99951171875"/>
+          <point x="1258.68359375" y="3637.99951171875"/>
+          <point x="164.0001220703125" y="3637.99951171875"/>
+          <point x="164.0001220703125" y="2298.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="8165911e-78f8-450b-82e5-0a24cfb4026c" manual="true">
+        <element uuid="df5a030a-fded-40bc-a36e-0ef4c46ca5c2" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_FAILURE_ACK_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="1158.68359375" y="3007.99951171875"/>
+          <point x="1158.68359375" y="3687.99951171875"/>
+          <point x="184.0001220703125" y="3687.99951171875"/>
+          <point x="184.0001220703125" y="2478.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="9635fd1d-a4fb-4cdc-a029-826a1d5e06be" manual="true">
+        <element uuid="b1114aea-5ae1-4d5f-9986-12d76a6becb9" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_FAILURE_DETECTION_0</seg>
+        </bo>
+        <bendpoints>
+          <point x="1288.68359375" y="2478.000244140625"/>
+          <point x="1288.68359375" y="2308.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="c992aec3-8bc9-4fd6-9c37-feeed3774184" manual="true">
+        <element uuid="338c65d0-0515-425e-901a-25f421e47ae2" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_FAILURE_DETECTION_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="1298.68359375" y="2538.000244140625"/>
+          <point x="1298.68359375" y="2358.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="26d154ba-3d95-4776-8af0-449c4d5678a5" manual="true">
+        <element uuid="b0bfcf6c-eb47-498c-af06-2c68c610a2cf" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_FAILURE_DETECTION_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1308.68359375" y="2597.99951171875"/>
+          <point x="1308.68359375" y="2408.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="362719a9-c2ab-435e-92e4-a5fbccf61595" manual="true">
+        <element uuid="268af90e-eb11-421f-a29e-0910543c5c02" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_FAILURE_DETECTION_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="1258.68359375" y="2657.99951171875"/>
+          <point x="1258.68359375" y="2458.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="3b19e5cf-5fa8-4516-9b21-18e320703653" manual="true">
+        <element uuid="9dcfb98f-1d59-46ef-b39f-21284792dd90" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_REPAIRED_0</seg>
+        </bo>
+        <bendpoints>
+          <point x="1418.68359375" y="3107.99951171875"/>
+          <point x="1418.68359375" y="3707.99951171875"/>
+          <point x="234.0001220703125" y="3707.99951171875"/>
+          <point x="234.0001220703125" y="2957.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="53c03774-83ce-4b44-8a15-023836352c87" manual="true">
+        <element uuid="42526ee6-f4ab-4638-9b95-a6bf69fc40b4" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_REPAIRED_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="1468.68359375" y="3407.99951171875"/>
+          <point x="1468.68359375" y="3767.99951171875"/>
+          <point x="154.0001220703125" y="3767.99951171875"/>
+          <point x="154.0001220703125" y="2657.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="485ef333-8959-46d5-903e-cba5dbcd5bda" manual="true">
+        <element uuid="6b54cf8d-de76-4491-9556-a29c3f66a7a2" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_REPAIRED_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1348.68359375" y="2657.99951171875"/>
+          <point x="1348.68359375" y="3617.99951171875"/>
+          <point x="224.0001220703125" y="3617.99951171875"/>
+          <point x="224.0001220703125" y="2777.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="6a88a742-57d8-4e4c-ba27-0f27690b2afc" manual="true">
+        <element uuid="63bad42a-2f65-413b-b76f-efe46bc24b65" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_REPAIRED_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="1258.68359375" y="1408.000244140625"/>
+          <point x="1258.68359375" y="1068.0"/>
+          <point x="334.0001220703125" y="1068.0"/>
+          <point x="334.0001220703125" y="2597.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="4774c03e-6d3d-4592-8d51-39f08e589f89" manual="true">
+        <element uuid="e6dc268a-6210-432f-8398-3b0a009421df" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_REPAIRED_ACK_0</seg>
+        </bo>
+        <bendpoints>
+          <point x="1238.68359375" y="2298.000244140625"/>
+          <point x="1238.68359375" y="2158.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="19a4163b-f1d0-475b-9801-45cd366b8881" manual="true">
+        <element uuid="b85ef0d9-dbfc-4e5d-ada3-5d234bae7324" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_REPAIRED_ACK_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="1228.68359375" y="2238.000244140625"/>
+          <point x="1228.68359375" y="2108.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="5787011c-4270-49a6-86e0-0ff8ee93c230" manual="true">
+        <element uuid="f861fb80-ca23-49da-b97a-9361c45d56d9" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_REPAIRED_ACK_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1218.68359375" y="2178.000244140625"/>
+          <point x="1218.68359375" y="2058.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="f2b3edbe-07bf-45f9-9fe7-feea43f9a415" manual="true">
+        <element uuid="9959e110-cca1-433c-8b2e-7f10312d0911" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_REPAIRED_ACK_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="1208.68359375" y="2118.000244140625"/>
+          <point x="1208.68359375" y="2008.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="14ce5f01-1c95-4320-8d0c-e0c792a01b98" manual="true">
+        <element uuid="b395a3ec-d36b-4063-ae8e-78fce49563af" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_STATE_0</seg>
+        </bo>
+        <bendpoints>
+          <point x="234.0001220703125" y="447.99993896484375"/>
+          <point x="234.0001220703125" y="2058.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="3c10087c-e1ad-48e6-bdd0-6659e5d5741e" manual="true">
+        <element uuid="70622344-21f3-4f69-9367-ef4b859e39cc" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_STATE_1</seg>
+        </bo>
+        <bendpoints>
+          <point x="124.0001220703125" y="3837.99951171875"/>
+          <point x="124.0001220703125" y="1998.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="9b5362a0-3633-469d-bfbf-ac4367cdad02" manual="true">
+        <element uuid="94279c73-6d72-48d8-999f-71b6c32c1bf9" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_STATE_2</seg>
+        </bo>
+        <bendpoints>
+          <point x="134.0001220703125" y="4117.99951171875"/>
+          <point x="134.0001220703125" y="2238.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="db3b6be9-a7c1-4d84-986b-738aed73ddd0" manual="true">
+        <element uuid="023ff6de-9e42-4174-9acd-007e0fcc6602" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>PUMP_STATE_3</seg>
+        </bo>
+        <bendpoints>
+          <point x="294.0001220703125" y="1058.0"/>
+          <point x="294.0001220703125" y="2118.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="d33c2741-1502-4f24-929d-5b9bb16b0df7" manual="true">
+        <element uuid="cbdc9958-42ab-4a93-a7a3-f65124edf30a" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>STEAM</seg>
+        </bo>
+        <bendpoints>
+          <point x="1138.68359375" y="4447.99951171875"/>
+          <point x="1138.68359375" y="4407.99951171875"/>
+          <point x="54.0001220703125" y="4407.99951171875"/>
+          <point x="54.0001220703125" y="1348.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="ce7f7074-cc17-4151-b6b0-a992909ce860" manual="true">
+        <element uuid="7cbc26a1-a398-4c80-8de8-f9092b8e8d91" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>STEAM_BOILER_WAITING</seg>
+        </bo>
+        <bendpoints>
+          <point x="1158.68359375" y="727.9999389648438"/>
+          <point x="1158.68359375" y="1028.0"/>
+          <point x="274.0001220703125" y="1028.0"/>
+          <point x="274.0001220703125" y="1398.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="3d806ee4-24f2-4382-8509-61a9dfe2f241" manual="true">
+        <element uuid="f6fbca9f-d04c-48f8-b27a-26000abef187" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>STEAM_FAILURE_ACK</seg>
+        </bo>
+        <bendpoints>
+          <point x="1448.68359375" y="3307.99951171875"/>
+          <point x="1448.68359375" y="3747.99951171875"/>
+          <point x="194.0001220703125" y="3747.99951171875"/>
+          <point x="194.0001220703125" y="2538.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="9f863a5e-742a-44ee-a637-afc05eef00d4" manual="true">
+        <element uuid="3a5dcbec-4a37-48df-aaf5-6215b918461c" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>STEAM_FAILURE_DETECTION</seg>
+        </bo>
+        <bendpoints>
+          <point x="1278.68359375" y="2418.000244140625"/>
+          <point x="1278.68359375" y="2258.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="fc61676d-6274-4b8f-b40b-d527111c700b" manual="true">
+        <element uuid="ec545073-104d-4899-817b-0582a0d31956" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>STEAM_REPAIRED</seg>
+        </bo>
+        <bendpoints>
+          <point x="1358.68359375" y="2707.99951171875"/>
+          <point x="1358.68359375" y="3627.99951171875"/>
+          <point x="314.0001220703125" y="3627.99951171875"/>
+          <point x="314.0001220703125" y="3257.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="4a100408-2ac5-462b-83f9-a0b51744eab8" manual="true">
+        <element uuid="a9a0688c-b39d-43e3-86e5-3ed60a3433ca" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>STEAM_REPAIRED_ACK</seg>
+        </bo>
+        <bendpoints>
+          <point x="1498.68359375" y="1518.000244140625"/>
+          <point x="1498.68359375" y="1508.000244140625"/>
+        </bendpoints>
+      </element>
+      <element uuid="7708a86a-2728-4082-b60d-0e4e66dacf5a" manual="true">
+        <element uuid="307eb69b-3821-4ca1-8dc9-91f6ac958e4b" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>STOP</seg>
+        </bo>
+        <bendpoints>
+          <point x="1438.68359375" y="3207.99951171875"/>
+          <point x="1438.68359375" y="3727.99951171875"/>
+          <point x="294.0001220703125" y="3727.99951171875"/>
+          <point x="294.0001220703125" y="3197.99951171875"/>
+        </bendpoints>
+      </element>
+      <element uuid="ef736006-6ce5-4bc2-a91b-a152d843341f" manual="true">
+        <element uuid="cf9dce9e-6339-46ce-b334-a50a8f7a061b" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>VALVE</seg>
+        </bo>
+        <bendpoints>
+          <point x="1168.68359375" y="1297.9998779296875"/>
+          <point x="1168.68359375" y="777.9999389648438"/>
+        </bendpoints>
+      </element>
+      <element uuid="cef9ef06-233d-4ab9-b075-a40298564495" manual="true">
+        <element uuid="fa06e885-a710-4eb9-9edf-7d9c60adb999" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>opMode</seg>
+          </bo>
+          <position y="210.0"/>
+        </element>
+        <element uuid="46d40bc5-6cd1-4bdc-b925-6d0497fbe08a" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>programReady</seg>
+          </bo>
+          <position y="160.0"/>
+        </element>
+        <element uuid="d24bd690-c0a1-4421-9f5a-9c320e6aa521" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>ready</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="d4c91beb-34e5-4df1-97a5-deac50b1313d" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>valve</seg>
+          </bo>
+          <position y="110.0"/>
+        </element>
+        <element uuid="67aabc11-68c0-4163-a124-66c3b448ead0" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>waiting</seg>
+          </bo>
+          <position y="60.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>boiler</seg>
+        </bo>
+        <position x="1506.68359375" y="598.0"/>
+        <size width="290.17968368530273" height="260.0"/>
+      </element>
+      <element uuid="fd5a5b9b-90e4-411e-ab18-bd956c2a3f73" manual="true">
+        <element uuid="4147f636-d689-44a1-9dd8-7a2d9949884a" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>boilerReady</seg>
+          </bo>
+          <position y="2208.0"/>
+        </element>
+        <element uuid="d6dc661a-fe41-4fc2-867f-7244ebd777e4" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>boilerWaiting</seg>
+          </bo>
+          <position y="288.0"/>
+        </element>
+        <element uuid="d5087627-27b8-4aca-a169-8f2033d4c4fd" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>levelFail</seg>
+          </bo>
+          <position x="723.7773475646973" y="948.0"/>
+        </element>
+        <element uuid="ccf850d1-659f-4815-95dd-51b90ae0fee5" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>levelFailAck</seg>
+          </bo>
+          <position y="1968.0"/>
+        </element>
+        <element uuid="f8114515-3378-43a0-88f4-ad8fb6caf228" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>levelRepair</seg>
+          </bo>
+          <position y="2028.0"/>
+        </element>
+        <element uuid="ca230e2a-cd32-49b6-b140-f9879a1c4a6d" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>levelRepairAck</seg>
+          </bo>
+          <position x="683.7578277587891" y="648.0"/>
+        </element>
+        <element uuid="39deac6a-d1dc-470b-a3a6-f607cf1e9aef" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>openPump0</seg>
+          </bo>
+          <position x="700.7760391235352" y="38.0"/>
+        </element>
+        <element uuid="71c35be1-cdeb-4597-aeff-b58f2a0d8078" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>openPump1</seg>
+          </bo>
+          <position x="700.7760391235352" y="288.0"/>
+        </element>
+        <element uuid="97a42458-5e29-4540-aa44-30ef00809afa" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>openPump2</seg>
+          </bo>
+          <position x="700.7760391235352" y="138.0"/>
+        </element>
+        <element uuid="633a76d4-6fdf-49ed-9ab2-b4c4cf556316" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>openPump3</seg>
+          </bo>
+          <position x="700.7760391235352" y="88.0"/>
+        </element>
+        <element uuid="e31353c9-8da0-409f-85eb-764343bc2fef" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>opMode</seg>
+          </bo>
+          <position x="724.5000038146973" y="1248.0"/>
+        </element>
+        <element uuid="a98f841f-5f7f-4687-8b68-74d7ebb99263" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFail0</seg>
+          </bo>
+          <position x="667.4492111206055" y="348.0"/>
+        </element>
+        <element uuid="8917c0ec-39ff-4892-a217-5e2df226dbb7" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFail1</seg>
+          </bo>
+          <position x="667.4492111206055" y="468.0"/>
+        </element>
+        <element uuid="b7d5916f-7400-4400-86ed-85432b60504d" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFail2</seg>
+          </bo>
+          <position x="667.4492111206055" y="528.0"/>
+        </element>
+        <element uuid="704743ba-0747-4684-b7c1-90236c757497" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFail3</seg>
+          </bo>
+          <position x="667.4492111206055" y="588.0"/>
+        </element>
+        <element uuid="079545e8-38fe-45f1-8ef6-e76c6160950c" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFailAck0</seg>
+          </bo>
+          <position y="1608.0"/>
+        </element>
+        <element uuid="c4e824aa-0ea2-4165-901a-20e328dff807" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFailAck1</seg>
+          </bo>
+          <position y="1728.0"/>
+        </element>
+        <element uuid="c80b7936-a43e-4208-9cf8-e0cf44d162e6" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFailAck2</seg>
+          </bo>
+          <position y="1788.0"/>
+        </element>
+        <element uuid="2f97e96c-d105-41e4-951a-74332fb4e663" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFailAck3</seg>
+          </bo>
+          <position y="1908.0"/>
+        </element>
+        <element uuid="c0f73fcb-6bc5-41e7-a2d7-a36baa0be3c0" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlReady0</seg>
+          </bo>
+          <position y="708.0"/>
+        </element>
+        <element uuid="fd073467-535e-4e4b-90a0-c4474c0dcaa9" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlReady1</seg>
+          </bo>
+          <position y="648.0"/>
+        </element>
+        <element uuid="31c29e80-f49d-4c9b-96b8-99acd801b7eb" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlReady2</seg>
+          </bo>
+          <position y="828.0"/>
+        </element>
+        <element uuid="e405123b-0ddc-4e60-9b8e-d013cb57d2c8" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlReady3</seg>
+          </bo>
+          <position y="768.0"/>
+        </element>
+        <element uuid="d3165547-3380-45e9-8728-33eebe9b95ec" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepair0</seg>
+          </bo>
+          <position y="468.0"/>
+        </element>
+        <element uuid="d55784b9-55c3-4bdc-8f5f-92da7399c94e" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepair1</seg>
+          </bo>
+          <position y="528.0"/>
+        </element>
+        <element uuid="993e5048-cf26-4f5e-bb00-7692dbf500ac" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepair2</seg>
+          </bo>
+          <position y="348.0"/>
+        </element>
+        <element uuid="3a227737-a046-404f-9713-d8be331a53d2" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepair3</seg>
+          </bo>
+          <position y="408.0"/>
+        </element>
+        <element uuid="64afc6bf-0921-4320-940f-a4b125ae7114" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepairAck0</seg>
+          </bo>
+          <position x="627.4296875" y="888.0"/>
+        </element>
+        <element uuid="9f64ed23-6cc3-4f9b-b2f2-b9591416d673" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepairAck1</seg>
+          </bo>
+          <position x="627.4296875" y="768.0"/>
+        </element>
+        <element uuid="aee5041c-cb6e-42ac-84e4-ddc6904a853e" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepairAck2</seg>
+          </bo>
+          <position x="627.4296875" y="708.0"/>
+        </element>
+        <element uuid="25c24989-e127-4ff6-8730-16411a7fa85f" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepairAck3</seg>
+          </bo>
+          <position x="627.4296875" y="828.0"/>
+        </element>
+        <element uuid="ba57a8fa-4ea0-4071-bcdd-a891128d1ed8" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFail0</seg>
+          </bo>
+          <position x="710.4309959411621" y="1368.0"/>
+        </element>
+        <element uuid="a0836479-c7cc-4afa-966a-60e54288a98c" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFail1</seg>
+          </bo>
+          <position x="710.4309959411621" y="1428.0"/>
+        </element>
+        <element uuid="dff33268-ce1b-4b78-9daf-0a70946d629f" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFail2</seg>
+          </bo>
+          <position x="710.4309959411621" y="1488.0"/>
+        </element>
+        <element uuid="50437226-a958-4809-8345-32d8006c7390" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFail3</seg>
+          </bo>
+          <position x="710.4309959411621" y="1548.0"/>
+        </element>
+        <element uuid="f74c52b0-d294-4445-bed4-7b22effd2ce6" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFailAck0</seg>
+          </bo>
+          <position y="1068.0"/>
+        </element>
+        <element uuid="e57d5951-b281-42fc-8116-9f2614016c5a" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFailAck1</seg>
+          </bo>
+          <position y="1308.0"/>
+        </element>
+        <element uuid="035560bc-8365-4e97-a018-532fa2f828a2" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFailAck2</seg>
+          </bo>
+          <position y="1188.0"/>
+        </element>
+        <element uuid="f5630df7-7481-4d94-b477-de4d4b1da01e" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFailAck3</seg>
+          </bo>
+          <position y="1368.0"/>
+        </element>
+        <element uuid="5e1fae38-d3dd-48fc-8503-40dcd883eeb3" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFlow0</seg>
+          </bo>
+          <position y="2328.0"/>
+        </element>
+        <element uuid="628ca1c9-c30e-414f-93cf-b5e614266b83" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFlow1</seg>
+          </bo>
+          <position y="2268.0"/>
+        </element>
+        <element uuid="6419015c-490c-460b-9de0-e16b1d826d6d" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFlow2</seg>
+          </bo>
+          <position y="2448.0"/>
+        </element>
+        <element uuid="ec43a1c7-2a00-4941-8fa8-d3c2c9457cc5" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFlow3</seg>
+          </bo>
+          <position y="2388.0"/>
+        </element>
+        <element uuid="e3380cd5-f7b8-46c8-bba5-ffa210c4daa9" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpOpen0</seg>
+          </bo>
+          <position y="948.0"/>
+        </element>
+        <element uuid="f781ba34-07ad-4a24-99f7-22789e447276" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpOpen1</seg>
+          </bo>
+          <position y="888.0"/>
+        </element>
+        <element uuid="35ef4fb6-63c9-4418-b0c4-af97b3db7efb" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpOpen2</seg>
+          </bo>
+          <position y="1128.0"/>
+        </element>
+        <element uuid="fc31091c-093d-4075-8297-de3039b68b0f" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpOpen3</seg>
+          </bo>
+          <position y="1008.0"/>
+        </element>
+        <element uuid="25e7f55d-1d60-4ef5-8da2-926c23e9cbaf" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepair0</seg>
+          </bo>
+          <position y="1848.0"/>
+        </element>
+        <element uuid="af2e0a3c-a0a5-4301-9581-8db36bc12b81" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepair1</seg>
+          </bo>
+          <position y="1548.0"/>
+        </element>
+        <element uuid="068c6fbc-faa9-4510-96c3-ffd216923524" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepair2</seg>
+          </bo>
+          <position y="1668.0"/>
+        </element>
+        <element uuid="74d09c7f-6d68-4122-954f-b13acba48740" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepair3</seg>
+          </bo>
+          <position y="1488.0"/>
+        </element>
+        <element uuid="f62030d6-1fa4-4272-9958-afcc9df126ff" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepairAck0</seg>
+          </bo>
+          <position x="670.4114685058594" y="1188.0"/>
+        </element>
+        <element uuid="27c66fce-e861-4250-9224-862096dac15d" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepairAck1</seg>
+          </bo>
+          <position x="670.4114685058594" y="1128.0"/>
+        </element>
+        <element uuid="441d5780-4e6f-4219-a14f-1418349ddc55" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepairAck2</seg>
+          </bo>
+          <position x="670.4114685058594" y="1068.0"/>
+        </element>
+        <element uuid="76ad56a1-4ed2-42a2-9953-906daa59a2af" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepairAck3</seg>
+          </bo>
+          <position x="670.4114685058594" y="1008.0"/>
+        </element>
+        <element uuid="72deef75-0619-4d05-a243-20bdd7dedf42" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>ready</seg>
+          </bo>
+          <position x="739.3307304382324" y="238.0"/>
+        </element>
+        <element uuid="5618e969-feec-40ec-bcc9-582b993b8819" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>steamFail</seg>
+          </bo>
+          <position x="714.8906326293945" y="1308.0"/>
+        </element>
+        <element uuid="1158f227-7689-427c-beab-6983a92e9ed1" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>steamFailAck</seg>
+          </bo>
+          <position y="1428.0"/>
+        </element>
+        <element uuid="28cce48d-3554-48b8-a1fc-a03ba51a8bbb" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>steamMeterReady</seg>
+          </bo>
+          <position y="588.0"/>
+        </element>
+        <element uuid="0475fdad-8383-452c-a166-e74b16b97449" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>steamRate</seg>
+          </bo>
+          <position y="238.0"/>
+        </element>
+        <element uuid="327ebc9b-462d-420d-97df-504773109190" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>steamRepair</seg>
+          </bo>
+          <position y="2148.0"/>
+        </element>
+        <element uuid="37f0d17e-5b16-43f3-bc64-540ef3ac81e8" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>steamRepairAck</seg>
+          </bo>
+          <position x="674.8711090087891" y="408.0"/>
+        </element>
+        <element uuid="15523a14-6726-4adb-8afc-a9c4fcd65d56" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>stop</seg>
+          </bo>
+          <position y="2088.0"/>
+        </element>
+        <element uuid="34d54beb-d2d6-4df5-ac52-878bc9cc129c" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>valve</seg>
+          </bo>
+          <position x="741.5572929382324" y="188.0"/>
+        </element>
+        <element uuid="1ff65b18-e85c-4c55-ba6c-47afe5e89d4b" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>waterLevel</seg>
+          </bo>
+          <position y="38.0"/>
+        </element>
+        <element uuid="e31c4e15-387d-48ef-a001-9decc7a1ffd3" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>waterMeterReady</seg>
+          </bo>
+          <position y="1248.0"/>
+        </element>
+        <element uuid="95632568-310f-4812-8e32-270e01ca04e2" manual="true">
+          <bo>
+            <seg>flow_specification</seg>
+            <seg>Ampulla</seg>
+          </bo>
+          <bendpoints>
+            <point x="691.39453125" y="1148.0"/>
+            <point x="691.39453125" y="1248.0"/>
+          </bendpoints>
+        </element>
+        <element uuid="a6a9577a-11ec-4337-92a1-a0ae4e8676ed" manual="true">
+          <bo>
+            <seg>flow_specification</seg>
+            <seg>Cotland</seg>
+          </bo>
+          <bendpoints>
+            <point x="691.39453125" y="1148.0"/>
+            <point x="691.39453125" y="1348.000244140625"/>
+          </bendpoints>
+        </element>
+        <element uuid="b40cbfee-a0b1-440f-ac65-183e72e38378" manual="true">
+          <bo>
+            <seg>flow_specification</seg>
+            <seg>Ditrochee</seg>
+          </bo>
+          <bendpoints>
+            <point x="691.39453125" y="1398.000244140625"/>
+            <point x="691.39453125" y="1348.000244140625"/>
+          </bendpoints>
+        </element>
+        <element uuid="cce897ed-c643-400f-a4b3-9f0a5aeaae14" manual="true">
+          <bo>
+            <seg>flow_specification</seg>
+            <seg>Kaligenous</seg>
+          </bo>
+          <bendpoints>
+            <point x="691.39453125" y="1148.0"/>
+            <point x="691.39453125" y="1297.9998779296875"/>
+          </bendpoints>
+        </element>
+        <element uuid="0b761d42-4d36-41a2-b6ce-0c10e2436107" manual="true">
+          <bo>
+            <seg>flow_specification</seg>
+            <seg>Oleiferous</seg>
+          </bo>
+          <bendpoints>
+            <point x="691.39453125" y="1148.0"/>
+            <point x="691.39453125" y="1198.0"/>
+          </bendpoints>
+        </element>
+        <element uuid="076717e4-b02b-478b-beed-d96fad1bf5a3" manual="true">
+          <bo>
+            <seg>flow_specification</seg>
+            <seg>Plathelminth</seg>
+          </bo>
+        </element>
+        <element uuid="24cf0961-a12d-4777-a042-53efa6e977e0" manual="true">
+          <bo>
+            <seg>flow_specification</seg>
+            <seg>Synodically</seg>
+          </bo>
+        </element>
+        <element uuid="5053be90-d8f6-4ce5-9dd0-be54f14a929b" manual="true">
+          <bo>
+            <seg>flow_specification</seg>
+            <seg>Undergore</seg>
+          </bo>
+          <bendpoints>
+            <point x="691.39453125" y="1148.0"/>
+            <point x="691.39453125" y="1398.000244140625"/>
+          </bendpoints>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>control</seg>
+        </bo>
+        <position x="332.0" y="1040.0"/>
+        <size width="784.68359375" height="2500.0"/>
+      </element>
+      <element uuid="d39fcf71-dc46-4615-b372-02da36256fd9" manual="true">
+        <element uuid="967c873b-c601-4839-ab2c-c3f92e509ff7" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>levelFail</seg>
+          </bo>
+          <position y="560.0"/>
+        </element>
+        <element uuid="67dd92e9-64a8-48e5-bd1d-8b7c0f037b22" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>levelFailAck</seg>
+          </bo>
+          <position y="1510.0"/>
+        </element>
+        <element uuid="ea88ac88-ce8b-42bc-8a64-55cec9e98485" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>levelRepair</seg>
+          </bo>
+          <position y="2060.0"/>
+        </element>
+        <element uuid="352a2485-7eb4-498a-a803-2ec455eea875" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>levelRepairAck</seg>
+          </bo>
+          <position y="310.0"/>
+        </element>
+        <element uuid="7ead2126-8362-4c94-9e20-ca5319ad8bfb" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>opMode</seg>
+          </bo>
+          <position y="810.0"/>
+        </element>
+        <element uuid="70a0d3fe-d18b-4d97-9383-2bebc0fae4e7" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFail0</seg>
+          </bo>
+          <position y="60.0"/>
+        </element>
+        <element uuid="780e54ac-af3c-44bb-b4ed-85bbf215e2ad" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFail1</seg>
+          </bo>
+          <position y="160.0"/>
+        </element>
+        <element uuid="1a19cf76-ff62-4032-9506-903eee03220e" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFail2</seg>
+          </bo>
+          <position y="210.0"/>
+        </element>
+        <element uuid="15bb792d-cc8b-47ec-bed8-a6b482c4b702" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFail3</seg>
+          </bo>
+          <position y="260.0"/>
+        </element>
+        <element uuid="5a60f065-96e4-4145-a6de-83931e2e278e" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFailAck0</seg>
+          </bo>
+          <position y="1960.0"/>
+        </element>
+        <element uuid="7c56f81b-0565-4028-a2e8-aa407ff1ed85" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFailAck1</seg>
+          </bo>
+          <position y="1160.0"/>
+        </element>
+        <element uuid="b4438dbc-780d-466d-87f1-e6e7ebe9a8f0" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFailAck2</seg>
+          </bo>
+          <position y="1410.0"/>
+        </element>
+        <element uuid="c7258ebb-a404-4e27-a8b8-a723aaf1f022" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlFailAck3</seg>
+          </bo>
+          <position y="1110.0"/>
+        </element>
+        <element uuid="49bf2eb5-819f-4f1d-b102-b3d6de77b94d" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepair0</seg>
+          </bo>
+          <position y="1760.0"/>
+        </element>
+        <element uuid="ce73b25d-c552-4d7b-90a8-76b3ecbb05e8" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepair1</seg>
+          </bo>
+          <position y="1860.0"/>
+        </element>
+        <element uuid="d4d30a03-dbec-423e-ae78-1aa32ebb64dc" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepair2</seg>
+          </bo>
+          <position y="1660.0"/>
+        </element>
+        <element uuid="dcafedce-8695-4ae1-be79-7b1313757441" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepair3</seg>
+          </bo>
+          <position y="1210.0"/>
+        </element>
+        <element uuid="97db0788-e976-40d2-b039-45f0af66f37b" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepairAck0</seg>
+          </bo>
+          <position y="510.0"/>
+        </element>
+        <element uuid="587daa0c-d18c-47fe-8a2b-d7773ce946d7" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepairAck1</seg>
+          </bo>
+          <position y="410.0"/>
+        </element>
+        <element uuid="b30caed7-9351-4680-ac95-2df11f1da9d2" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepairAck2</seg>
+          </bo>
+          <position y="360.0"/>
+        </element>
+        <element uuid="11add03c-fe95-43a2-9948-003210f8b3cc" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpControlRepairAck3</seg>
+          </bo>
+          <position y="460.0"/>
+        </element>
+        <element uuid="108283d2-9e6a-4cc7-90fa-d29de5763ad0" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFail0</seg>
+          </bo>
+          <position y="910.0"/>
+        </element>
+        <element uuid="3f5fcbf8-74bc-4e2e-963a-99e1686ac9f5" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFail1</seg>
+          </bo>
+          <position y="960.0"/>
+        </element>
+        <element uuid="23ed3d86-0f60-41b6-ab6f-13134b523329" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFail2</seg>
+          </bo>
+          <position y="1010.0"/>
+        </element>
+        <element uuid="45058409-b310-402c-bbbc-b022183875e6" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFail3</seg>
+          </bo>
+          <position y="1060.0"/>
+        </element>
+        <element uuid="b7b951ef-8299-46cb-ac2e-7114f04e4856" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFailAck0</seg>
+          </bo>
+          <position y="1560.0"/>
+        </element>
+        <element uuid="e6525b9a-9b3c-43d6-bf30-8e02f2a73729" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFailAck1</seg>
+          </bo>
+          <position y="1460.0"/>
+        </element>
+        <element uuid="189ac216-4f5e-4b5f-9601-b40085fbae4e" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFailAck2</seg>
+          </bo>
+          <position y="1360.0"/>
+        </element>
+        <element uuid="320a2a5e-c1b7-443f-8b44-34ca0d41c7c4" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFailAck3</seg>
+          </bo>
+          <position y="1610.0"/>
+        </element>
+        <element uuid="76769c9b-2a21-406a-8536-608f4efd3f8b" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepair0</seg>
+          </bo>
+          <position y="1710.0"/>
+        </element>
+        <element uuid="073ffadd-4ba0-4fd0-8564-c72029a900b5" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepair1</seg>
+          </bo>
+          <position y="2010.0"/>
+        </element>
+        <element uuid="da384b7a-74ed-4a73-9e53-e2bc379e3c76" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepair2</seg>
+          </bo>
+          <position y="1260.0"/>
+        </element>
+        <element uuid="6a298345-eec7-4868-bda7-9ba37fceaeb6" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepair3</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="19b6f35a-2d07-4da7-be76-10bc6075c65b" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepairAck0</seg>
+          </bo>
+          <position y="760.0"/>
+        </element>
+        <element uuid="04ea9b2d-9530-456a-b2a3-48858212fd01" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepairAck1</seg>
+          </bo>
+          <position y="710.0"/>
+        </element>
+        <element uuid="ec3bf3ac-4f8f-46b2-ac9f-9f58ec4a3a92" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepairAck2</seg>
+          </bo>
+          <position y="660.0"/>
+        </element>
+        <element uuid="56622981-12da-44dc-add3-cdad35db73dc" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpRepairAck3</seg>
+          </bo>
+          <position y="610.0"/>
+        </element>
+        <element uuid="dc13aca3-a2ba-4deb-875c-2ac5e4b78d91" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>steamFail</seg>
+          </bo>
+          <position y="860.0"/>
+        </element>
+        <element uuid="7be8bdbb-1fbb-4590-84be-fefdf22848af" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>steamFailAck</seg>
+          </bo>
+          <position y="1910.0"/>
+        </element>
+        <element uuid="4d34833a-bf4f-4938-9251-1b0432342add" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>steamRepair</seg>
+          </bo>
+          <position y="1310.0"/>
+        </element>
+        <element uuid="3eb0a9d9-2e56-4346-b84d-aceee6417ac2" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>steamRepairAck</seg>
+          </bo>
+          <position y="110.0"/>
+        </element>
+        <element uuid="a742bb4d-b943-45e0-84e8-d87edeeb4b2e" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>stop</seg>
+          </bo>
+          <position y="1810.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>desk</seg>
+        </bo>
+        <position x="1506.68359375" y="1328.0"/>
+        <size width="399.8606758117676" height="2110.0"/>
+      </element>
+      <element uuid="29d5cc34-036a-4aac-9df3-f4c4701c65c6" manual="true">
+        <element uuid="20a90bf5-b6a8-4e34-b686-06a06175ddb0" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>openPump</seg>
+          </bo>
+          <position y="160.0"/>
+        </element>
+        <element uuid="533e0b69-1607-4441-9893-bde233d23eea" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>opMode</seg>
+          </bo>
+          <position y="260.0"/>
+        </element>
+        <element uuid="9338eae5-9abd-44ea-9af5-b45fcb5900be" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>programReady</seg>
+          </bo>
+          <position y="210.0"/>
+        </element>
+        <element uuid="1052c229-7809-47da-8939-5770919fc655" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFlow</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="b48752b6-33ec-4efa-97d3-6502475a592c" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpOpen</seg>
+          </bo>
+          <position y="110.0"/>
+        </element>
+        <element uuid="1828c3ce-ce01-4e84-80c2-d6e16f494d26" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>ready</seg>
+          </bo>
+          <position y="60.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>pumpControl0</seg>
+        </bo>
+        <position x="1506.68359375" y="268.0"/>
+        <size width="341.31900787353516" height="310.0"/>
+      </element>
+      <element uuid="cb4e6d0e-6cb8-42d3-96dd-37b223f7380e" manual="true">
+        <element uuid="f9daf88a-4a40-4419-bc42-58546f8d478c" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>openPump</seg>
+          </bo>
+          <position y="60.0"/>
+        </element>
+        <element uuid="e4902246-a249-449a-94e7-57e8143f391b" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>opMode</seg>
+          </bo>
+          <position y="110.0"/>
+        </element>
+        <element uuid="96416e3a-547a-4f6b-9f96-481f55a97dab" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>programReady</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="80bb3d1d-72ae-41b1-956e-0e4da1f1b669" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFlow</seg>
+          </bo>
+          <position y="160.0"/>
+        </element>
+        <element uuid="687c0938-d957-4b6e-a247-738ef6ddcb06" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpOpen</seg>
+          </bo>
+          <position y="210.0"/>
+        </element>
+        <element uuid="68b4a6b4-8721-41f0-bd72-d880b023e002" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>ready</seg>
+          </bo>
+          <position y="260.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>pumpControl1</seg>
+        </bo>
+        <position x="1506.68359375" y="3558.0"/>
+        <size width="341.31900787353516" height="310.0"/>
+      </element>
+      <element uuid="0861a973-c6c8-4a07-ba05-23b8d8e03b0e" manual="true">
+        <element uuid="a27e6a3d-edab-4bc2-85f2-ec8b426fdac4" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>openPump</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="5bb51116-74d7-4e48-9202-987db18c1638" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>opMode</seg>
+          </bo>
+          <position y="110.0"/>
+        </element>
+        <element uuid="5e7b856e-c7f0-4e18-b7c5-362b9349ce43" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>programReady</seg>
+          </bo>
+          <position y="60.0"/>
+        </element>
+        <element uuid="532f6cbe-b02e-4d1e-a307-b85e80847fe9" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFlow</seg>
+          </bo>
+          <position y="260.0"/>
+        </element>
+        <element uuid="0e744952-14f4-43a1-a89d-1d54d7d84d97" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpOpen</seg>
+          </bo>
+          <position y="160.0"/>
+        </element>
+        <element uuid="2b93ec25-ea80-41e6-8175-16470aebadfa" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>ready</seg>
+          </bo>
+          <position y="210.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>pumpControl2</seg>
+        </bo>
+        <position x="1506.68359375" y="3888.0"/>
+        <size width="341.31900787353516" height="310.0"/>
+      </element>
+      <element uuid="25328f1a-8334-41ab-9298-0bad42de27dd" manual="true">
+        <element uuid="690e27b1-b0ac-4e82-9f55-a0e967a4ab76" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>openPump</seg>
+          </bo>
+          <position y="160.0"/>
+        </element>
+        <element uuid="471efca5-f400-4e86-9a1b-5c4d9ffe55da" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>opMode</seg>
+          </bo>
+          <position y="260.0"/>
+        </element>
+        <element uuid="56fa6fe5-fbd8-4922-bd4d-2c9b17223e41" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>programReady</seg>
+          </bo>
+          <position y="210.0"/>
+        </element>
+        <element uuid="ea756095-8e49-419a-82ff-aeb77c8d46f7" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpFlow</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="d814f9ea-0f69-4ae0-be6d-51de5533b750" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>pumpOpen</seg>
+          </bo>
+          <position y="110.0"/>
+        </element>
+        <element uuid="eb5fc61f-cc7a-4f8b-ab95-bb6a59c8991b" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>ready</seg>
+          </bo>
+          <position y="60.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>pumpControl3</seg>
+        </bo>
+        <position x="1506.68359375" y="878.0"/>
+        <size width="341.31900787353516" height="310.0"/>
+      </element>
+      <element uuid="75fca7ae-07fe-4578-bb81-38fdd28a4298" manual="true">
+        <element uuid="3ec52ecc-f19a-42fe-9886-0958450689bd" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>opMode</seg>
+          </bo>
+          <position y="60.0"/>
+        </element>
+        <element uuid="428deac0-8d49-4298-a526-a854dcab6891" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>programReady</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="018094de-baa0-40c5-855f-c47c63ee9c97" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>rate</seg>
+          </bo>
+          <position y="160.0"/>
+        </element>
+        <element uuid="92d23005-4c0c-4d38-be54-cf5c60945b8b" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>ready</seg>
+          </bo>
+          <position y="110.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>steamMeter</seg>
+        </bo>
+        <position x="1506.68359375" y="4218.0"/>
+        <size width="327.9596252441406" height="210.0"/>
+      </element>
+      <element uuid="00cdd2db-e03c-4cf0-9b4c-b2030c6218f1" manual="true">
+        <element uuid="84243d2d-1162-4cae-8c75-22823bfeac89" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>level</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="e67ebfbf-a7d0-4c4b-8929-b3fecd6ce1da" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>opMode</seg>
+          </bo>
+          <position y="160.0"/>
+        </element>
+        <element uuid="5a49f5ed-6e97-43b5-bb44-d0b20d021398" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>programReady</seg>
+          </bo>
+          <position y="110.0"/>
+        </element>
+        <element uuid="0c76f272-64e2-4644-8c58-908773c2dc10" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>ready</seg>
+          </bo>
+          <position y="60.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>waterMeter</seg>
+        </bo>
+        <position x="1506.68359375" y="38.0"/>
+        <size width="324.2552032470703" height="210.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>bcproc</seg>
+      </bo>
+      <position x="12.0" y="38.0"/>
+      <size width="1918.5443115234375" height="4440.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>BoilerControlSystem.i</seg>
+    </bo>
+    <position/>
+    <size width="1942.5443115234375" height="4490.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>BoilerControl::BoilerControlSystem.i</seg>
+    </context>
+  </config>
+</diagram:Diagram>

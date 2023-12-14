@@ -11,7 +11,7 @@ class Tests extends org.sireum.test.TestSuite {
     println(root)
 
     val containers: ISZ[String] = ISZ(
-      "src/main/util/RTS/system_tests/Containers.scala"
+      "src/main/util/RTS/system_tests/rts1/Containers.scala"
     )
 
     val reporter = Reporter.create

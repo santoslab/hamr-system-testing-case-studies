@@ -1,0 +1,1546 @@
+package BoilerControl
+public
+  with Base_Types, Data_Model;
+
+  ------------------------------------------------------------------------------
+  -- BOILER CONTROL SYSTEM
+  --
+  -- Top-level component of the model representing the software system boundary.
+  ------------------------------------------------------------------------------
+  system BoilerControlSystem
+  end BoilerControlSystem;
+  
+  system implementation BoilerControlSystem.i
+  subcomponents
+    bcproc: process BoilerControlProcess.i;
+  end BoilerControlSystem.i;
+
+  ------------------------------------------------------------------------------
+  -- BOILER CONTROL PROCESS
+  --
+  -- Process incorporating all the software of the system.
+  ------------------------------------------------------------------------------
+  process BoilerControlProcess
+  end BoilerControlProcess;
+
+  process implementation BoilerControlProcess.i
+  subcomponents
+    boiler: thread Boiler.i;
+    pumpControl0: thread PumpControl.i;
+    pumpControl1: thread PumpControl.i;
+    pumpControl2: thread PumpControl.i;
+    pumpControl3: thread PumpControl.i;
+    waterMeter: thread WaterMeter.i;
+    steamMeter: thread SteamMeter.i;
+    desk: thread OperatorDesk.i;
+    control: thread BoilerControl.i;
+  connections
+    OP_MODE_0: port control.opMode -> boiler.opMode;
+    OP_MODE_1: port control.opMode -> pumpControl0.opMode;
+    OP_MODE_2: port control.opMode -> pumpControl1.opMode;
+    OP_MODE_3: port control.opMode -> pumpControl2.opMode;
+    OP_MODE_4: port control.opMode -> pumpControl3.opMode;
+    OP_MODE_5: port control.opMode -> waterMeter.opMode;
+    OP_MODE_6: port control.opMode -> steamMeter.opMode;
+    OP_MODE_7: port control.opMode -> desk.opMode;
+    
+    PROGRAM_READY_0: port control.ready -> boiler.programReady;
+    PROGRAM_READY_1: port control.ready -> waterMeter.programReady;
+    PROGRAM_READY_2: port control.ready -> pumpControl0.programReady;
+    PROGRAM_READY_3: port control.ready -> pumpControl1.programReady;
+    PROGRAM_READY_4: port control.ready -> pumpControl2.programReady;
+    PROGRAM_READY_5: port control.ready -> pumpControl3.programReady;
+    PROGRAM_READY_6: port control.ready -> steamMeter.programReady;
+    VALVE: port control.valve -> boiler.valve;
+    OPEN_PUMP_0: port control.openPump0 -> pumpControl0.openPump;
+    OPEN_PUMP_1: port control.openPump1 -> pumpControl1.openPump;
+    OPEN_PUMP_2: port control.openPump2 -> pumpControl2.openPump;
+    OPEN_PUMP_3: port control.openPump3 -> pumpControl3.openPump;
+
+    PUMP_FAILURE_DETECTION_0: port control.pumpFail0 -> desk.pumpFail0;
+    PUMP_FAILURE_DETECTION_1: port control.pumpFail1 -> desk.pumpFail1;
+    PUMP_FAILURE_DETECTION_2: port control.pumpFail2 -> desk.pumpFail2;
+    PUMP_FAILURE_DETECTION_3: port control.pumpFail3 -> desk.pumpFail3;
+    PUMP_C_FAILURE_DET_0: port control.pumpControlFail0 -> desk.pumpControlFail0;
+    PUMP_C_FAILURE_DET_1: port control.pumpControlFail1 -> desk.pumpControlFail1;
+    PUMP_C_FAILURE_DET_2: port control.pumpControlFail2 -> desk.pumpControlFail2;
+    PUMP_C_FAILURE_DET_3: port control.pumpControlFail3 -> desk.pumpControlFail3;
+    LEVEL_FAILURE_DETECTION: port control.levelFail -> desk.levelFail;
+    STEAM_FAILURE_DETECTION: port control.steamFail -> desk.steamFail;
+
+    PUMP_REPAIRED_ACK_0: port control.pumpRepairAck0 -> desk.pumpRepairAck0;
+    PUMP_REPAIRED_ACK_1: port control.pumpRepairAck1 -> desk.pumpRepairAck1;
+    PUMP_REPAIRED_ACK_2: port control.pumpRepairAck2 -> desk.pumpRepairAck2;
+    PUMP_REPAIRED_ACK_3: port control.pumpRepairAck3 -> desk.pumpRepairAck3;
+    P_C_R_A_0: port control.pumpControlRepairAck0 -> desk.pumpControlRepairAck0;
+    P_C_R_A_1: port control.pumpControlRepairAck1 -> desk.pumpControlRepairAck1;
+    P_C_R_A_2: port control.pumpControlRepairAck2 -> desk.pumpControlRepairAck2;
+    P_C_R_A_3: port control.pumpControlRepairAck3 -> desk.pumpControlRepairAck3;
+    LEVEL_REPAIRED_ACK: port control.levelRepairAck -> desk.levelRepairAck;
+    STEAM_REPAIRED_ACK: port control.steamRepairAck -> desk.steamRepairAck;
+
+
+    STOP: port desk.stop -> control.stop;
+    STEAM_BOILER_WAITING: port boiler.waiting -> control.boilerWaiting;
+    PHYSICAL_UNITS_READY_0: port boiler.ready -> control.boilerReady;
+    PHYSICAL_UNITS_READY_1: port pumpControl0.ready -> control.pumpControlReady0;
+    PHYSICAL_UNITS_READY_2: port pumpControl1.ready -> control.pumpControlReady1;
+    PHYSICAL_UNITS_READY_3: port pumpControl2.ready -> control.pumpControlReady2;
+    PHYSICAL_UNITS_READY_4: port pumpControl3.ready -> control.pumpControlReady3;
+    PHYSICAL_UNITS_READY_5: port waterMeter.ready -> control.waterMeterReady;
+    PHYSICAL_UNITS_READY_6: port steamMeter.ready -> control.steamMeterReady;
+    PUMP_STATE_0: port pumpControl0.pumpOpen -> control.pumpOpen0;
+    PUMP_STATE_1: port pumpControl1.pumpOpen -> control.pumpOpen1;
+    PUMP_STATE_2: port pumpControl2.pumpOpen -> control.pumpOpen2;
+    PUMP_STATE_3: port pumpControl3.pumpOpen -> control.pumpOpen3;
+    PUMP_CONTROL_STATE_0: port pumpControl0.pumpFlow -> control.pumpFlow0;
+    PUMP_CONTROL_STATE_1: port pumpControl1.pumpFlow -> control.pumpFlow1;
+    PUMP_CONTROL_STATE_2: port pumpControl2.pumpFlow -> control.pumpFlow2;
+    PUMP_CONTROL_STATE_3: port pumpControl3.pumpFlow -> control.pumpFlow3;
+    LEVEL: port waterMeter.level -> control.waterLevel;
+    STEAM: port steamMeter.rate -> control.steamRate;
+
+    PUMP_REPAIRED_0: port desk.pumpRepair0 -> control.pumpRepair0;
+    PUMP_REPAIRED_1: port desk.pumpRepair1 -> control.pumpRepair1;
+    PUMP_REPAIRED_2: port desk.pumpRepair2 -> control.pumpRepair2;
+    PUMP_REPAIRED_3: port desk.pumpRepair3 -> control.pumpRepair3;
+    PUMP_C_REPAIRED_0: port desk.pumpControlRepair0 -> control.pumpControlRepair0;
+    PUMP_C_REPAIRED_1: port desk.pumpControlRepair1 -> control.pumpControlRepair1;
+    PUMP_C_REPAIRED_2: port desk.pumpControlRepair2 -> control.pumpControlRepair2;
+    PUMP_C_REPAIRED_3: port desk.pumpControlRepair3 -> control.pumpControlRepair3;
+    LEVEL_REPAIRED: port desk.levelRepair -> control.levelRepair;
+    STEAM_REPAIRED: port desk.steamRepair -> control.steamRepair;
+
+    PUMP_FAILURE_ACK_0: port desk.pumpFailAck0 -> control.pumpFailAck0;
+    PUMP_FAILURE_ACK_1: port desk.pumpFailAck1 -> control.pumpFailAck1;
+    PUMP_FAILURE_ACK_2: port desk.pumpFailAck2 -> control.pumpFailAck2;
+    PUMP_FAILURE_ACK_3: port desk.pumpFailAck3 -> control.pumpFailAck3;
+    P_C_FAIL_ACK_0: port desk.pumpControlFailAck0 -> control.pumpControlFailAck0;
+    P_C_FAIL_ACK_1: port desk.pumpControlFailAck1 -> control.pumpControlFailAck1;
+    P_C_FAIL_ACK_2: port desk.pumpControlFailAck2 -> control.pumpControlFailAck2;
+    P_C_FAIL_ACK_3: port desk.pumpControlFailAck3 -> control.pumpControlFailAck3;
+    LEVEL_FAILURE_ACK: port desk.levelFailAck -> control.levelFailAck;
+    STEAM_FAILURE_ACK: port desk.steamFailAck -> control.steamFailAck;
+  end BoilerControlProcess.i;
+
+  ------------------------------------------------------------------------------
+  -- BOILER THREAD
+  --
+  -- One should view this as a simple controller attached to the boiler that
+  -- manipulates the valve and communicates with Dave, rather than as the actual
+  -- boiler itself.
+  ------------------------------------------------------------------------------
+  thread Boiler
+  features
+    opMode: in event data port OpMode;
+    programReady: in event port;
+    valve: in event port;
+    waiting: out event port;
+    ready: out event port;
+  properties
+    Dispatch_Protocol => Periodic;
+    Period => 5sec;
+  end Boiler;
+
+  thread implementation Boiler.i
+  	  	annex GUMBO
+	{**
+		state
+    		Mode:OpMode;
+    		ValveOpen:Base_Types::Boolean;
+    	initialize
+    		guarantee
+				REQ_BOILER_INIT_1 "When the system Initializes, the Boiler must send a Waiting event.":
+					MustSend(waiting);
+			guarantee
+				REQ_BOILER_INIT_2 "When the system Initializes, the Boiler's state variable, Mode, must be Init.":
+					Mode == BoilerControl::OpMode.Init;
+			guarantee
+				REQ_BOILER_INIT_3 "When the system Initializes, the valve should not be open.":
+					!ValveOpen;
+			guarantee
+				REQ_BOILER_INIT_4 "When the system Initializes, the Boiler must not send a Ready event.":
+					NoSend(ready);
+		compute
+			modifies
+				Mode,
+				ValveOpen;
+			cases
+				case REQ_BOILER_COMP_1 "If OpMode is Init and Valve has an event, then Open the Valve (OpenValve == True)":
+					assume 
+						((HasEvent(opMode) && opMode == BoilerControl::OpMode.Init) || 
+						(Mode == BoilerControl::OpMode.Init && (!HasEvent(opMode)))) &&
+						HasEvent(valve);
+					guarantee 
+						ValveOpen;
+				case REQ_BOILER_COMP_2 "If OpMode is Init and has received the ProgramReady event, then Boiler should send the Ready message.":
+					assume 
+						((HasEvent(opMode) && opMode == BoilerControl::OpMode.Init) || 
+						(Mode == BoilerControl::OpMode.Init && (!HasEvent(opMode)))) &&
+						HasEvent(programReady);
+					guarantee 
+						MustSend(ready);
+				case REQ_BOILER_COMP_3 "If OpMode is not Init or Boiler has not received the Valve event, then the Valve remains unchanged.":
+					assume 
+						!(((HasEvent(opMode) && opMode == BoilerControl::OpMode.Init) || 
+						(Mode == BoilerControl::OpMode.Init && (!HasEvent(opMode)))) &&
+						HasEvent(valve));
+					guarantee 
+						In(ValveOpen) == ValveOpen;
+				case REQ_BOILER_COMP_4 "If OpMode is not Init or Boiler has not received the ProgramReady event, then Boiler will not send the Ready message.":
+					assume 
+						!(((HasEvent(opMode) && opMode == BoilerControl::OpMode.Init) || 
+						(Mode == BoilerControl::OpMode.Init && (!HasEvent(opMode)))) &&
+						HasEvent(programReady));
+					guarantee 
+						NoSend(ready);
+				case REQ_BOILER_COMP_5 "The Waiting message must never be sent (This is because it is sent when the component is initialized, and only once, so it should not be done here).":
+					assume 
+						T;
+					guarantee 
+						NoSend(waiting);
+    **};
+  	
+  end Boiler.i;
+
+  ------------------------------------------------------------------------------
+  -- PUMP CONTROL THREAD
+  --
+  -- Pump control device.
+  ------------------------------------------------------------------------------
+  thread PumpControl
+  features
+    opMode: in event data port OpMode;
+    programReady: in event port;
+    openPump: in event data port Base_Types::Boolean;
+    ready: out event port;
+    pumpOpen: out event data port Base_Types::Boolean;
+    pumpFlow: out event data port Base_Types::Boolean;
+  properties
+    Dispatch_Protocol => Periodic;
+    Period => 5sec;
+  end PumpControl;
+
+  thread implementation PumpControl.i
+  	  	  	annex GUMBO
+	{**
+		state
+    		isPumpOpen:Base_Types::Boolean;
+    		isPumpFlow:Base_Types::Boolean;
+    		pumpNumber:Base_Types::Integer;
+    	initialize
+    		guarantee
+				REQ_PUMP_INIT_1 "When the system Initializes, the Pump's local isPumpOpen value must be false.":
+					!isPumpOpen;
+			guarantee
+				REQ_PUMP_INIT_2 "When the system Initializes, the Pump's local isPumpFlow value must be false.":
+					!isPumpFlow;
+			guarantee
+				REQ_PUMP_INIT_3 "When the system Initializes, the Pump's local pumpNumber is set between 0 and 3.":
+					pumpNumber >= 0 && 
+					pumpNumber <= 3;
+			guarantee
+				REQ_PUMP_INIT_4 "When the system Initializes, the Pump's output port ready should not send a message.":
+					NoSend(ready);
+			guarantee
+				REQ_PUMP_INIT_5 "When the system Initializes, the Pump's output port pumpOpen should send a message containing false.":
+					MustSend(pumpOpen) && 
+					pumpOpen == false;
+			guarantee
+				REQ_PUMP_INIT_6 "When the system Initializes, the Pump's output port pumpFlow should send a message containing false.":
+					MustSend(pumpFlow) && 
+					pumpFlow == false;
+		compute
+			modifies
+				isPumpOpen,
+				isPumpFlow;
+			cases
+				case REQ_PUMP_COMP_1 "If programReady has an event, then a ready event must be sent.":
+					assume 
+						HasEvent(programReady);
+					guarantee 
+						MustSend(ready);
+				case REQ_PUMP_COMP_2 "If programReady does not have an event, then a ready event can not be sent.":
+					assume 
+						!HasEvent(programReady);
+					guarantee 
+						NoSend(ready);
+				case REQ_PUMP_COMP_3 "If openPump has an event, then the pump is opened or closed according to the event.":
+					assume 
+						HasEvent(openPump);
+					guarantee 
+						isPumpOpen == openPump;
+				case REQ_PUMP_COMP_4 "If openPump does not have an event, then the pump remains in its previous state.":
+					assume 
+						!HasEvent(openPump);
+					guarantee 
+						In(isPumpOpen) == isPumpOpen;
+				case REQ_PUMP_COMP_5 "Always send a pumpOpen event, it should contain whether or not the pump is open (isPumpOpen).":
+					assume 
+						T;
+					guarantee 
+						MustSend(pumpOpen) && pumpOpen == isPumpOpen;
+				case REQ_PUMP_COMP_6 "Always send a pumpFlow event, it should contain whether or not the pump has water flowing (isPumpFlow).":
+					assume 
+						T;
+					guarantee 
+						MustSend(pumpFlow) && pumpFlow == isPumpFlow;
+    **};
+  end PumpControl.i;
+
+  ------------------------------------------------------------------------------
+  -- WATER LEVEL SENSOR THREAD
+  --
+  -- Water level measurement device.
+  ------------------------------------------------------------------------------
+  thread WaterMeter
+  features
+    opMode: in event data port OpMode;
+    programReady: in event port;
+    ready: out event port;
+    level: out event data port Base_Types::Float_32;
+  properties
+    Dispatch_Protocol => Periodic;
+    Period => 5sec;
+  end WaterMeter;
+
+  thread implementation WaterMeter.i
+  	annex GUMBO
+	{**
+		state
+    		volume:Base_Types::Float_32;
+    	initialize
+    		guarantee
+				REQ_WATER_INIT_1 "level message is sent with volume as its value.": 
+					MustSend(level) && level == volume;
+			guarantee
+				REQ_WATER_INIT_2 "ready message is not sent during initialization.": 
+					NoSend(ready);
+		compute
+			modifies
+				volume;
+			cases
+				case REQ_WATER_COMP_1 "If programReady has an event, then a ready event must be sent if the component is ready.":
+					assume 
+						HasEvent(programReady);
+					guarantee 
+						MustSend(ready);
+				case REQ_WATER_COMP_2 "If programReady does not have an event, then a ready event can not be sent.":
+					assume 
+						!HasEvent(programReady);
+					guarantee 
+						NoSend(ready);
+				case REQ_WATER_COMP_3 "Each computational cycle, the Water Level Reader will send the water level equal to its volume variable reading.":
+					assume
+						T;
+					guarantee
+						MustSend(level) && level == volume;
+    **};
+  end WaterMeter.i;
+
+  ------------------------------------------------------------------------------
+  -- STEAM METER THREAD
+  --
+  -- Steam meter.
+  ------------------------------------------------------------------------------
+  thread SteamMeter
+  features
+    opMode: in event data port OpMode;
+    programReady: in event port;
+    ready: out event port;
+    rate: out event data port Base_Types::Float_32;
+  properties
+    Dispatch_Protocol => Periodic;
+    Period => 5sec;
+  end SteamMeter;
+
+  thread implementation SteamMeter.i
+  	annex GUMBO
+	{**
+		state
+    		computedRate:Base_Types::Float_32;
+    		volume:Base_Types::Float_32;
+    	initialize
+    		guarantee
+				REQ_STEAM_INIT_1 "level message is sent with volume as its value.": 
+				MustSend(rate) && rate == computedRate;
+			guarantee
+				REQ_STEAM_INIT_2 "ready message is not sent during initialization.": 
+				NoSend(ready);
+			guarantee
+				REQ_STEAM_INIT_3 "computedRate, the local variable for the Steam Meter is the volume of steam recorded from the reader divided by 5 (each compute cycle in the system is 5 seconds apart). Note, the amount of steam recorded from a lower level hardware is presumed in this system implementation to provide the volume read between each of its cycles. This was also done so that way there is a computational element to the reading for logika and other testers to have to deal with division. It is likely in other implementations that it would be returning the rate, and thus, the rate would be supplied to the port directly.":
+				computedRate == volume / 5.0f;
+		compute
+			modifies
+				volume;
+			cases
+				case REQ_STEAM_COMP_1 "If programReady has an event, then a ready event must be sent if the component is ready.":
+					assume 
+						HasEvent(programReady);
+					guarantee 
+						MustSend(ready);
+				case REQ_STEAM_COMP_2 "If programReady does not have an event, then a ready event can not be sent.":
+					assume 
+						!HasEvent(programReady);
+					guarantee 
+						NoSend(ready);
+				case REQ_STEAM_COMP_3 "Each computational cycle, the Steam Meter will send the computedRate through a rate message.":
+					assume
+						T;
+					guarantee
+						MustSend(rate) && rate == computedRate;
+				case REQ_STEAM_COMP_4 "computedRate, the local variable for the Steam Meter is the volume of steam recorded from the reader divided by 5 (each compute cycle in the system is 5 seconds apart). Note, the amount of steam recorded from a lower level hardware is presumed in this system implementation to provide the volume read between each of its cycles. This was also done so that way there is a computational element to the reading for logika and other testers to have to deal with division. It is likely in other implementations that it would be returning the rate, and thus, the rate would be supplied to the port directly.":
+					assume
+						T;
+					guarantee
+				computedRate == volume / 5.0f;
+    **};
+  end SteamMeter.i;
+
+  ------------------------------------------------------------------------------
+  -- OPERATOR DESK THREAD
+  --
+  -- Operator desk.
+  ------------------------------------------------------------------------------
+  thread OperatorDesk
+  features
+    opMode: in event data port OpMode;
+    pumpFail0: in event port;
+    pumpFail1: in event port;
+    pumpFail2: in event port;
+    pumpFail3: in event port;
+    pumpControlFail0: in event port;
+    pumpControlFail1: in event port;
+    pumpControlFail2: in event port;
+    pumpControlFail3: in event port;
+    levelFail: in event port;
+    steamFail: in event port;
+    pumpRepairAck0: in event port;
+    pumpRepairAck1: in event port;
+    pumpRepairAck2: in event port;
+    pumpRepairAck3: in event port;
+    pumpControlRepairAck0: in event port;
+    pumpControlRepairAck1: in event port;
+    pumpControlRepairAck2: in event port;
+    pumpControlRepairAck3: in event port;
+    levelRepairAck: in event port;
+    steamRepairAck: in event port;
+
+    stop: out event port;
+    pumpRepair0: out event port;
+    pumpRepair1: out event port;
+    pumpRepair2: out event port;
+    pumpRepair3: out event port;
+    pumpControlRepair0: out event port;
+    pumpControlRepair1: out event port;
+    pumpControlRepair2: out event port;
+    pumpControlRepair3: out event port;
+    levelRepair: out event port;
+    steamRepair: out event port;
+    pumpFailAck0: out event port;
+    pumpFailAck1: out event port;
+    pumpFailAck2: out event port;
+    pumpFailAck3: out event port;
+    pumpControlFailAck0: out event port;
+    pumpControlFailAck1: out event port;
+    pumpControlFailAck2: out event port;
+    pumpControlFailAck3: out event port;
+    levelFailAck: out event port;
+    steamFailAck: out event port;
+  properties
+    Dispatch_Protocol => Periodic;
+    Period => 5sec;
+  end OperatorDesk;
+
+  thread implementation OperatorDesk.i
+  	annex GUMBO
+	{**
+		state
+    		isPumpBroken0:Base_Types::Boolean;
+    		isPumpBroken1:Base_Types::Boolean;
+    		isPumpBroken2:Base_Types::Boolean;
+    		isPumpBroken3:Base_Types::Boolean;
+    		isPumpControlBroken0:Base_Types::Boolean;
+    		isPumpControlBroken1:Base_Types::Boolean;
+    		isPumpControlBroken2:Base_Types::Boolean;
+    		isPumpControlBroken3:Base_Types::Boolean;
+    		isLevelBroken:Base_Types::Boolean;
+    		isSteamBroken:Base_Types::Boolean;
+    		--operatorButtonRepairedPump0:Base_Types::Boolean;
+    		--operatorButtonRepairedPump1:Base_Types::Boolean;
+    		--operatorButtonRepairedPump2:Base_Types::Boolean;
+    		--operatorButtonRepairedPump3:Base_Types::Boolean;
+    		--operatorButtonRepairedPumpControl0:Base_Types::Boolean;
+    		--operatorButtonRepairedPumpControl1:Base_Types::Boolean;
+    		--operatorButtonRepairedPumpControl2:Base_Types::Boolean;
+    		--operatorButtonRepairedPumpControl3:Base_Types::Boolean;
+    		--operatorButtonRepairedLevel:Base_Types::Boolean;
+    		--operatorButtonRepairedSteam:Base_Types::Boolean;
+    	initialize
+    		guarantee
+				REQ_OPDESK_INIT_1 "All 'is part broken' state variable booleans start equal to false.": 
+				!(isPumpBroken0 || isPumpBroken1 || isPumpBroken2 || isPumpBroken3 || 
+					isPumpControlBroken0 || isPumpControlBroken1 || isPumpControlBroken2 || isPumpControlBroken3 || 
+					isLevelBroken || isSteamBroken);
+			guarantee
+				REQ_OPDESK_INIT_2 "All repair messages are not send during initialization.": 
+				NoSend(pumpRepair0) && NoSend(pumpRepair1) && NoSend(pumpRepair2) && NoSend(pumpRepair3) &&
+					NoSend(pumpControlRepair0) && NoSend(pumpControlRepair1) && NoSend(pumpControlRepair2) && NoSend(pumpControlRepair3) &&
+					NoSend(levelRepair) && NoSend(steamRepair);
+			guarantee
+				REQ_OPDESK_INIT_3 "All failure acknowledgement messages are not send during initialization.": 
+				NoSend(pumpFailAck0) && NoSend(pumpFailAck1) && NoSend(pumpFailAck2) && NoSend(pumpFailAck3) &&
+					NoSend(pumpControlFailAck0) && NoSend(pumpControlFailAck1) && NoSend(pumpControlFailAck2) && NoSend(pumpControlFailAck3) &&
+					NoSend(levelFailAck) && NoSend(steamFailAck);
+			guarantee
+				REQ_OPDESK_INIT_4 "Stop message is not sent during Initialization.":
+				NoSend(stop);
+		compute
+			modifies
+				isPumpBroken0,
+	    		isPumpBroken1,
+	    		isPumpBroken2,
+	    		isPumpBroken3,
+	    		isPumpControlBroken0,
+	    		isPumpControlBroken1,
+	    		isPumpControlBroken2,
+	    		isPumpControlBroken3,
+	    		isLevelBroken,
+	    		isSteamBroken;
+			cases
+				case REQ_OPDESK_COMP_1 "If there is not already a failure on Pump 0 and there is a nonempty port saying Pump 0 has failed, then OpDesk will acknowledge the failure.":
+					assume 
+						(!(isPumpBroken0 || isPumpControlBroken0)) && 
+							(HasEvent(pumpFail0) || HasEvent(pumpControlFail0));
+					guarantee
+						MustSend(pumpFailAck0) &&
+						MustSend(pumpControlFailAck0) &&
+						isPumpBroken0 &&
+						isPumpControlBroken0;
+				case REQ_OPDESK_COMP_2 "If there is not already a failure on Pump 1 and there is a nonempty port saying Pump 1 has failed, then OpDesk will acknowledge the failure.":
+					assume 
+						(!(isPumpBroken1 || isPumpControlBroken1)) && 
+							(HasEvent(pumpFail1) || HasEvent(pumpControlFail1));
+					guarantee
+						MustSend(pumpFailAck1) &&
+						MustSend(pumpControlFailAck1) &&
+						isPumpBroken1 &&
+						isPumpControlBroken1;
+				case REQ_OPDESK_COMP_3 "If there is not already a failure on Pump 2 and there is a nonempty port saying Pump 2 has failed, then OpDesk will acknowledge the failure.":
+					assume 
+						(!(isPumpBroken2 || isPumpControlBroken2)) && 
+							(HasEvent(pumpFail2) || HasEvent(pumpControlFail2));
+					guarantee
+						MustSend(pumpFailAck2) &&
+						MustSend(pumpControlFailAck2) &&
+						isPumpBroken2 &&
+						isPumpControlBroken2;
+				case REQ_OPDESK_COMP_4 "If there is not already a failure on Pump 3 and there is a nonempty port saying Pump 3 has failed, then OpDesk will acknowledge the failure.":
+					assume 
+						(!(isPumpBroken3 || isPumpControlBroken3)) && 
+							(HasEvent(pumpFail3) || HasEvent(pumpControlFail3));
+					guarantee
+						MustSend(pumpFailAck3) &&
+						MustSend(pumpControlFailAck3) &&
+						isPumpBroken3 &&
+						isPumpControlBroken3;
+				case REQ_OPDESK_COMP_5 "For Pump 0, if there is no failure present from the event ports, then there will be no failure acknowledgement sent for the component.":
+					assume 
+						(!(HasEvent(pumpFail0) || HasEvent(pumpControlFail0)));
+					guarantee
+						NoSend(pumpFailAck0) &&
+						NoSend(pumpControlFailAck0);
+				case REQ_OPDESK_COMP_6 "For Pump 1, if there is no failure present from the event ports, then there will be no failure acknowledgement sent for the component.":
+					assume 
+						(!(HasEvent(pumpFail1) || HasEvent(pumpControlFail1)));
+					guarantee
+						NoSend(pumpFailAck1) &&
+						NoSend(pumpControlFailAck1);
+				case REQ_OPDESK_COMP_7 "For Pump 2, if there is no failure present from the event ports, then there will be no failure acknowledgement sent for the component.":
+					assume 
+						(!(HasEvent(pumpFail2) || HasEvent(pumpControlFail2)));
+					guarantee
+						NoSend(pumpFailAck2) &&
+						NoSend(pumpControlFailAck2);
+				case REQ_OPDESK_COMP_8 "For Pump 3, if OpDesk has already acknowledged a given failure, or there is no failure present from the event ports, then there will be no failure acknowledgement sent for the component.":
+					assume 
+						(!(HasEvent(pumpFail3) || HasEvent(pumpControlFail3)));
+					guarantee
+						NoSend(pumpFailAck3) &&
+						NoSend(pumpControlFailAck3);
+				case REQ_OPDESK_COMP_9 "For Pump 0, if the system is aware of a failure, then the operator may say it has been repaired. If they do, then send a repair message for the relavent component.":
+					assume
+						(isPumpBroken0 || isPumpControlBroken0);
+					guarantee
+						MustSend(pumpRepair0) &&
+						MustSend(pumpControlRepair0) &&
+						((!(HasEvent(pumpFail0) || HasEvent(pumpControlFail0)))->:((!isPumpBroken0) && (!isPumpControlBroken0)));
+				case REQ_OPDESK_COMP_10 "For Pump 1, if the system is aware of a failure, then the operator may say it has been repaired. If they do, then send a repair message for the relavent component.":
+					assume
+						(isPumpBroken1 || isPumpControlBroken1);
+					guarantee
+						MustSend(pumpRepair1) &&
+						MustSend(pumpControlRepair1) &&
+						((!(HasEvent(pumpFail1) || HasEvent(pumpControlFail1)))->:((!isPumpBroken1) && (!isPumpControlBroken1)));
+				case REQ_OPDESK_COMP_11 "For Pump 2, if there the system is aware of a failure, then the operator may say it has been repaired. If they do, then send a repair message for the relavent component.":
+					assume
+						(isPumpBroken2 || isPumpControlBroken2);
+					guarantee
+						MustSend(pumpRepair2) &&
+						MustSend(pumpControlRepair2) &&
+						((!(HasEvent(pumpFail2) || HasEvent(pumpControlFail2)))->:((!isPumpBroken2) && (!isPumpControlBroken2)));
+				case REQ_OPDESK_COMP_12 "For Pump 3, if there the system is aware of a failure, then the operator may say it has been repaired. If they do, then send a repair message for the relavent component.":
+					assume
+						(isPumpBroken3 || isPumpControlBroken3);
+					guarantee
+						MustSend(pumpRepair3) &&
+						MustSend(pumpControlRepair3) &&
+						((!(HasEvent(pumpFail3) || HasEvent(pumpControlFail3)))->:((!isPumpBroken3) && (!isPumpControlBroken3)));
+				case REQ_OPDESK_COMP_13 "If there is not already a failure on the Water Level and there is a nonempty port saying the Water Level has failed, then OpDesk will acknowledge the failure.":
+					assume 
+						(!(isLevelBroken)) && 
+							(HasEvent(levelFail));
+					guarantee
+						MustSend(levelFailAck) &&
+						isLevelBroken;
+				case REQ_OPDESK_COMP_14 "If there is not already a failure on the Steam Meter and there is a nonempty port saying the Steam Meter has failed, then OpDesk will acknowledge the failure.":
+					assume 
+						(!(isSteamBroken)) && 
+							(HasEvent(steamFail));
+					guarantee
+						MustSend(steamFailAck) &&
+						isSteamBroken;
+				case REQ_OPDESK_COMP_15 "For Water Level, if OpDesk has already acknowledged a given failure, or there is no failure present from the event ports, then there will be no failure acknowledgement sent for the component.":
+					assume 
+						(!(HasEvent(levelFail)));
+					guarantee
+						NoSend(levelFailAck);
+				case REQ_OPDESK_COMP_16 "For Steam Meter, if OpDesk has already acknowledged a given failure, or there is no failure present from the event ports, then there will be no failure acknowledgement sent for the component.":
+					assume 
+						(!(HasEvent(steamFail)));
+					guarantee
+						NoSend(steamFailAck);
+				case REQ_OPDESK_COMP_17 "For Water Level, if there the system is aware of a failure, then the operator may say it has been repaired. If they do, then send a repair message for the relavent component.":
+					assume
+						(isLevelBroken);
+					guarantee
+						MustSend(levelRepair) &&
+						((!(HasEvent(levelFail))) ->: 
+							(!isLevelBroken));
+				case REQ_OPDESK_COMP_18 "For Water Level, if there the system is aware of a failure, then the operator may say it has been repaired. If they do, then send a repair message for the relavent component.":
+					assume
+						(isSteamBroken);
+					guarantee
+						MustSend(steamRepair) &&
+						((!(HasEvent(steamFail))) ->: 
+							(!isSteamBroken));
+    **};
+  end OperatorDesk.i;
+
+  ------------------------------------------------------------------------------
+  -- BOILER CONTROL THREAD
+  --
+  -- Control logic.
+  ------------------------------------------------------------------------------
+  thread BoilerControl
+  features
+    stop: in event port;
+    boilerWaiting: in event port;
+    boilerReady: in event port;
+    waterMeterReady: in event port;
+    pumpControlReady0: in event port;
+    pumpControlReady1: in event port;
+    pumpControlReady2: in event port;
+    pumpControlReady3: in event port;
+    steamMeterReady: in event port;
+    pumpOpen0: in event data port Base_Types::Boolean;
+    pumpOpen1: in event data port Base_Types::Boolean;
+    pumpOpen2: in event data port Base_Types::Boolean;
+    pumpOpen3: in event data port Base_Types::Boolean;
+    pumpFlow0: in event data port Base_Types::Boolean;
+    pumpFlow1: in event data port Base_Types::Boolean;
+    pumpFlow2: in event data port Base_Types::Boolean;
+    pumpFlow3: in event data port Base_Types::Boolean;
+    waterLevel: in event data port Base_Types::Float_32;
+    steamRate: in event data port Base_Types::Float_32;
+    pumpRepair0: in event port;
+    pumpRepair1: in event port;
+    pumpRepair2: in event port;
+    pumpRepair3: in event port;
+    pumpControlRepair0: in event port;
+    pumpControlRepair1: in event port;
+    pumpControlRepair2: in event port;
+    pumpControlRepair3: in event port;
+    levelRepair: in event port;
+    steamRepair: in event port;
+    pumpFailAck0: in event port;
+    pumpFailAck1: in event port;
+    pumpFailAck2: in event port;
+    pumpFailAck3: in event port;
+    pumpControlFailAck0: in event port;
+    pumpControlFailAck1: in event port;
+    pumpControlFailAck2: in event port;
+    pumpControlFailAck3: in event port;
+    levelFailAck: in event port;
+    steamFailAck: in event port;
+    opMode: out event data port OpMode;
+    ready: out event port;
+    valve: out event port;
+    openPump0: out event data port Base_Types::Boolean;
+    openPump1: out event data port Base_Types::Boolean;
+    openPump2: out event data port Base_Types::Boolean;
+    openPump3: out event data port Base_Types::Boolean;
+    pumpFail0: out event port;
+    pumpFail1: out event port;
+    pumpFail2: out event port;
+    pumpFail3: out event port;
+    pumpControlFail0: out event port;
+    pumpControlFail1: out event port;
+    pumpControlFail2: out event port;
+    pumpControlFail3: out event port;
+    levelFail: out event port;
+    steamFail: out event port;
+    pumpRepairAck0: out event port;
+    pumpRepairAck1: out event port;
+    pumpRepairAck2: out event port;
+    pumpRepairAck3: out event port;
+    pumpControlRepairAck0: out event port;
+    pumpControlRepairAck1: out event port;
+    pumpControlRepairAck2: out event port;
+    pumpControlRepairAck3: out event port;
+    levelRepairAck: out event port;
+    steamRepairAck: out event port;
+  flows
+    Ditrochee: flow path boilerWaiting -> ready;
+    Synodically: flow path steamRate -> ready;
+    Cotland: flow path waterLevel -> ready;
+    Kaligenous: flow path waterLevel -> valve;
+    Plathelminth: flow path waterLevel -> openPump0;
+    Undergore: flow path waterLevel -> openPump1;
+    Ampulla: flow path waterLevel -> openPump2;
+    Oleiferous: flow path waterLevel -> openPump3;
+    -- and more
+  properties
+    Dispatch_Protocol => Periodic;
+    Period => 5sec;
+  end BoilerControl;
+
+  thread implementation BoilerControl.i
+
+  	annex GUMBO
+	{**
+		state
+		mode: BoilerControl::OpMode;
+		C: Base_Types::Float_32; --Boiler Capacity [502]
+		M1: Base_Types::Float_32;-- Minimal Limit [502]
+		M2: Base_Types::Float_32;--Maximal Limit [502]
+		N1: Base_Types::Float_32;--Minimal Normal [502]
+		N2: Base_Types::Float_32;--Maximal Normal [502]
+		W: Base_Types::Float_32;--Maximum Steam Output [502]
+		U1: Base_Types::Float_32;--Maximum Gradiant of Increase (Steam) [502]
+		U2: Base_Types::Float_32;--Maximum Gradiant of Decrease (Steam) [502]
+		q: Base_Types::Float_32;--Quantity of Water in steam boiler (water level recorded)[502]
+		P: Base_Types::Float_32;-- Throughput of pumps
+		v_steamRate: Base_Types::Float_32;--Quantity of Steam exiting boiler (steam meter rate) [502]
+		hasBoilerSentWaiting: Base_Types::Boolean;
+		isPump0Failing: Base_Types::Boolean;
+		isPump1Failing: Base_Types::Boolean;
+		isPump2Failing: Base_Types::Boolean;
+		isPump3Failing: Base_Types::Boolean;
+		isWaterMeterFailing: Base_Types::Boolean;
+		isSteamMeterFailing: Base_Types::Boolean;
+		p0: Base_Types::Float_32;
+		p1: Base_Types::Float_32;
+		p2: Base_Types::Float_32;
+		p3: Base_Types::Float_32;
+		qc1: Base_Types::Float_32;
+		qc2: Base_Types::Float_32;
+		qa1: Base_Types::Float_32;
+		qa2: Base_Types::Float_32;
+		shouldUpdatePumps: Base_Types::Boolean;
+		transmissionFailure: Base_Types::Boolean;
+		initialize
+			guarantee
+				REQ_BCON_INIT_1 "OpMode should be sent initially, it should contain an init payload. mode should be init.":
+					MustSend(opMode) && mode == BoilerControl::OpMode.Init;
+			guarantee
+				REQ_BCON_INIT_2 "Other than OpMode, no other out port should be sent.":
+					NoSend(openPump0) &&
+					NoSend(openPump1) &&
+					NoSend(openPump2) && 
+					NoSend(openPump3) &&
+					NoSend(ready) &&
+					NoSend(valve) &&
+					NoSend(pumpFail0) &&
+					NoSend(pumpFail1) &&
+					NoSend(pumpFail2) &&
+					NoSend(pumpFail3) &&
+					NoSend(pumpControlFail0) &&
+					NoSend(pumpControlFail1) &&
+					NoSend(pumpControlFail2) &&
+					NoSend(pumpControlFail3) &&
+					NoSend(levelFail) &&
+					NoSend(steamFail) &&
+					NoSend(pumpRepairAck0) &&
+					NoSend(pumpRepairAck1) &&
+					NoSend(pumpRepairAck2) &&
+					NoSend(pumpRepairAck3) &&
+					NoSend(pumpControlRepairAck0) &&
+					NoSend(pumpControlRepairAck1) &&
+					NoSend(pumpControlRepairAck2) &&
+					NoSend(pumpControlRepairAck3) &&
+					NoSend(levelRepairAck) &&
+					NoSend(steamRepairAck);
+		compute
+			-- PROBLEM CHILDREN
+			--assume
+			--	REQ_BCON_COMP_ASM_1 "Capacity should be greater than M2, M2 greater than N2, N2 greater than N1, N1 greater than M1, and M1 greater than 0.":
+			--		(C > M2) &
+			--		(M2 > N2) &
+			--		(N2 > N1) &
+			--		(N1 > M1) &
+			--		(M1 > 0);
+		--	assume
+		--		REQ_BCON_COMP_PBT_1 "For the ease of Property based testing, let api.waterLevel.get (if it is populated) it should be between -1f and C + 1.0f inclusive.":
+	--				((HasEvent(waterLevel))->:(waterLevel >= (-1.0f) && waterLevel <= (C+1.0f)));
+	--		assume
+	--			REQ_BCON_COMP_PBT_2 "For the ease of Property Based testing, let C be 1000.0f":
+	--				(C == 1000.0f);
+	--		assume
+	--			REQ_BCON_COMP_PBT_3 "For the ease of Property Based Testing, let p0, p1, p2, and p3 be between 1.0f and 0.0f inclusive.":
+	--				(p0 >= 0.0f & p0 <= 1.0f &
+	--					p1 >= 0.0f & p1 <= 1.0f &
+	--					p2 >= 0.0f & p2 <= 1.0f &
+	--					p3 >= 0.0f & p3 <= 1.0f
+	--				);
+	--		assume
+	--			REQ_BCON_COMP_PBT_4 "For the ease of Property Based testing, let U1 be greater than 0.0f and less than or equal to 20.0f":
+	--				(U1 > 0.0f & U1 <= 20.0f);
+			cases
+				case
+				    REQ_BCON_COMP_1 "If the stop event is recieved, mode is stop.":
+				        assume
+				            HasEvent(stop);
+				        guarantee
+				            mode == BoilerControl::OpMode.Stop;
+				case
+				    REQ_BCON_COMP_2 "If the stop event is not recieved and if mode was not stop before, then any part that is failing will send the correct fail event.":
+				        assume
+				            (!HasEvent(stop)) && mode != BoilerControl::OpMode.Stop;
+				        guarantee
+				            ((isWaterMeterFailing)->:(MustSend(levelFail))) &
+				            ((isSteamMeterFailing)->:(MustSend(steamFail))) &
+				            ((isPump0Failing)->:(MustSend(pumpFail0))) &
+				            ((isPump1Failing)->:(MustSend(pumpFail1))) &
+				            ((isPump2Failing)->:(MustSend(pumpFail2))) &
+				            ((isPump3Failing)->:(MustSend(pumpFail3)));
+				case
+				    REQ_BCON_COMP_3 "If the stop event is not recieved and if mode was not stop before, then P is equal to the sum of p0, p1, p2, and p3.":
+				        assume
+				            (!HasEvent(stop)) && mode != BoilerControl::OpMode.Stop;
+				        guarantee
+				            (P == p0 + p1 + p2 + p3);
+				case
+				    REQ_BCON_COMP_4 "If the stop event is not recieved and if mode was not stop before, then qc1 and qc2 follow the formula on [508].":
+				        assume
+				            (!HasEvent(stop)) && mode != BoilerControl::OpMode.Stop;
+				        guarantee
+				            (qc1 == q - 5.0f * v_steamRate - 12.5f * U1 + P) &
+				            (qc2 == q - 5.0f * v_steamRate + 12.5f * U1 + P);
+				case
+				    REQ_BCON_COMP_5 "If the stop event is not recieved and if mode was not stop before, and Water Meter is failing, then qa1 == qc1 and qa2 == qc2 [508]":
+				        assume
+				            (!HasEvent(stop)) && mode != BoilerControl::OpMode.Stop;
+				        guarantee
+				            (isWaterMeterFailing)->:((qa1 == qc1) &
+				            (qa2 == qc2));
+				case
+				    REQ_BCON_COMP_6 "If the stop event is not recieved and if mode was not stop before, and Water Meter is not failing, then qa1 == q and qa2 == q [508]":
+				        assume
+				            (!HasEvent(stop)) && mode != BoilerControl::OpMode.Stop;
+				        guarantee
+				            (!isWaterMeterFailing) ->:
+				            ((qa1 == q) &
+				            (qa2 == q));
+				case
+				    REQ_BCON_COMP_7 "Always, an OpMode event should be sent with the current value of mode.":
+				        assume
+				            T;
+				        guarantee
+				            MustSend(OpMode) & OpMode == mode;
+				case
+					REQ_BCON_COMP_8 "If in mode is Stop. Then no ports other than OpMode should be populated.":
+						assume
+							(mode == BoilerControl::OpMode.Stop);
+						guarantee
+							MustSend(opMode) &
+							NoSend(openPump0) &
+							NoSend(openPump1) &
+							NoSend(openPump2) &
+							NoSend(openPump3) &
+							NoSend(ready) &
+							NoSend(valve) &
+							NoSend(pumpFail0) &
+							NoSend(pumpFail1) &
+							NoSend(pumpFail2) &
+							NoSend(pumpFail3) &
+							NoSend(pumpControlFail0) &
+							NoSend(pumpControlFail1) &
+							NoSend(pumpControlFail2) &
+							NoSend(pumpControlFail3) &
+							NoSend(levelFail) &
+							NoSend(steamFail) &
+							NoSend(pumpRepairAck0) &
+							NoSend(pumpRepairAck1) &
+							NoSend(pumpRepairAck2) &
+							NoSend(pumpRepairAck3) &
+							NoSend(levelRepairAck) &
+							NoSend(steamRepairAck);
+				case
+					REQ_BCON_COMP_9 "Always send an OpMode":
+						assume
+							T;
+						guarantee
+							MustSend(opMode);
+				case
+				    REQ_BCON_COMP_CHECK_1 "Water Meter Failure (No Repair): If the Water Meter was broken, and the repair message has not been sent. The Water Meter remains broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            isWaterMeterFailing &
+				            (!HasEvent(levelRepair));
+				        guarantee
+				            isWaterMeterFailing &
+				            NoSend(levelRepairAck);
+				case
+				    REQ_BCON_COMP_CHECK_2 "Water Meter Failure (No Level): If the Water Meter provides no level event, The Water Meter is Broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            (!HasEvent(waterLevel));
+				        guarantee
+				            isWaterMeterFailing &
+				            transmissionFailure &
+				            NoSend(levelRepairAck);
+				case
+				    REQ_BCON_COMP_CHECK_3 "Water Meter Failure (Invalid Level): If the Water Meter provides a level event, but it is less than or equal to 0, then the Water Meter is broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            HasEvent(waterLevel) &&
+				            waterLevel == 0.0f;
+				        guarantee
+				            isWaterMeterFailing &
+				            NoSend(levelRepairAck);
+				case
+				    REQ_BCON_COMP_CHECK_4 "Water Meter Repair: If the Water Meter was broken, but a repair event has been received, the Water Meter is not broken as long as there is a level event with a valid data payload.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            HasEvent(levelRepair) &
+				            HasEvent(waterLevel) &&
+				            waterLevel > 0.0f;
+				        guarantee
+				            (!isWaterMeterFailing) &
+				            ((In(isWaterMeterFailing))->:MustSend(levelRepairAck));
+				case
+				    REQ_BCON_COMP_CHECK_5 "Steam Meter Failure (No Repair): If the Steam Meter was broken, and the repair message has not been sent. The Steam Meter remains broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            isSteamMeterFailing &
+				            (!HasEvent(steamRepair));
+				        guarantee
+				            isSteamMeterFailing &
+				            NoSend(steamRepairAck);
+				case
+				    REQ_BCON_COMP_CHECK_6 "Steam Meter Failure (No steamRate): If the Steam Meter provides no steamRate event, The Steam Meter is Broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            (!HasEvent(steamRate));
+				        guarantee
+				            isSteamMeterFailing &
+				            transmissionFailure &
+				            NoSend(steamRepairAck);
+				case
+				    REQ_BCON_COMP_CHECK_7 "Steam Meter Failure (Invalid steamRate): If the Steam Meter provides a steamRate event, but it is less than 0, then the Steam Meter is broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            (HasEvent(steamRate)) &&
+				            steamRate < 0.0f;
+				        guarantee
+				            isSteamMeterFailing &
+				            NoSend(steamRepairAck);
+				case
+				    REQ_BCON_COMP_CHECK_8 "Steam Meter Repair: If the Steam Meter was broken, but a repair event has been received, the Steam Meter is not broken as long as there is a steamRate event with a valid data payload.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            HasEvent(steamRepair) &&
+				            HasEvent(steamRate) &&
+				            steamRate >= 0.0f;
+				        guarantee
+				            (!isSteamMeterFailing) &
+				            ((In(isSteamMeterFailing))->:(MustSend(steamRepairAck)));
+				case
+				    REQ_BCON_COMP_CHECK_9_Pump0 "Pump Failure (No Repair): If a given Pump was broken, and the repair message for that pump has not been sent. The given Pump remains broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            isPump0Failing &
+				            (!HasEvent(pumpRepair0));
+				        guarantee
+				            isPump0Failing &
+				            NoSend(pumpRepairAck0);
+				case
+				    REQ_BCON_COMP_CHECK_9_Pump1 "Pump Failure (No Repair): If a given Pump was broken, and the repair message for that pump has not been sent. The given Pump remains broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            isPump1Failing &
+				            (!HasEvent(pumpRepair1));
+				        guarantee
+				            isPump1Failing  &
+				            NoSend(pumpRepairAck1);
+				case
+				    REQ_BCON_COMP_CHECK_9_Pump2 "Pump Failure (No Repair): If a given Pump was broken, and the repair message for that pump has not been sent. The given Pump remains broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            isPump2Failing &
+				            (!HasEvent(pumpRepair2));
+				        guarantee
+				            isPump2Failing  &
+				            NoSend(pumpRepairAck2);
+				case
+				    REQ_BCON_COMP_CHECK_9_Pump3 "Pump Failure (No Repair): If a given Pump was broken, and the repair message for that pump has not been sent. The given Pump remains broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            isPump3Failing &
+				            (!HasEvent(pumpRepair3));
+				        guarantee
+				            isPump3Failing  &
+				            NoSend(pumpRepairAck3);
+				case
+				    REQ_BCON_COMP_CHECK_10_Pump0 "Pump Failure (No Open, or No Flow): If a given Pump provides no open or flow event, The Pump is Broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            ((!HasEvent(pumpOpen0)) |
+				            (!HasEvent(pumpFlow0)));
+				        guarantee
+				            isPump0Failing  &
+				            NoSend(pumpRepairAck0);
+				case
+				    REQ_BCON_COMP_CHECK_10_Pump1 "Pump Failure (No Open, or No Flow): If a given Pump provides no open or flow event, The Pump is Broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            ((!HasEvent(pumpOpen1)) |
+				            (!HasEvent(pumpFlow1)));
+				        guarantee
+				            isPump1Failing  &
+				            NoSend(pumpRepairAck1);
+				case
+				    REQ_BCON_COMP_CHECK_10_Pump2 "Pump Failure (No Open, or No Flow): If a given Pump provides no open or flow event, The Pump is Broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            ((!HasEvent(pumpOpen2)) |
+				            (!HasEvent(pumpFlow2)));
+				        guarantee
+				            isPump2Failing  &
+				            NoSend(pumpRepairAck2);
+				case
+				    REQ_BCON_COMP_CHECK_10_Pump3 "Pump Failure (No Open, or No Flow): If a given Pump provides no open or flow event, The Pump is Broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            ((!HasEvent(pumpOpen3)) |
+				            (!HasEvent(pumpFlow3)));
+				        guarantee
+				            isPump3Failing  &
+				            NoSend(pumpRepairAck3);
+				case
+				    REQ_BCON_COMP_CHECK_11_Pump0 "Pump Failure (Invalid Level): If a given Pump provides an open and flow event, but they do not logically match (if open then flow or if !open then !flow), then the Pump is broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            HasEvent(pumpOpen0) &&
+				            HasEvent(pumpFlow0) &&
+				            pumpOpen0 != pumpFlow0;
+				        guarantee
+				            isPump0Failing  &
+				            NoSend(pumpRepairAck0);
+				case
+				    REQ_BCON_COMP_CHECK_11_Pump1 "Pump Failure (Invalid Level): If a given Pump provides an open and flow event, but they do not logically match (if open then flow or if !open then !flow), then the Pump is broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            HasEvent(pumpOpen1) &&
+				            HasEvent(pumpFlow1) &&
+				            pumpOpen1 != pumpFlow1;
+				        guarantee
+				            isPump1Failing  &
+				            NoSend(pumpRepairAck1);
+				case
+				    REQ_BCON_COMP_CHECK_11_Pump2 "Pump Failure (Invalid Level): If a given Pump provides an open and flow event, but they do not logically match (if open then flow or if !open then !flow), then the Pump is broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            HasEvent(pumpOpen2) &&
+				            HasEvent(pumpFlow2) &&
+				            pumpOpen2 != pumpFlow2;
+				        guarantee
+				            isPump2Failing  &
+				            NoSend(pumpRepairAck2);
+				case
+				    REQ_BCON_COMP_CHECK_11_Pump3 "Pump Failure (Invalid Level): If a given Pump provides an open and flow event, but they do not logically match (if open then flow or if !open then !flow), then the Pump is broken.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            HasEvent(pumpOpen3) &&
+				            HasEvent(pumpFlow3) &&
+				            pumpOpen3 != pumpFlow3;
+				        guarantee
+				            isPump3Failing  &
+				            NoSend(pumpRepairAck3);
+				case
+				    REQ_BCON_COMP_CHECK_12_Pump0 "Pump Repair: If a given Pump was broken, but a repair event for that pump has been received, the Pump is not broken as long as there is an open and flow event with a valid data payload.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            HasEvent(pumpRepair0) &
+				            HasEvent(pumpOpen0) &&
+				            HasEvent(pumpFlow0) &&
+				            pumpOpen0 == pumpFlow0;
+				        guarantee
+				            (!isPump0Failing) &
+				            ((isPump0Failing)->:(MustSend(pumpRepairAck0)));
+				case
+				    REQ_BCON_COMP_CHECK_12_Pump1 "Pump Repair: If a given Pump was broken, but a repair event for that pump has been received, the Pump is not broken as long as there is an open and flow event with a valid data payload.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            HasEvent(pumpRepair1) &
+				            HasEvent(pumpOpen1) &&
+				            HasEvent(pumpFlow1) &&
+				            pumpOpen1 == pumpFlow1;
+				        guarantee
+				            (!isPump1Failing) &
+				            ((isPump1Failing)->:(MustSend(pumpRepairAck1)));
+				case
+				    REQ_BCON_COMP_CHECK_12_Pump2 "Pump Repair: If a given Pump was broken, but a repair event for that pump has been received, the Pump is not broken as long as there is an open and flow event with a valid data payload.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            HasEvent(pumpRepair2) &
+				            HasEvent(pumpOpen2) &&
+				            HasEvent(pumpFlow2) &&
+				            pumpOpen2 == pumpFlow2;
+				        guarantee
+				            (!isPump2Failing) &
+				            ((isPump2Failing)->:(MustSend(pumpRepairAck2)));
+				case
+				    REQ_BCON_COMP_CHECK_12_Pump3 "Pump Repair: If a given Pump was broken, but a repair event for that pump has been received, the Pump is not broken as long as there is an open and flow event with a valid data payload.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop)) &
+				            HasEvent(pumpRepair3) &
+				            HasEvent(pumpOpen3) &&
+				            HasEvent(pumpFlow3) &&
+				            pumpOpen3 == pumpFlow3;
+				        guarantee
+				            (!isPump3Failing) &
+				            ((isPump3Failing)->:(MustSend(pumpRepairAck3)));
+				case
+				    REQ_BCON_COMP_CHECK_13 "Transmission Failure: If any of the following ports are empty, then the transmissionFailure state variable must be true: pumpOpen0, pumpOpen1, pumpOpen2, pumpOpen3, pumpFlow0, pumpFlow1, pumpFlow2, pumpFlow3, steamRate, waterLevel.":
+				        assume
+				            mode != BoilerControl::OpMode.Stop &
+				            (!HasEvent(stop));
+				        guarantee
+				            ((
+				                (!HasEvent(pumpFlow0)) |
+				                (!HasEvent(pumpOpen0)) |
+				                (!HasEvent(pumpFlow1)) |
+				                (!HasEvent(pumpOpen1)) |
+				                (!HasEvent(pumpFlow2)) |
+				                (!HasEvent(pumpOpen2)) |
+				                (!HasEvent(pumpFlow3)) |
+				                (!HasEvent(pumpOpen3)) |
+				                (!HasEvent(steamRate)) |
+				                (!HasEvent(waterLevel))
+				            )->:
+				                (transMissionFailure));
+				case
+				    REQ_BCON_COMP_INITMODE_1 "If the boiler has not sent waiting yet, and the boiler control recieves the waiting event, hasBoilerSentWaiting is true.":
+				        assume
+				            mode == BoilerControl::OpMode.Init &
+				            (!HasEvent(stop)) &
+				            (
+				                (!hasBoilerSentWaiting) &
+				                HasEvent(boilerWaiting)
+				            );
+				        guarantee
+				            hasBoilerSentWaiting;
+				case
+				    REQ_BCON_COMP_INITMODE_2 "If the steam meter is failing, or the steam rate recorded is not zero, then mode is stop.":
+				        assume
+				            mode == BoilerControl::OpMode.Init &
+				            (!HasEvent(stop));
+				        guarantee
+				            (v_steamRate != 0.0f | isSteamMeterFailing)
+				            ->:
+				            (mode == BoilerControl::OpMode.Stop);
+				case
+				    REQ_BCON_COMP_INITMODE_3 "If the water meter is failing, then mode is stop.":
+				        assume
+				            mode == BoilerControl::OpMode.Init &
+				            (!HasEvent(stop));
+				        guarantee
+				            (isWaterMeterFailing)
+				            ->:
+				            (mode == BoilerControl::OpMode.Stop);
+				case
+				    REQ_BCON_COMP_INITMODE_4 "If the Boiler has sent waiting before, or we receive the event boilerWaiting, then if q > N2, the valve is opened, and the pumps are closed.":
+				        assume
+				            mode == BoilerControl::OpMode.Init &
+				            (!HasEvent(stop)) &
+				            (
+				                hasBoilerSentWaiting |
+				                HasEvent(boilerWaiting)
+				            ) &
+				            (!(
+				                v_steamRate != 0.0f |
+				                isSteamMeterFailing |
+				                isWaterMeterFailing
+				            ));
+				        guarantee
+				            (q > N2)
+				            ->:
+				            (
+				                HasEvent(valve) &&
+				                HasEvent(openPump0) &&
+				                (!openPump0) &&
+				                HasEvent(openPump1) &&
+				                (!openPump1) &
+				                HasEvent(openPump2) &&
+				                (!openPump2) &&
+				                HasEvent(openPump3) &&
+				                (!openPump3)
+				            );
+				case
+				    REQ_BCON_COMP_INITMODE_5 "If the Boiler has sent waiting before, or we receive the event boilerWaiting, then if q < N1, the lowest id working pump is opened. If none can, mode to stop.":
+				        assume
+				            mode == BoilerControl::OpMode.Init &
+				            (!HasEvent(stop)) &
+				            (
+				                hasBoilerSentWaiting |
+				                HasEvent(boilerWaiting)
+				            ) &
+				            (!(
+				                v_steamRate != 0.0f |
+				                isSteamMeterFailing |
+				                isWaterMeterFailing
+				            ));
+				        guarantee
+				            (q < N1)
+				            ->:
+				            (
+				                ((!isPump0Failing) && HasEvent(pumpOpen0) && pumpOpen0 == T) |^
+				                (isPump0Failing && (!isPump1Failing) && HasEvent(pumpOpen1) && pumpOpen1 == T) |^
+				                (isPump0Failing && isPump1Failing && (!isPump2Failing) && HasEvent(pumpOpen2) && pumpOpen2 == T) |^
+				                (isPump0Failing && isPump1Failing && isPump2Failing && (!isPump3Failing) && HasEvent(pumpOpen3) && pumpOpen3 == T) |^
+				                (isPump0Failing && isPump1Failing && isPump2Failing && isPump3Failing && mode == BoilerControl::OpMode.Stop)
+				            );
+				case
+				    REQ_BCON_COMP_INITMODE_6 "If the Boiler has sent waiting before, or we receive the event boilerWaiting, then if q >= N1 and q <= N2, then the ready event is sent. If all other parts are sending the ready event, mode is normal.":
+				        assume
+				            mode == BoilerControl::OpMode.Init &
+				            (!HasEvent(stop)) &
+				            (
+				                hasBoilerSentWaiting |
+				                HasEvent(boilerWaiting)
+				            ) &
+				            (!(
+				                v_steamRate != 0.0f |
+				                isSteamMeterFailing |
+				                isWaterMeterFailing
+				            ));
+				        guarantee
+				            (q >= N1 && q <= N2)
+				            ->:
+				            (
+				                HasEvent(ready) &
+				                (
+				                    HasEvent(boilerReady) &
+				                    HasEvent(steamMeterReady) &
+				                    HasEvent(waterMeterReady) &
+				                    HasEvent(pumpControlReady0) &
+				                    HasEvent(pumpControlReady1) &
+				                    HasEvent(pumpControlReady2) &
+				                    HasEvent(pumpControlReady3)
+				                )
+				                ->:
+				                (
+				                    mode == BoilerControl::OpMode.Norm
+				                )
+				            );
+            	case
+            		REQ_BCON_COMP_NORMMODE_1 "NORMtoRESC: While in Normal mode, if the Water Meter fails, then mode to Rescue.":
+            			assume
+            				mode == BoilerControl::OpMode.Norm &
+            				(!HasEvent(stop));
+            			guarantee
+            				(isWaterMeterFailing) ->: (mode == BoilerControl::OpMode.Resc);
+            	case
+            		REQ_BCON_COMP_NORMMODE_2 "NORMtoDEGR: While in Normal mode, if the Water Meter is working, but another element is failing, then mode to Degraded.":
+            			assume
+            				mode == BoilerControl::OpMode.Norm &
+            				(!HasEvent(stop));
+            			guarantee
+            				((!isWaterMeterFailing) && 
+            					(
+            						isSteamMeterFailing |
+            						isPump0Failing |
+            						isPump1Failing |
+            						isPump2Failing |
+            						isPump3Failing 
+            					)
+            				) 
+            				->:
+            				(
+            					mode == BoilerControl::OpMode.Degr
+            				);
+            	case
+            		REQ_BCON_COMP_NORMMODE_3 "NORMtoSTOP: While in Normal mode, if all components are working, but qa1 or qa2 are not between M1 and M2, then mode will move to Stop.":
+            			assume
+            				mode == BoilerControl::OpMode.Norm &
+            				(!HasEvent(stop));
+            			guarantee
+    				        ((!(isWaterMeterFailing ||
+				            isSteamMeterFailing ||
+				            isPump0Failing ||
+				            isPump1Failing ||
+				            isPump2Failing ||
+				            isPump3Failing)) 
+				            &&
+				          	(qa1 <= M1 ||
+				            qa1 >= M2 ||
+				            qa2 <= M1 ||
+				            qa2 >= M2))
+				            ->:
+				            (mode == BoilerControl::OpMode.Stop);
+				case
+					REQ_BCON_COMP_NORMMODE_4 "NORMMAINTAIN: While in Normal mode, if all components are working, and qa1 or qa2 are between M1 and M2, then mode will remain Normal.":
+						assume
+							mode == BoilerControl::OpMode.Norm &
+            				(!HasEvent(stop));
+            			guarantee
+            				(
+	            				(!(isWaterMeterFailing ||
+						        isSteamMeterFailing ||
+						        isPump0Failing ||
+						        isPump1Failing ||
+						        isPump2Failing ||
+						        isPump3Failing)) 
+						        &&
+						        (!(
+					        	qa1 <= M1 ||
+					            qa1 >= M2 ||
+					            qa2 <= M1 ||
+					            qa2 >= M2))
+					        )
+					        ->:
+					        (mode == BoilerControl::OpMode.Norm);
+				case
+					REQ_BCON_COMP_DEGRMODE_1 "DEGRtoRESC: While in Degraded mode, if the Water Meter Fails, then the mode shall be set to Rescue.":
+						assume
+							mode == BoilerControl::OpMode.Degr &
+            				(!HasEvent(stop));
+            			guarantee
+            				(isWaterMeterFailing) ->: (mode == BoilerControl::OpMode.Resc);
+            	case
+            		REQ_BCON_COMP_DEGRMODE_2 "DEGRtoSTOP: While in Degraded mode, if the Water Meter is not failing, but some other component is failing, and qc1 or qc2 is not between M1 and M2 exclusive, then the mode shall be set to Stop.":
+            			assume
+            				mode == BoilerControl::OpMode.Degr &
+            				(!HasEvent(stop));
+            			guarantee
+            				((!isWaterMeterFailing) &&
+					          (isSteamMeterFailing ||
+					            isPump0Failing ||
+					            isPump1Failing ||
+					            isPump2Failing ||
+					            isPump3Failing) &&
+					          (qa1 <= M1 ||
+					            qa1 >= M2 ||
+					            qa2 <= M1 ||
+					            qa2 >= M2))
+					            ->:
+					            (mode == BoilerControl::OpMode.Stop);
+				case
+					REQ_BCON_COMP_DEGRMODE_3 "DEGRtoNORM: While in Degraded mode, if no component is failing, then mode is changed to Normal.":
+						assume
+							mode == BoilerControl::OpMode.Degr &
+            				(!HasEvent(stop));
+            			guarantee
+            				(!(isWaterMeterFailing || isSteamMeterFailing ||
+              				isPump0Failing || isPump1Failing || isPump2Failing || isPump3Failing)) 
+				              ->:
+				              (mode == BoilerControl::OpMode.Norm);
+				case
+					REQ_BCON_COMP_DEGRMODE_4 "DEGRMAINTAIN: While in Degraded mode, if Water Meter is not failing, but another component is, and qa1 and qa2 are between M1 and M2, then mode stays in Degraded, and the pumps should be updated.":
+						assume
+							mode == BoilerControl::OpMode.Degr &
+            				(!HasEvent(stop));
+            			guarantee
+    				        ((!isWaterMeterFailing) &&
+					          (isSteamMeterFailing ||
+					            isPump0Failing || isPump1Failing || isPump2Failing || isPump3Failing) &&
+					          (!(qa1 <= M1 || qa1 >= M2 || qa2 <= M1 || qa2 >= M2)))
+					          ->:
+					          (mode == BoilerControl::OpMode.Degr &&
+					            shouldUpdatePumps);
+				case
+					REQ_BCON_COMP_RESCMODE_1 "RESCtoDEGR: While in Rescue Mode, if the Water Meter is operating properly, but another element has failed, then the mode should be changed to Degraded.":
+						assume
+							mode == BoilerControl::OpMode.Resc &
+            				(!HasEvent(stop));
+            			guarantee
+            				(((!isWaterMeterFailing) &&
+				          (isPump0Failing ||
+				            isPump1Failing ||
+				            isPump2Failing ||
+				            isPump3Failing ||
+				            isSteamMeterFailing))->:
+				          (mode == BoilerControl::OpMode.Degr));
+				case
+					REQ_BCON_COMP_RESCMODE_2 "RESCtoNORM: While in Rescue Mode, if there are no failures in any component, then mode moves to normal mode.":
+						assume
+							mode == BoilerControl::OpMode.Resc &
+            				(!HasEvent(stop));
+						guarantee
+							((!((isWaterMeterFailing ||
+				          isPump0Failing ||
+				          isPump1Failing ||
+				          isPump2Failing ||
+				          isPump3Failing ||
+				          isSteamMeterFailing)))->:
+				          (mode == BoilerControl::OpMode.Norm));
+				case
+					REQ_BCON_COMP_RESCMODE_3 "RESCtoSTOP: While in Rescue Mode, if the Water Meter is failing, and either qc1 is not (M1 < qc1 < M2) or qc2 is not (M1 < qc2 < M2), then mode is Stop.":
+						assume
+							mode == BoilerControl::OpMode.Resc &
+            				(!HasEvent(stop));
+						guarantee
+						  ((isWaterMeterFailing &&
+				          (qc1 <= M1 ||
+				            qc1 >= M2 ||
+				            qc2 <= M1 ||
+				            qc2 >= M2)) ->:
+				          (mode == BoilerControl::OpMode.Stop));
+				case
+					REQ_BCON_COMP_RESCMODE_4 "MAINTAINRESC: While in Rescue Mode, if the Water Meter is failing, and qc1 is (M1 < qc1 < M2) and qc2 is (M1 < qc2 < M2), then mode remains Resc.":
+						assume
+							mode == BoilerControl::OpMode.Resc &
+            				(!HasEvent(stop));
+            			guarantee
+            				((isWaterMeterFailing &&
+					          (!(qc1 <= M1 ||
+					            qc1 >= M2 ||
+					            qc2 <= M1 ||
+					            qc2 >= M2))) ->:
+					          (mode == BoilerControl::OpMode.Resc &&
+					            mode == In(mode)));
+				case
+					REQ_BCON_COMP_UPD_CASE_1 "Case 1 [509]: If qa1 and qa2 are less than N1, open pumps.":
+						assume
+							T;
+            			guarantee
+            				((shouldUpdatePumps & qa1 < N1 & qa2 < N1)->:
+					          (HasEvent(openPump0) && openPump0 == T &&
+					            HasEvent(openPump1) && openPump1 == T &&
+					            HasEvent(openPump2) && openPump2 == T &&
+					            HasEvent(openPump3) && openPump3 == T ));
+				case
+					REQ_BCON_COMP_UPD_CASE_2 "Case 2 [509]: If qa1 is less than N1, and qa2 is less than N2, but qa2 is greater than N1, open pumps.":
+						assume
+							T;
+            			guarantee
+            				((shouldUpdatePumps & qa1 < N1 & qa2 < N2 & qa2 >= N1)->:
+					          (HasEvent(openPump0) && openPump0 == T &&
+					            HasEvent(openPump1) && openPump1 == T &&
+					            HasEvent(openPump2) && openPump2 == T &&
+					            HasEvent(openPump3) && openPump3 == T ));
+				case
+					REQ_BCON_COMP_UPD_CASE_3 "Case 3 [509]: If qa1 is less than N1 and qa2 is greater than N2, then no call is sent the pumps.":
+						assume
+							T;
+						guarantee
+							((shouldUpdatePumps & qa1 < N1 & qa2 >= N2)->:
+					          ((!HasEvent(openPump0)) &&
+					            (!HasEvent(openPump1)) &&
+					            (!HasEvent(openPump2)) &&
+					            (!HasEvent(openPump3))));
+				case
+					REQ_BCON_COMP_UPD_CASE_4 "Case 4 [509]: If qa1 and qa2 are between N1 and N2, then no call is sent to the pumps.":
+						assume
+							T;
+						guarantee
+							((shouldUpdatePumps & qa1 >= N1 & qa1 < N2 & qa2 >= N1 & qa2 < N2)->:
+					          ((!HasEvent(openPump0)) &&
+					            (!HasEvent(openPump1)) &&
+					            (!HasEvent(openPump2)) &&
+					            (!HasEvent(openPump3))));
+				case
+					REQ_BCON_COMP_UPD_CASE_5 "Case 5 [509]: If qa1 is between N1 and N2 (less than N2), and qa2 is greater than or equal to N2.":
+						assume
+							T;
+						guarantee
+							((shouldUpdatePumps & qa1 >= N1 & qa1 < N2 & qa2 >= N2)->:
+					          (HasEvent(openPump0) && openPump0 == F &&
+					            HasEvent(openPump1) && openPump1 == F &&
+					            HasEvent(openPump2) && openPump2 == F &&
+					            HasEvent(openPump3) && openPump3 == F ));
+				case
+					REQ_BCON_COMP_UPD_CASE_6 "Case 6 [509]: If qa1 is less than N1, and qa2 is less than N2, but qa2 is greater than N1, open pumps.":
+						assume
+							T;
+						guarantee
+							((shouldUpdatePumps & qa1 >= N2 & qa2 >= N2)->:
+					          (HasEvent(openPump0) && openPump0 == F &&
+					            HasEvent(openPump1) && openPump1 == F &&
+					            HasEvent(openPump2) && openPump2 == F &&
+					            HasEvent(openPump3) && openPump3 == F ));
+	**};
+  end BoilerControl.i;
+
+  ------------------------------------------------------------------------------
+  -- DATA TYPES
+  ------------------------------------------------------------------------------
+
+  -- ---------------------------------------------------------------------------
+  -- OP MODE
+  --
+  -- Current operation mode of the system; options are:
+  -- initialization
+  -- normal
+  -- degraded
+  -- rescue
+  -- emergency stop
+  -- (Apparently, "Mode" is a reserved word.)
+  -- ---------------------------------------------------------------------------
+  data OpMode
+  properties
+    Data_Model::Data_Representation => Enum;
+    Data_Model::Enumerators =>
+      ("Init", "Norm", "Degr", "Resc", "Stop");
+  end OpMode;
+
+  data implementation OpMode.i
+  end OpMode.i;
+
+end BoilerControl;

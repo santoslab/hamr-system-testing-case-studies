@@ -1,0 +1,187 @@
+// #Sireum
+
+package bc
+
+import org.sireum._
+import org.sireum.Random.Gen64
+
+/*
+GENERATED FROM
+
+OpMode.scala
+
+Base_Types.scala
+
+Boiler_i_bcproc_boiler__Containers.scala
+
+PumpControl_i_bcproc_pumpControl0__Containers.scala
+
+PumpControl_i_bcproc_pumpControl1__Containers.scala
+
+PumpControl_i_bcproc_pumpControl2__Containers.scala
+
+PumpControl_i_bcproc_pumpControl3__Containers.scala
+
+WaterMeter_i_bcproc_waterMeter__Containers.scala
+
+SteamMeter_i_bcproc_steamMeter__Containers.scala
+
+OperatorDesk_i_bcproc_desk__Containers.scala
+
+BoilerControl_i_bcproc_control__Containers.scala
+
+ObservationKind.scala
+
+DataContent.scala
+
+Aux_Types.scala
+
+*/
+
+@enum object _artDataContent_DataTypeId {
+   "_artEmpty_Id"
+   "Base_TypesBits_Payload_Id"
+   "Base_TypesBoolean_Payload_Id"
+   "Base_TypesCharacter_Payload_Id"
+   "Base_TypesFloat_32_Payload_Id"
+   "Base_TypesFloat_64_Payload_Id"
+   "Base_TypesFloat_Payload_Id"
+   "Base_TypesInteger_16_Payload_Id"
+   "Base_TypesInteger_32_Payload_Id"
+   "Base_TypesInteger_64_Payload_Id"
+   "Base_TypesInteger_8_Payload_Id"
+   "Base_TypesInteger_Payload_Id"
+   "Base_TypesString_Payload_Id"
+   "Base_TypesUnsigned_16_Payload_Id"
+   "Base_TypesUnsigned_32_Payload_Id"
+   "Base_TypesUnsigned_64_Payload_Id"
+   "Base_TypesUnsigned_8_Payload_Id"
+   "BoilerControlBoilerControl_i_bcproc_control_PostState_Container_P_Id"
+   "BoilerControlBoilerControl_i_bcproc_control_PostState_Container_PS_Id"
+   "BoilerControlBoilerControl_i_bcproc_control_PreState_Container_P_Id"
+   "BoilerControlBoilerControl_i_bcproc_control_PreState_Container_PS_Id"
+   "BoilerControlBoiler_i_bcproc_boiler_PostState_Container_P_Id"
+   "BoilerControlBoiler_i_bcproc_boiler_PostState_Container_PS_Id"
+   "BoilerControlBoiler_i_bcproc_boiler_PreState_Container_P_Id"
+   "BoilerControlBoiler_i_bcproc_boiler_PreState_Container_PS_Id"
+   "BoilerControlOpMode_Payload_Id"
+   "BoilerControlOperatorDesk_i_bcproc_desk_PostState_Container_P_Id"
+   "BoilerControlOperatorDesk_i_bcproc_desk_PostState_Container_PS_Id"
+   "BoilerControlOperatorDesk_i_bcproc_desk_PreState_Container_P_Id"
+   "BoilerControlOperatorDesk_i_bcproc_desk_PreState_Container_PS_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl0_PostState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl0_PostState_Container_PS_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl0_PreState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl0_PreState_Container_PS_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl1_PostState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl1_PostState_Container_PS_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl1_PreState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl1_PreState_Container_PS_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl2_PostState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl2_PostState_Container_PS_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl2_PreState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl2_PreState_Container_PS_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl3_PostState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl3_PostState_Container_PS_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl3_PreState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl3_PreState_Container_PS_Id"
+   "BoilerControlSteamMeter_i_bcproc_steamMeter_PostState_Container_P_Id"
+   "BoilerControlSteamMeter_i_bcproc_steamMeter_PostState_Container_PS_Id"
+   "BoilerControlSteamMeter_i_bcproc_steamMeter_PreState_Container_P_Id"
+   "BoilerControlSteamMeter_i_bcproc_steamMeter_PreState_Container_PS_Id"
+   "BoilerControlWaterMeter_i_bcproc_waterMeter_PostState_Container_P_Id"
+   "BoilerControlWaterMeter_i_bcproc_waterMeter_PostState_Container_PS_Id"
+   "BoilerControlWaterMeter_i_bcproc_waterMeter_PreState_Container_P_Id"
+   "BoilerControlWaterMeter_i_bcproc_waterMeter_PreState_Container_PS_Id"
+}
+
+@enum object BoilerControlBoilerControl_i_bcproc_control_PreState_Container_DataTypeId {
+   "BoilerControlBoilerControl_i_bcproc_control_PreState_Container_P_Id"
+   "BoilerControlBoilerControl_i_bcproc_control_PreState_Container_PS_Id"
+}
+
+@enum object BoilerControlBoilerControl_i_bcproc_control_PostState_Container_DataTypeId {
+   "BoilerControlBoilerControl_i_bcproc_control_PostState_Container_P_Id"
+   "BoilerControlBoilerControl_i_bcproc_control_PostState_Container_PS_Id"
+}
+
+@enum object BoilerControlBoiler_i_bcproc_boiler_PreState_Container_DataTypeId {
+   "BoilerControlBoiler_i_bcproc_boiler_PreState_Container_P_Id"
+   "BoilerControlBoiler_i_bcproc_boiler_PreState_Container_PS_Id"
+}
+
+@enum object BoilerControlBoiler_i_bcproc_boiler_PostState_Container_DataTypeId {
+   "BoilerControlBoiler_i_bcproc_boiler_PostState_Container_P_Id"
+   "BoilerControlBoiler_i_bcproc_boiler_PostState_Container_PS_Id"
+}
+
+@enum object BoilerControlOperatorDesk_i_bcproc_desk_PreState_Container_DataTypeId {
+   "BoilerControlOperatorDesk_i_bcproc_desk_PreState_Container_P_Id"
+   "BoilerControlOperatorDesk_i_bcproc_desk_PreState_Container_PS_Id"
+}
+
+@enum object BoilerControlOperatorDesk_i_bcproc_desk_PostState_Container_DataTypeId {
+   "BoilerControlOperatorDesk_i_bcproc_desk_PostState_Container_P_Id"
+   "BoilerControlOperatorDesk_i_bcproc_desk_PostState_Container_PS_Id"
+}
+
+@enum object BoilerControlPumpControl_i_bcproc_pumpControl0_PreState_Container_DataTypeId {
+   "BoilerControlPumpControl_i_bcproc_pumpControl0_PreState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl0_PreState_Container_PS_Id"
+}
+
+@enum object BoilerControlPumpControl_i_bcproc_pumpControl0_PostState_Container_DataTypeId {
+   "BoilerControlPumpControl_i_bcproc_pumpControl0_PostState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl0_PostState_Container_PS_Id"
+}
+
+@enum object BoilerControlPumpControl_i_bcproc_pumpControl1_PreState_Container_DataTypeId {
+   "BoilerControlPumpControl_i_bcproc_pumpControl1_PreState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl1_PreState_Container_PS_Id"
+}
+
+@enum object BoilerControlPumpControl_i_bcproc_pumpControl1_PostState_Container_DataTypeId {
+   "BoilerControlPumpControl_i_bcproc_pumpControl1_PostState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl1_PostState_Container_PS_Id"
+}
+
+@enum object BoilerControlPumpControl_i_bcproc_pumpControl2_PreState_Container_DataTypeId {
+   "BoilerControlPumpControl_i_bcproc_pumpControl2_PreState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl2_PreState_Container_PS_Id"
+}
+
+@enum object BoilerControlPumpControl_i_bcproc_pumpControl2_PostState_Container_DataTypeId {
+   "BoilerControlPumpControl_i_bcproc_pumpControl2_PostState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl2_PostState_Container_PS_Id"
+}
+
+@enum object BoilerControlPumpControl_i_bcproc_pumpControl3_PreState_Container_DataTypeId {
+   "BoilerControlPumpControl_i_bcproc_pumpControl3_PreState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl3_PreState_Container_PS_Id"
+}
+
+@enum object BoilerControlPumpControl_i_bcproc_pumpControl3_PostState_Container_DataTypeId {
+   "BoilerControlPumpControl_i_bcproc_pumpControl3_PostState_Container_P_Id"
+   "BoilerControlPumpControl_i_bcproc_pumpControl3_PostState_Container_PS_Id"
+}
+
+@enum object BoilerControlSteamMeter_i_bcproc_steamMeter_PreState_Container_DataTypeId {
+   "BoilerControlSteamMeter_i_bcproc_steamMeter_PreState_Container_P_Id"
+   "BoilerControlSteamMeter_i_bcproc_steamMeter_PreState_Container_PS_Id"
+}
+
+@enum object BoilerControlSteamMeter_i_bcproc_steamMeter_PostState_Container_DataTypeId {
+   "BoilerControlSteamMeter_i_bcproc_steamMeter_PostState_Container_P_Id"
+   "BoilerControlSteamMeter_i_bcproc_steamMeter_PostState_Container_PS_Id"
+}
+
+@enum object BoilerControlWaterMeter_i_bcproc_waterMeter_PreState_Container_DataTypeId {
+   "BoilerControlWaterMeter_i_bcproc_waterMeter_PreState_Container_P_Id"
+   "BoilerControlWaterMeter_i_bcproc_waterMeter_PreState_Container_PS_Id"
+}
+
+@enum object BoilerControlWaterMeter_i_bcproc_waterMeter_PostState_Container_DataTypeId {
+   "BoilerControlWaterMeter_i_bcproc_waterMeter_PostState_Container_P_Id"
+   "BoilerControlWaterMeter_i_bcproc_waterMeter_PostState_Container_PS_Id"
+}
+
