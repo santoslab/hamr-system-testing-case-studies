@@ -3,7 +3,7 @@
 import org.sireum._
 import Helper._
 
-val removeDump: B = F
+val removeDump: B = T
 val regenMergedReports: B = F
 
 val root = Os.path("/opt") / "santos" / "jenkins" / "dsc_sys" / "dsc_tester"
@@ -16,13 +16,6 @@ var map: hsm = HashSMap.empty
 Os.Path.walk(root, F, T, p => {
   if (p.name == "sireum.version") {
     val paths = p.up.list
-
-    fetch(".dump", paths) match {
-      case Some(d) if removeDump =>
-        d.removeAll()
-        println(s"Removed: dump ${d}")
-      case _ =>
-    }
 
     val testRowP = fetch(".json", p.up.up.list).get
     val passingP = fetch(".passing", paths).get
@@ -51,6 +44,18 @@ Os.Path.walk(root, F, T, p => {
     )
     results = results :+ r
     map = add2Map(r, map)
+
+    val dumpLoc = Helper.dumpLoc(r.project)
+
+    fetch(".dump", paths) match {
+      case Some(d) if removeDump && d.string != dumpLoc.string =>
+        d.removeAll()
+        println(s"Removed: dump ${d}")
+      case Some(d) if removeDump =>
+        println(s"Not removing ${d}")
+      case _ =>
+    }
+
   }
   F
 })
