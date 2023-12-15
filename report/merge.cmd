@@ -7,6 +7,8 @@ val removeDump: B = F
 val regenMergedReports: B = F
 
 val root = Os.path("/opt") / "santos" / "jenkins" / "dsc_sys" / "dsc_tester"
+//val root = Os.path("/opt") / "santos" / "jenkins" / "dsc_sys" / "dsc_tester__BACKUP_14_08"
+
 var results: ISZ[Results] = ISZ()
 //                  proj             subsys           family           timeout
 type hsm = HashSMap[String, HashSMap[String, HashSMap[String, HashSMap[Z, Results]]]]
@@ -72,17 +74,20 @@ for (projects <- map.entries) {
         addTimeoutReport(results)
       }
 
-      val fResults: Results = mergeResults(familyResults, familyResults(0).passingP.up.up)
-      addFamilyReport(fResults)
+      val familyRoot = familyResults(0).passingP.up.up
+      val fResults: Results = mergeResults(familyResults, familyRoot)
+      addFamilyReport(fResults, families._2.keys, familyRoot)
 
     }
 
-    val sResults: Results = mergeResults(systemResults, systemResults(0).passingP.up.up.up)
-    addSystemReport(sResults)
+    val sysRoot = systemResults(0).passingP.up.up.up
+    val sResults: Results = mergeResults(systemResults, sysRoot)
+    addSystemReport(sResults, systems._2.keys,sysRoot)
   }
 
-  val pResults: Results = mergeResults(projectResults, projectResults(0).passingP.up.up.up.up)
-  addProjectReport(pResults)
+  val pRoot = projectResults(0).passingP.up.up.up.up
+  val pResults: Results = mergeResults(projectResults, pRoot)
+  addProjectReport(pResults, projects._2.keys, pRoot)
 }
 
 
@@ -108,14 +113,14 @@ object Helper {
            |<pre>
            |${cookieCrumb}
            |
-           |Project:   ${r.project}
-           |SubSystem: ${r.subSystem}
-           |Family:    ${r.testFamily}
-           |Timeout:   ${r.timeout}
+           |Project:    <a href="$r1">${r.project}</a>
+           |SubSystems: <a href="$r2">${r.subSystem}</a>
+           |Families:   <a href="$r3">${r.testFamily}</a>
+           |Timeouts:   ${r.timeout}
            |
-           |Passing:   ${r.passing}
-           |Failing:   ${r.failing}
-           |Unsat:     ${r.unsat}
+           |Passing:    ${r.passing}
+           |Failing:    ${r.failing}
+           |Unsat:      ${r.unsat}
            |
            |Coverage:  <a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>
            |  ${(subs, "\n")}
@@ -129,15 +134,16 @@ object Helper {
     println(s"Wrote: ${report}")
   }
 
-  def addFamilyReport(r: Results): Unit = {
-    val root1 = r.passingP.up.up
-
-    val reportDir = root1
+  def addFamilyReport(r: Results, timeouts: ISZ[Z], froot: Os.Path): Unit = {
+    val reportDir = froot
 
     val r0 = reportDir.relativize(root)
-    val r1 = reportDir.relativize(root / r.project)
+    val r1 = reportDir.relativize(root / r.project / "report.html")
     val r2 = reportDir.relativize(root / r.project / r.subSystem / "report.html")
     //val r3 = reportDir.relativize(root / r.project / r.subSystem / r.testFamily)
+
+    val stimeouts = ops.ISZOps(timeouts).sortWith((a,b) => a <= b)
+    val touts = for(t <- stimeouts) yield s"<a href=\"${(reportDir.relativize(reportDir / t.string / "report.html")).string}\">${t.string}</a>"
 
     val cookieCrumb = st"""<a href="${r0}">Report</a> > <a href="${r1}">${r.project}</a> > <a href="${r2}">${r.subSystem}</a> >"""
     val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
@@ -148,14 +154,14 @@ object Helper {
           |<pre>
           |${cookieCrumb}
           |
-          |Project:   ${r.project}
-          |SubSystem: ${r.subSystem}
-          |Family:    ${r.testFamily}
-          |Timeouts:  <todo>
+          |Project:    <a href="$r1">${r.project}</a>
+          |SubSystems: <a href="$r2">${r.subSystem}</a>
+          |Families:   ${r.testFamily}
+          |Timeouts:   ${(touts, " ")}
           |
-          |Passing:   ${r.passing}
-          |Failing:   ${r.failing}
-          |Unsat:     ${r.unsat}
+          |Passing:    ${r.passing}
+          |Failing:    ${r.failing}
+          |Unsat:      ${r.unsat}
           |
           |Coverage:  <a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>
           |  ${(subs, "\n")}
@@ -169,15 +175,15 @@ object Helper {
     println(s"Wrote: ${report}")
   }
 
-  def addSystemReport(r: Results): Unit = {
-    val root1 = r.passingP.up.up.up
-
-    val reportDir = root1
+  def addSystemReport(r: Results, families: ISZ[String], sroot: Os.Path): Unit = {
+    val reportDir = sroot
 
     val r0 = reportDir.relativize(root)
     val r1 = reportDir.relativize(root / r.project / "report.html")
     //val r2 = reportDir.relativize(root / r.project / r.subSystem)
     //val r3 = reportDir.relativize(root / r.project / r.subSystem / r.testFamily)
+
+    val touts = for(t <- families) yield s"<a href=\"${(reportDir.relativize(reportDir / t / "report.html")).string}\">${t.string}</a>"
 
     val cookieCrumb = st"""<a href="${r0}">Report</a> > <a href="${r1}">${r.project}</a>"""
     val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
@@ -188,14 +194,14 @@ object Helper {
           |<pre>
           |${cookieCrumb}
           |
-          |Project:   ${r.project}
-          |SubSystem: ${r.subSystem}
-          |Families:
-          |Timeouts:
+          |Project:    <a href="$r1">${r.project}</a>
+          |SubSystems: ${r.subSystem}
+          |Families:   ${(touts, " ")}
           |
-          |Passing:   ${r.passing}
-          |Failing:   ${r.failing}
-          |Unsat:     ${r.unsat}
+          |
+          |Passing:    ${r.passing}
+          |Failing:    ${r.failing}
+          |Unsat:      ${r.unsat}
           |
           |Coverage:  <a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>
           |  ${(subs, "\n")}
@@ -209,15 +215,15 @@ object Helper {
     println(s"Wrote: ${report}")
   }
 
-  def addProjectReport(r: Results): Unit = {
-    val root1 = r.passingP.up.up.up.up
-
-    val reportDir = root1
+  def addProjectReport(r: Results, systems: ISZ[String], sroot: Os.Path): Unit = {
+    val reportDir = sroot
 
     val r0 = reportDir.relativize(root)
     //val r1 = reportDir.relativize(root / r.project)
     //val r2 = reportDir.relativize(root / r.project / r.subSystem)
     //val r3 = reportDir.relativize(root / r.project / r.subSystem / r.testFamily)
+
+    val touts = for(t <- systems) yield s"<a href=\"${(reportDir.relativize(reportDir / t / "report.html")).string}\">${t.string}</a>"
 
     val cookieCrumb = st"""<a href="${r0}">Report</a>"""
     val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
@@ -228,14 +234,14 @@ object Helper {
           |<pre>
           |${cookieCrumb}
           |
-          |Project:   ${r.project}
-          |SubSystems:
-          |Family:    <todo>
-          |Timeouts:  <todo>
+          |Project:    ${r.project}
+          |SubSystems: ${(touts, " ")}
           |
-          |Passing:   ${r.passing}
-          |Failing:   ${r.failing}
-          |Unsat:     ${r.unsat}
+          |
+          |
+          |Passing:    ${r.passing}
+          |Failing:    ${r.failing}
+          |Unsat:      ${r.unsat}
           |
           |Coverage:  <a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>
           |  ${(subs, "\n")}
