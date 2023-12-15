@@ -16,7 +16,7 @@ val testServer="e2206hm02.cs.ksu.edu"
 
 val DSC_PREFIX="dsc_sys" // name of the root artifacts directory on testServer
 
-val FQ_DSC_NAME = "isolette.system_tests.rst.Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness"
+val FQ_DSC_NAME = "isolette.system_tests.monitor1.Monitor_Subsystem_DSC_Test_Harness"
 
 val DSC_PROJECT_NAME = ops.ISZOps(ops.StringOps(FQ_DSC_NAME).split(c => c == '.')).first
 
