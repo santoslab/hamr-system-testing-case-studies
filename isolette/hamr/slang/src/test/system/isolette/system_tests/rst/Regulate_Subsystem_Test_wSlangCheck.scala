@@ -435,11 +435,11 @@ class Regulate_Subsystem_Test_wSlangCheck
 
   def sysProp_NormalModeHeatOn(inputs_container: Regulate_Subsystem_Inputs_Container,
                                outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (!helper_RegulatorErrorCondition(inputs_container)
+    val triggerCondition: B = (!helper_RegulatorErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode
       & inputs_container.currentTempWStatus.value < inputs_container.lowerDesiredTempWStatus.value)
-    val desiredCondition = (outputs_container.heat_control == On_Off.Onn)
-    return (triggerCondition ->: desiredCondition)
+    val desiredCondition: B = (outputs_container.heat_control == On_Off.Onn)
+    return (triggerCondition.->:(desiredCondition))
   }
 
   //----------------------------------------------
@@ -453,11 +453,11 @@ class Regulate_Subsystem_Test_wSlangCheck
                                  inputs_container: Regulate_Subsystem_Inputs_Container,
 
                                  outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (!helper_RegulatorErrorCondition(inputs_container)
+    val triggerCondition: B = (!helper_RegulatorErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode
       & inputs_container.currentTempWStatus.value > inputs_container.upperDesiredTempWStatus.value)
-    val desiredCondition = (outputs_container.heat_control == On_Off.Off)
-    return (triggerCondition ->: desiredCondition)
+    val desiredCondition: B = (outputs_container.heat_control == On_Off.Off)
+    return (triggerCondition.->:(desiredCondition))
   }
 
   //---------------------------------------------------
@@ -470,39 +470,39 @@ class Regulate_Subsystem_Test_wSlangCheck
                                           inputs_container: Regulate_Subsystem_Inputs_Container,
 
                                           outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (helper_RegulatorCTInputErrorCondition(inputs_container)
+    val triggerCondition: B = (helper_RegulatorCTInputErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.heat_control == On_Off.Off)
-    return (triggerCondition ->: desiredCondition)
+    val desiredCondition: B = (outputs_container.heat_control == On_Off.Off)
+    return (triggerCondition.->:(desiredCondition))
   }
 
   def sysProp_InvalidUDTNormalModeHeatOff(
                                            inputs_container: Regulate_Subsystem_Inputs_Container,
 
                                            outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (helper_RegulatorUDTInputErrorCondition(inputs_container)
+    val triggerCondition: B = (helper_RegulatorUDTInputErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.heat_control == On_Off.Off)
-    return (triggerCondition ->: desiredCondition)
+    val desiredCondition: B = (outputs_container.heat_control == On_Off.Off)
+    return (triggerCondition.->:(desiredCondition))
   }
 
   def sysProp_InvalidLDTNormalModeHeatOff(
                                            inputs_container: Regulate_Subsystem_Inputs_Container,
 
                                            outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (helper_RegulatorLDTInputErrorCondition(inputs_container)
+    val triggerCondition: B = (helper_RegulatorLDTInputErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.heat_control == On_Off.Off)
-    return (triggerCondition ->: desiredCondition)
+    val desiredCondition: B = (outputs_container.heat_control == On_Off.Off)
+    return (triggerCondition.->:(desiredCondition))
   }
 
 
   def sysProp_InternalFailureNormalModeHeatOff(inputs_container: Regulate_Subsystem_Inputs_Container,
                                                outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (helper_RegulatorInternalFailureCondition(inputs_container)
+    val triggerCondition: B = (helper_RegulatorInternalFailureCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.heat_control == On_Off.Off)
-    return (triggerCondition ->: desiredCondition)
+    val desiredCondition: B = (outputs_container.heat_control == On_Off.Off)
+    return (triggerCondition.->:(desiredCondition))
   }
 
   // This property is a disjunction of the previous properties that address validity of temperature
@@ -511,10 +511,10 @@ class Regulate_Subsystem_Test_wSlangCheck
                                      inputs_container: Regulate_Subsystem_Inputs_Container,
 
                                      outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (helper_RegulatorErrorCondition(inputs_container)
+    val triggerCondition: B = (helper_RegulatorErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.heat_control == On_Off.Off)
-    return (triggerCondition ->: desiredCondition)
+    val desiredCondition: B = (outputs_container.heat_control == On_Off.Off)
+    return (triggerCondition.->:(desiredCondition))
   }
 
   // ===========================  Display Temperature Properties ========================
@@ -526,9 +526,9 @@ class Regulate_Subsystem_Test_wSlangCheck
   // I (John) am not 100% convinced this is how we would want to formalize this property.
   def sysProp_NormalDisplayTemp(inputs_container: Regulate_Subsystem_Inputs_Container,
                                 outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.display_temperature.value == ROUND(inputs_container.currentTempWStatus.value))
-    return (triggerCondition ->: desiredCondition)
+    val triggerCondition: B = (inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+    val desiredCondition: B = (outputs_container.display_temperature.value == ROUND(inputs_container.currentTempWStatus.value))
+    return (triggerCondition.->:(desiredCondition))
   }
 
   // ===========================  Mode Implication Properties ===========================
@@ -541,29 +541,29 @@ class Regulate_Subsystem_Test_wSlangCheck
   def sysProp_InitModeImpliesHeatOff(inputs_container: Regulate_Subsystem_Inputs_Container,
                                      outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     // if the hyper-period concludes in Init mode, then heat source should be off
-    // val triggerCondition = outputs_container.mode == Regulator_Mode.Normal_Regulator_Mode // seeded property error
-    val triggerCondition = outputs_container.mode == Regulator_Mode.Init_Regulator_Mode // seeded property error
+    // val triggerCondition: B = outputs_container.mode == Regulator_Mode.Normal_Regulator_Mode // seeded property error
+    val triggerCondition: B = outputs_container.mode == Regulator_Mode.Init_Regulator_Mode // seeded property error
     println(s"Mode: ${outputs_container.mode}")
-    val desiredCondition = outputs_container.heat_control == On_Off.Off
+    val desiredCondition: B = outputs_container.heat_control == On_Off.Off
     println(s"Heat control: ${outputs_container.heat_control}")
-    val test_result = triggerCondition ->: desiredCondition
+    val test_result = triggerCondition.->:(desiredCondition)
     return test_result
   }
 
   def sysProp_FailedModeImpliesHeatOff(inputs_container: Regulate_Subsystem_Inputs_Container,
                                        outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     // if the hyper-period concludes in Init mode, then heat source should be off
-    val triggerCondition = outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode
-    val desiredCondition = outputs_container.heat_control == On_Off.Off
-    return (triggerCondition ->: desiredCondition)
+    val triggerCondition: B = outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode
+    val desiredCondition: B = outputs_container.heat_control == On_Off.Off
+    return (triggerCondition.->:(desiredCondition))
   }
 
   def sysProp_FailedModeImpliesFailedStatus(inputs_container: Regulate_Subsystem_Inputs_Container,
                                             outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     // if the hyper-period concludes in Init mode, then heat source should be off
-    val triggerCondition = outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode
-    val desiredCondition = outputs_container.regulator_status == Status.Failed_Status
-    return (triggerCondition ->: desiredCondition)
+    val triggerCondition: B = outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode
+    val desiredCondition: B = outputs_container.regulator_status == Status.Failed_Status
+    return (triggerCondition.->:(desiredCondition))
   }
 
   //====================================================================
@@ -574,10 +574,10 @@ class Regulate_Subsystem_Test_wSlangCheck
   // Normal --> Normal  Transitions
   def sysProp_NormalToNormalMode(inputs_container: Regulate_Subsystem_Inputs_Container,
                                  outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (!helper_RegulatorErrorCondition(inputs_container)
+    val triggerCondition: B = (!helper_RegulatorErrorCondition(inputs_container)
                             & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    return (triggerCondition ->: desiredCondition)
+    val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+    return (triggerCondition.->:(desiredCondition))
   }
 
   // Normal --> Failed   Transitions
@@ -585,36 +585,36 @@ class Regulate_Subsystem_Test_wSlangCheck
                                             inputs_container: Regulate_Subsystem_Inputs_Container,
 
                                             outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (helper_RegulatorUDTInputErrorCondition(inputs_container)
+    val triggerCondition: B = (helper_RegulatorUDTInputErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
-    return (triggerCondition ->: desiredCondition)
+    val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+    return (triggerCondition.->:(desiredCondition))
   }
 
   def sysProp_InvalidLDTNormalToFailedMode(
                                             inputs_container: Regulate_Subsystem_Inputs_Container,
                                             outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (helper_RegulatorLDTInputErrorCondition(inputs_container)
+    val triggerCondition: B = (helper_RegulatorLDTInputErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
-    return (triggerCondition ->: desiredCondition)
+    val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+    return (triggerCondition.->:(desiredCondition))
   }
 
   def sysProp_InvalidCTNormalToFailedMode(
                                            inputs_container: Regulate_Subsystem_Inputs_Container,
                                            outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (helper_RegulatorCTInputErrorCondition(inputs_container)
+    val triggerCondition: B = (helper_RegulatorCTInputErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
-    return (triggerCondition ->: desiredCondition)
+    val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+    return (triggerCondition.->:(desiredCondition))
   }
 
   def sysProp_InternalFailureNormalToFailedMode(inputs_container: Regulate_Subsystem_Inputs_Container,
                                                 outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (helper_RegulatorInternalFailureCondition(inputs_container)
+    val triggerCondition: B = (helper_RegulatorInternalFailureCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
-    return (triggerCondition ->: desiredCondition)
+    val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+    return (triggerCondition.->:(desiredCondition))
   }
 
   // This property is a disjunction of the previous properties that address validity of temperature
@@ -622,17 +622,17 @@ class Regulate_Subsystem_Test_wSlangCheck
   def sysProp_ErrorConditionNormalToFailedMode(
                                                 inputs_container: Regulate_Subsystem_Inputs_Container,
                                                 outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (helper_RegulatorErrorCondition(inputs_container)
+    val triggerCondition: B = (helper_RegulatorErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
-    return (triggerCondition ->: desiredCondition)
+    val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+    return (triggerCondition.->:(desiredCondition))
   }
 
   // Failure --> Failure Transition  (Failure preserved)
   def sysProp_FailedToFailedMode(inputs_container: Regulate_Subsystem_Inputs_Container,
                                  outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = inputs_container.mode == Regulator_Mode.Failed_Regulator_Mode
-    val desiredCondition = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
-    return (triggerCondition ->: desiredCondition)
+    val triggerCondition: B = inputs_container.mode == Regulator_Mode.Failed_Regulator_Mode
+    val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+    return (triggerCondition.->:(desiredCondition))
   }
 }

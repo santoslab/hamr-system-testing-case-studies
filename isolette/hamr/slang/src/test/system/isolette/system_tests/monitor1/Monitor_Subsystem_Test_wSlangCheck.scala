@@ -371,43 +371,43 @@ class Monitor_Subsystem_Test_wSlangCheck
 
   @strictpure def sysProp_NormalModeAlarmOn(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                             outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
-    val triggerCondition = !helper_MonitorErrorCondition(inputs_Container) &
+    val triggerCondition: B = !helper_MonitorErrorCondition(inputs_Container) &
       inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode &
       helper_AlarmShouldBeOn(inputs_Container)
 
-    val desiredCondition = outputs_Containers(1).alarm_control == On_Off.Onn
+    val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Onn
 
-    triggerCondition ->: desiredCondition
+    triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_NormalModeAlarmUnchanged(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                        outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition =
+    val triggerCondition: B =
       !helper_MonitorErrorCondition(inputs_Container) &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode &
         !helper_AlarmShouldBeOn(inputs_Container) &
         helper_AlarmShouldBeUnchanged(inputs_Container)
 
-    val desiredCondition = outputs_Containers(0).alarm_control == outputs_Containers(1).alarm_control
+    val desiredCondition: B = outputs_Containers(0).alarm_control == outputs_Containers(1).alarm_control
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_NormalModeAlarmOff(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                  outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition =
+    val triggerCondition: B =
       !helper_MonitorErrorCondition(inputs_Container) &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode &
         !helper_AlarmShouldBeOn(inputs_Container)
         !helper_AlarmShouldBeUnchanged(inputs_Container)
 
-    val desiredCondition = outputs_Containers(1).alarm_control == On_Off.Off
+    val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Off
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
 
@@ -418,68 +418,68 @@ class Monitor_Subsystem_Test_wSlangCheck
                                          outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition =
+    val triggerCondition: B =
       inputs_Container.currentTempWStatus.status == ValueStatus.Invalid &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
 
-    val desiredCondition = outputs_Containers(1).alarm_control == On_Off.Onn
+    val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Onn
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_InvalidLATNormalModeAlarmOn(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                          outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition =
+    val triggerCondition: B =
       inputs_Container.lowerAlarmTempWStatus.status == ValueStatus.Invalid &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
 
-    val desiredCondition = outputs_Containers(1).alarm_control == On_Off.Onn
+    val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Onn
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_InvalidUATNormalModeAlarmOn(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                           outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition =
+    val triggerCondition: B =
       inputs_Container.upperAlarmTempWStatus.status == ValueStatus.Invalid &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
 
-    val desiredCondition = outputs_Containers(1).alarm_control == On_Off.Onn
+    val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Onn
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_InternalFailureNormalModeAlarmOn(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                                outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition =
+    val triggerCondition: B =
       inputs_Container.internalFailure.value &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
 
-    val desiredCondition = outputs_Containers(1).alarm_control == On_Off.Onn
+    val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Onn
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_ErrorConditionAlarmOn(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                     outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition =
+    val triggerCondition: B =
       (helper_MonitorInputErrorCondition(inputs_Container) |
         helper_MonitorInternalFailureCondition(inputs_Container)) &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
 
-    val desiredCondition =
+    val desiredCondition: B =
       outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode &
       outputs_Containers(1).alarm_control == On_Off.Onn
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
 
@@ -487,82 +487,82 @@ class Monitor_Subsystem_Test_wSlangCheck
                                  outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition =
+    val triggerCondition: B =
       (!helper_MonitorErrorCondition(inputs_Container) &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
 
-    val desiredCondition = outputs_Containers(1).monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+    val desiredCondition: B = outputs_Containers(1).monitor_mode == Monitor_Mode.Normal_Monitor_Mode
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_InvalidCTNormalToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                            outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition =
+    val triggerCondition: B =
       inputs_Container.currentTempWStatus.status == ValueStatus.Invalid &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
 
-    val desiredCondition =
+    val desiredCondition: B =
       outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_InvalidLATNormalToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                            outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition =
+    val triggerCondition: B =
       inputs_Container.lowerAlarmTempWStatus.status == ValueStatus.Invalid &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
 
-    val desiredCondition =
+    val desiredCondition: B =
       outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
   def sysProp_InvalidUATNormalToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                            outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition =
+    val triggerCondition: B =
       inputs_Container.upperAlarmTempWStatus.status == ValueStatus.Invalid &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
 
-    val desiredCondition =
+    val desiredCondition: B =
       outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_InternalFailureNormalToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                                 outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition =
+    val triggerCondition: B =
       helper_MonitorInternalFailureCondition(inputs_Container) &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
 
-    val desiredCondition =
+    val desiredCondition: B =
       outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_ErrorConditionNormalToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                                outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition =
+    val triggerCondition: B =
       helper_MonitorErrorCondition(inputs_Container) &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
 
-    val desiredCondition =
+    val desiredCondition: B =
       outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
 
@@ -570,20 +570,20 @@ class Monitor_Subsystem_Test_wSlangCheck
                                      outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition = outputs_Containers(1).monitor_mode == Monitor_Mode.Init_Monitor_Mode
-    val desiredCondition = outputs_Containers(1).alarm_control == On_Off.Off
+    val triggerCondition: B = outputs_Containers(1).monitor_mode == Monitor_Mode.Init_Monitor_Mode
+    val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Off
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_FailedModeImpliesAlarmOn(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                        outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition = outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
-    val desiredCondition = outputs_Containers(1).alarm_control == On_Off.Onn
+    val triggerCondition: B = outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
+    val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Onn
 
-    return triggerCondition ->: desiredCondition
+    return triggerCondition.->:(desiredCondition)
   }
 
   def c32(low: Option[F32], high: Option[F32], ranLib: RandomLib): Config_F32 = {
