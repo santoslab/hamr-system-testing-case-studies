@@ -3,6 +3,9 @@ package RTS
 import org.sireum._
 import art.{Art, ArtNative_Ext}
 import art.scheduling.static._
+import RTS.system_tests.rts1.Actuation_Subsystem_Test_wSlangCheck
+import RTS.system_tests.rts1.{Actuation_Subsystem_Inputs_Container, Actuation_Subsystem_Outputs_Container}
+import RTS.system_tests.rts1.Functional_Oracles._
 
 import java.io.{OutputStream, PrintStream}
 
@@ -27,7 +30,7 @@ class SystemTests extends SystemTestSuite {
 
   override def beforeEach(): Unit = {
     // uncomment this to disable the various guis
-    // System.setProperty("java.awt.headless", "true")
+    System.setProperty("java.awt.headless", "true")
 
     // uncomment this to suppress the log stream
     //ArtNative_Ext.logStream = new PrintStream(new OutputStream {
@@ -90,6 +93,43 @@ class SystemTests extends SystemTestSuite {
 
     TPAU_tempPressA_actuator.put_manualActuatorInput(tempManualActuatorInput)
     SAU_satActuator_actuator.put_manualActuatorInput(satManualActuatorInput)
+  }
+
+  def makeInputsContainer(unit1TripSignals: ALUTripSignals,
+           unit2TripSignals: ALUTripSignals,
+           tempManualActuatorInput: B,
+           satManualActuatorInput: B): Actuation_Subsystem_Inputs_Container = {
+   val result = Actuation_Subsystem_Inputs_Container(
+      unit1TripSignals._1,
+      unit1TripSignals._2,
+      unit1TripSignals._3,
+      unit1TripSignals._4,
+      unit1TripSignals._5,
+      unit1TripSignals._6,
+      unit1TripSignals._7,
+      unit1TripSignals._8,
+      unit1TripSignals._9,
+      unit1TripSignals._10,
+      unit1TripSignals._11,
+      unit1TripSignals._12,
+
+      unit2TripSignals._1,
+      unit2TripSignals._2,
+      unit2TripSignals._3,
+      unit2TripSignals._4,
+      unit2TripSignals._5,
+      unit2TripSignals._6,
+      unit2TripSignals._7,
+      unit2TripSignals._8,
+      unit2TripSignals._9,
+      unit2TripSignals._10,
+      unit2TripSignals._11,
+      unit2TripSignals._12,
+
+      tempManualActuatorInput,
+      satManualActuatorInput)
+
+    return result
   }
 
   def coincidenceLogic_function(channel1: B, channel2: B, channel3: B, channel4: B): B = {
@@ -253,4 +293,144 @@ class SystemTests extends SystemTestSuite {
     TPAU_tempPressA_actuator.check_concrete_outputs(oracleOutputs._1)
     SAU_satActuator_actuator.check_concrete_outputs(oracleOutputs._2)
   }
+
+  test("Oracle Schema - Sat Manual trip, sat trip") {
+    val unit1TripSignals = (F, F, F, F, F, F, F, F, F, F, F, F)
+    val unit2TripSignals = (F, F, F, F, F, F, F, F, F, F, F, F)
+    val tempManualActuatorInput = F
+    val satManualActuatorInput = T
+
+    val testClass = new RTS.system_tests.rts1.Actuation_Subsystem_Test_wSlangCheck()
+    val inject_container: Actuation_Subsystem_Inputs_Container
+      = makeInputsContainer(unit1TripSignals, unit2TripSignals, tempManualActuatorInput, satManualActuatorInput)
+    assert(testClass.Actuation_Subsystem_1HP_script_schema(inject_container, testClass.sysProp_ALU_Satisfies_Functional_Oracle _))
+  }
+
+
+  test("Oracle Schema - Failing Case 1") {
+    val testClass = new RTS.system_tests.rts1.Actuation_Subsystem_Test_wSlangCheck()
+    val inject_container =
+      Actuation_Subsystem_Inputs_Container(
+        false, false, true, false, // temp   -- no trip
+        true, false, false, false, // press  -- no trip
+        true, false, true, true,   // sat    -- trip
+        false, false, false, true, // temp   -- no trip
+        true, false, false, false, // press  -- no trip
+        false, true, false, true,  // sat    -- trip
+        false, true)
+        // system result = Actuation_Subsystem_Outputs_Container(true, true)
+        // ** System is report TRUE for Temp/Press trip, when there is no trip on the inputs
+    assert(testClass.Actuation_Subsystem_1HP_script_schema(inject_container, testClass.sysProp_ALU_Satisfies_Functional_Oracle _))
+  }
+
+  test("Oracle Schema - Failing Case 2") {
+    val testClass = new RTS.system_tests.rts1.Actuation_Subsystem_Test_wSlangCheck()
+    val inject_container =
+      Actuation_Subsystem_Inputs_Container(
+        false, true, false, false, // temp -- no trip
+        false, false, false, true, // press -- no trip
+        true, true, true, false,   // sat -- trip
+        false, false, false, true, // temp -- no trip
+        false, false, true, true,  // press -- trip
+        true, false, true, true,   // sat trip
+        false, false)              // no manual trips
+    // system result = (false, true)  expected: true, true
+    // ** System is report FALSE for Temp/Press trip, even though there is a pressure trip
+    println(s"Oracle output: ${ALUOracleContainers(inject_container)}")
+    assert(testClass.Actuation_Subsystem_1HP_script_schema(inject_container, testClass.sysProp_ALU_Satisfies_Functional_Oracle _))
+  }
+
+  test("Oracle Schema - Failing Case 3") {
+    val testClass = new RTS.system_tests.rts1.Actuation_Subsystem_Test_wSlangCheck()
+    val inject_container =
+      Actuation_Subsystem_Inputs_Container(
+        false, false, true, false,  // temp -- no trip
+        false, true, false, false,  // press -- no trip
+        false, false, true, true,   // sat -- trip
+        false, false, false, true,  // temp -- no trip
+        false, true, false, true,   // press -- trip
+        false, false, false, true,  // sat -- no trip
+        false, true)
+    // system result = (false, true)  expected: true, true
+    // ** System is report FALSE for Temp/Press trip, even though there is a pressure trip
+    println(s"Oracle output: ${ALUOracleContainers(inject_container)}")
+    assert(testClass.Actuation_Subsystem_1HP_script_schema(inject_container, testClass.sysProp_ALU_Satisfies_Functional_Oracle _))
+  }
+
+  test("Failing Case 3 -- in detail") {
+    val testClass = new RTS.system_tests.rts1.Actuation_Subsystem_Test_wSlangCheck()
+    val inject_container =
+      Actuation_Subsystem_Inputs_Container(
+        false, false, true, false, // temp -- no trip
+        false, true, false, false, // press -- no trip
+        false, false, true, true, // sat -- trip
+        false, false, false, true, // temp -- no trip
+        false, true, false, true, // press -- trip
+        false, false, false, true, // sat -- no trip
+        false, true)
+
+    // run the initialization phase
+    Art.initializePhase(scheduler)
+
+    // run the intrumentation and eventControl Mock threads (two steps in the schedule)
+    compute(ISZ(Sstep(2)))
+
+    testClass.injectALUInputs(inject_container)
+
+    compute(ISZ(RunToThread("actuatorsMockThread")))
+
+    //    val TPAU_output = TPAU_tempPressA_actuator.check_concrete_outputs(F)
+    //    val SAU_satActuator_actuator_output = SAU_satActuator_actuator.check_concrete_outputs(F)
+
+    au1_temp_coincidenceLogic.check_concrete_outputs(F)
+    au1_press_coincidenceLogic.check_concrete_outputs(F)
+    au2_temp_coincidenceLogic.check_concrete_outputs(F)
+    au2_press_coincidenceLogic.check_concrete_outputs(T)
+    au1_tempPressTripOut_orLogic.check_concrete_outputs(F)
+    au2_tempPressTripOut_orLogic.check_concrete_outputs(T)
+    TPAU_tempPressA_actuator.check_concrete_outputs(T)
+    SAU_satActuator_actuator.check_concrete_outputs(T)
+  }
+
+  test("Oracle Schema - Failing Case 4") {
+    val testClass = new RTS.system_tests.rts1.Actuation_Subsystem_Test_wSlangCheck()
+    val inject_container =
+      Actuation_Subsystem_Inputs_Container(
+        false, true, false, false, // temp -- no trip
+        false, true, true, true,   // press -- trip
+        true, false, false, false, // sat -- no trip
+        true, false, false, true,  // temp -- trip
+        false, false, false, true, // press -- no trip
+        true, false, false, false, // sat -- no trip
+        false, true)
+    // system result = (true, false)  expected: true, true
+    // ** System is report FALSE for Temp/Press trip, even though there is a pressure trip
+    println(s"Oracle output: ${ALUOracleContainers(inject_container)}")
+    assert(testClass.Actuation_Subsystem_1HP_script_schema(inject_container, testClass.sysProp_ALU_Satisfies_Functional_Oracle _))
+  }
+
+  test("Schema - AU1 Temp Coincidence (no trip channels true)") {
+    val unit1TripSignals = (F, F, F, F, F, F, F, F, F, F, F, F)
+    val unit2TripSignals = (F, F, F, F, F, F, F, F, F, F, F, F)
+    val tempManualActuatorInput = F
+    val satManualActuatorInput = F
+
+    val testClass = new RTS.system_tests.rts1.Actuation_Subsystem_Test_wSlangCheck()
+    val inject_container: Actuation_Subsystem_Inputs_Container
+    = makeInputsContainer(unit1TripSignals, unit2TripSignals, tempManualActuatorInput, satManualActuatorInput)
+    assert(testClass.Actuation_Subsystem_1HP_script_schema(inject_container, testClass.sysProp_AU1TempTrip _))
+  }
+
+  test("Schema - AU1 Temp Coincidence (first two trip channels true)") {
+    val unit1TripSignals = (T, T, F, F, F, F, F, F, F, F, F, F)
+    val unit2TripSignals = (F, F, F, F, F, F, F, F, F, F, F, F)
+    val tempManualActuatorInput = F
+    val satManualActuatorInput = F
+
+    val testClass = new RTS.system_tests.rts1.Actuation_Subsystem_Test_wSlangCheck()
+    val inject_container: Actuation_Subsystem_Inputs_Container
+    = makeInputsContainer(unit1TripSignals, unit2TripSignals, tempManualActuatorInput, satManualActuatorInput)
+    assert(testClass.Actuation_Subsystem_1HP_script_schema(inject_container, testClass.sysProp_AU1TempTrip _))
+  }
+
 }

@@ -68,6 +68,9 @@ class Actuation_Subsystem_Test_wSlangCheck
   var verbose: B = T
 
   val testMatrix: Map[String, TestRow] = Map.empty ++ ISZ(
+    // -------------
+    //  Operator Override Properties
+    // -------------
     "TempPress_Manual_Trip" ~> TestRow(
       testDescription = "TempPress Manual Trip",
       testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
@@ -82,6 +85,74 @@ class Actuation_Subsystem_Test_wSlangCheck
       preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
       property = NameProvider("Saturation Manual Trip", (sysProp_SaturationManualTrip _).asInstanceOf[(Any, Any) => B])
     ),
+    // -------------
+    //  AU1 Properties
+    // -------------
+    "AU1TempTrip" ~> TestRow(
+      testDescription = "AU1TempTrip",
+      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = getDefaultProfile,
+      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
+      property = NameProvider("AU1TempTrip", (sysProp_AU1TempTrip _).asInstanceOf[(Any, Any) => B])
+    ),
+    "AU1PressTrip" ~> TestRow(
+      testDescription = "AU1PressTrip",
+      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = getDefaultProfile,
+      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
+      property = NameProvider("AU1PressTrip", (sysProp_AU1PressTrip _).asInstanceOf[(Any, Any) => B])
+    ),
+    "AU1SatTrip" ~> TestRow(
+      testDescription = "AU1SatTrip",
+      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = getDefaultProfile,
+      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
+      property = NameProvider("AU1SatTrip", (sysProp_AU1SatTrip _).asInstanceOf[(Any, Any) => B])
+    ),
+    // -------------
+    //  AU2 Properties
+    // -------------
+    "AU2TempTrip" ~> TestRow(
+      testDescription = "AU2TempTrip",
+      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = getDefaultProfile,
+      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
+      property = NameProvider("AU2TempTrip", (sysProp_AU2TempTrip _).asInstanceOf[(Any, Any) => B])
+    ),
+    "AU2PressTrip" ~> TestRow(
+      testDescription = "AU2PressTrip",
+      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = getDefaultProfile,
+      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
+      property = NameProvider("AU2PressTrip", (sysProp_AU2PressTrip _).asInstanceOf[(Any, Any) => B])
+    ),
+    "AU2SatTrip" ~> TestRow(
+      testDescription = "AU2SatTrip",
+      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = getDefaultProfile,
+      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
+      property = NameProvider("AU2SatTrip", (sysProp_AU2SatTrip _).asInstanceOf[(Any, Any) => B])
+    ),
+    // -------------
+    //  Causality Properties
+    // -------------
+    "TempPressTripCausality" ~> TestRow(
+      testDescription = "TempPressTripCausality",
+      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = getDefaultProfile,
+      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
+      property = NameProvider("TempPressTripCausality", (sysProp_TempPressTripCausality _).asInstanceOf[(Any, Any) => B])
+    ),
+     "SatTripCausality" ~> TestRow(
+          testDescription = "SatTripCausality",
+          testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+          profile = getDefaultProfile,
+          preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
+          property = NameProvider("SatTripCausality", (sysProp_SatTripCausality _).asInstanceOf[(Any, Any) => B])
+        ),
+    // -------------
+    //  Functional Oracle Properties
+    // -------------
     "ALU_Satisfies_Oracle" ~> TestRow(
       testDescription = "ALU Satisfies Oracle",
       testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
@@ -90,6 +161,7 @@ class Actuation_Subsystem_Test_wSlangCheck
       property = NameProvider("ALU Satisfies Oracle", (sysProp_ALU_Satisfies_Functional_Oracle _).asInstanceOf[(Any, Any) => B])
     )
   )
+
 
   for (testRow <- testMatrix.entries) {
     run(testRow._1, testRow._2)
@@ -122,7 +194,13 @@ class Actuation_Subsystem_Test_wSlangCheck
               if (!testRow.preStateCheck(container)) {
                 // retry
               } else {
-                testRow.testMethod.function(container, testRow.property.function)
+                // debugging
+                //  Wierd:  if I uncomment this, I get failing tests
+//                val result = testRow.testMethod.function(container, testRow.property.function)
+//                if (!result) {
+//                  println(s"ERROR: Inputs Container: ${container}")
+//                }
+                assert(testRow.testMethod.function(container, testRow.property.function))
                 retry = F
               }
             case _ =>
@@ -164,10 +242,11 @@ class Actuation_Subsystem_Test_wSlangCheck
     au2_temp_coincidenceLogic.put_channel2(c.au2_temp_coincidenceLogic_channel2)
     au2_temp_coincidenceLogic.put_channel3(c.au2_temp_coincidenceLogic_channel3)
     au2_temp_coincidenceLogic.put_channel4(c.au2_temp_coincidenceLogic_channel4)
+    // Note: there was originally a bug below -- channel1 input was being used to set channels 2,3,4
     au2_press_coincidenceLogic.put_channel1(c.au2_press_coincidenceLogic_channel1)
-    au2_press_coincidenceLogic.put_channel2(c.au2_press_coincidenceLogic_channel1)
-    au2_press_coincidenceLogic.put_channel3(c.au2_press_coincidenceLogic_channel1)
-    au2_press_coincidenceLogic.put_channel4(c.au2_press_coincidenceLogic_channel1)
+    au2_press_coincidenceLogic.put_channel2(c.au2_press_coincidenceLogic_channel2)
+    au2_press_coincidenceLogic.put_channel3(c.au2_press_coincidenceLogic_channel3)
+    au2_press_coincidenceLogic.put_channel4(c.au2_press_coincidenceLogic_channel4)
     au2_satLogic_coincidenceLogic.put_channel1(c.au2_satlogic_coincidenceLogic_channel1)
     au2_satLogic_coincidenceLogic.put_channel2(c.au2_satlogic_coincidenceLogic_channel2)
     au2_satLogic_coincidenceLogic.put_channel3(c.au2_satlogic_coincidenceLogic_channel3)
@@ -207,8 +286,7 @@ class Actuation_Subsystem_Test_wSlangCheck
 
     // ====== Compute ======
 
-    //  ----  r u n   t o   a r b i t r a r y    s y s t e m    s t a t e
-
+    // run past components providing inputs to the Actuation subsystem, i.e.,
     // run the intrumentation and eventControl Mock threads (two steps in the schedule)
     compute(ISZ(Sstep(2)))
 
@@ -218,11 +296,12 @@ class Actuation_Subsystem_Test_wSlangCheck
     //      declarations of when to inject and observe
     // -------------------------------------------------------------------
 
-    // inject subsystem inputs
+    // inject subsystem inputs (overriding inputs from components that we ran past above)
+    // println(s"Input container: ${inject_container}")  // debugging
     injectALUInputs(inject_container)
 
-    // run to end of current hyper-period - and check outputs of selected components
-    compute(ISZ(Hstep(1)))
+    // run to the end of the portion of the schedule for the Actuation subsystem components
+    compute(ISZ(RunToThread("actuatorsMockThread")))
 
     // ------------------ observe output -- build output observation vector ------------------
     //   ...eventually, auto-generated from higher-level specification of
@@ -230,10 +309,9 @@ class Actuation_Subsystem_Test_wSlangCheck
     //      declarations of when to inject and observe
     // ---------------------------------------------------------------------------------------
 
-    compute(ISZ(RunToThread("actuatorsMockThread")))
-
     val output_container: Actuation_Subsystem_Outputs_Container = observeALUOutputs()
 
+    // println(s"Output container: ${output_container}")  // debugging
     // gracefully take system down
     Art.finalizePhase(scheduler)
 
@@ -242,7 +320,77 @@ class Actuation_Subsystem_Test_wSlangCheck
     //      property evaluation
     // ---------------------------------------------------------------------------------------
 
-    return prop(inject_container, output_container)
+    val result = prop(inject_container, output_container)
+    //    if (!result) {     // debugging
+    //      println(s"Property failed")
+    //    }
+    return result
+  }
+
+  //====================================================================
+  //   P r o p e r t y     H e l p e r s
+  //
+  //    Predicates for individual temp, pressure, and saturation trip conditions
+  //====================================================================
+
+  // does the temp trip condition hold for AU1 inputs?
+  def helper_TempTripConditionAU1(inputs_container: Actuation_Subsystem_Inputs_Container): B = {
+    val channel1 = inputs_container.au1_temp_coincidenceLogic_channel1
+    val channel2 = inputs_container.au1_temp_coincidenceLogic_channel2
+    val channel3 = inputs_container.au1_temp_coincidenceLogic_channel3
+    val channel4 = inputs_container.au1_temp_coincidenceLogic_channel4
+    // If at least two of the temp trip channels are set for AU1
+    return coincidenceLogic_function(channel1, channel2, channel3, channel4)
+  }
+
+  // does the temp trip condition hold for AU2 inputs?
+  def helper_TempTripConditionAU2(inputs_container: Actuation_Subsystem_Inputs_Container): B = {
+    val channel1 = inputs_container.au2_temp_coincidenceLogic_channel1
+    val channel2 = inputs_container.au2_temp_coincidenceLogic_channel2
+    val channel3 = inputs_container.au2_temp_coincidenceLogic_channel3
+    val channel4 = inputs_container.au2_temp_coincidenceLogic_channel4
+    // If at least two of the temp trip channels are set for AU2
+    return coincidenceLogic_function(channel1, channel2, channel3, channel4)
+  }
+
+  // does the pressure trip condition hold for AU1 inputs?
+  def helper_PressTripConditionAU1(inputs_container: Actuation_Subsystem_Inputs_Container): B = {
+    val channel1 = inputs_container.au1_press_coincidenceLogic_channel1
+    val channel2 = inputs_container.au1_press_coincidenceLogic_channel2
+    val channel3 = inputs_container.au1_press_coincidenceLogic_channel3
+    val channel4 = inputs_container.au1_press_coincidenceLogic_channel4
+    // If at least two of the pressure trip channels are set for AU1
+    return coincidenceLogic_function(channel1, channel2, channel3, channel4)
+  }
+
+  // does the pressure trip condition hold for AU2 inputs?
+  def helper_PressTripConditionAU2(inputs_container: Actuation_Subsystem_Inputs_Container): B = {
+    val channel1 = inputs_container.au2_press_coincidenceLogic_channel1
+    val channel2 = inputs_container.au2_press_coincidenceLogic_channel2
+    val channel3 = inputs_container.au2_press_coincidenceLogic_channel3
+    val channel4 = inputs_container.au2_press_coincidenceLogic_channel4
+    // If at least two of the pressure trip channels are set for AU2
+    return coincidenceLogic_function(channel1, channel2, channel3, channel4)
+  }
+
+  // does the saturation trip condition hold for AU1 inputs?
+  def helper_SatTripConditionAU1(inputs_container: Actuation_Subsystem_Inputs_Container): B = {
+    val channel1 = inputs_container.au1_satlogic_coincidenceLogic_channel1
+    val channel2 = inputs_container.au1_satlogic_coincidenceLogic_channel2
+    val channel3 = inputs_container.au1_satlogic_coincidenceLogic_channel3
+    val channel4 = inputs_container.au1_satlogic_coincidenceLogic_channel4
+    // If at least two of the sat trip channels are set for AU1
+    return coincidenceLogic_function(channel1, channel2, channel3, channel4)
+  }
+
+  // does the saturation trip condition hold for AU2 inputs?
+  def helper_SatTripConditionAU2(inputs_container: Actuation_Subsystem_Inputs_Container): B = {
+    val channel1 = inputs_container.au2_satlogic_coincidenceLogic_channel1
+    val channel2 = inputs_container.au2_satlogic_coincidenceLogic_channel2
+    val channel3 = inputs_container.au2_satlogic_coincidenceLogic_channel3
+    val channel4 = inputs_container.au2_satlogic_coincidenceLogic_channel4
+    // If at least two of the sat trip channels are set for AU2
+    return coincidenceLogic_function(channel1, channel2, channel3, channel4)
   }
 
   //====================================================================
@@ -259,7 +407,9 @@ class Actuation_Subsystem_Test_wSlangCheck
     val triggerCondition = inputs_container.tempPressManualActuatorInput
     // Then we should have a temp/pressure actuation
     val desiredCondition = outputs_container.TPAU_tempPressA_actuator_output
-    return (triggerCondition ->: desiredCondition)
+    // val result = (triggerCondition ->: desiredCondition)
+    val result = !triggerCondition | desiredCondition
+    return result
   }
 
   // test effect of operator-initiated manual TempPressure
@@ -272,67 +422,129 @@ class Actuation_Subsystem_Test_wSlangCheck
     val triggerCondition = inputs_container.satManualActuatorInput
     // Then we should have a temp/pressure actuation
     val desiredCondition = outputs_container.SAU_satActuator_actuator
-    return (triggerCondition ->: desiredCondition)
+    val result1 = (triggerCondition ->: desiredCondition)
+    val result2 = (triggerCondition.->:(desiredCondition))
+    val result3 = !triggerCondition | desiredCondition
+    return result3
   }
 
+  //=================================================
+  //  AU1 Properties
+  //=================================================
+  def sysProp_AU1TempTrip(
+                                    inputs_container: Actuation_Subsystem_Inputs_Container,
+                                    outputs_container: Actuation_Subsystem_Outputs_Container): B = {
+    // If at least two of the temp trip channels are set for AU1
+    val triggerCondition = helper_TempTripConditionAU1(inputs_container)
+    // Then we should have a temp/pressure actuation
+    val desiredCondition = outputs_container.TPAU_tempPressA_actuator_output
+    val result = !triggerCondition | desiredCondition
+    return result
+  }
+
+  def sysProp_AU1PressTrip(
+                           inputs_container: Actuation_Subsystem_Inputs_Container,
+                           outputs_container: Actuation_Subsystem_Outputs_Container): B = {
+    // If at least two of the pressure trip channels are set for AU1
+    val triggerCondition = helper_PressTripConditionAU1(inputs_container)
+    // Then we should have a temp/pressure actuation
+    val desiredCondition = outputs_container.TPAU_tempPressA_actuator_output
+    val result = !triggerCondition | desiredCondition
+    return result
+  }
+
+  def sysProp_AU1SatTrip(
+                            inputs_container: Actuation_Subsystem_Inputs_Container,
+                            outputs_container: Actuation_Subsystem_Outputs_Container): B = {
+    // If at least two of the temp trip channels are set for AU1
+    val triggerCondition = helper_SatTripConditionAU1(inputs_container)
+    // Then we should have a temp/pressure actuation
+    val desiredCondition = outputs_container.SAU_satActuator_actuator
+    val result = !triggerCondition | desiredCondition
+    return result
+  }
+
+  //=================================================
+  //  AU2 Properties
+  //=================================================
+  def sysProp_AU2TempTrip(
+                           inputs_container: Actuation_Subsystem_Inputs_Container,
+                           outputs_container: Actuation_Subsystem_Outputs_Container): B = {
+    // If at least two of the temp trip channels are set for AU1
+    val triggerCondition = helper_TempTripConditionAU2(inputs_container)
+    // Then we should have a temp/pressure actuation
+    val desiredCondition = outputs_container.TPAU_tempPressA_actuator_output
+    val result = !triggerCondition | desiredCondition
+    return result
+  }
+
+  def sysProp_AU2PressTrip(
+                            inputs_container: Actuation_Subsystem_Inputs_Container,
+                            outputs_container: Actuation_Subsystem_Outputs_Container): B = {
+   // If at least two of the temp trip channels are set for AU1
+    val triggerCondition = helper_PressTripConditionAU2(inputs_container)
+    // Then we should have a temp/pressure actuation
+    val desiredCondition = outputs_container.TPAU_tempPressA_actuator_output
+    val result = !triggerCondition | desiredCondition
+    return result
+  }
+
+  def sysProp_AU2SatTrip(
+                          inputs_container: Actuation_Subsystem_Inputs_Container,
+                          outputs_container: Actuation_Subsystem_Outputs_Container): B = {
+    // If at least two of the temp trip channels are set for AU1
+    val triggerCondition = helper_SatTripConditionAU2(inputs_container)
+    // Then we should have a temp/pressure actuation
+    val desiredCondition = outputs_container.SAU_satActuator_actuator
+    val result = !triggerCondition | desiredCondition
+    return result
+  }
+
+  //=================================================
+  //  Causality Properties
+  //=================================================
+  def sysProp_SatTripCausality(
+                          inputs_container: Actuation_Subsystem_Inputs_Container,
+                          outputs_container: Actuation_Subsystem_Outputs_Container): B = {
+    // If there is a saturation trip
+    val triggerCondition = outputs_container.SAU_satActuator_actuator
+    // Then it must be the case that there is a operator override trip
+    //  or a coincidence condition from either AU1 or AU2
+    val au1SatTrip = helper_SatTripConditionAU1(inputs_container)
+    val au2SatTrip = helper_SatTripConditionAU2(inputs_container)
+    val desiredCondition = au1SatTrip | au2SatTrip | inputs_container.satManualActuatorInput
+    val result = !triggerCondition | desiredCondition
+    return result
+  }
+
+  def sysProp_TempPressTripCausality(
+                                inputs_container: Actuation_Subsystem_Inputs_Container,
+                                outputs_container: Actuation_Subsystem_Outputs_Container): B = {
+    // If there is a saturation trip
+    val triggerCondition = outputs_container.TPAU_tempPressA_actuator_output
+    // Then it must be the case that there is a operator override trip
+    //  or a temp or press coincidence condition from either AU1 or AU2
+    val au1TempTrip = helper_TempTripConditionAU1(inputs_container)
+    val au1PressTrip = helper_PressTripConditionAU1(inputs_container)
+    val au2TempTrip = helper_TempTripConditionAU2(inputs_container)
+    val au2PressTrip = helper_PressTripConditionAU2(inputs_container)
+    val desiredCondition = au1TempTrip | au1PressTrip | au2TempTrip | au2PressTrip | inputs_container.tempPressManualActuatorInput
+    val result = !triggerCondition | desiredCondition
+    return result
+  }
+
+
+  //======================================================
+  //  O r a c l e
+  //
   // test entire subsystem against functional oracle
+  //======================================================
   def sysProp_ALU_Satisfies_Functional_Oracle(
                                                inputs_container: Actuation_Subsystem_Inputs_Container,
                                                outputs_container: Actuation_Subsystem_Outputs_Container): B = {
-
-    // restructure inputs - from contain to trip signals
-
-    val unit1TripSignals: ALUTripSignals = (
-      inputs_container.au1_temp_coincidenceLogic_channel1,
-      inputs_container.au1_temp_coincidenceLogic_channel2,
-      inputs_container.au1_temp_coincidenceLogic_channel3,
-      inputs_container.au1_temp_coincidenceLogic_channel4,
-      inputs_container.au1_press_coincidenceLogic_channel1,
-      inputs_container.au1_press_coincidenceLogic_channel2,
-      inputs_container.au1_press_coincidenceLogic_channel3,
-      inputs_container.au1_press_coincidenceLogic_channel4,
-      inputs_container.au1_satlogic_coincidenceLogic_channel1,
-      inputs_container.au1_satlogic_coincidenceLogic_channel2,
-      inputs_container.au1_satlogic_coincidenceLogic_channel3,
-      inputs_container.au1_satlogic_coincidenceLogic_channel4
-    )
-
-    val unit2TripSignals: ALUTripSignals = (
-      inputs_container.au2_satlogic_coincidenceLogic_channel1,
-      inputs_container.au2_temp_coincidenceLogic_channel2,
-      inputs_container.au2_temp_coincidenceLogic_channel3,
-      inputs_container.au2_temp_coincidenceLogic_channel4,
-      inputs_container.au2_press_coincidenceLogic_channel1,
-      inputs_container.au2_press_coincidenceLogic_channel2,
-      inputs_container.au2_press_coincidenceLogic_channel3,
-      inputs_container.au2_press_coincidenceLogic_channel4,
-      inputs_container.au2_satlogic_coincidenceLogic_channel1,
-      inputs_container.au2_satlogic_coincidenceLogic_channel2,
-      inputs_container.au2_satlogic_coincidenceLogic_channel3,
-      inputs_container.au2_satlogic_coincidenceLogic_channel4
-    )
-
-    val tempManualActuationInput = inputs_container.tempPressManualActuatorInput
-    val satManualActuationInput = inputs_container.satManualActuatorInput
-
-    // execute functional behavior
-
-    val actuation_unit1_outputs = actuationLogic_function(unit1TripSignals)
-    val actuation_unit2_outputs = actuationLogic_function(unit2TripSignals)
-    val tempPressure_actuator_unit_output = actuatorUnit_function(
-      actuation_unit1_outputs._1,
-      actuation_unit2_outputs._1,
-      tempManualActuationInput)
-    val sat_actuator_unit_output = actuatorUnit_function(
-      actuation_unit1_outputs._2,
-      actuation_unit2_outputs._2,
-      satManualActuationInput)
-
+    val oracle_outputs_container = Functional_Oracles.ALUOracleContainers(inputs_container)
     // compare specified result (oracle) to actual result (container)
-
-    val result = ((tempPressure_actuator_unit_output == outputs_container.TPAU_tempPressA_actuator_output)
-      & (sat_actuator_unit_output == outputs_container.SAU_satActuator_actuator))
-
+    val result = (outputs_container == oracle_outputs_container)
     return result
   }
 

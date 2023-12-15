@@ -3,6 +3,8 @@
 package RTS.system_tests.rts1
 
 import org.sireum._
+import RTS.system_tests.rts1.{Actuation_Subsystem_Inputs_Container, Actuation_Subsystem_Outputs_Container}
+
 // Use Scala import renaming syntax to create shorter, more convenient names, for thread components
 
 import RTS.Instrumentation.{InstrumentationMockThread_i_instrumentationMock_instrumentationMockThread_SystemTestAPI => instrumentationMockThread}
@@ -102,6 +104,44 @@ object Functional_Oracles {
       actuation_unit2_outputs._2,
       satManualActuatorInput)
     return (tempPressure_actuator_unit_output, sat_actuator_unit_output)
+  }
+
+  def ALUOracleContainers(inputs_container: Actuation_Subsystem_Inputs_Container): Actuation_Subsystem_Outputs_Container = {
+    val unit1TripSignals: ALUTripSignals = (
+      inputs_container.au1_temp_coincidenceLogic_channel1,
+      inputs_container.au1_temp_coincidenceLogic_channel2,
+      inputs_container.au1_temp_coincidenceLogic_channel3,
+      inputs_container.au1_temp_coincidenceLogic_channel4,
+      inputs_container.au1_press_coincidenceLogic_channel1,
+      inputs_container.au1_press_coincidenceLogic_channel2,
+      inputs_container.au1_press_coincidenceLogic_channel3,
+      inputs_container.au1_press_coincidenceLogic_channel4,
+      inputs_container.au1_satlogic_coincidenceLogic_channel1,
+      inputs_container.au1_satlogic_coincidenceLogic_channel2,
+      inputs_container.au1_satlogic_coincidenceLogic_channel3,
+      inputs_container.au1_satlogic_coincidenceLogic_channel4
+    )
+
+    val unit2TripSignals: ALUTripSignals = (
+      inputs_container.au2_temp_coincidenceLogic_channel1,
+      inputs_container.au2_temp_coincidenceLogic_channel2,
+      inputs_container.au2_temp_coincidenceLogic_channel3,
+      inputs_container.au2_temp_coincidenceLogic_channel4,
+      inputs_container.au2_press_coincidenceLogic_channel1,
+      inputs_container.au2_press_coincidenceLogic_channel2,
+      inputs_container.au2_press_coincidenceLogic_channel3,
+      inputs_container.au2_press_coincidenceLogic_channel4,
+      inputs_container.au2_satlogic_coincidenceLogic_channel1,
+      inputs_container.au2_satlogic_coincidenceLogic_channel2,
+      inputs_container.au2_satlogic_coincidenceLogic_channel3,
+      inputs_container.au2_satlogic_coincidenceLogic_channel4
+    )
+
+    val tempManualActuationInput = inputs_container.tempPressManualActuatorInput
+    val satManualActuationInput = inputs_container.satManualActuatorInput
+
+    val oracle_result = ALUOracle(unit1TripSignals, unit2TripSignals, tempManualActuationInput, satManualActuationInput)
+    return Actuation_Subsystem_Outputs_Container(oracle_result._1, oracle_result._2)
   }
 }
 
