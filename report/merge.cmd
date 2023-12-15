@@ -3,6 +3,9 @@
 import org.sireum._
 import Helper._
 
+val removeDump: B = F
+val regenMergedReports: B = F
+
 val root = Os.path("/opt") / "santos" / "jenkins" / "dsc_sys" / "dsc_tester"
 var results: ISZ[Results] = ISZ()
 //                  proj             subsys           family           timeout
@@ -13,7 +16,7 @@ Os.Path.walk(root, F, T, p => {
     val paths = p.up.list
 
     fetch(".dump", paths) match {
-      case Some(d) =>
+      case Some(d) if removeDump =>
         d.removeAll()
         println(s"Removed: dump ${d}")
       case _ =>
@@ -23,7 +26,7 @@ Os.Path.walk(root, F, T, p => {
     val passingP = fetch(".passing", paths).get
     val failingP = fetch(".failing", paths).get
     val unsatP = fetch(".unsat", paths).get
-    val execP = fetch(".unsat", paths).get
+    val execP = fetch(".exec", paths).get
     val csvP = fetch(".csv", paths).get
     val coverageP = fetch(".coverage", paths).get
 
@@ -55,19 +58,31 @@ for (projects <- map.entries) {
   var projectResults = ISZ[Results]()
   for (systems <- projects._2.entries) {
     val sys = systems._1
-    var sysResults = ISZ[Results]()
+    var systemResults = ISZ[Results]()
     for (families <- systems._2.entries) {
       val family = families._1
-      var famResults = ISZ[Results]()
+      var familyResults = ISZ[Results]()
       for (timeouts <- families._2.entries) {
         val timeout = timeouts._1
         val results = timeouts._2
-        famResults = famResults :+ results
+        familyResults = familyResults :+ results
+        systemResults = systemResults :+ results
+        projectResults = projectResults :+ results
 
         addTimeoutReport(results)
       }
+
+      val fResults: Results = mergeResults(familyResults, familyResults(0).passingP.up.up)
+      addFamilyReport(fResults)
+
     }
+
+    val sResults: Results = mergeResults(systemResults, systemResults(0).passingP.up.up.up)
+    addSystemReport(sResults)
   }
+
+  val pResults: Results = mergeResults(projectResults, projectResults(0).passingP.up.up.up.up)
+  addProjectReport(pResults)
 }
 
 
@@ -77,15 +92,13 @@ object Helper {
   def addTimeoutReport(r: Results): Unit = {
     val root1 = r.passingP.up
 
-    val oldreport = root1 / "report"
-    oldreport.removeAll()
-
     val reportDir = root1
 
     val r0 = reportDir.relativize(root)
-    val r1 = reportDir.relativize(root / r.project)
-    val r2 = reportDir.relativize(root / r.project / r.subSystem)
-    val r3 = reportDir.relativize(root / r.project / r.subSystem / r.testFamily)
+    val r1 = reportDir.relativize(root / r.project / "report.html")
+    val r2 = reportDir.relativize(root / r.project / r.subSystem / "report.html")
+    val r3 = reportDir.relativize(root / r.project / r.subSystem / r.testFamily / "report.html")
+
     val cookieCrumb = st"""<a href="${r0}">Report</a> > <a href="${r1}">${r.project}</a> > <a href="${r2}">${r.subSystem}</a> > <a href="${r3}">${r.testFamily}</a>"""
     val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
     val html =
@@ -104,7 +117,7 @@ object Helper {
            |Failing:   ${r.failing}
            |Unsat:     ${r.unsat}
            |
-           |Coverage:  <a href="${reportDir.relativize(r.coverage)}/index.html">report</a>
+           |Coverage:  <a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>
            |  ${(subs, "\n")}
            |</pre>
            |<table>
@@ -114,6 +127,142 @@ object Helper {
     val report = reportDir / "report.html"
     report.writeOver(html.render)
     println(s"Wrote: ${report}")
+  }
+
+  def addFamilyReport(r: Results): Unit = {
+    val root1 = r.passingP.up.up
+
+    val reportDir = root1
+
+    val r0 = reportDir.relativize(root)
+    val r1 = reportDir.relativize(root / r.project)
+    val r2 = reportDir.relativize(root / r.project / r.subSystem / "report.html")
+    //val r3 = reportDir.relativize(root / r.project / r.subSystem / r.testFamily)
+
+    val cookieCrumb = st"""<a href="${r0}">Report</a> > <a href="${r1}">${r.project}</a> > <a href="${r2}">${r.subSystem}</a> >"""
+    val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
+    val html =
+      st"""<html>
+          |<body>
+          |
+          |<pre>
+          |${cookieCrumb}
+          |
+          |Project:   ${r.project}
+          |SubSystem: ${r.subSystem}
+          |Family:    ${r.testFamily}
+          |Timeouts:  <todo>
+          |
+          |Passing:   ${r.passing}
+          |Failing:   ${r.failing}
+          |Unsat:     ${r.unsat}
+          |
+          |Coverage:  <a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>
+          |  ${(subs, "\n")}
+          |</pre>
+          |<table>
+          |</table>
+          |</body>
+          |</html>"""
+    val report = reportDir / "report.html"
+    report.writeOver(html.render)
+    println(s"Wrote: ${report}")
+  }
+
+  def addSystemReport(r: Results): Unit = {
+    val root1 = r.passingP.up.up.up
+
+    val reportDir = root1
+
+    val r0 = reportDir.relativize(root)
+    val r1 = reportDir.relativize(root / r.project / "report.html")
+    //val r2 = reportDir.relativize(root / r.project / r.subSystem)
+    //val r3 = reportDir.relativize(root / r.project / r.subSystem / r.testFamily)
+
+    val cookieCrumb = st"""<a href="${r0}">Report</a> > <a href="${r1}">${r.project}</a>"""
+    val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
+    val html =
+      st"""<html>
+          |<body>
+          |
+          |<pre>
+          |${cookieCrumb}
+          |
+          |Project:   ${r.project}
+          |SubSystem: ${r.subSystem}
+          |Families:
+          |Timeouts:
+          |
+          |Passing:   ${r.passing}
+          |Failing:   ${r.failing}
+          |Unsat:     ${r.unsat}
+          |
+          |Coverage:  <a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>
+          |  ${(subs, "\n")}
+          |</pre>
+          |<table>
+          |</table>
+          |</body>
+          |</html>"""
+    val report = reportDir / "report.html"
+    report.writeOver(html.render)
+    println(s"Wrote: ${report}")
+  }
+
+  def addProjectReport(r: Results): Unit = {
+    val root1 = r.passingP.up.up.up.up
+
+    val reportDir = root1
+
+    val r0 = reportDir.relativize(root)
+    //val r1 = reportDir.relativize(root / r.project)
+    //val r2 = reportDir.relativize(root / r.project / r.subSystem)
+    //val r3 = reportDir.relativize(root / r.project / r.subSystem / r.testFamily)
+
+    val cookieCrumb = st"""<a href="${r0}">Report</a>"""
+    val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
+    val html =
+      st"""<html>
+          |<body>
+          |
+          |<pre>
+          |${cookieCrumb}
+          |
+          |Project:   ${r.project}
+          |SubSystems:
+          |Family:    <todo>
+          |Timeouts:  <todo>
+          |
+          |Passing:   ${r.passing}
+          |Failing:   ${r.failing}
+          |Unsat:     ${r.unsat}
+          |
+          |Coverage:  <a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>
+          |  ${(subs, "\n")}
+          |</pre>
+          |<table>
+          |</table>
+          |</body>
+          |</html>"""
+    val report = reportDir / "report.html"
+    report.writeOver(html.render)
+    println(s"Wrote: ${report}")
+  }
+
+  def jarLoc(project: String): Os.Path = {
+    project match {
+      case string"isolette" => Os.home / "devel" / "git" / "hamr-system-testing-case-studies" / "isolette/hamr/slang/out/slang/assemble/slang.jar"
+      case string"RTS" => Os.home / "devel" / "git" / "hamr-system-testing-case-studies" / "rts/hamr/slang/out/slang/assemble/slang.jar"
+      case _ => halt(s"Unexpected ${project}")
+    }
+  }
+
+  def dumpLoc(project: String): Os.Path = {
+    project match {
+      case string"isolette" => Os.path("/opt/santos/jenkins/dsc_sys/dsc_tester/isolette/Monitor_Subsystem_DSC_Test_Harness/MA__Failing__CT____Alarm_On/1/isolette_Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_1_mac-mini-m1-jacoco.dump")
+      case string"RTS" => Os.path("/opt/santos/jenkins/dsc_sys/dsc_tester/RTS/Actuation_Subsystem_DSC_Test_Harness/ALU_Satisfies_Oracle/1/RTS_Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_1_mac-mini-m1-jacoco.dump")
+      case _ => halt(s"Unexpected ${project}")
+    }
   }
 
   val coverageMap: Map[String, ISZ[(String, String)]] = {
@@ -217,5 +366,44 @@ object Helper {
 
   def numVectors(p: Os.Path): Z = {
     return ops.StringOps(p.read).split(c => c == '\n').size
+  }
+
+
+  def mergeResults(results: ISZ[Results], relativeTo: Os.Path): Results = {
+    var (passing, failing, unsat): (Z, Z, Z) = (0, 0, 0)
+    var execsPaths: ISZ[Os.Path] = ISZ()
+    for (r <- results) {
+      passing = passing + r.passing
+      failing = failing + r.failing
+      unsat = unsat + r.unsat
+      execsPaths = execsPaths :+ r.exec
+    }
+
+    val jacocoOutDir = relativeTo / "jacocoCoverage"
+
+    if (regenMergedReports) {
+      val jacocoCli = Os.home / "devel" / "sireum" / "kekinian" / "lib" / "jacococli.jar"
+      //val projJar = jarLoc(results(0).project)
+      val projDump = dumpLoc(results(0).project)
+
+      val csv = relativeTo / "jacoco.csv"
+
+      val sireumHome = Sireum.homeOpt.get
+      val javaExe = Sireum.javaHomeOpt.get / "bin" / (if (Os.isWin) "java.exe" else "java")
+
+      val execs = for(x <- execsPaths) yield x.string
+
+      println(s"Working on ${relativeTo.string} ...")
+      val commands = ISZ[String](javaExe.string, "-jar", jacocoCli.string, "report") ++ execs ++ ISZ[String]("--encoding",
+        "UTF-8", "--classfiles", projDump.string, "--csv", csv.string, "--html", jacocoOutDir.string, "--sourcefiles", projDump.string)
+
+      //println(commands)
+      Os.proc(commands).console.echo.runCheck()
+      println()
+    }
+
+    val x = results(0)(passing = passing, failing = failing, unsat = unsat, coverage = jacocoOutDir)
+
+    return x
   }
 }
