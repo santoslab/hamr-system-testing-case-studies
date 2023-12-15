@@ -111,13 +111,82 @@ class Monitor_Subsystem_Test_wSlangCheck
     ),
 
 
-
     "MA__Failing__Internal_Failure____Alarm_On" ~> TestRow(
       testDescription = "Failure due to internal failure should result in Alarm On",
       testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = validRanges,
       preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
       property = NameProvider("sysProp_InternalFailureNormalModeAlarmOn", (sysProp_InternalFailureNormalModeAlarmOn _).asInstanceOf[(Any, Any) => B])
+    ),
+    "MA__Failing__Error_Condition____Alarm_On" ~> TestRow(
+      testDescription = "observe any failure condition (combining the input failures and internal failures above) should result in Alarm On",
+      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = validRanges,
+      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
+      property = NameProvider("sysProp_ErrorConditionAlarmOn", (sysProp_ErrorConditionAlarmOn _).asInstanceOf[(Any, Any) => B])
+    ),
+
+
+
+    // Normal --> Normal  Transitions
+    "Mode_Trans___Normal__Normal" ~> TestRow(
+      testDescription = "If no error condition and in normal then stay  in Normal",
+      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = validRanges,
+      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
+      property = NameProvider("sysProp_NormalToNormalMode", (sysProp_NormalToNormalMode _).asInstanceOf[(Any, Any) => B])
+    ),
+
+    "Mode_Trans___Normal__Failed__CT_Invalid" ~> TestRow(
+      testDescription = "If in normal, but CT is invalid then should transition to Failed",
+      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = validRanges,
+      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
+      property = NameProvider("sysProp_InvalidCTNormalToFailedMode", (sysProp_InvalidCTNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+    ),
+    "Mode_Trans___Normal__Failed__LAT_Invalid" ~> TestRow(
+      testDescription = "If in normal, but LAT is invalid then should transition to Failed",
+      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = validRanges,
+      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
+      property = NameProvider("sysProp_InvalidUDTNormalToFailedMode", (sysProp_InvalidLATNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+    ),
+    "Mode_Trans___Normal__Failed__UAT_Invalid" ~> TestRow(
+      testDescription = "If in normal, but UAT is invalid then should transition to Failed",
+      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = validRanges,
+      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
+      property = NameProvider("sysProp_InvalidUDTNormalToFailedMode", (sysProp_InvalidUATNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+    ),
+
+    "Mode_Trans___Normal__Failed__Internal_Failure" ~> TestRow(
+      testDescription = "If in normal, but there is an internal failure then should transition to Failed",
+      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = validRanges,
+      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
+      property = NameProvider("sysProp_InternalFailureNormalToFailedMode", (sysProp_InternalFailureNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+    ),
+    "Mode_Trans___Normal__Failed__Error_Condition" ~> TestRow(
+      testDescription = "If in normal, but there is an internal or interface failure then should transition to Failed",
+      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = validRanges,
+      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
+      property = NameProvider("sysProp_ErrorConditionNormalToFailedMode", (sysProp_ErrorConditionNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+    ),
+
+    "Mode_Impl__Init____Alarm_Off" ~> TestRow(
+      testDescription = "If in Init mode then the alarm should be off",
+      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = validRanges,
+      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
+      property = NameProvider("sysProp_InitModeImpliesAlarmOff", (sysProp_InitModeImpliesAlarmOff _).asInstanceOf[(Any, Any) => B])
+    ),
+    "Mode_Impl__Failed____Alarm_On" ~> TestRow(
+      testDescription = "If in Failed mode then the alarm should be On",
+      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = validRanges,
+      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
+      property = NameProvider("sysProp_FailedModeImpliesAlarmOn", (sysProp_FailedModeImpliesAlarmOn _).asInstanceOf[(Any, Any) => B])
     ),
   )
 
@@ -140,7 +209,7 @@ class Monitor_Subsystem_Test_wSlangCheck
         case string"currentTemp-in-left-partition" =>
           val la = profile.lowerAlarmTempWStatus.nextIsolette_Data_ModelTempWstatus_impl()
           val nextCt = profile.currentTempWStatus.set_Config_F32(profile.currentTempWStatus.get_Config_F32(
-            low = Some(la.value), // currentTemp >= lowerAlarm
+            low = Some(la.value),         // currentTemp >= lowerAlarm
             high = Some(la.value + 0.49f) // currentTemp < lowerAlarm + 0.5
           ))
           val ct = nextCt.nextIsolette_Data_ModelTempWstatus_impl()
@@ -397,7 +466,125 @@ class Monitor_Subsystem_Test_wSlangCheck
     return triggerCondition ->: desiredCondition
   }
 
+  def sysProp_ErrorConditionAlarmOn(inputs_Container: Monitor_Subsystem_Inputs_Container,
+                                    outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+    assert(outputs_Containers.size == 2)
 
+    val triggerCondition =
+      (helper_MonitorInputErrorCondition(inputs_Container) |
+        helper_MonitorInternalFailureCondition(inputs_Container)) &
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+
+    val desiredCondition =
+      outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode &
+      outputs_Containers(1).alarm_control == On_Off.Onn
+
+    return triggerCondition ->: desiredCondition
+  }
+
+
+  def sysProp_NormalToNormalMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
+                                 outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+    assert(outputs_Containers.size == 2)
+
+    val triggerCondition =
+      (!helper_MonitorErrorCondition(inputs_Container) &
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
+
+    val desiredCondition = outputs_Containers(1).monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+
+    return triggerCondition ->: desiredCondition
+  }
+
+  def sysProp_InvalidCTNormalToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
+                                           outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+    assert(outputs_Containers.size == 2)
+
+    val triggerCondition =
+      inputs_Container.currentTempWStatus.status == ValueStatus.Invalid &
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+
+    val desiredCondition =
+      outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
+
+    return triggerCondition ->: desiredCondition
+  }
+
+  def sysProp_InvalidLATNormalToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
+                                           outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+    assert(outputs_Containers.size == 2)
+
+    val triggerCondition =
+      inputs_Container.lowerAlarmTempWStatus.status == ValueStatus.Invalid &
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+
+    val desiredCondition =
+      outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
+
+    return triggerCondition ->: desiredCondition
+  }
+  def sysProp_InvalidUATNormalToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
+                                           outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+    assert(outputs_Containers.size == 2)
+
+    val triggerCondition =
+      inputs_Container.upperAlarmTempWStatus.status == ValueStatus.Invalid &
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+
+    val desiredCondition =
+      outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
+
+    return triggerCondition ->: desiredCondition
+  }
+
+  def sysProp_InternalFailureNormalToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
+                                                outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+    assert(outputs_Containers.size == 2)
+
+    val triggerCondition =
+      helper_MonitorInternalFailureCondition(inputs_Container) &
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+
+    val desiredCondition =
+      outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
+
+    return triggerCondition ->: desiredCondition
+  }
+
+  def sysProp_ErrorConditionNormalToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
+                                               outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+    assert(outputs_Containers.size == 2)
+
+    val triggerCondition =
+      helper_MonitorErrorCondition(inputs_Container) &
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+
+    val desiredCondition =
+      outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
+
+    return triggerCondition ->: desiredCondition
+  }
+
+
+  def sysProp_InitModeImpliesAlarmOff(inputs_Container: Monitor_Subsystem_Inputs_Container,
+                                     outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+    assert(outputs_Containers.size == 2)
+
+    val triggerCondition = outputs_Containers(1).monitor_mode == Monitor_Mode.Init_Monitor_Mode
+    val desiredCondition = outputs_Containers(1).alarm_control == On_Off.Off
+
+    return triggerCondition ->: desiredCondition
+  }
+
+  def sysProp_FailedModeImpliesAlarmOn(inputs_Container: Monitor_Subsystem_Inputs_Container,
+                                       outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+    assert(outputs_Containers.size == 2)
+
+    val triggerCondition = outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
+    val desiredCondition = outputs_Containers(1).alarm_control == On_Off.Onn
+
+    return triggerCondition ->: desiredCondition
+  }
 
   def c32(low: Option[F32], high: Option[F32], ranLib: RandomLib): Config_F32 = {
     return ranLib.get_Config_F32(low = low, high = high)

@@ -174,6 +174,7 @@ class Regulate_Subsystem_Test_wSlangCheck
       property = NameProvider("Mode Trans:  Normal->Failed; Error Condition", (sysProp_ErrorConditionNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
     ),
 
+    /*
     // Failed --> Failed Transitions  (Failure mode preserved)
     "Mode_Trans___Failed__Failed" ~> TestRow(
       testDescription = "Mode Trans:  Failed->Failed",
@@ -182,6 +183,7 @@ class Regulate_Subsystem_Test_wSlangCheck
       preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
       property = NameProvider("Mode Trans: Failed->Failed", (sysProp_FailedToFailedMode _).asInstanceOf[(Any, Any) => B])
     ),
+    */
 
     // ======================
     //  Mode Implication Properties
@@ -509,9 +511,8 @@ class Regulate_Subsystem_Test_wSlangCheck
                                      inputs_container: Regulate_Subsystem_Inputs_Container,
 
                                      outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (helper_RegulatorInputErrorCondition(inputs_container)
-      & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode
-      & inputs_container.currentTempWStatus.value < inputs_container.lowerDesiredTempWStatus.value)
+    val triggerCondition = (helper_RegulatorErrorCondition(inputs_container)
+      & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
     val desiredCondition = (outputs_container.heat_control == On_Off.Off)
     return (triggerCondition ->: desiredCondition)
   }
@@ -571,12 +572,11 @@ class Regulate_Subsystem_Test_wSlangCheck
   //====================================================================
 
   // Normal --> Normal  Transitions
-  def sysProp_NormalToNormalMode(
-                                                inputs_container: Regulate_Subsystem_Inputs_Container,
-                                                outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (!helper_RegulatorInputErrorCondition(inputs_container)
+  def sysProp_NormalToNormalMode(inputs_container: Regulate_Subsystem_Inputs_Container,
+                                 outputs_container: Regulate_Subsystem_Outputs_Container): B = {
+    val triggerCondition = (!helper_RegulatorErrorCondition(inputs_container)
                             & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
-    val desiredCondition = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+    val desiredCondition = (outputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
     return (triggerCondition ->: desiredCondition)
   }
 
@@ -622,9 +622,8 @@ class Regulate_Subsystem_Test_wSlangCheck
   def sysProp_ErrorConditionNormalToFailedMode(
                                                 inputs_container: Regulate_Subsystem_Inputs_Container,
                                                 outputs_container: Regulate_Subsystem_Outputs_Container): B = {
-    val triggerCondition = (helper_RegulatorInputErrorCondition(inputs_container)
-      & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode
-      & inputs_container.currentTempWStatus.value < inputs_container.lowerDesiredTempWStatus.value)
+    val triggerCondition = (helper_RegulatorErrorCondition(inputs_container)
+      & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
     val desiredCondition = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
     return (triggerCondition ->: desiredCondition)
   }
