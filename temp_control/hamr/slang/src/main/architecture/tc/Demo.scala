@@ -4,6 +4,7 @@ package tc
 
 import org.sireum._
 import art.scheduling.Scheduler
+import tc.runtimemonitor.{GumboXRuntimeMonitor, HamrVision}
 
 // This file will not be overwritten so is safe to edit
 
@@ -20,8 +21,14 @@ object Demo extends App {
     *           bin/run.sh --legacy
     */
   def defaultScheduler(): Scheduler = {
-    return Schedulers.getRoundRobinScheduler(None())
+    return Schedulers.getStaticScheduler(
+      StaticSchedulerCust.staticSchedule,
+      StaticSchedulerCust.domainToBridgeIdMap,
+      StaticSchedulerCust.threadNickNames,
+      HamrVision.getCommandProvider())
   }
+
+
 
   def main(args: ISZ[String]): Z = {
     Cli(' ').parseRun(args, 0) match {

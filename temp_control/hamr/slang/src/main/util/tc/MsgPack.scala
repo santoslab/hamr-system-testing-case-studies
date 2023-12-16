@@ -1,7 +1,7 @@
 // #Sireum
 // @formatter:off
 
-// This file is auto-generated from Temperature_i.scala, FanCmd.scala, FanAck.scala, SetPoint_i.scala, Base_Types.scala, GUMBO__Library.scala, GUMBO__Library.scala, TempSensorPeriodic_p_tcproc_tempSensor__Containers.scala, FanPeriodic_p_tcproc_fan__Containers.scala, TempControlPeriodic_p_tcproc_tempControl__Containers.scala, OperatorInterfacePeriodic_p_tcproc_operatorInterface__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala
+// This file is auto-generated from Temperature_i.scala, FanCmd.scala, FanAck.scala, SetPoint_i.scala, Base_Types.scala, GUMBO__Library.scala, GUMBO__Library.scala, TempSensorPeriodic_p_tcproc_tempSensor__Containers.scala, FanPeriodic_p_tcproc_fan__Containers.scala, TempControlPeriodic_p_tcproc_tempControl__Containers.scala, OperatorInterfacePeriodic_p_tcproc_operatorInterface__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala, Containers.scala
 
 package tc
 
@@ -88,6 +88,10 @@ object MsgPack {
     val TempControlSoftwareSystemOperatorInterfacePeriodic_p_tcproc_operatorInterface_PostState_Container_PS: Z = 5
 
     val _artEmpty: Z = 6
+
+    val system_testsTempControl_Inputs_Container: Z = 7
+
+    val system_testsTempControl_Outputs_Container: Z = 8
 
   }
 
@@ -408,6 +412,18 @@ object MsgPack {
 
     def write_artEmpty(o: art.Empty): Unit = {
       writer.writeZ(Constants._artEmpty)
+    }
+
+    def writesystem_testsTempControl_Inputs_Container(o: system_tests.TempControl_Inputs_Container): Unit = {
+      writer.writeZ(Constants.system_testsTempControl_Inputs_Container)
+      writeTempSensorTemperature_i(o.currentTemp)
+      writeTempControlSoftwareSystemSetPoint_i(o.setPoint)
+      writeCoolingFanFanCmdType(o.latestFanCmd)
+    }
+
+    def writesystem_testsTempControl_Outputs_Container(o: system_tests.TempControl_Outputs_Container): Unit = {
+      writer.writeZ(Constants.system_testsTempControl_Outputs_Container)
+      writeCoolingFanFanCmdType(o.fanCmd)
     }
 
     def result: ISZ[U8] = {
@@ -1106,6 +1122,34 @@ object MsgPack {
         reader.expectZ(Constants._artEmpty)
       }
       return art.Empty()
+    }
+
+    def readsystem_testsTempControl_Inputs_Container(): system_tests.TempControl_Inputs_Container = {
+      val r = readsystem_testsTempControl_Inputs_ContainerT(F)
+      return r
+    }
+
+    def readsystem_testsTempControl_Inputs_ContainerT(typeParsed: B): system_tests.TempControl_Inputs_Container = {
+      if (!typeParsed) {
+        reader.expectZ(Constants.system_testsTempControl_Inputs_Container)
+      }
+      val currentTemp = readTempSensorTemperature_i()
+      val setPoint = readTempControlSoftwareSystemSetPoint_i()
+      val latestFanCmd = readCoolingFanFanCmdType()
+      return system_tests.TempControl_Inputs_Container(currentTemp, setPoint, latestFanCmd)
+    }
+
+    def readsystem_testsTempControl_Outputs_Container(): system_tests.TempControl_Outputs_Container = {
+      val r = readsystem_testsTempControl_Outputs_ContainerT(F)
+      return r
+    }
+
+    def readsystem_testsTempControl_Outputs_ContainerT(typeParsed: B): system_tests.TempControl_Outputs_Container = {
+      if (!typeParsed) {
+        reader.expectZ(Constants.system_testsTempControl_Outputs_Container)
+      }
+      val fanCmd = readCoolingFanFanCmdType()
+      return system_tests.TempControl_Outputs_Container(fanCmd)
     }
 
   }
@@ -1837,6 +1881,36 @@ object MsgPack {
       return r
     }
     val r = to(data, f_artEmpty _)
+    return r
+  }
+
+  def fromsystem_testsTempControl_Inputs_Container(o: system_tests.TempControl_Inputs_Container, pooling: B): ISZ[U8] = {
+    val w = Writer.Default(MessagePack.writer(pooling))
+    w.writesystem_testsTempControl_Inputs_Container(o)
+    return w.result
+  }
+
+  def tosystem_testsTempControl_Inputs_Container(data: ISZ[U8]): Either[system_tests.TempControl_Inputs_Container, MessagePack.ErrorMsg] = {
+    def fsystem_testsTempControl_Inputs_Container(reader: Reader): system_tests.TempControl_Inputs_Container = {
+      val r = reader.readsystem_testsTempControl_Inputs_Container()
+      return r
+    }
+    val r = to(data, fsystem_testsTempControl_Inputs_Container _)
+    return r
+  }
+
+  def fromsystem_testsTempControl_Outputs_Container(o: system_tests.TempControl_Outputs_Container, pooling: B): ISZ[U8] = {
+    val w = Writer.Default(MessagePack.writer(pooling))
+    w.writesystem_testsTempControl_Outputs_Container(o)
+    return w.result
+  }
+
+  def tosystem_testsTempControl_Outputs_Container(data: ISZ[U8]): Either[system_tests.TempControl_Outputs_Container, MessagePack.ErrorMsg] = {
+    def fsystem_testsTempControl_Outputs_Container(reader: Reader): system_tests.TempControl_Outputs_Container = {
+      val r = reader.readsystem_testsTempControl_Outputs_Container()
+      return r
+    }
+    val r = to(data, fsystem_testsTempControl_Outputs_Container _)
     return r
   }
 

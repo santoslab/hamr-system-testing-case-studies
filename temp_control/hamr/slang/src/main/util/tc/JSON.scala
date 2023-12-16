@@ -1,7 +1,7 @@
 // #Sireum
 // @formatter:off
 
-// This file is auto-generated from Temperature_i.scala, FanCmd.scala, FanAck.scala, SetPoint_i.scala, Base_Types.scala, GUMBO__Library.scala, GUMBO__Library.scala, TempSensorPeriodic_p_tcproc_tempSensor__Containers.scala, FanPeriodic_p_tcproc_fan__Containers.scala, TempControlPeriodic_p_tcproc_tempControl__Containers.scala, OperatorInterfacePeriodic_p_tcproc_operatorInterface__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala
+// This file is auto-generated from Temperature_i.scala, FanCmd.scala, FanAck.scala, SetPoint_i.scala, Base_Types.scala, GUMBO__Library.scala, GUMBO__Library.scala, TempSensorPeriodic_p_tcproc_tempSensor__Containers.scala, FanPeriodic_p_tcproc_fan__Containers.scala, TempControlPeriodic_p_tcproc_tempControl__Containers.scala, OperatorInterfacePeriodic_p_tcproc_operatorInterface__Containers.scala, ObservationKind.scala, DataContent.scala, Aux_Types.scala, Containers.scala
 
 package tc
 
@@ -427,6 +427,22 @@ object JSON {
     @pure def print_artEmpty(o: art.Empty): ST = {
       return printObject(ISZ(
         ("type", st""""art.Empty"""")
+      ))
+    }
+
+    @pure def printsystem_testsTempControl_Inputs_Container(o: system_tests.TempControl_Inputs_Container): ST = {
+      return printObject(ISZ(
+        ("type", st""""system_tests.TempControl_Inputs_Container""""),
+        ("currentTemp", printTempSensorTemperature_i(o.currentTemp)),
+        ("setPoint", printTempControlSoftwareSystemSetPoint_i(o.setPoint)),
+        ("latestFanCmd", printCoolingFanFanCmdType(o.latestFanCmd))
+      ))
+    }
+
+    @pure def printsystem_testsTempControl_Outputs_Container(o: system_tests.TempControl_Outputs_Container): ST = {
+      return printObject(ISZ(
+        ("type", st""""system_tests.TempControl_Outputs_Container""""),
+        ("fanCmd", printCoolingFanFanCmdType(o.fanCmd))
       ))
     }
 
@@ -1213,6 +1229,42 @@ object JSON {
         parser.parseObjectType("art.Empty")
       }
       return art.Empty()
+    }
+
+    def parsesystem_testsTempControl_Inputs_Container(): system_tests.TempControl_Inputs_Container = {
+      val r = parsesystem_testsTempControl_Inputs_ContainerT(F)
+      return r
+    }
+
+    def parsesystem_testsTempControl_Inputs_ContainerT(typeParsed: B): system_tests.TempControl_Inputs_Container = {
+      if (!typeParsed) {
+        parser.parseObjectType("system_tests.TempControl_Inputs_Container")
+      }
+      parser.parseObjectKey("currentTemp")
+      val currentTemp = parseTempSensorTemperature_i()
+      parser.parseObjectNext()
+      parser.parseObjectKey("setPoint")
+      val setPoint = parseTempControlSoftwareSystemSetPoint_i()
+      parser.parseObjectNext()
+      parser.parseObjectKey("latestFanCmd")
+      val latestFanCmd = parseCoolingFanFanCmdType()
+      parser.parseObjectNext()
+      return system_tests.TempControl_Inputs_Container(currentTemp, setPoint, latestFanCmd)
+    }
+
+    def parsesystem_testsTempControl_Outputs_Container(): system_tests.TempControl_Outputs_Container = {
+      val r = parsesystem_testsTempControl_Outputs_ContainerT(F)
+      return r
+    }
+
+    def parsesystem_testsTempControl_Outputs_ContainerT(typeParsed: B): system_tests.TempControl_Outputs_Container = {
+      if (!typeParsed) {
+        parser.parseObjectType("system_tests.TempControl_Outputs_Container")
+      }
+      parser.parseObjectKey("fanCmd")
+      val fanCmd = parseCoolingFanFanCmdType()
+      parser.parseObjectNext()
+      return system_tests.TempControl_Outputs_Container(fanCmd)
     }
 
     def eof(): B = {
@@ -2093,6 +2145,42 @@ object JSON {
       return r
     }
     val r = to(s, f_artEmpty _)
+    return r
+  }
+
+  def fromsystem_testsTempControl_Inputs_Container(o: system_tests.TempControl_Inputs_Container, isCompact: B): String = {
+    val st = Printer.printsystem_testsTempControl_Inputs_Container(o)
+    if (isCompact) {
+      return st.renderCompact
+    } else {
+      return st.render
+    }
+  }
+
+  def tosystem_testsTempControl_Inputs_Container(s: String): Either[system_tests.TempControl_Inputs_Container, Json.ErrorMsg] = {
+    def fsystem_testsTempControl_Inputs_Container(parser: Parser): system_tests.TempControl_Inputs_Container = {
+      val r = parser.parsesystem_testsTempControl_Inputs_Container()
+      return r
+    }
+    val r = to(s, fsystem_testsTempControl_Inputs_Container _)
+    return r
+  }
+
+  def fromsystem_testsTempControl_Outputs_Container(o: system_tests.TempControl_Outputs_Container, isCompact: B): String = {
+    val st = Printer.printsystem_testsTempControl_Outputs_Container(o)
+    if (isCompact) {
+      return st.renderCompact
+    } else {
+      return st.render
+    }
+  }
+
+  def tosystem_testsTempControl_Outputs_Container(s: String): Either[system_tests.TempControl_Outputs_Container, Json.ErrorMsg] = {
+    def fsystem_testsTempControl_Outputs_Container(parser: Parser): system_tests.TempControl_Outputs_Container = {
+      val r = parser.parsesystem_testsTempControl_Outputs_Container()
+      return r
+    }
+    val r = to(s, fsystem_testsTempControl_Outputs_Container _)
     return r
   }
 

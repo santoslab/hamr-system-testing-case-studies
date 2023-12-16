@@ -36,6 +36,8 @@ DataContent.scala
 
 Aux_Types.scala
 
+Containers.scala
+
 */
 
 @msig trait RandomLibI {
@@ -907,52 +909,14 @@ Aux_Types.scala
       halt("Requirements too strict to generate")
     }
 
-  // ============= String ===================
-
-  def get_Config_String: Config_String
-  def set_Config_String(config: Config_String): RandomLib
-
   def nextString(): String = {
-
-    var length: Z = gen.nextZBetween(get_Config_String.minSize, get_Config_String.maxSize)
+    val length: Z = gen.nextZBetween(0, get_numElement)
     var str: String = ""
     for(r <- 0 until length){
-      str = s"${str}${nextC().string}"
+      str = s"${str}${gen.nextC().string}"
     }
 
-    if(get_Config_String.attempts >= 0) {
-      for (i <- 0 to get_Config_String.attempts) {
-        if(get_Config_String.filter(str)) {
-          return str
-        }
-        if(get_Config_String.verbose) {
-          println(s"Retrying for failing value: $str")
-        }
-
-        length = gen.nextZBetween(get_Config_String.minSize, get_Config_String.maxSize)
-        str = ""
-        for (r <- 0 until length) {
-          str = s"${str}${nextC().string}"
-        }
-      }
-    } else {
-      while(T) {
-        if (get_Config_String.filter(str)) {
-          return str
-        }
-        if (get_Config_String.verbose) {
-          println(s"Retrying for failing value: $str")
-        }
-
-        length = gen.nextZBetween(get_Config_String.minSize, get_Config_String.maxSize)
-        str = ""
-        for (r <- 0 until length) {
-          str = s"${str}${nextC().string}"
-        }
-      }
-    }
-    assert(F, "Requirements too strict to generate")
-    halt("Requirements too strict to generate")
+    return str
   }
 
   // ============= art.DataContent ===================
@@ -1720,54 +1684,6 @@ Aux_Types.scala
        }
        value = nextString()
        v = Base_Types.String_Payload(value)
-     }
-    }
-
-    assert(F, "Requirements too strict to generate")
-    halt("Requirements too strict to generate")
-  }
-
-  //=================== ISZ[B] =====================
-  def get_Config_ISZB: Config_ISZB
-  def set_Config_ISZB(config: Config_ISZB): RandomLib
-
-  def nextISZB(): ISZ[B] = {
-
-    var length: Z = gen.nextZBetween(0, get_numElement)
-    var v: ISZ[B] = ISZ()
-    for (r <- 0 until length) {
-      v = v :+ nextB()
-    }
-
-    if(get_Config_ISZB.attempts >= 0) {
-     for(i <- 0 to get_Config_ISZB.attempts) {
-        if(get_Config_ISZB.filter(v)) {
-          return v
-        }
-        if (get_Config_ISZB.verbose) {
-          println(s"Retrying for failing value: $v")
-        }
-
-        length = gen.nextZBetween(0, get_numElement)
-        v = ISZ()
-        for (r <- 0 until length) {
-           v = v :+ nextB()
-        }
-     }
-    } else {
-     while(T) {
-       if(get_Config_ISZB.filter(v)) {
-         return v
-       }
-       if (get_Config_ISZB.verbose) {
-         println(s"Retrying for failing value: $v")
-       }
-
-       length = gen.nextZBetween(0, get_numElement)
-       v = ISZ()
-       for (r <- 0 until length) {
-          v = v :+ nextB()
-       }
      }
     }
 
@@ -3271,6 +3187,99 @@ Aux_Types.scala
     halt("Requirements too strict to generate")
   }
 
+  // ============= system_tests.TempControl_Inputs_Container ===================
+
+  def get_Config_system_testsTempControl_Inputs_Container: Config_system_testsTempControl_Inputs_Container
+  def set_Config_system_testsTempControl_Inputs_Container(config: Config_system_testsTempControl_Inputs_Container): RandomLib
+
+  def nextsystem_testsTempControl_Inputs_Container(): system_tests.TempControl_Inputs_Container = {
+    var currentTemp: TempSensor.Temperature_i = nextTempSensorTemperature_i()
+    var setPoint: TempControlSoftwareSystem.SetPoint_i = nextTempControlSoftwareSystemSetPoint_i()
+    var latestFanCmd: CoolingFan.FanCmd.Type = nextCoolingFanFanCmdType()
+
+    var v: system_tests.TempControl_Inputs_Container = system_tests.TempControl_Inputs_Container(currentTemp, setPoint, latestFanCmd)
+
+    if(get_Config_system_testsTempControl_Inputs_Container.attempts >= 0) {
+     for(i <- 0 to get_Config_system_testsTempControl_Inputs_Container.attempts) {
+        if(get_Config_system_testsTempControl_Inputs_Container.filter(v)) {
+          return v
+        }
+        if (get_Config_system_testsTempControl_Inputs_Container.verbose) {
+          println(s"Retrying for failing value: $v")
+        }
+        currentTemp = nextTempSensorTemperature_i()
+        setPoint = nextTempControlSoftwareSystemSetPoint_i()
+        latestFanCmd = nextCoolingFanFanCmdType()
+        v = system_tests.TempControl_Inputs_Container(currentTemp, setPoint, latestFanCmd)
+     }
+    } else {
+     while(T) {
+       if(get_Config_system_testsTempControl_Inputs_Container.filter(v)) {
+         return v
+       }
+       if (get_Config_system_testsTempControl_Inputs_Container.verbose) {
+         println(s"Retrying for failing value: $v")
+       }
+       currentTemp = nextTempSensorTemperature_i()
+       setPoint = nextTempControlSoftwareSystemSetPoint_i()
+       latestFanCmd = nextCoolingFanFanCmdType()
+       v = system_tests.TempControl_Inputs_Container(currentTemp, setPoint, latestFanCmd)
+     }
+    }
+
+    assert(F, "Requirements too strict to generate")
+    halt("Requirements too strict to generate")
+  }
+
+  // ============= system_tests.TempControl_Outputs_Container ===================
+
+  def get_Config_system_testsTempControl_Outputs_Container: Config_system_testsTempControl_Outputs_Container
+  def set_Config_system_testsTempControl_Outputs_Container(config: Config_system_testsTempControl_Outputs_Container): RandomLib
+
+  def nextsystem_testsTempControl_Outputs_Container(): system_tests.TempControl_Outputs_Container = {
+    var fanCmd: CoolingFan.FanCmd.Type = nextCoolingFanFanCmdType()
+
+    var v: system_tests.TempControl_Outputs_Container = system_tests.TempControl_Outputs_Container(fanCmd)
+
+    if(get_Config_system_testsTempControl_Outputs_Container.attempts >= 0) {
+     for(i <- 0 to get_Config_system_testsTempControl_Outputs_Container.attempts) {
+        if(get_Config_system_testsTempControl_Outputs_Container.filter(v)) {
+          return v
+        }
+        if (get_Config_system_testsTempControl_Outputs_Container.verbose) {
+          println(s"Retrying for failing value: $v")
+        }
+        fanCmd = nextCoolingFanFanCmdType()
+        v = system_tests.TempControl_Outputs_Container(fanCmd)
+     }
+    } else {
+     while(T) {
+       if(get_Config_system_testsTempControl_Outputs_Container.filter(v)) {
+         return v
+       }
+       if (get_Config_system_testsTempControl_Outputs_Container.verbose) {
+         println(s"Retrying for failing value: $v")
+       }
+       fanCmd = nextCoolingFanFanCmdType()
+       v = system_tests.TempControl_Outputs_Container(fanCmd)
+     }
+    }
+
+    assert(F, "Requirements too strict to generate")
+    halt("Requirements too strict to generate")
+  }
+
+  //=================== ISZ[B] =====================
+
+  def nextISZB(): ISZ[B] = {
+    val length: Z = gen.nextZBetween(0, get_numElement)
+    var temp: ISZ[B] = ISZ()
+    for (r <- 0 until length) {
+      temp = temp :+ nextB()
+    }
+
+    return temp
+  }
 }
 
 @record class RandomLib(val gen: org.sireum.Random.Gen) extends RandomLibI {
@@ -3287,19 +3296,6 @@ Aux_Types.scala
 
   def set_numElement(s: Z): Unit ={
     numElem = s
-  }
-
-  // ============= String =============
-
-  def alwaysTrue_String(v: String): B = {return T}
-
-  var config_String: Config_String = Config_String(0, numElem, 100, _verbose, alwaysTrue_String _)
-
-  def get_Config_String: Config_String = {return config_String}
-
-  def set_Config_String(config: Config_String): RandomLib = {
-    config_String = config
-    return this
   }
 
   // ============= Z ===================
@@ -3657,17 +3653,6 @@ Aux_Types.scala
 
   def set_Config_Base_TypesString_Payload(config: Config_Base_TypesString_Payload): RandomLib ={
     config_Base_TypesString_Payload = config
-    return this
-  }
-
-  // ============= ISZ[B] ===================
-  def alwaysTrue_ISZB(v: ISZ[B]): B = {return T}
-
-  var config_ISZB: Config_ISZB = Config_ISZB(0, 20, 100, _verbose, alwaysTrue_ISZB _)
-  def get_Config_ISZB: Config_ISZB = {return config_ISZB}
-
-  def set_Config_ISZB(config: Config_ISZB): RandomLib ={
-    config_ISZB = config
     return this
   }
 
@@ -4076,6 +4061,30 @@ Aux_Types.scala
 
   def set_Config_runtimemonitorObservationKindType(config: Config_runtimemonitorObservationKindType): RandomLib ={
     config_runtimemonitorObservationKindType = config
+    return this
+  }
+
+  // ============= system_tests.TempControl_Inputs_Container ===================
+  def alwaysTrue_system_testsTempControl_Inputs_Container(v: system_tests.TempControl_Inputs_Container): B = {return T}
+
+  var config_system_testsTempControl_Inputs_Container: Config_system_testsTempControl_Inputs_Container = Config_system_testsTempControl_Inputs_Container(100, _verbose, alwaysTrue_system_testsTempControl_Inputs_Container _)
+
+  def get_Config_system_testsTempControl_Inputs_Container: Config_system_testsTempControl_Inputs_Container = {return config_system_testsTempControl_Inputs_Container}
+
+  def set_Config_system_testsTempControl_Inputs_Container(config: Config_system_testsTempControl_Inputs_Container): RandomLib ={
+    config_system_testsTempControl_Inputs_Container = config
+    return this
+  }
+
+  // ============= system_tests.TempControl_Outputs_Container ===================
+  def alwaysTrue_system_testsTempControl_Outputs_Container(v: system_tests.TempControl_Outputs_Container): B = {return T}
+
+  var config_system_testsTempControl_Outputs_Container: Config_system_testsTempControl_Outputs_Container = Config_system_testsTempControl_Outputs_Container(100, _verbose, alwaysTrue_system_testsTempControl_Outputs_Container _)
+
+  def get_Config_system_testsTempControl_Outputs_Container: Config_system_testsTempControl_Outputs_Container = {return config_system_testsTempControl_Outputs_Container}
+
+  def set_Config_system_testsTempControl_Outputs_Container(config: Config_system_testsTempControl_Outputs_Container): RandomLib ={
+    config_system_testsTempControl_Outputs_Container = config
     return this
   }
 }
