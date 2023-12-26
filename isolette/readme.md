@@ -1,4 +1,4 @@
-# <!---title_start-->RTS<!---title_end-->
+# <!---title_start-->Isolette<!---title_end-->
 <!---description_start-->
 <!---description_end-->
 ## <!--arch-section-title_start-->AADL Architecture<!--arch-section-title_end-->
@@ -7,130 +7,87 @@
 <!--arch-section-aadl-arch-diagram_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.svg)
 <!--arch-section-aadl-arch-diagram_end-->
-<!--arch-section-aadl-arch-component-info-RTS_i_Instance_start-->
-|System: [RTS_i_Instance](aadl/packages/RTS.aadl#L35) |
+<!--arch-section-aadl-arch-component-info-isolette_single_sensor_Instance_start-->
+|System: [isolette_single_sensor_Instance](aadl/aadl/packages/Isolette.aadl#L71) |
 |--|
-<!--arch-section-aadl-arch-component-info-RTS_i_Instance_end-->
-<!--arch-section-aadl-arch-component-info-actuator_start-->
-|Thread: [actuator](aadl/packages/Actuation.aadl#L240) |
+<!--arch-section-aadl-arch-component-info-isolette_single_sensor_Instance_end-->
+<!--arch-section-aadl-arch-component-info-heat_controller_start-->
+|Thread: [heat_controller](aadl/aadl/packages/Devices.aadl#L118) |
 |--|
-|Classifier: [Actuation::Actuator.i](aadl/packages/Actuation.aadl#L216)|
+|Classifier: [Devices::Heat_Source.impl](aadl/aadl/packages/Devices.aadl#L135)|
 |Periodic: 1000 ms|
-|Domain: 14|
 
-<!--arch-section-aadl-arch-component-info-actuator_end-->
-<!--arch-section-aadl-arch-component-info-actuator_start-->
-|Thread: [actuator](aadl/packages/Actuation.aadl#L240) |
+<!--arch-section-aadl-arch-component-info-heat_controller_end-->
+<!--arch-section-aadl-arch-component-info-thermostat_start-->
+|Thread: [thermostat](aadl/aadl/packages/Devices.aadl#L73) |
 |--|
-|Classifier: [Actuation::Actuator.i](aadl/packages/Actuation.aadl#L216)|
+|Classifier: [Devices::Temperature_Sensor.impl](aadl/aadl/packages/Devices.aadl#L90)|
 |Periodic: 1000 ms|
-|Domain: 16|
 
-<!--arch-section-aadl-arch-component-info-actuator_end-->
-<!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
-|Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
+<!--arch-section-aadl-arch-component-info-thermostat_end-->
+<!--arch-section-aadl-arch-component-info-oit_start-->
+|Thread: [oit](aadl/aadl/packages/Isolette.aadl#L274) |
 |--|
-|Classifier: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Classifier: [Isolette::operator_interface_thread.impl](aadl/aadl/packages/Isolette.aadl#L307)|
 |Periodic: 1000 ms|
-|Domain: 5|
 
-<!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
-<!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
-|Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
+<!--arch-section-aadl-arch-component-info-oit_end-->
+<!--arch-section-aadl-arch-component-info-detect_monitor_failure_start-->
+|Thread: [detect_monitor_failure](aadl/aadl/packages/Monitor.aadl#L43) |
 |--|
-|Classifier: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Classifier: [Monitor::Detect_Monitor_Failure.impl](aadl/aadl/packages/Monitor.aadl#L439)|
 |Periodic: 1000 ms|
-|Domain: 6|
 
-<!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
-<!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
-|Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
+<!--arch-section-aadl-arch-component-info-detect_monitor_failure_end-->
+<!--arch-section-aadl-arch-component-info-manage_alarm_start-->
+|Thread: [manage_alarm](aadl/aadl/packages/Monitor.aadl#L39) |
 |--|
-|Classifier: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Classifier: [Monitor::Manage_Alarm.impl](aadl/aadl/packages/Monitor.aadl#L321)|
 |Periodic: 1000 ms|
-|Domain: 7|
 
-<!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
-<!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
-|Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
+<!--arch-section-aadl-arch-component-info-manage_alarm_end-->
+<!--arch-section-aadl-arch-component-info-manage_monitor_interface_start-->
+|Thread: [manage_monitor_interface](aadl/aadl/packages/Monitor.aadl#L37) |
 |--|
-|Classifier: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Classifier: [Monitor::Manage_Monitor_Interface.impl](aadl/aadl/packages/Monitor.aadl#L125)|
 |Periodic: 1000 ms|
-|Domain: 9|
 
-<!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
-<!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
-|Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
+<!--arch-section-aadl-arch-component-info-manage_monitor_interface_end-->
+<!--arch-section-aadl-arch-component-info-manage_monitor_mode_start-->
+|Thread: [manage_monitor_mode](aadl/aadl/packages/Monitor.aadl#L41) |
 |--|
-|Classifier: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Classifier: [Monitor::Manage_Monitor_Mode.impl](aadl/aadl/packages/Monitor.aadl#L240)|
 |Periodic: 1000 ms|
-|Domain: 10|
 
-<!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
-<!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
-|Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
+<!--arch-section-aadl-arch-component-info-manage_monitor_mode_end-->
+<!--arch-section-aadl-arch-component-info-detect_regulator_failure_start-->
+|Thread: [detect_regulator_failure](aadl/aadl/packages/Regulate.aadl#L48) |
 |--|
-|Classifier: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Classifier: [Regulate::Detect_Regulator_Failure.impl](aadl/aadl/packages/Regulate.aadl#L518)|
 |Periodic: 1000 ms|
-|Domain: 11|
 
-<!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
-<!--arch-section-aadl-arch-component-info-orLogic_start-->
-|Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
+<!--arch-section-aadl-arch-component-info-detect_regulator_failure_end-->
+<!--arch-section-aadl-arch-component-info-manage_heat_source_start-->
+|Thread: [manage_heat_source](aadl/aadl/packages/Regulate.aadl#L42) |
 |--|
-|Classifier: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
+|Classifier: [Regulate::Manage_Heat_Source.impl](aadl/aadl/packages/Regulate.aadl#L489)|
 |Periodic: 1000 ms|
-|Domain: 8|
 
-<!--arch-section-aadl-arch-component-info-orLogic_end-->
-<!--arch-section-aadl-arch-component-info-orLogic_start-->
-|Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
+<!--arch-section-aadl-arch-component-info-manage_heat_source_end-->
+<!--arch-section-aadl-arch-component-info-manage_regulator_interface_start-->
+|Thread: [manage_regulator_interface](aadl/aadl/packages/Regulate.aadl#L38) |
 |--|
-|Classifier: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
+|Classifier: [Regulate::Manage_Regulator_Interface.impl](aadl/aadl/packages/Regulate.aadl#L256)|
 |Periodic: 1000 ms|
-|Domain: 12|
 
-<!--arch-section-aadl-arch-component-info-orLogic_end-->
-<!--arch-section-aadl-arch-component-info-orLogic_start-->
-|Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
+<!--arch-section-aadl-arch-component-info-manage_regulator_interface_end-->
+<!--arch-section-aadl-arch-component-info-manage_regulator_mode_start-->
+|Thread: [manage_regulator_mode](aadl/aadl/packages/Regulate.aadl#L46) |
 |--|
-|Classifier: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
+|Classifier: [Regulate::Manage_Regulator_Mode.impl](aadl/aadl/packages/Regulate.aadl#L383)|
 |Periodic: 1000 ms|
-|Domain: 13|
 
-<!--arch-section-aadl-arch-component-info-orLogic_end-->
-<!--arch-section-aadl-arch-component-info-orLogic_start-->
-|Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
-|--|
-|Classifier: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
-|Periodic: 1000 ms|
-|Domain: 15|
-
-<!--arch-section-aadl-arch-component-info-orLogic_end-->
-<!--arch-section-aadl-arch-component-info-actuatorsMockThread_start-->
-|Thread: [actuatorsMockThread](aadl/packages/Actuators.aadl#L48) |
-|--|
-|Classifier: [Actuators::ActuatorsMockThread.i](aadl/packages/Actuators.aadl#L23)|
-|Periodic: 1000 ms|
-|Domain: 4|
-
-<!--arch-section-aadl-arch-component-info-actuatorsMockThread_end-->
-<!--arch-section-aadl-arch-component-info-eventControlMockThread_start-->
-|Thread: [eventControlMockThread](aadl/packages/EventControl.aadl#L69) |
-|--|
-|Classifier: [EventControl::EventControlMockThread.i](aadl/packages/EventControl.aadl#L37)|
-|Periodic: 1000 ms|
-|Domain: 3|
-
-<!--arch-section-aadl-arch-component-info-eventControlMockThread_end-->
-<!--arch-section-aadl-arch-component-info-instrumentationMockThread_start-->
-|Thread: [instrumentationMockThread](aadl/packages/Instrumentation.aadl#L195) |
-|--|
-|Classifier: [Instrumentation::InstrumentationMockThread.i](aadl/packages/Instrumentation.aadl#L97)|
-|Periodic: 1000 ms|
-|Domain: 2|
-
-<!--arch-section-aadl-arch-component-info-instrumentationMockThread_end-->
+<!--arch-section-aadl-arch-component-info-manage_regulator_mode_end-->
 
 ## <!---title_start-->Metrics<!---title_end-->
 <!---description_start-->
@@ -141,15 +98,15 @@
 <!---_start-->
 | | |
 |--|--|
-|Threads|15|
-|Ports|76|
-|Connections|38|
+|Threads|11|
+|Ports|49|
+|Connections|27|
 <!---_end-->
 
 ### <!---title_start-->JVM Metrics<!---title_end-->
 <!---description_start-->
 <!---description_end-->
-<!---RTS_code_metrics_start-->
+<!---Isolette_code_metrics_start-->
 Directories Scanned Using [https://github.com/AlDanial/cloc](https://github.com/AlDanial/cloc) v1.94:
 - [hamr/slang/src/main](hamr/slang/src/main)
 
@@ -158,9 +115,9 @@ Directories Scanned Using [https://github.com/AlDanial/cloc](https://github.com/
 Total number of HAMR-generated and developer-written lines of code
 Language|files|blank|comment|code
 :-------|-------:|-------:|-------:|-------:
-Scala|147|5810|2780|26725
+Scala|144|5721|2940|25462
 --------|--------|--------|--------|--------
-SUM:|147|5810|2780|26725
+SUM:|144|5721|2940|25462
 
 <u><b>User LOC</b></u>
 
@@ -168,7 +125,7 @@ The number of lines of code written by the developer.
 "Log" are lines of code used for logging that
 likely would be excluded in a release build
  TODO
-<!---RTS_code_metrics_end-->
+<!---Isolette_code_metrics_end-->
 
 ## <!--logika-title_start-->Logika<!--logika-title_end-->
 <!--logika-description_start-->

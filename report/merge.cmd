@@ -55,80 +55,133 @@ Os.Path.walk(root, F, T, p => {
   F
 })
 
+var topLevelProjs: ISZ[(String, Os.Path)] = ISZ()
 for (projects <- map.entries) {
-  val project = projects._1
   var projectResults = ISZ[Results]()
   for (systems <- projects._2.entries) {
-    val sys = systems._1
     var systemResults = ISZ[Results]()
     for (families <- systems._2.entries) {
-      val family = families._1
       var familyResults = ISZ[Results]()
       for (timeouts <- families._2.entries) {
-        val timeout = timeouts._1
         val results = timeouts._2
         familyResults = familyResults :+ results
         systemResults = systemResults :+ results
         projectResults = projectResults :+ results
-
         addTimeoutReport(results)
       }
-
       val familyRoot = familyResults(0).passingP.up.up
       val fResults: Results = mergeResults(familyResults, familyRoot)
       addFamilyReport(fResults, families._2.keys, familyRoot)
-
     }
-
     val sysRoot = systemResults(0).passingP.up.up.up
     val sResults: Results = mergeResults(systemResults, sysRoot)
-    addSystemReport(sResults, systems._2.keys,sysRoot)
+    addSystemReport(sResults, systems._2.keys, sysRoot)
   }
-
   val pRoot = projectResults(0).passingP.up.up.up.up
   val pResults: Results = mergeResults(projectResults, pRoot)
   addProjectReport(pResults, projects._2.keys, pRoot)
+
+  topLevelProjs = topLevelProjs :+ (projects._1, pRoot)
 }
 
-
+addRootReport(root, topLevelProjs)
 
 
 object Helper {
+
+  def reportTemplate(cookieCrumbs: ST,
+                     project: ST,
+                     system: Option[ST],
+                     families: Option[ST],
+                     timeouts: Option[ST],
+                     stats: Option[Results],
+                     coverage: Option[(ST, ISZ[ST])]): ST = {
+
+    @strictpure def wrap(n: String, title: String, o: Option[ST]): Option[ST] =
+      if (o.nonEmpty) Some(st"""<tr><td id=col_a title="$title">${n}: </td><td>${o.get}<br><br></td></tr>""")
+      else None()
+
+    val stats_ : Option[ST] = {
+      stats match {
+        case Some(s) =>
+          Some(
+            st"""<tr>
+                |  <td id=col_a title="Number of test vectors that passed">Passing:</td><td>${s.passing}</td>
+                |</tr><tr>
+                |  <td id=col_a title="Number of test vectors that failed">Failing:</td><td>${s.failing}</td>
+                |</tr><tr>
+                |  <td id=col_a title="Number of test vectors that failed to satisfy filter">Unsat:</td><td>${s.unsat}<br><br></td>
+                |</tr>""")
+
+        case _ => None()
+      }
+    }
+
+    val coverage_ : Option[ST] =
+      if (coverage.nonEmpty)
+        Some(st"""<tr>
+                 |  <td id=col_a title = "Combined code coverage information">Coverage:</td><td>${coverage.get._1}<br><br><br>
+                 |
+                 |                                                                              Select Classes<br><br>
+                 |                                                                              ${(coverage.get._2, "<br>\n")}</td>
+                 |</tr>""")
+      else None()
+
+    return(
+      st"""<html>
+          |  <head>
+          |    <style>
+          |      td { vertical-align: top; }
+          |      #col_a { font-weight: bold; }
+          |    </style>
+          |  </head>
+          |  <body>
+          |
+          |<pre>
+          |$cookieCrumbs
+          |
+          |<br><br>
+          |
+          |<table>
+          |  <tr><td id=col_a title="Project name">Projects:</td><td>$project<br><br></td></tr>
+          |    ${wrap("Sub-Systems", "The sub-system(s) testing was run on", system)}
+          |    ${wrap("Profiles", "The test profile(s) used during testing", families)}
+          |    ${wrap("Timeouts", "The timeout(s) used while generating test vectors", timeouts)}
+          |    $stats_
+          |    $coverage_
+          |  </table>
+          |</pre>
+          |
+          |  </body>
+          |</html>
+          |""")
+  }
+
+  def cookies(ps: ISZ[(String, Os.Path)]): ST = {
+    val x = for(p <- ps) yield st"""<a href="${p._2}">${p._1}</a>"""
+    return st"${(x, " > ")}"
+  }
+
   def addTimeoutReport(r: Results): Unit = {
     val root1 = r.passingP.up
 
     val reportDir = root1
 
-    val r0 = reportDir.relativize(root)
+    val r0 = reportDir.relativize(root / "report.html")
     val r1 = reportDir.relativize(root / r.project / "report.html")
     val r2 = reportDir.relativize(root / r.project / r.subSystem / "report.html")
     val r3 = reportDir.relativize(root / r.project / r.subSystem / r.testFamily / "report.html")
 
-    val cookieCrumb = st"""<a href="${r0}">Report</a> > <a href="${r1}">${r.project}</a> > <a href="${r2}">${r.subSystem}</a> > <a href="${r3}">${r.testFamily}</a>"""
+    val cookieCrumb = cookies(ISZ(("Report", r0), (r.project, r1), (r.subSystem, r2), (r.testFamily, r3)))
     val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
-    val html =
-      st"""<html>
-           |<body>
-           |
-           |<pre>
-           |${cookieCrumb}
-           |
-           |Project:    <a href="$r1">${r.project}</a>
-           |SubSystems: <a href="$r2">${r.subSystem}</a>
-           |Families:   <a href="$r3">${r.testFamily}</a>
-           |Timeouts:   ${r.timeout}
-           |
-           |Passing:    ${r.passing}
-           |Failing:    ${r.failing}
-           |Unsat:      ${r.unsat}
-           |
-           |Coverage:  <a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>
-           |  ${(subs, "\n")}
-           |</pre>
-           |<table>
-           |</table>
-           |</body>
-           |</html>"""
+    val html = reportTemplate(cookieCrumbs = cookieCrumb,
+      project = st"""<a href="$r1">${r.project}</a>""",
+      system = Some(st"""<a href="$r2">${r.subSystem}</a>"""),
+      families = Some(st"""<a href="$r3">${r.testFamily}</a>"""),
+      timeouts = Some(st"""${r.timeout}"""),
+      stats = Some(r),
+      coverage = Some(st"""<a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>""", subs)
+    )
     val report = reportDir / "report.html"
     report.writeOver(html.render)
     println(s"Wrote: ${report}")
@@ -137,39 +190,23 @@ object Helper {
   def addFamilyReport(r: Results, timeouts: ISZ[Z], froot: Os.Path): Unit = {
     val reportDir = froot
 
-    val r0 = reportDir.relativize(root)
+    val r0 = reportDir.relativize(root / "report.html")
     val r1 = reportDir.relativize(root / r.project / "report.html")
     val r2 = reportDir.relativize(root / r.project / r.subSystem / "report.html")
-    //val r3 = reportDir.relativize(root / r.project / r.subSystem / r.testFamily)
 
     val stimeouts = ops.ISZOps(timeouts).sortWith((a,b) => a <= b)
-    val touts = for(t <- stimeouts) yield s"<a href=\"${(reportDir.relativize(reportDir / t.string / "report.html")).string}\">${t.string}</a>"
+    val timeOuts = for(t <- stimeouts) yield s"<a href=\"${(reportDir.relativize(reportDir / t.string / "report.html")).string}\">${t.string}</a>"
 
-    val cookieCrumb = st"""<a href="${r0}">Report</a> > <a href="${r1}">${r.project}</a> > <a href="${r2}">${r.subSystem}</a> >"""
+    val cookieCrumb = cookies(ISZ(("Report", r0), (r.project, r1), (r.subSystem, r2)))
     val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
-    val html =
-      st"""<html>
-          |<body>
-          |
-          |<pre>
-          |${cookieCrumb}
-          |
-          |Project:    <a href="$r1">${r.project}</a>
-          |SubSystems: <a href="$r2">${r.subSystem}</a>
-          |Families:   ${r.testFamily}
-          |Timeouts:   ${(touts, " ")}
-          |
-          |Passing:    ${r.passing}
-          |Failing:    ${r.failing}
-          |Unsat:      ${r.unsat}
-          |
-          |Coverage:  <a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>
-          |  ${(subs, "\n")}
-          |</pre>
-          |<table>
-          |</table>
-          |</body>
-          |</html>"""
+    val html = reportTemplate(cookieCrumbs = cookieCrumb,
+      project = st"""<a href="$r1">${r.project}</a>""",
+      system = Some(st"""<a href="$r2">${r.subSystem}</a>"""),
+      families = Some(st"""${r.testFamily} : ${r.testRow.get("testDescription").get}"""),
+      timeouts = Some(st"""${(timeOuts, " ")}"""),
+      stats = Some(r),
+      coverage = Some(st"""<a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>""", subs)
+    )
     val report = reportDir / "report.html"
     report.writeOver(html.render)
     println(s"Wrote: ${report}")
@@ -178,38 +215,24 @@ object Helper {
   def addSystemReport(r: Results, families: ISZ[String], sroot: Os.Path): Unit = {
     val reportDir = sroot
 
-    val r0 = reportDir.relativize(root)
+    val r0 = reportDir.relativize(root / "report.html")
     val r1 = reportDir.relativize(root / r.project / "report.html")
-    //val r2 = reportDir.relativize(root / r.project / r.subSystem)
-    //val r3 = reportDir.relativize(root / r.project / r.subSystem / r.testFamily)
 
-    val touts = for(t <- families) yield s"<a href=\"${(reportDir.relativize(reportDir / t / "report.html")).string}\">${t.string}</a>"
+    val famOuts = for(t <- families) yield s"""<a href="${(reportDir.relativize(reportDir / t / "report.html")).string}">${t.string}</a><br>"""
 
-    val cookieCrumb = st"""<a href="${r0}">Report</a> > <a href="${r1}">${r.project}</a>"""
+    val cookieCrumb = cookies(ISZ(("Report", r0), (r.project, r1)))
     val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
-    val html =
-      st"""<html>
-          |<body>
-          |
-          |<pre>
-          |${cookieCrumb}
-          |
-          |Project:    <a href="$r1">${r.project}</a>
-          |SubSystems: ${r.subSystem}
-          |Families:   ${(touts, " ")}
-          |
-          |
-          |Passing:    ${r.passing}
-          |Failing:    ${r.failing}
-          |Unsat:      ${r.unsat}
-          |
-          |Coverage:  <a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>
-          |  ${(subs, "\n")}
-          |</pre>
-          |<table>
-          |</table>
-          |</body>
-          |</html>"""
+
+    val html = reportTemplate(
+      cookieCrumbs = cookieCrumb,
+      project = st"""<a href="$r1">${r.project}</a>""",
+      system = Some(st"${r.subSystem}"),
+      families = Some(st"${(famOuts, " ")}"),
+      timeouts= None(),
+      stats = Some(r),
+      coverage = Some(st"""<a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>""", subs)
+    )
+
     val report = reportDir / "report.html"
     report.writeOver(html.render)
     println(s"Wrote: ${report}")
@@ -218,42 +241,42 @@ object Helper {
   def addProjectReport(r: Results, systems: ISZ[String], sroot: Os.Path): Unit = {
     val reportDir = sroot
 
-    val r0 = reportDir.relativize(root)
-    //val r1 = reportDir.relativize(root / r.project)
-    //val r2 = reportDir.relativize(root / r.project / r.subSystem)
-    //val r3 = reportDir.relativize(root / r.project / r.subSystem / r.testFamily)
+    val r0 = reportDir.relativize(root / "report.html")
 
-    val touts = for(t <- systems) yield s"<a href=\"${(reportDir.relativize(reportDir / t / "report.html")).string}\">${t.string}</a>"
+    val sysOuts = for(sys <- systems) yield s"<a href=\"${(reportDir.relativize(reportDir / sys / "report.html")).string}\">${sys.string}</a><br><br>"
 
-    val cookieCrumb = st"""<a href="${r0}">Report</a>"""
+    val cookieCrumb = cookies(ISZ(("Report", r0)))
     val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
-    val html =
-      st"""<html>
-          |<body>
-          |
-          |<pre>
-          |${cookieCrumb}
-          |
-          |Project:    ${r.project}
-          |SubSystems: ${(touts, " ")}
-          |
-          |
-          |
-          |Passing:    ${r.passing}
-          |Failing:    ${r.failing}
-          |Unsat:      ${r.unsat}
-          |
-          |Coverage:  <a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>
-          |  ${(subs, "\n")}
-          |</pre>
-          |<table>
-          |</table>
-          |</body>
-          |</html>"""
+    val html = reportTemplate(
+      cookieCrumbs = cookieCrumb,
+      project = st"${r.project}",
+      system = Some(st"${(sysOuts, " ")}"),
+      families = None(),
+      timeouts = None(),
+      stats = Some(r),
+      coverage = Some(st"""<a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>""", subs)
+    )
     val report = reportDir / "report.html"
     report.writeOver(html.render)
     println(s"Wrote: ${report}")
   }
+
+  def addRootReport(root: Os.Path, topLevelProjs: ISZ[(String, Os.Path)]): Unit = {
+    val projects = for (p <- topLevelProjs) yield st"""<a href="${root.relativize(p._2 / "report.html")}">${p._1}</a>"""
+    val html = reportTemplate(
+      cookieCrumbs = st"",
+      project = st"${(projects, "<br><br>")}",
+      system = None(),
+      families = None(),
+      timeouts = None(),
+      stats = None(),
+      coverage = None()
+    )
+    val f = root / "report.html"
+    f.writeOver(html.render)
+    println(s"Wrote: $f")
+  }
+
 
   def jarLoc(project: String): Os.Path = {
     project match {
