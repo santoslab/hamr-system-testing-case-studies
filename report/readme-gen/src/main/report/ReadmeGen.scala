@@ -21,6 +21,22 @@ object ReadmeGen extends App {
     c
   }
 
+  @datatype class TestConfig(val name: String,
+                             val schema: String,
+                             val profile: String,
+                             val filter: String,
+                             val property: String)
+
+  @datatype class SystemTestingArtifacts(val systemName: String,
+                                         val inputOutputContainers: Os.Path,
+                                         val systemTestOutputDir: Os.Path,
+
+                                         val exampleTestFrameworkPrefix: String,
+                                         val manualTestingFilename: String,
+                                         val exampleTestConfig: TestConfig,
+
+                                         val dscTestingFileName: String
+                                        )
   @datatype class Project(val title: String,
                           val description: Option[String],
                           val projectRootDir: Os.Path,
@@ -31,7 +47,9 @@ object ReadmeGen extends App {
                           // NOTE: ignore tipe warning that it can't find Cli.SireumHamrCodegenOption
                           //       as the source for that is in the jitpack jar file and thus not
                           //       accessible to tipe
-                          val configs: ISZ[Cli.SireumHamrCodegenOption]
+                          val configs: ISZ[Cli.SireumHamrCodegenOption],
+
+                          val testConfigs: ISZ[SystemTestingArtifacts]
                          )
 
   /*
@@ -72,7 +90,39 @@ object ReadmeGen extends App {
         args = ISZ(defaultDirs.json.value),
         outputDir = Some(defaultDirs.slangDir.value),
         aadlRootDir = Some(defaultDirs.aadlDir.value)
-      ))
+      )),
+      testConfigs = ISZ(
+        SystemTestingArtifacts(
+          systemName = "Regulator subsystem",
+          inputOutputContainers = defaultDirs.slangDir / "src/main/util/isolette/system_tests/rst/Regulate_Subsystem_Containers.scala",
+          systemTestOutputDir = defaultDirs.slangDir / "src/test/system/isolette/system_tests/rst",
+          exampleTestFrameworkPrefix = "Example_Regulate_Subsystem_Inputs_Container",
+          manualTestingFilename = "Regulate_Subsystem_Test_wSlangCheck.scala",
+          dscTestingFileName = "Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness.scala",
+          exampleTestConfig = TestConfig(
+            name = "HC__Normal_____Heat_On",
+            schema = "Regulator_1HP_script_schema",
+            profile = "validRanges",
+            filter = "Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container",
+            property = "sysProp_NormalModeHeatOn"
+          )
+        ),
+        SystemTestingArtifacts(
+          systemName = "Monitor subsystem",
+          inputOutputContainers = defaultDirs.slangDir / "src/main/util/isolette/system_tests/monitor1/Monitor_Subsystem_Containers.scala",
+          systemTestOutputDir = defaultDirs.slangDir / "src/test/system/isolette/system_tests/monitor1",
+          exampleTestFrameworkPrefix = "Example_Monitor_Subsystem_Inputs_Container",
+          manualTestingFilename = "Monitor_Subsystem_Test_wSlangCheck.scala",
+          dscTestingFileName = "Monitor_Subsystem_DSC_Test_Harness.scala",
+          exampleTestConfig = TestConfig(
+            name = "MA__Normal_____Alarm_On",
+            schema = "Monitor_1HP_script_schema",
+            profile = "validRanges",
+            filter = "assumeFigureA_7",
+            property = "sysProp_NormalModeAlarmOn"
+          )
+        )
+      )
     )
   }
 
@@ -92,7 +142,24 @@ object ReadmeGen extends App {
         args = ISZ(defaultDirs.json.value),
         outputDir = Some(defaultDirs.slangDir.value),
         aadlRootDir = Some(defaultDirs.aadlDir.value)
-      ))
+      )),
+      testConfigs = ISZ(
+        SystemTestingArtifacts(
+          systemName = "Actuator subsystem",
+          inputOutputContainers = defaultDirs.slangDir / "src/main/util/RTS/system_tests/rts1/Containers.scala",
+          systemTestOutputDir = defaultDirs.slangDir / "src/test/system/RTS/system_tests/rts1",
+          exampleTestFrameworkPrefix = "Example_Actuation_Subsystem_Inputs_Container",
+          manualTestingFilename = "Actuation_Subsystem_Test_wSlangCheck.scala",
+          dscTestingFileName = "Actuation_Subsystem_DSC_Test_Harness.scala",
+          exampleTestConfig = TestConfig(
+            name = "TempPress_Manual_Trip",
+            schema = "Actuation_Subsystem_1HP_script_schema",
+            profile = "getDefaultProfile",
+            filter = "examplePreStateContainerFilter",
+            property = "sysProp_SaturationManualTrip"
+          )
+        )
+      )
     )
   }
 

@@ -1,4 +1,4 @@
-# System Test Artifact Generator
+# System Testing Artifact Generator
 
 ## How to Use
 
@@ -7,9 +7,13 @@ git clone https://github.com/santoslab/hamr-system-testing-case-studies.git
 
 cd hamr-system-testing-case-studies
 
- sireum proyek assemble --uber -m s.SystemTestArtifactGen report/util/SystemTestArtifactGen
+# build a runnable jar
+sireum proyek assemble --uber -m s.SystemTestArtifactGen report/util/SystemTestArtifactGen
 
-alias genny=$(pwd)/report/util/SystemTestArtifactGen/out/SystemTestArtifactGen/assemble/SystemTestArtifactGen.jar.bat
+# optionally create an alias to the runnable jar
+alias sysgen=$(pwd)/report/util/SystemTestArtifactGen/out/SystemTestArtifactGen/assemble/SystemTestArtifactGen.jar.bat
 
-genny isolette/hamr/slang src/main/util/isolette/system_tests/rst/Regulate_Subsystem_Containers.scala
+# run the generator by passing it the paths to one or more files that contain
+# input/output container definitions
+sysgen isolette/hamr/slang src/main/util/isolette/system_tests/rst/Regulate_Subsystem_Containers.scala
 ```

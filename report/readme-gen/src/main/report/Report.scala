@@ -6,7 +6,7 @@ import org.sireum.hamr.codegen.common.StringUtil
 import org.sireum.hamr.codegen.common.symbols.{AadlComponent, AadlThread, SymbolTable}
 import org.sireum.hamr.ir.Classifier
 import org.sireum.message.{Position, Reporter}
-import report.ReadmeGen.{Project, repoRootDir, projects}
+import report.ReadmeGen.{Project, main, projects, repoRootDir}
 import org.sireum.U32._
 
 @datatype class ReportBlock(val tag: String,
@@ -216,6 +216,36 @@ import Report._
     )
   }
 
+  def processUserCloc(root: Os.Path): ST = {
+    var code: Z = 0
+    var log: Z = 0
+
+    def process(d: Os.Path): Unit = {
+      if(d.isDir) {
+        for(f <- d.list) {
+          process(f)
+        }
+      } else {
+        if(d.ext == "loc") {
+          val props = d.properties
+          code = code + Z(props.getOrElse("code", "0")).get
+          log = log + Z(props.getOrElse("log", "0")).get
+        }
+      }
+    }
+    process(root)
+
+    val ret: ST =
+      st"""|Type|code |
+           ||--|--:|
+           ||Behavior|${(code - log)}|
+           ||Log|${log}|
+           ||--------|--------|
+           ||SUM:|${code}|"""
+
+    return ret
+  }
+
   def genJVMMetrics(project: Project): ReportLevel = {
 
     assert (project.configs.size == 1)
@@ -227,7 +257,8 @@ import Report._
 
     val _dirsScanned = dirsScanned(project, ISZ(mainDir))
 
-    val userCloc: ST = st"TODO"//processUserCloc(mainDir)
+    val userCloc: ST = processUserCloc(mainDir)
+
     val ret: ST =
       st"""${_dirsScanned}
           |
@@ -267,6 +298,207 @@ import Report._
     )
   }
 
+  def genTestingSection(project: Project, table: SymbolTable): ReportLevel = {
+
+    val readmeRoot = project.projectRootDir
+    val reportRoot = project.projectRootDir.up
+    val stagReadme = readmeRoot.relativize(reportRoot / "report/util/SystemTestArtifactGen/readme.md")
+
+    val exTestConfig = project.testConfigs(0)
+    val exContainer = readmeRoot.relativize(exTestConfig.inputOutputContainers)
+    val testOutputDirRel = readmeRoot.relativize(exTestConfig.systemTestOutputDir)
+    val exManualRel = testOutputDirRel / s"${exTestConfig.exampleTestFrameworkPrefix}_Test_wSlangCheck.scala"
+    val exDSCRel = testOutputDirRel / s"${exTestConfig.exampleTestFrameworkPrefix}_DSC_Test_Harness.scala"
+
+    val framework: ReportLevel = ReportLevel(
+      tag = "framework-generation",
+      title = Some(st"Framework Generation"),
+      description = Some(
+        st"""1. Build the System Testing Artifact Generator following the instructions at
+            |   [SystemTestArtifactGen/readme.md]($stagReadme)
+            |1. Run the generator by passing it the paths to one or more files that contain
+            |   input/output container definitions
+            |
+            |For example, running the generator on
+            |[${exContainer.name}](${exContainer})
+            |will generate the following artifacts:
+            |
+            |1. [${exManualRel.name}]($exManualRel)
+            |
+            |   System test suite containing an example test run configuration.  Developers can make a copy of this file and then define
+            |   custom test run configurations where each configuration has the structure
+            |   _(script schema, property, randomization profile, random vector filter)_
+            |
+            |1. [${exDSCRel.name}]($exDSCRel)
+            |
+            |      Example showing how a system test suite can be adapted for use with Distributed SlangCheck (DSC). It overrides/implements
+            |   two DCS methods, ``next`` and ``test``.  The next method is called during DSC's test vector generation phase. The generated
+            |   vectors are subsequently passed to the test method during DSC's testing phase. Both methods use the environment variable
+            |   ``DSC_TEST_FAMILY_NAME`` to determine which test run configuration should be used.
+            |
+            |"""),
+      content = ISZ(),
+      subLevels = ISZ()
+    )
+
+    val subSystemsX: ISZ[String] = for(sub <- project.testConfigs) yield sub.systemName
+    val subSystems: String = if (subSystemsX.size == 1) { subSystemsX(0)}
+    else {
+      val o = ops.ISZOps(subSystemsX)
+      st"${(o.dropRight(1), ", ")} and ${o.last}".render
+    }
+
+    val manBlocks: ISZ[ReportBlock] = {
+      var mbs: ISZ[ReportBlock] = ISZ()
+      for (tconfig <- project.testConfigs) {
+        val daconfig = tconfig.systemTestOutputDir / tconfig.manualTestingFilename
+        val daconfigcontents = ops.StringOps(ops.StringOps(daconfig.read).replaceAllLiterally("\n", " \n")).split(c => c == '\n')
+        val mtf = readmeRoot.relativize(daconfig)
+
+        def locateDef(s: String): String = {
+          if (s == "Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container") {
+            return "[system_Pre_Container](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Inputs_Container_GumboX.scala#L46)"
+          }
+          if (s == "getDefaultProfile") {
+            return "getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_"
+          }
+          val deffy = s"def $s"
+          for (i <- 0 until daconfigcontents.size if ops.StringOps(daconfigcontents(i)).contains(deffy)) {
+            return s"[$s](${mtf}#L${i+1})"
+          }
+          return s
+        }
+        def locateText(s: String): String = {
+          for (i <- 0 until daconfigcontents.size if ops.StringOps(daconfigcontents(i)).contains(s)) {
+            return s"[$s](${mtf}#L${i+1})"
+          }
+          return s
+        }
+
+        val testSuiteSuffix: String = ops.StringOps(tconfig.manualTestingFilename).replaceAllLiterally(".scala", "")
+        val nest: ST =
+          st"""System Test Suite Class: [${mtf.name}](${mtf})
+              |
+              |Test run configurations are specified via entries in the ${locateText("testMatrix")}. For example,
+              |the ${locateText(tconfig.exampleTestConfig.name)} configuration uses the following:
+              |
+              || | |
+              ||--|--|
+              || Script Schema: | ${locateDef(tconfig.exampleTestConfig.schema)} |
+              || Property: | ${locateDef(tconfig.exampleTestConfig.property)} |
+              || Randomization Profile: | ${locateDef(tconfig.exampleTestConfig.profile)} |
+              || Random Vector Filter: | ${locateDef(tconfig.exampleTestConfig.filter)} |
+              |
+              |How to run:
+              |
+              |```
+              |cd hamr-system-testing-case-studies
+              |
+              |sireum proyek test --suffixes ${testSuiteSuffix} ${project.projectRootDir.name}/hamr/slang
+              |```
+              |"""
+
+        mbs = mbs :+ ReportBlock(
+          tag = s"${tconfig.systemName}_block",
+          content = Some(
+            st"""__${tconfig.systemName}__
+                |
+                |  $nest
+                |""")
+        )
+      }
+      mbs
+    }
+
+    val manualTesting: ReportLevel = ReportLevel(
+      tag = "manual-testing",
+      title = Some(st"Manual System Testing"),
+      description = Some(
+        st"""The example system test suites described previously were used to write
+            |system tests for the ${subSystems} as follows:"""),
+      content = manBlocks,
+      subLevels = ISZ()
+    )
+
+    val dscTesting: ReportLevel = ReportLevel(
+      tag = "dsc-testing",
+      title = Some(st"Distributed SlangCheck System Testing"),
+      description = Some(st"""Background:
+                             |
+                             |System testing as put forth in this paper uses SlangCheck to generate input/injection test vectors.
+                             |SlangCheck is Sireum's randomized
+                             |test generator framework similar to ScalaCheck and Haskell's QuickCheck.
+                             |Distributed SlangCheck (DSC) adds a framework that allows test vector
+                             |generation to be run via a server cluster up to a user specified timeout. Increasing
+                             |the timeout allows more vectors to be produced which may lead to increased code
+                             |coverage during testing. DSC passes the vectors to user defined unit tests
+                             |and serializes the
+                             |passing and failing vectors to seperate files so that they can be replayed if needed.
+                             |DSC uses JaCoCo to produce code coverage information.
+                             |
+                             |Approach:
+                             |
+                             |The <configname> configuration of <projctname>'s <tsetsuite> test suite will be used to
+                             |illustrate how system testing can employ DSC.  The actual results reported in the next
+                             |section simply automated the following steps such that each configuration was run with timeouts
+                             |of 1, 5, 10, and 30 seconds.
+                             |
+                             |Create a jar file for this project that includes sources and tests
+                             |
+                             |```
+                             |cd hamr-system-testing-case-studies
+                             |
+                             |sireum proyek assemble --include-sources --include-tests ${project.projectRootDir.name}/hamr/slang
+                             |```
+                             |
+                             |Set the environment variable DSC_TEST_FAMILY_NAME to indicate which configuration
+                             |should be used
+                             |
+                             |```
+                             |export DSC_TEST_FAMILY_NAME=<configname>
+                             |```
+                             |
+                             |Generate 1 second's worth of test vectors and store them in a local file (DSC can be
+                             |configured to scp the results to a remote server where they can be combined with vectors
+                             |generated from other 'generating' servers)
+                             |```
+                             |sireum tools slangcheck runner -c isolette/hamr/slang/out/slang/assemble/slang.jar -o $$(pwd)/isolette-dsc.jsons -t 5 isolette.system_tests.rst.Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness
+                             |```
+                             |
+                             |DSC is designed to only report passing and failing test vectors.  The generated DSC
+                             |test harnesses
+                             |```
+                             |export DSC_SAVE_LOC=$$(pwd)/isolette-dsc-output.unsat
+                             |touch $$DSC_SAVE_LOC
+                             |```
+                             |
+                             |Pass each vector to the <link to test method>
+                             |```
+                             |sireum tools slangcheck tester -i $$(pwd)/isolette-dsc.jsons.dsc.7z -o $$(pwd)/isolette-dsc-output -c isolette/hamr/slang/out/slang/assemble/slang.jar --sourcepath isolette/hamr/slang/out/slang/assemble/slang.jar isolette.system_tests.rst.Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness
+                             |```
+                             |
+                             |Results:
+                             |The following summarizes the results of running DSC+System Testing on the ${project.title} with different time-out values"""),
+      content = ISZ(),
+      subLevels = ISZ()
+    )
+
+    return ReportLevel(
+      tag = "testing",
+      title = Some(st"System Testing"),
+      description = Some(
+        st"""System testing requires a Sireum distribution. Instructions on how to obtain a
+            |distribution are available at [https://sireum.org/getting-started/](https://sireum.org/getting-started/).
+            |The rest of this documentation assumes the SIREUM_HOME environmental variable has been set and that
+            |sireum's bin directory has been added to your path (e.g. for Linux/MacOS ``export PATH=$$SIREUM_HOME/bin:$$PATH``
+            |or Windows ``set PATH=%PATH%\bin;%PATH%``
+            |
+            |"""),
+      content = ISZ(),
+      subLevels = ISZ(framework, manualTesting, dscTesting)
+    )
+  }
+
   def genReport(project: Project): ReportLevel = {
 
     val model = AadlModelUtil.getModel(project.air, F)
@@ -276,14 +508,15 @@ import Report._
 
     val metrics: ReportLevel = genCodeMetrics(project)
 
-    val logika: ReportLevel = genLogikaSection(project, table)
+    //val logika: ReportLevel = genLogikaSection(project, table)
+    val testing: ReportLevel = genTestingSection(project, table)
 
     return ReportLevel(
       tag = "",
       title = Some(st"${project.title}"),
       description = None(),
       content = ISZ(),
-      subLevels = ISZ(arch, metrics, logika)
+      subLevels = ISZ(arch, metrics, testing)
     )
   }
 

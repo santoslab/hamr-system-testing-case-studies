@@ -167,70 +167,137 @@ SUM:|147|5810|2780|26725
 The number of lines of code written by the developer.
 "Log" are lines of code used for logging that
 likely would be excluded in a release build
- TODO
+ |Type|code |
+ |--|--:|
+ |Behavior|0|
+ |Log|0|
+ |--------|--------|
+ |SUM:|0|
 <!---RTS_code_metrics_end-->
 
-## <!--logika-title_start-->Logika<!--logika-title_end-->
-<!--logika-description_start-->
-The following reports the experimental data obtained by running Logika
-only on the component entrypoints that require verification (e.g. TempControl's
-Fan component was excluded as it does not contain GUMBO contracts and does not
-use datatypes that have invariants).  Logika was configured with a 2 second
-validity checking timeout, a 500 millisecond satisfiability checking timeout, a
-SMT2 resource limit of 2,000,000, and with full parallelization optimizations
-enabled.  The SMT2 solvers used include CVC4 1.8, CVC5 1.0.5, and Z3 4.12.2. The
-**VC** and **SAT** columns report the number of verification and
-satisfiability conditions that were checked, respectively.  The time values
-reported in the final three columns are the averages obtained after re-running
-Logika 25 times for each entrypoint on an M1 Mac Mini with 8 cores and 16 GB of
-RAM.  **TTime** gives the total number of seconds it took to run Logika
-from the command line on the Slang project containing the entrypoint (i.e. it
-includes the verification time along with the time required for parsing, type
-checking, etc.).
+## <!--testing-title_start-->System Testing<!--testing-title_end-->
+<!--testing-description_start-->
+System testing requires a Sireum distribution. Instructions on how to obtain a
+distribution are available at [https://sireum.org/getting-started/](https://sireum.org/getting-started/).
+The rest of this documentation assumes the SIREUM_HOME environmental variable has been set and that
+sireum's bin directory has been added to your path (e.g. for Linux/MacOS ``export PATH=$SIREUM_HOME/bin:$PATH``
+or Windows ``set PATH=%PATH%\bin;%PATH%``
 
-One optimization technique related to using Logika from within IVE that can be
-measured via our experimental setup is Sireum's incremental type checking. For
-example, if Logika was run on the Isolette MA component's initialize entrypoint
-from within IVE using an identical configuration as was done for the experiments
-then it will take on average 2.482 seconds to verify, assuming Logika had not
-previously been invoked.  If a change was then made to MA's source code before
-re-running Logika on the timeTriggered entrypoint then Sireum's incremental type
-checking will only need to recheck MA (and any of its dependents) resulting in
-an average delay of only 0.214 seconds before verification can proceed. The
-results of these optimizations are reported in the Incremental-Type Checking
-column (**ITCTime**).  The time required to actually verify an entrypoint with
-a clean cache is reported in the Verification-Time column (**VTime**) so
-incremental type checking for this example would save 2.268 seconds (2.482 -
-0.214) on average.
-<!--logika-description_end-->
-### <!--logiak-results-title_start-->Results<!--logiak-results-title_end-->
-<!--logiak-results-description_start-->
-<!--logiak-results-description_end-->
 
-### <!--how-to-run-title_start-->How to replicate<!--how-to-run-title_end-->
-<!--how-to-run-description_start-->
-To run the experiments, first install Sireum Kekinian (optionally choosing the
-commit tip used for the experiments, ie. [843ede1](https://github.com/sireum/kekinian/tree/843ede1120e6e75fde089db0928ab66a3c9a3e73))
+<!--testing-description_end-->
+### <!--framework-generation-title_start-->Framework Generation<!--framework-generation-title_end-->
+<!--framework-generation-description_start-->
+1. Build the System Testing Artifact Generator following the instructions at
+   [SystemTestArtifactGen/readme.md](../report/util/SystemTestArtifactGen/readme.md)
+1. Run the generator by passing it the paths to one or more files that contain
+   input/output container definitions
+
+For example, running the generator on
+[Containers.scala](hamr/slang/src/main/util/RTS/system_tests/rts1/Containers.scala)
+will generate the following artifacts:
+
+1. [Example_Actuation_Subsystem_Inputs_Container_Test_wSlangCheck.scala](hamr/slang/src/test/system/RTS/system_tests/rts1/Example_Actuation_Subsystem_Inputs_Container_Test_wSlangCheck.scala)
+
+   System test suite containing an example test run configuration.  Developers can make a copy of this file and then define
+   custom test run configurations where each configuration has the structure
+   _(script schema, property, randomization profile, random vector filter)_
+
+1. [Example_Actuation_Subsystem_Inputs_Container_DSC_Test_Harness.scala](hamr/slang/src/test/system/RTS/system_tests/rts1/Example_Actuation_Subsystem_Inputs_Container_DSC_Test_Harness.scala)
+
+      Example showing how a system test suite can be adapted for use with Distributed SlangCheck (DSC). It overrides/implements
+   two DCS methods, ``next`` and ``test``.  The next method is called during DSC's test vector generation phase. The generated
+   vectors are subsequently passed to the test method during DSC's testing phase. Both methods use the environment variable
+   ``DSC_TEST_FAMILY_NAME`` to determine which test run configuration should be used.
+
+
+<!--framework-generation-description_end-->
+
+### <!--manual-testing-title_start-->Manual System Testing<!--manual-testing-title_end-->
+<!--manual-testing-description_start-->
+The example system test suites described previously were used to write
+system tests for the Actuator subsystem as follows:
+<!--manual-testing-description_end-->
+<!--manual-testing-Actuator subsystem_block_start-->
+__Actuator subsystem__
+
+  System Test Suite Class: [Actuation_Subsystem_Test_wSlangCheck.scala](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala)
+
+  Test run configurations are specified via entries in the [testMatrix](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L70). For example,
+  the [TempPress_Manual_Trip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L74) configuration uses the following:
+
+  | | |
+  |--|--|
+  | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L274) |
+  | Property: | [sysProp_SaturationManualTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L416) |
+  | Randomization Profile: | getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_ |
+  | Random Vector Filter: | [examplePreStateContainerFilter](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L217) |
+
+  How to run:
+
+  ```
+  cd hamr-system-testing-case-studies
+
+  sireum proyek test --suffixes Actuation_Subsystem_Test_wSlangCheck rts/hamr/slang
+  ```
+
+
+<!--manual-testing-Actuator subsystem_block_end-->
+
+### <!--dsc-testing-title_start-->Distributed SlangCheck System Testing<!--dsc-testing-title_end-->
+<!--dsc-testing-description_start-->
+Background:
+
+System testing as put forth in this paper uses SlangCheck to generate input/injection test vectors.
+SlangCheck is Sireum's randomized
+test generator framework similar to ScalaCheck and Haskell's QuickCheck.
+Distributed SlangCheck (DSC) adds a framework that allows test vector
+generation to be run via a server cluster up to a user specified timeout. Increasing
+the timeout allows more vectors to be produced which may lead to increased code
+coverage during testing. DSC passes the vectors to user defined unit tests
+and serializes the
+passing and failing vectors to seperate files so that they can be replayed if needed.
+DSC uses JaCoCo to produce code coverage information.
+
+Approach:
+
+The <configname> configuration of <projctname>'s <tsetsuite> test suite will be used to
+illustrate how system testing can employ DSC.  The actual results reported in the next
+section simply automated the following steps such that each configuration was run with timeouts
+of 1, 5, 10, and 30 seconds.
+
+Create a jar file for this project that includes sources and tests
 
 ```
-git clone --rec https://github.com/sireum/kekinian.git
-cd kekinian
-git checkout 843ede1
-git pull --rec
-bin/build.cmd
+cd hamr-system-testing-case-studies
 
-export SIREUM_HOME=$(pwd)
-export PATH=$SIREUM_HOME/bin:$PATH
+sireum proyek assemble --include-sources --include-tests rts/hamr/slang
 ```
 
-Then run the following Slash script specifying the number of number of times to rerun Logika
-on each entrypoint: [../bin/report-logika.cmd](../bin/report-logika.cmd)
+Set the environment variable DSC_TEST_FAMILY_NAME to indicate which configuration
+should be used
 
 ```
-../bin/report-logika.cmd run 25
+export DSC_TEST_FAMILY_NAME=<configname>
 ```
 
-The results will be appended to the csv file corresponding to the component
-being evaluated. The line ``val projects: Map[String, Project] = Map.empty + isolette + rts + tcP + tcS``
-in the script can be modified if you want to run a subset of the projects
-<!--how-to-run-description_end-->
+Generate 1 second's worth of test vectors and store them in a local file (DSC can be
+configured to scp the results to a remote server where they can be combined with vectors
+generated from other 'generating' servers)
+```
+sireum tools slangcheck runner -c isolette/hamr/slang/out/slang/assemble/slang.jar -o $(pwd)/isolette-dsc.jsons -t 5 isolette.system_tests.rst.Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness
+```
+
+Pass each vector to the <link to test method>
+```
+export DSC_SAVE_LOC=$(pwd)/isolette-dsc-output.unsat
+touch $DSC_SAVE_LOC
+```
+
+
+```
+sireum tools slangcheck tester -i $(pwd)/isolette-dsc.jsons.dsc.7z -o $(pwd)/isolette-dsc-output -c isolette/hamr/slang/out/slang/assemble/slang.jar --sourcepath isolette/hamr/slang/out/slang/assemble/slang.jar isolette.system_tests.rst.Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness
+```
+
+Results:
+The following summarizes the results of running DSC+System Testing on the RTS with different time-out values
+<!--dsc-testing-description_end-->
