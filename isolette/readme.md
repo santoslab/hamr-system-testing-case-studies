@@ -246,7 +246,7 @@ The HC__Normal_____Heat_On configuration of Isolette's
 Regulate_Subsystem_Test_wSlangCheck test suite will be used to
 illustrate how system testing can employ DSC.  The actual results reported in the next
 section simply automated the following steps such that each configuration was run with timeouts
-of 1, 5, 10, and 30 seconds using a Jenkins cluster.
+of 1, 5, and 10 seconds using a Jenkins cluster.
 
 Create a jar file for this project that includes the sources and tests suites
 
