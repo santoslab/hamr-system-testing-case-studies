@@ -3,7 +3,7 @@
 import org.sireum._
 import Helper._
 
-val removeDump: B = T
+val removeDump: B = F
 val regenMergedReports: B = F
 
 val root = Os.path("/opt") / "santos" / "jenkins" / "dsc_sys" / "dsc_tester"

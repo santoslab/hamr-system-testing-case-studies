@@ -19,6 +19,8 @@ import org.sireum.U32._
                             val subLevels: ISZ[ReportLevel])
 
 object Report {
+  val htmlDir: String = "https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies"
+
   def wrapWithTag(tag: String, isTitle: B, content: Option[ST]): ST = {
     val (start, end): (String, String) = (s"<!--${tag}_start-->", s"<!--${tag}_end-->")
     val ret: ST = {
@@ -419,6 +421,27 @@ import Report._
       content = manBlocks,
       subLevels = ISZ()
     )
+    val bs = "\\"
+
+    val title = project.title
+    val pdir = project.projectRootDir.name
+    val harness = project.testConfigs(0).simpleDscHarnessName
+    val config = project.testConfigs(0).exampleTestConfig.name
+
+    val phtmldir: String = {
+      if (title == "Isolette") "isolette"
+      else if (title == "RTS") "RTS"
+      else "??"
+    }
+
+    val lt1 = s"$phtmldir/$harness/$config/1"
+    val l1 = s"$htmlDir/$lt1"
+    val lt2 = s"$phtmldir/$harness/$config"
+    val l2 = s"$htmlDir/$lt2"
+    val lt3 = s"$phtmldir/$harness"
+    val l3 = s"$htmlDir/$lt3"
+    val lt4 = s"$phtmldir"
+    val l4 = s"$htmlDir/$lt4"
 
     val dscTesting: ReportLevel = ReportLevel(
       tag = "dsc-testing",
@@ -438,47 +461,77 @@ import Report._
                              |
                              |Approach:
                              |
-                             |The <configname> configuration of <projctname>'s <tsetsuite> test suite will be used to
+                             |The ${config} configuration of ${title}'s
+                             |${project.testConfigs(0).simpleManualTestSuiteName} test suite will be used to
                              |illustrate how system testing can employ DSC.  The actual results reported in the next
                              |section simply automated the following steps such that each configuration was run with timeouts
-                             |of 1, 5, 10, and 30 seconds.
+                             |of 1, 5, 10, and 30 seconds using a Jenkins cluster.
                              |
-                             |Create a jar file for this project that includes sources and tests
+                             |Create a jar file for this project that includes the sources and tests suites
                              |
                              |```
                              |cd hamr-system-testing-case-studies
                              |
-                             |sireum proyek assemble --include-sources --include-tests ${project.projectRootDir.name}/hamr/slang
+                             |sireum proyek assemble --include-sources --include-tests ${pdir}/hamr/slang
                              |```
                              |
-                             |Set the environment variable DSC_TEST_FAMILY_NAME to indicate which configuration
+                             |Set the environment variable ``DSC_TEST_FAMILY_NAME`` to indicate which configuration
                              |should be used
                              |
                              |```
-                             |export DSC_TEST_FAMILY_NAME=<configname>
+                             |export DSC_TEST_FAMILY_NAME=${config}
                              |```
                              |
-                             |Generate 1 second's worth of test vectors and store them in a local file (DSC can be
+                             |The following will repeatedly call ${harness}'s next method for 1 second to generate test vectors
+                             |and store them in a local file (DSC can be
                              |configured to scp the results to a remote server where they can be combined with vectors
                              |generated from other 'generating' servers)
                              |```
-                             |sireum tools slangcheck runner -c isolette/hamr/slang/out/slang/assemble/slang.jar -o $$(pwd)/isolette-dsc.jsons -t 5 isolette.system_tests.rst.Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness
+                             |sireum tools slangcheck runner$bs
+                             |  -t 1$bs
+                             |  -o $$(pwd)/${pdir}-dsc.jsons$bs
+                             |  -c ${pdir}/hamr/slang/out/slang/assemble/slang.jar$bs
+                             |  ${project.testConfigs(0).dscFQName}
                              |```
                              |
                              |DSC is designed to only report passing and failing test vectors.  The generated DSC
-                             |test harnesses
+                             |test harness test methods extend this by invoking the configuration's random vector filter and
+                             |writing out unsat vectors to a file specified via the ``DSC_SAVE_LOC`` environment variable.
                              |```
-                             |export DSC_SAVE_LOC=$$(pwd)/isolette-dsc-output.unsat
+                             |export DSC_SAVE_LOC=$$(pwd)/${pdir}-dsc-output.unsat
                              |touch $$DSC_SAVE_LOC
                              |```
                              |
-                             |Pass each vector to the <link to test method>
+                             |The following will pass each text vector to the ${harness}'s test method,
+                             |record the passing/failing/unsat test vectors in separate files and generate an HTML
+                             |report that combines the coverage information across all the runs.
                              |```
-                             |sireum tools slangcheck tester -i $$(pwd)/isolette-dsc.jsons.dsc.7z -o $$(pwd)/isolette-dsc-output -c isolette/hamr/slang/out/slang/assemble/slang.jar --sourcepath isolette/hamr/slang/out/slang/assemble/slang.jar isolette.system_tests.rst.Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness
+                             |sireum tools slangcheck tester$bs
+                             |  -i $$(pwd)/${pdir}-dsc.jsons.dsc.7z$bs
+                             |  -o $$(pwd)/${pdir}-dsc-output$bs
+                             |  --coverage $$(pwd)/${pdir}-jacoco$bs
+                             |  -c ${pdir}/hamr/slang/out/slang/assemble/slang.jar$bs
+                             |  --sourcepath ${pdir}/hamr/slang/out/slang/assemble/slang.jar$bs
+                             |  ${project.testConfigs(0).dscFQName}
                              |```
                              |
                              |Results:
-                             |The following summarizes the results of running DSC+System Testing on the ${project.title} with different time-out values"""),
+                             |
+                             |The full experimental results for the ${title} are available at:<br>
+                             |[$l4]($l4/report.html)
+                             |
+                             |<br><br>
+                             |The following table explains the report directory structure,
+                             |starting with the results from a specific run of DSC and then walking
+                             |up the report directory hierarchy.
+                             |
+                             |||
+                             ||-|
+                             ||[$lt1]($l1/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for the ${config} configuration with a 1 second timeout<br><br>__NOTE__ this is what DSC was actually run on.  The following rows are simply aggregate information |
+                             ||[$lt2]($l2/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for the MA__Failing__CT____Alarm_On configuration using timeouts of 1, 5, and 10 seconds |
+                             ||[$lt3]($l3/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for running all the configurations through ${harness} using timeouts of 1, 5, and 10 seconds |
+                             ||[$lt4]($l4/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for each of the ${title}'s subsystems under testing using timeouts of 1, 5, and 10 seconds |
+                             |"""),
       content = ISZ(),
       subLevels = ISZ()
     )
@@ -489,7 +542,7 @@ import Report._
       description = Some(
         st"""System testing requires a Sireum distribution. Instructions on how to obtain a
             |distribution are available at [https://sireum.org/getting-started/](https://sireum.org/getting-started/).
-            |The rest of this documentation assumes the SIREUM_HOME environmental variable has been set and that
+            |The rest of this documentation assumes the ``SIREUM_HOME`` environmental variable has been set and that
             |sireum's bin directory has been added to your path (e.g. for Linux/MacOS ``export PATH=$$SIREUM_HOME/bin:$$PATH``
             |or Windows ``set PATH=%PATH%\bin;%PATH%``
             |

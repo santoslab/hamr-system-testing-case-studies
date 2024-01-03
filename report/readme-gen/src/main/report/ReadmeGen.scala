@@ -35,8 +35,17 @@ object ReadmeGen extends App {
                                          val manualTestingFilename: String,
                                          val exampleTestConfig: TestConfig,
 
-                                         val dscTestingFileName: String
-                                        )
+                                         val dscTestingFileName: String,
+                                         val dscFQName: String
+                                        ) {
+    def simpleManualTestSuiteName: String = {
+      return ops.StringOps(manualTestingFilename).replaceAllLiterally(".scala", "")
+    }
+    def simpleDscHarnessName: String = {
+      return ops.StringOps(dscTestingFileName).replaceAllLiterally(".scala", "")
+    }
+  }
+
   @datatype class Project(val title: String,
                           val description: Option[String],
                           val projectRootDir: Os.Path,
@@ -98,7 +107,10 @@ object ReadmeGen extends App {
           systemTestOutputDir = defaultDirs.slangDir / "src/test/system/isolette/system_tests/rst",
           exampleTestFrameworkPrefix = "Example_Regulate_Subsystem_Inputs_Container",
           manualTestingFilename = "Regulate_Subsystem_Test_wSlangCheck.scala",
+
           dscTestingFileName = "Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness.scala",
+          dscFQName = "isolette.system_tests.rst.Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness",
+
           exampleTestConfig = TestConfig(
             name = "HC__Normal_____Heat_On",
             schema = "Regulator_1HP_script_schema",
@@ -114,6 +126,7 @@ object ReadmeGen extends App {
           exampleTestFrameworkPrefix = "Example_Monitor_Subsystem_Inputs_Container",
           manualTestingFilename = "Monitor_Subsystem_Test_wSlangCheck.scala",
           dscTestingFileName = "Monitor_Subsystem_DSC_Test_Harness.scala",
+          dscFQName = "isolette.system_tests.monitor1.Monitor_Subsystem_DSC_Test_Harness",
           exampleTestConfig = TestConfig(
             name = "MA__Normal_____Alarm_On",
             schema = "Monitor_1HP_script_schema",
@@ -151,6 +164,7 @@ object ReadmeGen extends App {
           exampleTestFrameworkPrefix = "Example_Actuation_Subsystem_Inputs_Container",
           manualTestingFilename = "Actuation_Subsystem_Test_wSlangCheck.scala",
           dscTestingFileName = "Actuation_Subsystem_DSC_Test_Harness.scala",
+          dscFQName = "RTS.system_tests.rts1.Actuation_Subsystem_DSC_Test_Harness",
           exampleTestConfig = TestConfig(
             name = "TempPress_Manual_Trip",
             schema = "Actuation_Subsystem_1HP_script_schema",
