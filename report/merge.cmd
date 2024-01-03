@@ -32,7 +32,7 @@ Os.Path.walk(root, F, T, p => {
       timeout = Z(p.up.name).get,
       testRow = parseJson(testRowP),
       testRowP = testRowP,
-      passing = numVectors(passingP),
+      passing = numVectors(passingP) - numVectors(unsatP), // remove unsat from the passing vectors
       failing = numVectors(failingP),
       unsat = numVectors(unsatP),
       passingP = passingP,
@@ -76,7 +76,7 @@ for (projects <- map.entries) {
       }
       val familyRoot = familyResults(0).passingP.up.up
       val fResults: Results = mergeResults(familyResults, familyRoot)
-      addFamilyReport(fResults, families._2.keys, familyRoot)
+      addConfigurationReport(fResults, families._2.keys, familyRoot)
     }
     val sysRoot = systemResults(0).passingP.up.up.up
     val sResults: Results = mergeResults(systemResults, sysRoot)
@@ -150,7 +150,7 @@ object Helper {
           |<table>
           |  <tr><td id=col_a title="Project name">Projects:</td><td>$project<br><br></td></tr>
           |    ${wrap("Sub-Systems", "The sub-system(s) testing was run on", system)}
-          |    ${wrap("Profiles", "The test profile(s) used during testing", families)}
+          |    ${wrap("Configurations", "The test configuration(s) used during testing", families)}
           |    ${wrap("Timeouts", "The timeout(s) used while generating test vectors", timeouts)}
           |    $stats_
           |    $coverage_
@@ -182,7 +182,7 @@ object Helper {
     val html = reportTemplate(cookieCrumbs = cookieCrumb,
       project = st"""<a href="$r1">${r.project}</a>""",
       system = Some(st"""<a href="$r2">${r.subSystem}</a>"""),
-      families = Some(st"""<a href="$r3">${r.testFamily}</a>"""),
+      families = Some(st"""<a href="$r3">${r.testFamily}</a> : ${r.testRow.get("testDescription").get}"""),
       timeouts = Some(st"""${r.timeout}"""),
       stats = Some(r),
       coverage = Some(st"""<a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>""", subs)
@@ -192,7 +192,7 @@ object Helper {
     println(s"Wrote: ${report}")
   }
 
-  def addFamilyReport(r: Results, timeouts: ISZ[Z], froot: Os.Path): Unit = {
+  def addConfigurationReport(r: Results, timeouts: ISZ[Z], froot: Os.Path): Unit = {
     val reportDir = froot
 
     val r0 = reportDir.relativize(root / "report.html")
