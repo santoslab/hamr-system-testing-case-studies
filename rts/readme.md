@@ -14,7 +14,7 @@
 <!--arch-section-aadl-arch-component-info-actuator_start-->
 |Thread: [actuator](aadl/packages/Actuation.aadl#L240) |
 |--|
-|Classifier: [Actuation::Actuator.i](aadl/packages/Actuation.aadl#L216)|
+|Type: [Actuation::Actuator](aadl/packages/Actuation.aadl#L187)<br>Implementation: [Actuation::Actuator.i](aadl/packages/Actuation.aadl#L216)|
 |Periodic: 1000 ms|
 |Domain: 14|
 
@@ -22,7 +22,7 @@
 <!--arch-section-aadl-arch-component-info-actuator_start-->
 |Thread: [actuator](aadl/packages/Actuation.aadl#L240) |
 |--|
-|Classifier: [Actuation::Actuator.i](aadl/packages/Actuation.aadl#L216)|
+|Type: [Actuation::Actuator](aadl/packages/Actuation.aadl#L187)<br>Implementation: [Actuation::Actuator.i](aadl/packages/Actuation.aadl#L216)|
 |Periodic: 1000 ms|
 |Domain: 16|
 
@@ -30,7 +30,7 @@
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
 |Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
 |--|
-|Classifier: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
 |Periodic: 1000 ms|
 |Domain: 5|
 
@@ -38,7 +38,7 @@
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
 |Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
 |--|
-|Classifier: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
 |Periodic: 1000 ms|
 |Domain: 6|
 
@@ -46,7 +46,7 @@
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
 |Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
 |--|
-|Classifier: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
 |Periodic: 1000 ms|
 |Domain: 7|
 
@@ -54,7 +54,7 @@
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
 |Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
 |--|
-|Classifier: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
 |Periodic: 1000 ms|
 |Domain: 9|
 
@@ -62,7 +62,7 @@
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
 |Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
 |--|
-|Classifier: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
 |Periodic: 1000 ms|
 |Domain: 10|
 
@@ -70,7 +70,7 @@
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
 |Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
 |--|
-|Classifier: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
 |Periodic: 1000 ms|
 |Domain: 11|
 
@@ -78,7 +78,7 @@
 <!--arch-section-aadl-arch-component-info-orLogic_start-->
 |Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
 |--|
-|Classifier: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
+|Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
 |Periodic: 1000 ms|
 |Domain: 8|
 
@@ -86,7 +86,7 @@
 <!--arch-section-aadl-arch-component-info-orLogic_start-->
 |Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
 |--|
-|Classifier: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
+|Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
 |Periodic: 1000 ms|
 |Domain: 12|
 
@@ -94,7 +94,7 @@
 <!--arch-section-aadl-arch-component-info-orLogic_start-->
 |Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
 |--|
-|Classifier: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
+|Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
 |Periodic: 1000 ms|
 |Domain: 13|
 
@@ -102,7 +102,7 @@
 <!--arch-section-aadl-arch-component-info-orLogic_start-->
 |Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
 |--|
-|Classifier: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
+|Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
 |Periodic: 1000 ms|
 |Domain: 15|
 
@@ -110,7 +110,7 @@
 <!--arch-section-aadl-arch-component-info-actuatorsMockThread_start-->
 |Thread: [actuatorsMockThread](aadl/packages/Actuators.aadl#L48) |
 |--|
-|Classifier: [Actuators::ActuatorsMockThread.i](aadl/packages/Actuators.aadl#L23)|
+|Type: [Actuators::ActuatorsMockThread](aadl/packages/Actuators.aadl#L16)<br>Implementation: [Actuators::ActuatorsMockThread.i](aadl/packages/Actuators.aadl#L23)|
 |Periodic: 1000 ms|
 |Domain: 4|
 
@@ -118,7 +118,7 @@
 <!--arch-section-aadl-arch-component-info-eventControlMockThread_start-->
 |Thread: [eventControlMockThread](aadl/packages/EventControl.aadl#L69) |
 |--|
-|Classifier: [EventControl::EventControlMockThread.i](aadl/packages/EventControl.aadl#L37)|
+|Type: [EventControl::EventControlMockThread](aadl/packages/EventControl.aadl#L16)<br>Implementation: [EventControl::EventControlMockThread.i](aadl/packages/EventControl.aadl#L37)|
 |Periodic: 1000 ms|
 |Domain: 3|
 
@@ -126,7 +126,7 @@
 <!--arch-section-aadl-arch-component-info-instrumentationMockThread_start-->
 |Thread: [instrumentationMockThread](aadl/packages/Instrumentation.aadl#L195) |
 |--|
-|Classifier: [Instrumentation::InstrumentationMockThread.i](aadl/packages/Instrumentation.aadl#L97)|
+|Type: [Instrumentation::InstrumentationMockThread](aadl/packages/Instrumentation.aadl#L14)<br>Implementation: [Instrumentation::InstrumentationMockThread.i](aadl/packages/Instrumentation.aadl#L97)|
 |Periodic: 1000 ms|
 |Domain: 2|
 
@@ -175,8 +175,171 @@ likely would be excluded in a release build
  |SUM:|162|
 <!---RTS_code_metrics_end-->
 
-## <!--testing-title_start-->System Testing<!--testing-title_end-->
-<!--testing-description_start-->
+## <!--system-testing-setup-title_start-->System Testing<!--system-testing-setup-title_end-->
+<!--system-testing-setup-description_start-->
+<!--system-testing-setup-description_end-->
+### <!--configurations-title_start-->Test Run Configurations<!--configurations-title_end-->
+<!--configurations-description_start-->
+<!--configurations-description_end-->
+#### <!--Actuation_Subsystem_DSC_Test_Harness_configurations-title_start-->Configurations for Actuation_Subsystem_DSC_Test_Harness<!--Actuation_Subsystem_DSC_Test_Harness_configurations-title_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-description_start-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-description_end-->
+##### <!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-title_start-->[ALU_Satisfies_Oracle](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L156)<!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-title_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-description_start-->
+<!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-description_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration_content_start-->
+| | |
+|--|--|
+| Description: | ALU Satisfies Oracle |
+| Script Schema: | Didn't find ALU 1HP in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Property: | Didn't find ALU Satisfies Oracle in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Randomization Profile: | Didn't find Default Actuation_Subsystem_Inputs_Container_Profile Profile in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Random Vector Filter: | TODO|
+
+<!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration_content_end-->
+
+##### <!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-title_start-->[AU1PressTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L98)<!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-title_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-description_start-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-description_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration_content_start-->
+| | |
+|--|--|
+| Description: | AU1PressTrip |
+| Script Schema: | Didn't find ALU 1HP in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Property: | Didn't find AU1PressTrip in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Randomization Profile: | Didn't find Default Actuation_Subsystem_Inputs_Container_Profile Profile in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Random Vector Filter: | TODO|
+
+<!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration_content_end-->
+
+##### <!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-title_start-->[AU1SatTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L105)<!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-title_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-description_start-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-description_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration_content_start-->
+| | |
+|--|--|
+| Description: | AU1SatTrip |
+| Script Schema: | Didn't find ALU 1HP in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Property: | Didn't find AU1SatTrip in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Randomization Profile: | Didn't find Default Actuation_Subsystem_Inputs_Container_Profile Profile in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Random Vector Filter: | TODO|
+
+<!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration_content_end-->
+
+##### <!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-title_start-->[AU1TempTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L91)<!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-title_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-description_start-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-description_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration_content_start-->
+| | |
+|--|--|
+| Description: | AU1TempTrip |
+| Script Schema: | Didn't find ALU 1HP in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Property: | Didn't find AU1TempTrip in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Randomization Profile: | Didn't find Default Actuation_Subsystem_Inputs_Container_Profile Profile in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Random Vector Filter: | TODO|
+
+<!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration_content_end-->
+
+##### <!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-title_start-->[AU2PressTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L122)<!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-title_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-description_start-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-description_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration_content_start-->
+| | |
+|--|--|
+| Description: | AU2PressTrip |
+| Script Schema: | Didn't find ALU 1HP in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Property: | Didn't find AU2PressTrip in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Randomization Profile: | Didn't find Default Actuation_Subsystem_Inputs_Container_Profile Profile in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Random Vector Filter: | TODO|
+
+<!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration_content_end-->
+
+##### <!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-title_start-->[AU2SatTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L129)<!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-title_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-description_start-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-description_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration_content_start-->
+| | |
+|--|--|
+| Description: | AU2SatTrip |
+| Script Schema: | Didn't find ALU 1HP in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Property: | Didn't find AU2SatTrip in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Randomization Profile: | Didn't find Default Actuation_Subsystem_Inputs_Container_Profile Profile in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Random Vector Filter: | TODO|
+
+<!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration_content_end-->
+
+##### <!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-title_start-->[AU2TempTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L115)<!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-title_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-description_start-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-description_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration_content_start-->
+| | |
+|--|--|
+| Description: | AU2TempTrip |
+| Script Schema: | Didn't find ALU 1HP in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Property: | Didn't find AU2TempTrip in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Randomization Profile: | Didn't find Default Actuation_Subsystem_Inputs_Container_Profile Profile in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Random Vector Filter: | TODO|
+
+<!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration_content_end-->
+
+##### <!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-title_start-->[SatTripCausality](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L146)<!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-title_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-description_start-->
+<!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-description_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration_content_start-->
+| | |
+|--|--|
+| Description: | SatTripCausality |
+| Script Schema: | Didn't find ALU 1HP in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Property: | Didn't find SatTripCausality in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Randomization Profile: | Didn't find Default Actuation_Subsystem_Inputs_Container_Profile Profile in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Random Vector Filter: | TODO|
+
+<!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration_content_end-->
+
+##### <!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-title_start-->[Saturation_Manual_Trip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L81)<!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-title_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-description_start-->
+<!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-description_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration_content_start-->
+| | |
+|--|--|
+| Description: | Saturation Manual Trip |
+| Script Schema: | Didn't find ALU 1HP in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Property: | Didn't find Saturation Manual Trip in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Randomization Profile: | Didn't find Default Actuation_Subsystem_Inputs_Container_Profile Profile in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Random Vector Filter: | TODO|
+
+<!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration_content_end-->
+
+##### <!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-title_start-->[TempPressTripCausality](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L139)<!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-title_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-description_start-->
+<!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-description_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration_content_start-->
+| | |
+|--|--|
+| Description: | TempPressTripCausality |
+| Script Schema: | Didn't find ALU 1HP in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Property: | Didn't find TempPressTripCausality in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Randomization Profile: | Didn't find Default Actuation_Subsystem_Inputs_Container_Profile Profile in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Random Vector Filter: | TODO|
+
+<!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration_content_end-->
+
+##### <!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-title_start-->[TempPress_Manual_Trip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L74)<!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-title_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-description_start-->
+<!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-description_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration_content_start-->
+| | |
+|--|--|
+| Description: | TempPress Manual Trip |
+| Script Schema: | Didn't find ALU 1HP in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Property: | Didn't find TempPress Manual Trip in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Randomization Profile: | Didn't find Default Actuation_Subsystem_Inputs_Container_Profile Profile in hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala|
+| Random Vector Filter: | TODO|
+
+<!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration_content_end-->
+
+## <!--how-to-run-title_start-->How to Run<!--how-to-run-title_end-->
+<!--how-to-run-description_start-->
 System testing requires a Sireum distribution. Instructions on how to obtain a
 distribution are available at [https://sireum.org/getting-started/](https://sireum.org/getting-started/).
 The rest of this documentation assumes the ``SIREUM_HOME`` environmental variable has been set and that
@@ -184,7 +347,7 @@ sireum's bin directory has been added to your path (e.g. for Linux/MacOS ``expor
 or Windows ``set PATH=%PATH%\bin;%PATH%``
 
 
-<!--testing-description_end-->
+<!--how-to-run-description_end-->
 ### <!--framework-generation-title_start-->Framework Generation<!--framework-generation-title_end-->
 <!--framework-generation-description_start-->
 1. Build the System Testing Artifact Generator following the instructions at
@@ -301,7 +464,7 @@ export DSC_SAVE_LOC=$(pwd)/rts-dsc-output.unsat
 touch $DSC_SAVE_LOC
 ```
 
-The following will pass each text vector to the Actuation_Subsystem_DSC_Test_Harness's test method,
+The following will pass each test vector to the Actuation_Subsystem_DSC_Test_Harness's test method,
 record the passing/failing/unsat test vectors in separate files and generate an HTML
 report that combines the coverage information across all the runs.
 ```

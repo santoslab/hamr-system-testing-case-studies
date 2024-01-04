@@ -5,6 +5,19 @@ package report
 import org.sireum._
 
 object Util {
+  def parseJson(json: Os.Path): HashSMap[String, String] = {
+    val p = org.sireum.Json.Parser.create(json.read)
+    p.parseObjectBegin()
+    var entries = HashSMap.empty[String, String]()
+    do {
+      val key = p.parseObjectKeys(ISZ[String](
+        "testFamilyName", "testDescription", "testMethodName", "property", "profile"))
+      val value = p.parseString()
+      entries = entries + key ~> value
+    } while(p.parseObjectNext())
+    return entries
+  }
+
   @datatype class Dirs(val rootDir: Os.Path,
                        val aadlDir: Os.Path,
                        val slangDir: Os.Path,
@@ -61,4 +74,34 @@ object Util {
 
     experimentalOptions = ISZ()
   )
+
+  def locateText(s: String, lines: ISZ[String], linkPrefix: Os.Path): String = {
+    return locateTextD(F, s, lines, linkPrefix)
+  }
+  def locateTextD(rev: B, s: String, lines: ISZ[String], linkPrefix: Os.Path): String = {
+    if (rev) {
+      for (i <- lines.size - 1 to 0 by -1 if ops.StringOps(lines(i)).contains(s)) {
+        return s"[$s](${linkPrefix}#L${i + 1})"
+      }
+    } else {
+      for (i <- 0 until lines.size if ops.StringOps(lines(i)).contains(s)) {
+        return s"[$s](${linkPrefix}#L${i + 1})"
+      }
+    }
+    return s"Didn't find $s in $linkPrefix"
+  }
+
+  def locateMethodDefinition(methodName: String, lines: ISZ[String], linkPrefix: Os.Path): String = {
+    if (methodName == "Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container") {
+      return "[system_Pre_Container](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Inputs_Container_GumboX.scala#L46)"
+    }
+    if (methodName == "getDefaultProfile") {
+      return "getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_"
+    }
+    val deffy = s"def $methodName"
+    for (i <- 0 until lines.size if ops.StringOps(lines(i)).contains(deffy)) {
+      return s"[$methodName](${linkPrefix}#L${i+1})"
+    }
+    return s"Didn't find $methodName in $linkPrefix"
+  }
 }

@@ -79,17 +79,31 @@ object Report {
     return ret
   }
 
-  def createClassifierLink(textToDisplay: String, componentType: String, classifier: Classifier, aadlDir: Os.Path, rootDir: Os.Path): ST = {
+  def createAadlComponentLink(textToDisplay: String,
+                              componentType: String,
+                              linkToImplementation: B,
+                              classifier: Classifier, aadlDir: Os.Path, rootDir: Os.Path): ST = {
     val name = ops.StringOps(ops.StringOps(classifier.name).replaceAllLiterally("::", ":")).split(c => c == ':')
-    val file = Os.Path.walk(aadlDir, T, F, p => p.isFile && ops.StringOps(p.read).contains(s"package ${name(0)}"))(0)
-    val cType: String =
-      if (ops.StringOps(name(1)).contains(".")) s"${componentType} implementation"
-      else componentType
+    val fileCands = Os.Path.walk(aadlDir, T, F,
+      p =>
+        p.isFile && p.ext == "aadl" &&
+          ops.ISZOps(p.readLines).exists(l => ops.StringOps(l).trim == s"package ${name(0)}")
+    )
+    assert (fileCands.size == 1)
+
+    val file = fileCands(0)
+    val searchStr: String = {
+      val nameSplit = ops.StringOps(name(1)).split(c => c == '.')
+      if (nameSplit.size == 1) s"$componentType ${name(1)}" // no period
+      else if (linkToImplementation) s"$componentType implementation ${name(1)}"
+      else s"$componentType ${nameSplit(0)}"
+    }
+
     val lines = file.readLines
-    for(i <- 0 until lines.size if ops.StringOps(lines(i)).contains(s"${cType} ${name(1)}")) {
+    for(i <- 0 until lines.size if ops.StringOps(lines(i)).contains(searchStr)) {
       return st"[${textToDisplay}](${rootDir.relativize(file).value}#L${i + 1})"
     }
-    halt(s"Infeasible: couldn't find $cType in $file")
+    halt(s"Infeasible: couldn't find $searchStr in $file")
   }
 
   def sortThreads(threads: ISZ[AadlThread], symbolTable: SymbolTable): ISZ[AadlThread] = {
@@ -302,6 +316,92 @@ import Report._
 
   def genTestingSection(project: Project, table: SymbolTable): ReportLevel = {
 
+    val configs: ISZ[ReportLevel] = {
+      var entries: HashSMap[String, ISZ[ReportLevel]] = HashSMap.empty
+      for (config <- project.testConfigs) {
+        val projDir: String = {
+          if (project.title == "Isolette") "isolette"
+          else if (project.title == "RTS") "RTS"
+          else "??"
+        }
+        val pathToJson = ReadmeGen.localResultsRootDir / projDir / config.simpleDscHarnessName
+
+        val jsons = Os.Path.walk(pathToJson, F, F, p => p.isFile && p.name == "testRow.json")
+
+        val manualTestingFile = config.manualTestingFile
+        val mtfContents = ops.StringOps(ops.StringOps(manualTestingFile.read).replaceAllLiterally("\n", " \n")).split(c => c == '\n')
+        val mtf = project.projectRootDir.relativize(manualTestingFile)
+
+        val dscHarnessFile = config.dscHarnessFile
+        assert (dscHarnessFile.exists, dscHarnessFile)
+
+        for (json <- jsons) {
+          val harnessName = json.up.up.name
+          val configName = json.up.name
+          val jsonContent = Util.parseJson(json)
+
+          val filter = "TODO"
+          //Util.locateMethodDefinition(jsonContent.get("filter").get, mtfContents, mtf)
+          val content =
+            st"""| | |
+                 ||--|--|
+                 || Description: | ${jsonContent.get("testDescription")} |
+                 || Script Schema: | ${Util.locateMethodDefinition(jsonContent.get("testMethodName").get, mtfContents, mtf)}|
+                 || Property: | ${Util.locateMethodDefinition(jsonContent.get("property").get, mtfContents, mtf)}|
+                 || Randomization Profile: | ${Util.locateTextD(T, jsonContent.get("profile").get, mtfContents, mtf)}|
+                 || Random Vector Filter: | ${filter}|
+                 |"""
+
+          val configReport = ReportLevel(
+            tag = s"${harnessName}_${configName}_configuration",
+            title = Some(st"${Util.locateText(configName, mtfContents, mtf)}"),
+            description = None(),
+            content = ISZ(ReportBlock(
+              tag = s"${harnessName}_${configName}_configuration_content",
+              content = Some(content))),
+            subLevels = ISZ()
+          )
+          val subEntries: ISZ[ReportLevel] = entries.get(harnessName) match {
+            case Some(existing) => existing
+            case _ => ISZ()
+          }
+          entries = entries + harnessName ~> (subEntries :+ configReport)
+        }
+      }
+
+      var ret: ISZ[ReportLevel] = ISZ()
+      for (e <- entries.entries) {
+        ret = ret :+ ReportLevel(
+          tag = s"${e._1}_configurations",
+          title = Some(st"Configurations for ${e._1}"),
+          description = None(),
+          content = ISZ(),
+          subLevels = e._2
+        )
+      }
+      ret
+    }
+
+    val configurations: ReportLevel = ReportLevel(
+      tag = "configurations",
+      title = Some(st"Test Run Configurations"),
+      description = None(),
+      content = ISZ(),
+      subLevels = configs
+    )
+
+    val ret: ReportLevel = ReportLevel(
+      tag = "system-testing-setup",
+      title = Some(st"System Testing"),
+      description = None(),
+      content = ISZ(),
+      subLevels = ISZ(configurations)
+    )
+    return ret
+  }
+
+  def genHowToRunSection(project: Project, table: SymbolTable): ReportLevel = {
+
     val readmeRoot = project.projectRootDir
     val reportRoot = project.projectRootDir.up
     val stagReadme = readmeRoot.relativize(reportRoot / "report/util/SystemTestArtifactGen/readme.md")
@@ -357,39 +457,19 @@ import Report._
         val daconfigcontents = ops.StringOps(ops.StringOps(daconfig.read).replaceAllLiterally("\n", " \n")).split(c => c == '\n')
         val mtf = readmeRoot.relativize(daconfig)
 
-        def locateDef(s: String): String = {
-          if (s == "Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container") {
-            return "[system_Pre_Container](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Inputs_Container_GumboX.scala#L46)"
-          }
-          if (s == "getDefaultProfile") {
-            return "getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_"
-          }
-          val deffy = s"def $s"
-          for (i <- 0 until daconfigcontents.size if ops.StringOps(daconfigcontents(i)).contains(deffy)) {
-            return s"[$s](${mtf}#L${i+1})"
-          }
-          return s
-        }
-        def locateText(s: String): String = {
-          for (i <- 0 until daconfigcontents.size if ops.StringOps(daconfigcontents(i)).contains(s)) {
-            return s"[$s](${mtf}#L${i+1})"
-          }
-          return s
-        }
-
         val testSuiteSuffix: String = ops.StringOps(tconfig.manualTestingFilename).replaceAllLiterally(".scala", "")
         val nest: ST =
           st"""System Test Suite Class: [${mtf.name}](${mtf})
               |
-              |Test run configurations are specified via entries in the ${locateText("testMatrix")}. For example,
-              |the ${locateText(tconfig.exampleTestConfig.name)} configuration uses the following:
+              |Test run configurations are specified via entries in the ${Util.locateText("testMatrix", daconfigcontents, mtf)}. For example,
+              |the ${Util.locateText(tconfig.exampleTestConfig.name, daconfigcontents, mtf)} configuration uses the following:
               |
               || | |
               ||--|--|
-              || Script Schema: | ${locateDef(tconfig.exampleTestConfig.schema)} |
-              || Property: | ${locateDef(tconfig.exampleTestConfig.property)} |
-              || Randomization Profile: | ${locateDef(tconfig.exampleTestConfig.profile)} |
-              || Random Vector Filter: | ${locateDef(tconfig.exampleTestConfig.filter)} |
+              || Script Schema: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.schema, daconfigcontents, mtf)} |
+              || Property: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.property, daconfigcontents, mtf)} |
+              || Randomization Profile: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.profile, daconfigcontents, mtf)} |
+              || Random Vector Filter: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.filter, daconfigcontents, mtf)} |
               |
               |How to run:
               |
@@ -502,7 +582,7 @@ import Report._
                              |touch $$DSC_SAVE_LOC
                              |```
                              |
-                             |The following will pass each text vector to the ${harness}'s test method,
+                             |The following will pass each test vector to the ${harness}'s test method,
                              |record the passing/failing/unsat test vectors in separate files and generate an HTML
                              |report that combines the coverage information across all the runs.
                              |```
@@ -537,8 +617,8 @@ import Report._
     )
 
     return ReportLevel(
-      tag = "testing",
-      title = Some(st"System Testing"),
+      tag = "how-to-run",
+      title = Some(st"How to Run"),
       description = Some(
         st"""System testing requires a Sireum distribution. Instructions on how to obtain a
             |distribution are available at [https://sireum.org/getting-started/](https://sireum.org/getting-started/).
@@ -561,15 +641,17 @@ import Report._
 
     val metrics: ReportLevel = genCodeMetrics(project)
 
+    val systemTesting: ReportLevel = genTestingSection(project, table)
+
     //val logika: ReportLevel = genLogikaSection(project, table)
-    val testing: ReportLevel = genTestingSection(project, table)
+    val howToRun: ReportLevel = genHowToRunSection(project, table)
 
     return ReportLevel(
       tag = "",
       title = Some(st"${project.title}"),
       description = None(),
       content = ISZ(),
-      subLevels = ISZ(arch, metrics, testing)
+      subLevels = ISZ(arch, metrics, systemTesting, howToRun)
     )
   }
 
@@ -787,8 +869,8 @@ import Report._
     val tagPrefix = "aadl-arch-component-info"
 
     val header: ST =
-      createClassifierLink(table.rootSystem.identifier,
-        "system", table.rootSystem.component.classifier.get, aadlRootDir, project.projectRootDir)
+      createAadlComponentLink(table.rootSystem.identifier, "system", T,
+        table.rootSystem.component.classifier.get, aadlRootDir, project.projectRootDir)
 
     var systemProps =
       st"""|System: ${header} |
@@ -825,16 +907,27 @@ import Report._
         createLinkFromPos(name, pos, aadlRootDir, project.projectRootDir)
       }
 
-      val classifierLink = createClassifierLink(
-        thread.component.classifier.get.name,"thread",
+      val componentType = createAadlComponentLink(
+        AadlModelUtil.getComponentTypeName(thread), "thread", F,
         thread.component.classifier.get, aadlRootDir, project.projectRootDir)
+
+      val componentImpl: Option[ST] =
+        if (AadlModelUtil.isImplementation(thread)) {
+          val link = createAadlComponentLink(
+            thread.component.classifier.get.name, "thread", T,
+            thread.component.classifier.get, aadlRootDir, project.projectRootDir)
+          Some(st"<br>Implementation: ${link}")
+        }
+        else {
+          None()
+        }
 
       blocks = blocks :+ ReportBlock(
         s"${tagPrefix}-${thread.identifier}",
         Some(
           st"""|Thread: ${header} |
                ||--|
-               ||Classifier: ${classifierLink}|
+               ||Type: ${componentType}${componentImpl}|
                ${compType}
                ||${typ}|
                |${domain}

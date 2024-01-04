@@ -4,7 +4,7 @@ package report
 import org.sireum._
 import org.sireum.cli.HAMR
 import org.sireum.hamr.codegen.common.properties.PropertyUtil
-import org.sireum.hamr.codegen.common.symbols.{SymbolResolver, SymbolTable, SymbolUtil}
+import org.sireum.hamr.codegen.common.symbols.{AadlThread, SymbolResolver, SymbolTable, SymbolUtil}
 import org.sireum.hamr.codegen.common.transformers.Transformers
 import org.sireum.hamr.codegen.common.types.TypeResolver
 import org.sireum.hamr.ir
@@ -12,6 +12,15 @@ import org.sireum.hamr.ir.{JSON, MsgPack}
 import org.sireum.message.Reporter
 
 object AadlModelUtil {
+  def getComponentTypeName(thread: AadlThread): String = {
+    val split = ops.StringOps(thread.component.classifier.get.name).split(c => c == '.')
+    return split(0)
+  }
+
+  def isImplementation(thread: AadlThread): B = {
+    return ops.StringOps(thread.component.classifier.get.name).contains(".")
+  }
+
   def getAadlArchDiagram(aadlRoot: Os.Path): Option[Os.Path] = {
     if((aadlRoot / "diagrams" / "aadl-arch.svg").exists) {
       return Some(aadlRoot / "diagrams" / "aadl-arch.svg")

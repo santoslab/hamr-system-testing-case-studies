@@ -131,7 +131,7 @@ class Monitor_Subsystem_Test_wSlangCheck
     // Normal --> Normal  Transitions
     "Mode_Trans___Normal__Normal" ~> TestRow(
       testDescription = "If no error condition and in normal then stay  in Normal",
-      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = validRanges,
       preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
       property = NameProvider("sysProp_NormalToNormalMode", (sysProp_NormalToNormalMode _).asInstanceOf[(Any, Any) => B])
@@ -139,36 +139,36 @@ class Monitor_Subsystem_Test_wSlangCheck
 
     "Mode_Trans___Normal__Failed__CT_Invalid" ~> TestRow(
       testDescription = "If in normal, but CT is invalid then should transition to Failed",
-      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = validRanges,
       preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
       property = NameProvider("sysProp_InvalidCTNormalToFailedMode", (sysProp_InvalidCTNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
     ),
     "Mode_Trans___Normal__Failed__LAT_Invalid" ~> TestRow(
       testDescription = "If in normal, but LAT is invalid then should transition to Failed",
-      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = validRanges,
       preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InvalidUDTNormalToFailedMode", (sysProp_InvalidLATNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+      property = NameProvider("sysProp_InvalidLATNormalToFailedMode", (sysProp_InvalidLATNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
     ),
     "Mode_Trans___Normal__Failed__UAT_Invalid" ~> TestRow(
       testDescription = "If in normal, but UAT is invalid then should transition to Failed",
-      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = validRanges,
       preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InvalidUDTNormalToFailedMode", (sysProp_InvalidUATNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+      property = NameProvider("sysProp_InvalidUATNormalToFailedMode", (sysProp_InvalidUATNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
     ),
 
     "Mode_Trans___Normal__Failed__Internal_Failure" ~> TestRow(
       testDescription = "If in normal, but there is an internal failure then should transition to Failed",
-      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = validRanges,
       preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
       property = NameProvider("sysProp_InternalFailureNormalToFailedMode", (sysProp_InternalFailureNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
     ),
     "Mode_Trans___Normal__Failed__Error_Condition" ~> TestRow(
       testDescription = "If in normal, but there is an internal or interface failure then should transition to Failed",
-      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = validRanges,
       preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
       property = NameProvider("sysProp_ErrorConditionNormalToFailedMode", (sysProp_ErrorConditionNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
@@ -176,14 +176,14 @@ class Monitor_Subsystem_Test_wSlangCheck
 
     "Mode_Impl__Init____Alarm_Off" ~> TestRow(
       testDescription = "If in Init mode then the alarm should be off",
-      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = validRanges,
       preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
       property = NameProvider("sysProp_InitModeImpliesAlarmOff", (sysProp_InitModeImpliesAlarmOff _).asInstanceOf[(Any, Any) => B])
     ),
     "Mode_Impl__Failed____Alarm_On" ~> TestRow(
       testDescription = "If in Failed mode then the alarm should be On",
-      testMethod = NameProvider("1HP", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = validRanges,
       preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
       property = NameProvider("sysProp_FailedModeImpliesAlarmOn", (sysProp_FailedModeImpliesAlarmOn _).asInstanceOf[(Any, Any) => B])

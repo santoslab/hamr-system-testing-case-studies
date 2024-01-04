@@ -10,6 +10,8 @@ import report.Report
 
 object ReadmeGen extends App {
 
+  val localResultsRootDir: Os.Path = Os.path("/opt") / "santos" / "jenkins" / "dsc_sys" / "dsc_tester"
+
   val runCodegen: B = F
   val replaceReadmes: B = T
 
@@ -38,6 +40,12 @@ object ReadmeGen extends App {
                                          val dscTestingFileName: String,
                                          val dscFQName: String
                                         ) {
+    def manualTestingFile: Os.Path = {
+      return systemTestOutputDir / manualTestingFilename
+    }
+    def dscHarnessFile: Os.Path = {
+      return systemTestOutputDir / dscTestingFileName
+    }
     def simpleManualTestSuiteName: String = {
       return ops.StringOps(manualTestingFilename).replaceAllLiterally(".scala", "")
     }
