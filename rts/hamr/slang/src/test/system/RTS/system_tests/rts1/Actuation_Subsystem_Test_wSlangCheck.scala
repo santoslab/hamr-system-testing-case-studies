@@ -73,92 +73,92 @@ class Actuation_Subsystem_Test_wSlangCheck
     // -------------
     "TempPress_Manual_Trip" ~> TestRow(
       testDescription = "TempPress Manual Trip",
-      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = getDefaultProfile,
       preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("TempPress Manual Trip", (sysProp_TempPressManualTrip _).asInstanceOf[(Any, Any) => B])
+      property = NameProvider("sysProp_TempPressManualTrip", (sysProp_TempPressManualTrip _).asInstanceOf[(Any, Any) => B])
     ),
     "Saturation_Manual_Trip" ~> TestRow(
       testDescription = "Saturation Manual Trip",
-      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = getDefaultProfile,
       preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("Saturation Manual Trip", (sysProp_SaturationManualTrip _).asInstanceOf[(Any, Any) => B])
+      property = NameProvider("sysProp_SaturationManualTrip", (sysProp_SaturationManualTrip _).asInstanceOf[(Any, Any) => B])
     ),
     // -------------
     //  AU1 Properties
     // -------------
     "AU1TempTrip" ~> TestRow(
       testDescription = "AU1TempTrip",
-      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = getDefaultProfile,
       preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("AU1TempTrip", (sysProp_AU1TempTrip _).asInstanceOf[(Any, Any) => B])
+      property = NameProvider("sysProp_AU1TempTrip", (sysProp_AU1TempTrip _).asInstanceOf[(Any, Any) => B])
     ),
     "AU1PressTrip" ~> TestRow(
       testDescription = "AU1PressTrip",
-      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = getDefaultProfile,
       preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("AU1PressTrip", (sysProp_AU1PressTrip _).asInstanceOf[(Any, Any) => B])
+      property = NameProvider("sysProp_AU1PressTrip", (sysProp_AU1PressTrip _).asInstanceOf[(Any, Any) => B])
     ),
     "AU1SatTrip" ~> TestRow(
       testDescription = "AU1SatTrip",
-      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = getDefaultProfile,
       preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("AU1SatTrip", (sysProp_AU1SatTrip _).asInstanceOf[(Any, Any) => B])
+      property = NameProvider("sysProp_AU1SatTrip", (sysProp_AU1SatTrip _).asInstanceOf[(Any, Any) => B])
     ),
     // -------------
     //  AU2 Properties
     // -------------
     "AU2TempTrip" ~> TestRow(
       testDescription = "AU2TempTrip",
-      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = getDefaultProfile,
       preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("AU2TempTrip", (sysProp_AU2TempTrip _).asInstanceOf[(Any, Any) => B])
+      property = NameProvider("sysProp_AU2TempTrip", (sysProp_AU2TempTrip _).asInstanceOf[(Any, Any) => B])
     ),
     "AU2PressTrip" ~> TestRow(
       testDescription = "AU2PressTrip",
-      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = getDefaultProfile,
       preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("AU2PressTrip", (sysProp_AU2PressTrip _).asInstanceOf[(Any, Any) => B])
+      property = NameProvider("sysProp_AU2PressTrip", (sysProp_AU2PressTrip _).asInstanceOf[(Any, Any) => B])
     ),
     "AU2SatTrip" ~> TestRow(
       testDescription = "AU2SatTrip",
-      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = getDefaultProfile,
       preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("AU2SatTrip", (sysProp_AU2SatTrip _).asInstanceOf[(Any, Any) => B])
+      property = NameProvider("sysProp_AU2SatTrip", (sysProp_AU2SatTrip _).asInstanceOf[(Any, Any) => B])
     ),
     // -------------
     //  Causality Properties
     // -------------
     "TempPressTripCausality" ~> TestRow(
       testDescription = "TempPressTripCausality",
-      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = getDefaultProfile,
       preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("TempPressTripCausality", (sysProp_TempPressTripCausality _).asInstanceOf[(Any, Any) => B])
+      property = NameProvider("sysProp_TempPressTripCausality", (sysProp_TempPressTripCausality _).asInstanceOf[(Any, Any) => B])
     ),
-     "SatTripCausality" ~> TestRow(
-          testDescription = "SatTripCausality",
-          testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
-          profile = getDefaultProfile,
-          preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-          property = NameProvider("SatTripCausality", (sysProp_SatTripCausality _).asInstanceOf[(Any, Any) => B])
-        ),
+    "SatTripCausality" ~> TestRow(
+      testDescription = "SatTripCausality",
+      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      profile = getDefaultProfile,
+      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
+      property = NameProvider("sysProp_SatTripCausality", (sysProp_SatTripCausality _).asInstanceOf[(Any, Any) => B])
+    ),
     // -------------
     //  Functional Oracle Properties
     // -------------
     "ALU_Satisfies_Oracle" ~> TestRow(
       testDescription = "ALU Satisfies Oracle",
-      testMethod = NameProvider("ALU 1HP", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
       profile = getDefaultProfile,
       preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("ALU Satisfies Oracle", (sysProp_ALU_Satisfies_Functional_Oracle _).asInstanceOf[(Any, Any) => B])
+      property = NameProvider("sysProp_ALU_Satisfies_Functional_Oracle", (sysProp_ALU_Satisfies_Functional_Oracle _).asInstanceOf[(Any, Any) => B])
     )
   )
 

@@ -79,6 +79,9 @@ object Util {
     return locateTextD(F, s, lines, linkPrefix)
   }
   def locateTextD(rev: B, s: String, lines: ISZ[String], linkPrefix: Os.Path): String = {
+    if (ops.StringOps(s).startsWith("Default ")) {
+      return "getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_"
+    }
     if (rev) {
       for (i <- lines.size - 1 to 0 by -1 if ops.StringOps(lines(i)).contains(s)) {
         return s"[$s](${linkPrefix}#L${i + 1})"
