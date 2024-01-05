@@ -330,14 +330,9 @@ import Report._
     val configs: ISZ[ReportLevel] = {
       var entries: HashSMap[String, ISZ[ReportBlock]] = HashSMap.empty
       for (config <- project.testConfigs) {
-        val projDir: String = {
-          if (project.title == "Isolette") "isolette"
-          else if (project.title == "RTS") "RTS"
-          else "??"
-        }
-        val pathToJson = ReadmeGen.localResultsRootDir / projDir / config.simpleDscHarnessName
 
-        val jsons = Os.Path.walk(pathToJson, F, F, p => p.isFile && p.name == "testRow.json")
+        val jsonsFile = config.systemTestOutputDir / s"${config.manualTestingFilename}.json"
+        val jsons: ISZ[HashSMap[String, String]] = for (l <- jsonsFile.readLines) yield Util.parseJson(l)
 
         val manualTestingFile = config.manualTestingFile
         val mtfContents = ops.StringOps(ops.StringOps(manualTestingFile.read).replaceAllLiterally("\n", " \n")).split(c => c == '\n')
@@ -347,37 +342,34 @@ import Report._
         assert (dscHarnessFile.exists, dscHarnessFile)
 
         for (json <- jsons) {
-          val harnessName = json.up.up.name
-          val configName = json.up.name
-          val jsonContent = Util.parseJson(json)
+          val harnessName = config.simpleDscHarnessName
+          val configName = json.get("testConfigurationName").get
 
           val emitMarkDown = F
 
-          val filter = "TODO"
-          //Util.locateMethodDefinition(jsonContent.get("filter").get, mtfContents, mtf)
           val content: ST = if (emitMarkDown)
             st"""${Util.locateText(configName, mtfContents, mtf)}
                  ||||
                  ||:--|--|
-                 || Description: | ${jsonContent.get("testDescription")} |
-                 || Script Schema: | ${Util.locateMethodDefinition(jsonContent.get("testMethodName").get, mtfContents, mtf)}|
-                 || Property: | ${Util.locateMethodDefinition(jsonContent.get("property").get, mtfContents, mtf)}|
-                 || Randomization Profile: | ${Util.locateTextD(T, F, jsonContent.get("profile").get, mtfContents, mtf)}|
-                 || Random Vector Filter: | ${filter}|
+                 || Description: | ${json.get("description").get} |
+                 || Script Schema: | ${Util.locateMethodDefinition(json.get("schema").get, mtfContents, mtf)}|
+                 || Property: | ${Util.locateMethodDefinition(json.get("property").get, mtfContents, mtf)}|
+                 || Randomization Profile: | ${Util.locateTextD(T, F, json.get("profile").get, mtfContents, mtf)}|
+                 || Random Vector Filter: | ${Util.locateTextD(T, F, json.get("filter").get, mtfContents, mtf)}|
                  |"""
           else
             st"""<table>
                 |<tr><th colspan=2 align="left">${Util.locateTextD(F, T, configName, mtfContents, mtf)}</th>
                 |</tr><tr>
-                |<td>Description:</td><td>${jsonContent.get("testDescription")}</td>
+                |<td>Description:</td><td>${json.get("description").get}</td>
                 |</tr><tr>
-                |<td>Script Schema:</td><td>${Util.locateMethodDefinitionH(T, jsonContent.get("testMethodName").get, mtfContents, mtf)}</td>
+                |<td>Script Schema:</td><td>${Util.locateMethodDefinitionH(T, json.get("schema").get, mtfContents, mtf)}</td>
                 |</tr><tr>
-                |<td>Property:</td><td>${Util.locateMethodDefinitionH(T, jsonContent.get("property").get, mtfContents, mtf)}</td>
+                |<td>Property:</td><td>${Util.locateMethodDefinitionH(T, json.get("property").get, mtfContents, mtf)}</td>
                 |</tr><tr>
-                |<td>Randomization Profile:</td><td>${Util.locateTextD(T, T, jsonContent.get("profile").get, mtfContents, mtf)}</td>
+                |<td>Randomization Profile:</td><td>${Util.locateTextD(T, T, json.get("profile").get, mtfContents, mtf)}</td>
                 |</tr><tr>
-                |<td>Random Vector Filter:</td><td>${filter}</td>
+                |<td>Random Vector Filter:</td><td>${Util.locateTextD(T, T, json.get("filter").get, mtfContents, mtf)}</td>
                 |</tr>
                 |</table>
                 |"""

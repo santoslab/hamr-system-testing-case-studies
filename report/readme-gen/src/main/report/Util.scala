@@ -5,13 +5,13 @@ package report
 import org.sireum._
 
 object Util {
-  def parseJson(json: Os.Path): HashSMap[String, String] = {
-    val p = org.sireum.Json.Parser.create(json.read)
+  def parseJson(str: String): HashSMap[String, String] = {
+    val p = org.sireum.Json.Parser.create(str)
     p.parseObjectBegin()
     var entries = HashSMap.empty[String, String]()
     do {
       val key = p.parseObjectKeys(ISZ[String](
-        "testFamilyName", "testDescription", "testMethodName", "property", "profile"))
+        "testConfigurationName", "description", "schema", "property", "profile", "filter"))
       val value = p.parseString()
       entries = entries + key ~> value
     } while(p.parseObjectNext())
