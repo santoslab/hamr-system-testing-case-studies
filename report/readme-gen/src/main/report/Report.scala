@@ -351,9 +351,11 @@ import Report._
           val configName = json.up.name
           val jsonContent = Util.parseJson(json)
 
+          val emitMarkDown = F
+
           val filter = "TODO"
           //Util.locateMethodDefinition(jsonContent.get("filter").get, mtfContents, mtf)
-          val content2 =
+          val content: ST = if (emitMarkDown)
             st"""${Util.locateText(configName, mtfContents, mtf)}
                  ||||
                  ||:--|--|
@@ -363,8 +365,7 @@ import Report._
                  || Randomization Profile: | ${Util.locateTextD(T, F, jsonContent.get("profile").get, mtfContents, mtf)}|
                  || Random Vector Filter: | ${filter}|
                  |"""
-
-          val content =
+          else
             st"""<table>
                 |<tr><th colspan=2 align="left">${Util.locateTextD(T, T, configName, mtfContents, mtf)}</th>
                 |</tr><tr>

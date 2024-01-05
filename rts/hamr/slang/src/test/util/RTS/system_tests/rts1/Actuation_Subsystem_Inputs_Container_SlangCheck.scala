@@ -7,14 +7,17 @@ import RTS._
 
 object Actuation_Subsystem_Inputs_Container_SlangCheck {
 
-  case class NameProvider(name: String,
-                          function: (Any, Any) => B)
+  case class NameProvider1(name: String,
+                           function: Any => B)
 
-  case class TestRow(testMethod: NameProvider,
-                     testDescription: String,
-                     profile: Actuation_Subsystem_Inputs_Container_Profile,
-                     preStateCheck: (Any => B),
-                     property: NameProvider)
+  case class NameProvider2(name: String,
+                           function: (Any, Any) => B)
+
+  case class TestConfiguration(schema: NameProvider2,
+                               description: String,
+                               profile: Actuation_Subsystem_Inputs_Container_Profile,
+                               filter: NameProvider1,
+                               property: NameProvider2)
 }
 
 trait Actuation_Subsystem_Inputs_Container_SlangCheck

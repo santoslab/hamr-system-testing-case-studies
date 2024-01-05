@@ -2,30 +2,22 @@ package RTS.system_tests.rts1
 
 import org.sireum._
 import RTS._
-import RTS.system_tests.rts1.Actuation_Subsystem_Inputs_Container_SlangCheck.{NameProvider, TestRow}
+import RTS.system_tests.rts1.Actuation_Subsystem_Inputs_Container_SlangCheck.{NameProvider1, NameProvider2, TestConfiguration}
 import art.Art
 import art.scheduling.static._
 import RTS.system_tests.rts1.Functional_Oracles._
-import RTS.system_tests.rts1.{Actuation_Subsystem_Inputs_Container, Actuation_Subsystem_Outputs_Container}
 
+import scala.language.implicitConversions
 
 // Use Scala import renaming syntax to create shorter, more convenient names, for thread components
-
-import RTS.Instrumentation.{InstrumentationMockThread_i_instrumentationMock_instrumentationMockThread_SystemTestAPI => instrumentationMockThread}
-import RTS.EventControl.{EventControlMockThread_i_eventControlMock_eventControlMockThread_SystemTestAPI => eventControlMockThread}
-import RTS.Actuators.{ActuatorsMockThread_i_actuatorsMock_actuatorsMockThread_SystemTestAPI => actuatorsMockThread}
 
 import RTS.Actuation.{CoincidenceLogic_i_actuationSubsystem_actuationUnit1_temperatureLogic_coincidenceLogic_SystemTestAPI => au1_temp_coincidenceLogic}
 import RTS.Actuation.{CoincidenceLogic_i_actuationSubsystem_actuationUnit1_pressureLogic_coincidenceLogic_SystemTestAPI => au1_press_coincidenceLogic}
 import RTS.Actuation.{CoincidenceLogic_i_actuationSubsystem_actuationUnit1_saturationLogic_coincidenceLogic_SystemTestAPI => au1_satLogic_coincidenceLogic}
-import RTS.Actuation.{OrLogic_i_actuationSubsystem_actuationUnit1_tempPressureTripOut_orLogic_SystemTestAPI => au1_tempPressTripOut_orLogic}
 import RTS.Actuation.{CoincidenceLogic_i_actuationSubsystem_actuationUnit2_temperatureLogic_coincidenceLogic_SystemTestAPI => au2_temp_coincidenceLogic}
 import RTS.Actuation.{CoincidenceLogic_i_actuationSubsystem_actuationUnit2_pressureLogic_coincidenceLogic_SystemTestAPI => au2_press_coincidenceLogic}
 import RTS.Actuation.{CoincidenceLogic_i_actuationSubsystem_actuationUnit2_saturationLogic_coincidenceLogic_SystemTestAPI => au2_satLogic_coincidenceLogic}
-import RTS.Actuation.{OrLogic_i_actuationSubsystem_actuationUnit2_tempPressureTripOut_orLogic_SystemTestAPI => au2_tempPressTripOut_orLogic}
-import RTS.Actuation.{OrLogic_i_actuationSubsystem_tempPressureActuatorUnit_actuateTempPressureActuator_orLogic_SystemTestAPI => TPAU_actTempPA_orLogic}
 import RTS.Actuation.{Actuator_i_actuationSubsystem_tempPressureActuatorUnit_tempPressureActuator_actuator_SystemTestAPI => TPAU_tempPressA_actuator}
-import RTS.Actuation.{OrLogic_i_actuationSubsystem_saturationActuatorUnit_actuateSaturationActuator_orLogic_SystemTestAPI => SAU_actSatActuator_orLogic}
 import RTS.Actuation.{Actuator_i_actuationSubsystem_saturationActuatorUnit_saturationActuator_actuator_SystemTestAPI => SAU_satActuator_actuator}
 
 class Actuation_Subsystem_Test_wSlangCheck
@@ -65,98 +57,98 @@ class Actuation_Subsystem_Test_wSlangCheck
   val maxTests = 100
   var verbose: B = T
 
-  val testMatrix: Map[String, TestRow] = Map.empty ++ ISZ(
+  val testMatrix: Map[String, TestConfiguration] = Map.empty ++ ISZ(
     // -------------
     //  Operator Override Properties
     // -------------
-    "TempPress_Manual_Trip" ~> TestRow(
-      testDescription = "TempPress Manual Trip",
-      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "TempPress_Manual_Trip" ~> TestConfiguration(
+      description = "TempPress Manual Trip",
+      schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
-      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_TempPressManualTrip", (sysProp_TempPressManualTrip _).asInstanceOf[(Any, Any) => B])
+      filter = examplePreStateContainerFilter _,
+      property = sysProp_TempPressManualTrip _
     ),
-    "Saturation_Manual_Trip" ~> TestRow(
-      testDescription = "Saturation Manual Trip",
-      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Saturation_Manual_Trip" ~> TestConfiguration(
+      description = "Saturation Manual Trip",
+      schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
-      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_SaturationManualTrip", (sysProp_SaturationManualTrip _).asInstanceOf[(Any, Any) => B])
+      filter = examplePreStateContainerFilter _,
+      property = sysProp_SaturationManualTrip _
     ),
     // -------------
     //  AU1 Properties
     // -------------
-    "AU1TempTrip" ~> TestRow(
-      testDescription = "AU1TempTrip",
-      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "AU1TempTrip" ~> TestConfiguration(
+      description = "AU1TempTrip",
+      schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
-      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_AU1TempTrip", (sysProp_AU1TempTrip _).asInstanceOf[(Any, Any) => B])
+      filter = examplePreStateContainerFilter _,
+      property = sysProp_AU1TempTrip _
     ),
-    "AU1PressTrip" ~> TestRow(
-      testDescription = "AU1PressTrip",
-      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "AU1PressTrip" ~> TestConfiguration(
+      description = "AU1PressTrip",
+      schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
-      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_AU1PressTrip", (sysProp_AU1PressTrip _).asInstanceOf[(Any, Any) => B])
+      filter = examplePreStateContainerFilter _,
+      property = sysProp_AU1PressTrip _
     ),
-    "AU1SatTrip" ~> TestRow(
-      testDescription = "AU1SatTrip",
-      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "AU1SatTrip" ~> TestConfiguration(
+      description = "AU1SatTrip",
+      schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
-      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_AU1SatTrip", (sysProp_AU1SatTrip _).asInstanceOf[(Any, Any) => B])
+      filter = examplePreStateContainerFilter _,
+      property = sysProp_AU1SatTrip _
     ),
     // -------------
     //  AU2 Properties
     // -------------
-    "AU2TempTrip" ~> TestRow(
-      testDescription = "AU2TempTrip",
-      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "AU2TempTrip" ~> TestConfiguration(
+      description = "AU2TempTrip",
+      schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
-      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_AU2TempTrip", (sysProp_AU2TempTrip _).asInstanceOf[(Any, Any) => B])
+      filter = examplePreStateContainerFilter _,
+      property = sysProp_AU2TempTrip _
     ),
-    "AU2PressTrip" ~> TestRow(
-      testDescription = "AU2PressTrip",
-      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "AU2PressTrip" ~> TestConfiguration(
+      description = "AU2PressTrip",
+      schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
-      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_AU2PressTrip", (sysProp_AU2PressTrip _).asInstanceOf[(Any, Any) => B])
+      filter = examplePreStateContainerFilter _,
+      property = sysProp_AU2PressTrip _
     ),
-    "AU2SatTrip" ~> TestRow(
-      testDescription = "AU2SatTrip",
-      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "AU2SatTrip" ~> TestConfiguration(
+      description = "AU2SatTrip",
+      schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
-      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_AU2SatTrip", (sysProp_AU2SatTrip _).asInstanceOf[(Any, Any) => B])
+      filter = examplePreStateContainerFilter _,
+      property = sysProp_AU2SatTrip _
     ),
     // -------------
     //  Causality Properties
     // -------------
-    "TempPressTripCausality" ~> TestRow(
-      testDescription = "TempPressTripCausality",
-      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "TempPressTripCausality" ~> TestConfiguration(
+      description = "TempPressTripCausality",
+      schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
-      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_TempPressTripCausality", (sysProp_TempPressTripCausality _).asInstanceOf[(Any, Any) => B])
+      filter = examplePreStateContainerFilter _,
+      property = sysProp_TempPressTripCausality _
     ),
-    "SatTripCausality" ~> TestRow(
-      testDescription = "SatTripCausality",
-      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "SatTripCausality" ~> TestConfiguration(
+      description = "SatTripCausality",
+      schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
-      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_SatTripCausality", (sysProp_SatTripCausality _).asInstanceOf[(Any, Any) => B])
+      filter = examplePreStateContainerFilter _,
+      property = sysProp_SatTripCausality _
     ),
     // -------------
     //  Functional Oracle Properties
     // -------------
-    "ALU_Satisfies_Oracle" ~> TestRow(
-      testDescription = "ALU Satisfies Oracle",
-      testMethod = NameProvider("Actuation_Subsystem_1HP_script_schema", (Actuation_Subsystem_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "ALU_Satisfies_Oracle" ~> TestConfiguration(
+      description = "ALU Satisfies Oracle",
+      schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
-      preStateCheck = (examplePreStateContainerFilter _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_ALU_Satisfies_Functional_Oracle", (sysProp_ALU_Satisfies_Functional_Oracle _).asInstanceOf[(Any, Any) => B])
+      filter = examplePreStateContainerFilter _,
+      property = sysProp_ALU_Satisfies_Functional_Oracle _
     )
   )
 
@@ -165,16 +157,16 @@ class Actuation_Subsystem_Test_wSlangCheck
     run(testRow._1, testRow._2)
   }
 
-  def genTestName(testFamilyName: String, testRow: TestRow): String = {
-    return s"${testFamilyName}: ${testRow.testMethod.name}: ${testRow.property.name}: ${testRow.profile.name}"
+  def genTestName(testFamilyName: String, testRow: TestConfiguration): String = {
+    return s"${testFamilyName}: ${testRow.schema.name}: ${testRow.property.name}: ${testRow.profile.name}"
   }
 
-  def genTestNameJson(testFamilyName: String, testRow: TestRow): String = {
+  def genTestNameJson(testFamilyName: String, testRow: TestConfiguration): String = {
     @strictpure def p(str: String): ST = Json.Printer.printString(str)
-    return st"""{"testFamilyName" : ${p(testFamilyName)}, "testDescription" : ${p(testRow.testDescription)}, "testMethodName": ${p(testRow.testMethod.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}}"""".render
+    return st"""{"testFamilyName" : ${p(testFamilyName)}, "testDescription" : ${p(testRow.description)}, "testMethodName": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}}"""".render
   }
 
-  def run(testFamilyName: String, testRow: TestRow): Unit = {
+  def run(testFamilyName: String, testRow: TestConfiguration): Unit = {
 
     for (i <- 0 until maxTests) {
       val testName = s"${genTestName(testFamilyName, testRow)}_$i"
@@ -189,7 +181,7 @@ class Actuation_Subsystem_Test_wSlangCheck
 
           next(testRow.profile) match {
             case Some(container) =>
-              if (!testRow.preStateCheck(container)) {
+              if (!testRow.filter.function(container)) {
                 // retry
               } else {
                 // debugging
@@ -198,7 +190,7 @@ class Actuation_Subsystem_Test_wSlangCheck
 //                if (!result) {
 //                  println(s"ERROR: Inputs Container: ${container}")
 //                }
-                assert(testRow.testMethod.function(container, testRow.property.function))
+                assert(testRow.schema.function(container, testRow.property.function))
                 retry = F
               }
             case _ =>
@@ -546,4 +538,19 @@ class Actuation_Subsystem_Test_wSlangCheck
     return result
   }
 
+  implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line) : NameProvider1 = {
+    val l = ops.StringOps(Actuation_Subsystem_Test_wSlangCheck.lines(line.value - 1))
+    return NameProvider1(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
+  }
+  implicit def toNameProvider2[X, Y](eta: (X, Y) => B)(implicit line: sourcecode.Line) : NameProvider2 = {
+    val l = ops.StringOps(Actuation_Subsystem_Test_wSlangCheck.lines(line.value - 1))
+    return NameProvider2(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
+  }
+  implicit def oneToGen[X](eta: (X) => B): Any => B = eta.asInstanceOf[Any => B]
+  implicit def twoToGen[X, Y](eta: (X, Y) => B): (Any, Any) => B = eta.asInstanceOf[(Any, Any) => B]
+}
+
+object Actuation_Subsystem_Test_wSlangCheck {
+  val lines: ISZ[String] =
+    ops.StringOps(ops.StringOps(Os.path(implicitly[sourcecode.File].value).read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
 }
