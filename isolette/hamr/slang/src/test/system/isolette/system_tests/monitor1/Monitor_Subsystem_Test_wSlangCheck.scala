@@ -184,21 +184,21 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_FailedModeImpliesAlarmOn _
-    ),
+    )
   )
 
   for (testRow <- testMatrix.entries) {
     run(testRow._1, testRow._2)
   }
 
-  def genTestName(testFamilyName: String, testRow: TestConfiguration): String = {
-    return s"${testFamilyName}: ${testRow.schema.name}: ${testRow.property.name}: ${testRow.profile.name}"
+  def genTestName(testConfigurationName: String, testRow: TestConfiguration): String = {
+    return s"${testConfigurationName}: ${testRow.schema.name}: ${testRow.property.name}: ${testRow.profile.name}: ${testRow.filter.name}"
   }
 
-  def genTestNameJson(testFamilyName: String, testRow: TestConfiguration): String = {
+  def genTestNameJson(testConfigurationName: String, testRow: TestConfiguration): String = {
     @strictpure def p(str: String): ST = Json.Printer.printString(str)
 
-    return st"""{"testFamilyName" : ${p(testFamilyName)}, "testDescription" : ${p(testRow.description)}, "testMethodName": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}}"""".render
+    return st"""{"testConfigurationName" : ${p(testConfigurationName)}, "description" : ${p(testRow.description)}, "schema": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}, "filter" : ${p(testRow.filter.name)}}"""".render
   }
 
   override def next(profile: Monitor_Subsystem_Inputs_Container_Profile): Option[Monitor_Subsystem_Inputs_Container] = {
@@ -617,12 +617,12 @@ class Monitor_Subsystem_Test_wSlangCheck
 
   implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line): NameProvider1 = {
     val l = ops.StringOps(Monitor_Subsystem_Test_wSlangCheck.lines(line.value - 1))
-    return NameProvider1(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
+    return NameProvider1(l.substring(l.lastIndexOf('=') + 2, l.lastIndexOf('_') - 1), eta)
   }
 
   implicit def toNameProvider2[X, Y](eta: (X, Y) => B)(implicit line: sourcecode.Line): NameProvider2 = {
     val l = ops.StringOps(Monitor_Subsystem_Test_wSlangCheck.lines(line.value - 1))
-    return NameProvider2(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
+    return NameProvider2(l.substring(l.lastIndexOf('=') + 2, l.lastIndexOf('_') - 1), eta)
   }
 
   implicit def oneToGen[X](eta: (X) => B): Any => B = eta.asInstanceOf[Any => B]
@@ -633,4 +633,13 @@ class Monitor_Subsystem_Test_wSlangCheck
 object Monitor_Subsystem_Test_wSlangCheck {
   val lines: ISZ[String] =
     ops.StringOps(ops.StringOps(Os.path(implicitly[sourcecode.File].value).read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
+
+  val dummy: B = {
+    val inst = new Monitor_Subsystem_Test_wSlangCheck()
+    val entries = for (entry <- inst.testMatrix.entries) yield inst.genTestNameJson(entry._1, entry._2)
+    val thisFile = Os.path(implicitly[sourcecode.File].value)
+    val outFile = thisFile.up / s"${thisFile.name}.json"
+    outFile.writeOver(st"${(entries, "\n")}".render)
+    F
+  }
 }
