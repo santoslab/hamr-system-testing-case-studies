@@ -367,7 +367,7 @@ import Report._
                  |"""
           else
             st"""<table>
-                |<tr><th colspan=2 align="left">${Util.locateTextD(T, T, configName, mtfContents, mtf)}</th>
+                |<tr><th colspan=2 align="left">${Util.locateTextD(F, T, configName, mtfContents, mtf)}</th>
                 |</tr><tr>
                 |<td>Description:</td><td>${jsonContent.get("testDescription")}</td>
                 |</tr><tr>
