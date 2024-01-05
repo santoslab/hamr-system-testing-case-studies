@@ -76,34 +76,43 @@ object Util {
   )
 
   def locateText(s: String, lines: ISZ[String], linkPrefix: Os.Path): String = {
-    return locateTextD(F, s, lines, linkPrefix)
+    return locateTextD(F, F, s, lines, linkPrefix)
   }
-  def locateTextD(rev: B, s: String, lines: ISZ[String], linkPrefix: Os.Path): String = {
+  def locateTextD(rev: B, makeHtmlLinks: B, s: String, lines: ISZ[String], linkPrefix: Os.Path): String = {
     if (ops.StringOps(s).startsWith("Default ")) {
       return "getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_"
     }
     if (rev) {
       for (i <- lines.size - 1 to 0 by -1 if ops.StringOps(lines(i)).contains(s)) {
-        return s"[$s](${linkPrefix}#L${i + 1})"
+        return mkLink(makeHtmlLinks, s, s"${linkPrefix}#L${i + 1})")
       }
     } else {
       for (i <- 0 until lines.size if ops.StringOps(lines(i)).contains(s)) {
-        return s"[$s](${linkPrefix}#L${i + 1})"
+        return mkLink(makeHtmlLinks, s, s"${linkPrefix}#L${i + 1})")
       }
     }
     return s"Didn't find $s in $linkPrefix"
   }
-
   def locateMethodDefinition(methodName: String, lines: ISZ[String], linkPrefix: Os.Path): String = {
+    return locateMethodDefinitionH(F, methodName, lines, linkPrefix)
+  }
+
+  def mkLink(makeHtmlLinks: B, name: String, anchor: String): String = {
+    return (
+      if (makeHtmlLinks) s"<a href=\"$anchor\">$name</a>"
+      else s"[$name]($anchor)"
+    )
+  }
+  def locateMethodDefinitionH(makeHtmlLinks: B, methodName: String, lines: ISZ[String], linkPrefix: Os.Path): String = {
     if (methodName == "Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container") {
-      return "[system_Pre_Container](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Inputs_Container_GumboX.scala#L46)"
+      return mkLink(makeHtmlLinks, "system_Pre_Container", "hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Inputs_Container_GumboX.scala#L46")
     }
     if (methodName == "getDefaultProfile") {
       return "getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_"
     }
     val deffy = s"def $methodName"
     for (i <- 0 until lines.size if ops.StringOps(lines(i)).contains(deffy)) {
-      return s"[$methodName](${linkPrefix}#L${i+1})"
+      return mkLink(makeHtmlLinks, methodName, s"{linkPrefix}#L${i+1})")
     }
     return s"Didn't find $methodName in $linkPrefix"
   }

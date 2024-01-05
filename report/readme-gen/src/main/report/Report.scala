@@ -353,18 +353,34 @@ import Report._
 
           val filter = "TODO"
           //Util.locateMethodDefinition(jsonContent.get("filter").get, mtfContents, mtf)
-          val content =
-            st"""<details><summary>${Util.locateText(configName, mtfContents, mtf)}</summary>
-                 |
-                 ||
+          val content2 =
+            st"""${Util.locateText(configName, mtfContents, mtf)}
+                 ||||
                  ||:--|--|
                  || Description: | ${jsonContent.get("testDescription")} |
                  || Script Schema: | ${Util.locateMethodDefinition(jsonContent.get("testMethodName").get, mtfContents, mtf)}|
                  || Property: | ${Util.locateMethodDefinition(jsonContent.get("property").get, mtfContents, mtf)}|
-                 || Randomization Profile: | ${Util.locateTextD(T, jsonContent.get("profile").get, mtfContents, mtf)}|
+                 || Randomization Profile: | ${Util.locateTextD(T, F, jsonContent.get("profile").get, mtfContents, mtf)}|
                  || Random Vector Filter: | ${filter}|
-                 |</details>
                  |"""
+
+          val content =
+            st"""<table>
+                |<tr><th colspan=2>${Util.locateTextD(T, T, configName, mtfContents, mtf)}</th>
+                |</tr><tr>
+                |<td>Description:</td><td>${jsonContent.get("testDescription")}</td>
+                |</tr><tr>
+                |<td>Script Schema:</td><td>${Util.locateMethodDefinitionH(T, jsonContent.get("testMethodName").get, mtfContents, mtf)}</td>
+                |</tr><tr>
+                |<td>Property:</td><td>${Util.locateMethodDefinitionH(T, jsonContent.get("property").get, mtfContents, mtf)}</td>
+                |</tr><tr>
+                |<td>Randomization Profile:</td><td>${Util.locateTextD(T, T, jsonContent.get("profile").get, mtfContents, mtf)}</td>
+                |</tr><tr>
+                |<td>Random Vector Filter:</td><td>${filter}</td>
+                |</tr>
+                |</table>
+                |"""
+
 
           val configReport = ReportBlock(
             tag = s"${harnessName}_${configName}_configuration_content",
