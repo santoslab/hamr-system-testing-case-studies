@@ -1,7 +1,7 @@
 package isolette.system_tests.monitor1
 
 import isolette._
-import isolette.system_tests.monitor1.Monitor_Subsystem_Inputs_Container_SlangCheck.TestRow
+import isolette.system_tests.monitor1.Monitor_Subsystem_Inputs_Container_SlangCheck.TestConfiguration
 import org.sireum._
 
 object Monitor_Subsystem_DSC_Test_Harness extends App {
@@ -24,7 +24,7 @@ object Monitor_Subsystem_DSC_Test_Harness extends App {
     args = args :+ ("DSC_RUNNER_SIMPLE_NAME", runnerSimpleName)
     args = args :+ ("DSC_RUNNER_CLASS_NAME", runnerClassName)
 
-    val families: ISZ[(String, TestRow)] = instance.testMatrix.entries
+    val families: ISZ[(String, TestConfiguration)] = instance.testMatrix.entries
 
     for (e <- families) {
       val familyName = e._1
@@ -64,7 +64,7 @@ class Monitor_Subsystem_DSC_Test_Harness
 
     super.beforeEach()
 
-    if (!testRow.preStateCheck(o)) {
+    if (!testRow.filter.function(o)) {
 
       if (verbose) {
         println(s"  Didn't pass pre state check ${o}")
@@ -75,7 +75,7 @@ class Monitor_Subsystem_DSC_Test_Harness
       return T
     } else {
 
-      val result = testRow.testMethod.function(o, testRow.property.function)
+      val result = testRow.schema.function(o, testRow.property.function)
 
       this.afterEach()
 

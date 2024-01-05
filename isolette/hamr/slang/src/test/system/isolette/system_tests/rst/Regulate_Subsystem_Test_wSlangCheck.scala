@@ -7,7 +7,9 @@ import org.sireum._
 import isolette.Isolette_Data_Model._
 import isolette.Regulate.Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface.ROUND
 import isolette.Regulate.{Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_SystemTestAPI => RegMHS, Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_SystemTestAPI => RegMRI, Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode_SystemTestAPI => RegMRM}
-import isolette.system_tests.rst.Regulate_Subsystem_Inputs_Container_SlangCheck.{NameProvider, TestRow}
+import isolette.system_tests.rst.Regulate_Subsystem_Inputs_Container_SlangCheck.{NameProvider1, NameProvider2, TestConfiguration}
+
+import scala.language.implicitConversions
 
 class Regulate_Subsystem_Test_wSlangCheck
   extends Regulate_Subsystem_Inputs_Container_SlangCheck {
@@ -46,81 +48,81 @@ class Regulate_Subsystem_Test_wSlangCheck
   val maxTests = 100
   var verbose: B = T
 
-  val testMatrix: Map[String, TestRow] = Map.empty ++ ISZ(
+  val testMatrix: Map[String, TestConfiguration] = Map.empty ++ ISZ(
     // ======================
     //  Output: Heat Control
     //=======================
     // -----
     //   Output: Heat Control;  Normal Mode Properties
     // -----
-    "HC__Normal_____Heat_On" ~> TestRow(
-      testDescription = "HC; Normal; => Heat On",
-      testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "HC__Normal_____Heat_On" ~> TestConfiguration(
+      description = "HC; Normal; => Heat On",
+      schema = Regulator_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_NormalModeHeatOn", (sysProp_NormalModeHeatOn _).asInstanceOf[(Any, Any) => B])
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_NormalModeHeatOn _
     ),
-    "HC__Normal_____Heat_Off" ~> TestRow(
-      testDescription = "HC; Normal; => Heat Off",
-      testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "HC__Normal_____Heat_Off" ~> TestConfiguration(
+      description = "HC; Normal; => Heat Off",
+      schema = Regulator_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_NormalModeHeatOff", (sysProp_NormalModeHeatOff _).asInstanceOf[(Any, Any) => B])
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_NormalModeHeatOff _
     ),
     // -----
     //   Output: Heat Control;  Failure properties
     // -----
-    "HC__Failing__CT____Heat_Off" ~> TestRow(
-      testDescription = "HC; Failing; CT => Heat Off",
-      testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "HC__Failing__CT____Heat_Off" ~> TestConfiguration(
+      description = "HC; Failing; CT => Heat Off",
+      schema = Regulator_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InvalidCTNormalModeHeatOff", (sysProp_InvalidCTNormalModeHeatOff _).asInstanceOf[(Any, Any) => B])
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_InvalidCTNormalModeHeatOff _
       ),
 
-   "HC__Failing__UDT____Heat_Off" ~> TestRow(
-     testDescription = "HC; Failing; UDT => Heat Off",
-     testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+   "HC__Failing__UDT____Heat_Off" ~> TestConfiguration(
+     description = "HC; Failing; UDT => Heat Off",
+     schema = Regulator_1HP_script_schema _,
      profile = validRanges,
-     preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-     property = NameProvider("sysProp_InvalidUDTNormalModeHeatOff", (sysProp_InvalidUDTNormalModeHeatOff _).asInstanceOf[(Any, Any) => B])
+     filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+     property = sysProp_InvalidUDTNormalModeHeatOff _
    ),
 
-  "HC__Failing__LDT____Heat_Off" ~> TestRow(
-    testDescription = "HC; Failing; LDT => Heat Off",
-    testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+  "HC__Failing__LDT____Heat_Off" ~> TestConfiguration(
+    description = "HC; Failing; LDT => Heat Off",
+    schema = Regulator_1HP_script_schema _,
     profile = validRanges,
-    preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-    property = NameProvider("sysProp_InvalidLDTNormalModeHeatOff", (sysProp_InvalidLDTNormalModeHeatOff _).asInstanceOf[(Any, Any) => B])
+    filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+    property = sysProp_InvalidLDTNormalModeHeatOff _
   ),
 
-  "HC__Failing__Internal_Failure____Heat_Off" ~> TestRow(
-    testDescription = "HC; Failing; Internal Failure => Heat Off",
-    testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+  "HC__Failing__Internal_Failure____Heat_Off" ~> TestConfiguration(
+    description = "HC; Failing; Internal Failure => Heat Off",
+    schema = Regulator_1HP_script_schema _,
     profile = validRanges,
-    preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-    property = NameProvider("sysProp_InternalFailureNormalModeHeatOff", (sysProp_InternalFailureNormalModeHeatOff _).asInstanceOf[(Any, Any) => B])
+    filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+    property = sysProp_InternalFailureNormalModeHeatOff _
   ),
 
     // observe any failure condition (combining the input failures and internal failures above)
-  "HC__Failing__Error_Condition____Heat_Off" ~> TestRow(
-    testDescription = "HC; Failing; Error Condition => Heat Off",
-    testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+  "HC__Failing__Error_Condition____Heat_Off" ~> TestConfiguration(
+    description = "HC; Failing; Error Condition => Heat Off",
+    schema = Regulator_1HP_script_schema _,
     profile = validRanges,
-    preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-    property = NameProvider("sysProp_ErrorConditionHeatOff", (sysProp_ErrorConditionHeatOff _).asInstanceOf[(Any, Any) => B])
+    filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+    property = sysProp_ErrorConditionHeatOff _
   ),
     // ======================
     //  Output: Display Temp
     //=======================
 
     // observe any failure condition (combining the input failures and internal failures above)
-    "DisplayTemp__Normal" ~> TestRow(
-      testDescription = "DisplayTemp; Normal",
-      testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "DisplayTemp__Normal" ~> TestConfiguration(
+      description = "DisplayTemp; Normal",
+      schema = Regulator_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_NormalDisplayTemp", (sysProp_NormalDisplayTemp _).asInstanceOf[(Any, Any) => B])
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_NormalDisplayTemp _
     ),
 
     // ======================
@@ -128,60 +130,60 @@ class Regulate_Subsystem_Test_wSlangCheck
     //=======================
 
     // Normal --> Normal  Transitions
-    "Mode_Trans___Normal__Normal" ~> TestRow(
-      testDescription = "Mode Trans:  Normal->Normal",
-      testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Trans___Normal__Normal" ~> TestConfiguration(
+      description = "Mode Trans:  Normal->Normal",
+      schema = Regulator_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_NormalToNormalMode", (sysProp_NormalToNormalMode _).asInstanceOf[(Any, Any) => B])
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_NormalToNormalMode _
     ),
 
     // Normal --> Failed  Transitions
-    "Mode_Trans___Normal__Failed__CT_Invalid" ~> TestRow(
-      testDescription = "Mode Trans:  Normal->Failed; CT Invalid",
-      testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Trans___Normal__Failed__CT_Invalid" ~> TestConfiguration(
+      description = "Mode Trans:  Normal->Failed; CT Invalid",
+      schema = Regulator_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InvalidCTNormalToFailedMode", (sysProp_InvalidCTNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_InvalidCTNormalToFailedMode _
     ),
-    "Mode_Trans___Normal__Failed__UDT_Invalid" ~> TestRow(
-      testDescription = "Mode Trans:  Normal->Failed; UDT Invalid",
-      testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Trans___Normal__Failed__UDT_Invalid" ~> TestConfiguration(
+      description = "Mode Trans:  Normal->Failed; UDT Invalid",
+      schema = Regulator_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InvalidUDTNormalToFailedMode", (sysProp_InvalidUDTNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_InvalidUDTNormalToFailedMode _
     ),
-    "Mode_Trans___Normal__Failed__LDT_Invalid" ~> TestRow(
-      testDescription = "Mode Trans:  Normal->Failed; LDT Invalid",
-      testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Trans___Normal__Failed__LDT_Invalid" ~> TestConfiguration(
+      description = "Mode Trans:  Normal->Failed; LDT Invalid",
+      schema = Regulator_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InvalidLDTNormalToFailedMode", (sysProp_InvalidLDTNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_InvalidLDTNormalToFailedMode _
     ),
-    "Mode_Trans___Normal__Failed__Internal_Failure" ~> TestRow(
-      testDescription = "Mode Trans:  Normal->Failed; Internal Failure",
-      testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Trans___Normal__Failed__Internal_Failure" ~> TestConfiguration(
+      description = "Mode Trans:  Normal->Failed; Internal Failure",
+      schema = Regulator_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InternalFailureNormalToFailedMode", (sysProp_InternalFailureNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_InternalFailureNormalToFailedMode _
     ),
     // Combinded Error Condition
-    "Mode_Trans___Normal__Failed__Error_Condition" ~> TestRow(
-      testDescription = "Mode Trans:  Normal->Failed; Error Condition",
-      testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Trans___Normal__Failed__Error_Condition" ~> TestConfiguration(
+      description = "Mode Trans:  Normal->Failed; Error Condition",
+      schema = Regulator_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_ErrorConditionNormalToFailedMode", (sysProp_ErrorConditionNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_ErrorConditionNormalToFailedMode _
     ),
 
     /*
     // Failed --> Failed Transitions  (Failure mode preserved)
-    "Mode_Trans___Failed__Failed" ~> TestRow(
+    "Mode_Trans___Failed__Failed" ~> TestConfiguration(
       testDescription = "Mode Trans:  Failed->Failed",
-      testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+      testMethod = Regulator_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-      property = NameProvider("Mode Trans: Failed->Failed", (sysProp_FailedToFailedMode _).asInstanceOf[(Any, Any) => B])
+      preStateCheck = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_FailedToFailedMode _
     ),
     */
 
@@ -192,20 +194,20 @@ class Regulate_Subsystem_Test_wSlangCheck
     //   Mode Implication; Output: Heat Control
     // -----
     // Heat Control Output
-    "Mode_Impl__Init____Heat_Off" ~> TestRow(
-      testDescription = "Mode Impl: Init => Heat Off",
-      testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Impl__Init____Heat_Off" ~> TestConfiguration(
+      description = "Mode Impl: Init => Heat Off",
+      schema = Regulator_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InitModeImpliesHeatOff", (sysProp_InitModeImpliesHeatOff _).asInstanceOf[(Any, Any) => B])
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_InitModeImpliesHeatOff _
     ),
 
-    "Mode_Impl__Failed____Heat_Off" ~> TestRow(
-      testDescription = "Mode Impl: Failed => Heat Off",
-      testMethod = NameProvider("Regulator_1HP_script_schema", (Regulator_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Impl__Failed____Heat_Off" ~> TestConfiguration(
+      description = "Mode Impl: Failed => Heat Off",
+      schema = Regulator_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (Regulate_Subsystem_Inputs_Container_GumboX.system_Pre_Container _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_FailedModeImpliesHeatOff", (sysProp_FailedModeImpliesHeatOff _).asInstanceOf[(Any, Any) => B])
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_FailedModeImpliesHeatOff _
     )
   )
 
@@ -213,16 +215,16 @@ class Regulate_Subsystem_Test_wSlangCheck
     run(testRow._1, testRow._2)
   }
 
-  def genTestName(testFamilyName: String, testRow: TestRow): String = {
-    return s"${testRow.testDescription}: ${testRow.testMethod.name}: ${testRow.property.name}: ${testRow.profile.name}"
+  def genTestName(testFamilyName: String, testRow: TestConfiguration): String = {
+    return s"${testRow.description}: ${testRow.schema.name}: ${testRow.property.name}: ${testRow.profile.name}"
   }
 
-  def genTestNameJson(testFamilyName: String, testRow: TestRow): String = {
+  def genTestNameJson(testFamilyName: String, testRow: TestConfiguration): String = {
     @strictpure def p(str: String): ST = Json.Printer.printString(str)
-    return st"""{"testFamilyName" : ${p(testFamilyName)}, "testDescription" : ${p(testRow.testDescription)}, "testMethodName": ${p(testRow.testMethod.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}}""".render
+    return st"""{"testFamilyName" : ${p(testFamilyName)}, "testDescription" : ${p(testRow.description)}, "testMethodName": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}}""".render
   }
 
-  def run(testFamilyName: String, testRow: TestRow): Unit = {
+  def run(testFamilyName: String, testRow: TestConfiguration): Unit = {
 
     for (i <- 0 until maxTests) {
       val testName = s"${genTestName(testFamilyName, testRow)}_$i"
@@ -237,10 +239,10 @@ class Regulate_Subsystem_Test_wSlangCheck
 
           next(testRow.profile) match {
             case Some(container) =>
-              if (!testRow.preStateCheck(container)) {
+              if (!testRow.filter.function(container)) {
                 // retry
               } else {
-                assert(testRow.testMethod.function(container, testRow.property.function))
+                assert(testRow.schema.function(container, testRow.property.function))
                 retry = F
               }
             case _ =>
@@ -635,4 +637,24 @@ class Regulate_Subsystem_Test_wSlangCheck
     val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
     return (triggerCondition.->:(desiredCondition))
   }
+
+  @strictpure def compute_spec_lower_is_not_higher_than_upper_assume(container: Regulate_Subsystem_Inputs_Container): B =
+    container.lowerDesiredTempWStatus.value <= container.upperDesiredTempWStatus.value
+
+  
+  implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line) : NameProvider1 = {
+    val l = ops.StringOps(Regulate_Subsystem_Test_wSlangCheck.lines(line.value - 1))
+    return NameProvider1(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
+  }
+  implicit def toNameProvider2[X, Y](eta: (X, Y) => B)(implicit line: sourcecode.Line) : NameProvider2 = {
+    val l = ops.StringOps(Regulate_Subsystem_Test_wSlangCheck.lines(line.value - 1))
+    return NameProvider2(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
+  }
+  implicit def oneToGen[X](eta: (X) => B): Any => B = eta.asInstanceOf[Any => B]
+  implicit def twoToGen[X, Y](eta: (X, Y) => B): (Any, Any) => B = eta.asInstanceOf[(Any, Any) => B]
+}
+
+object Regulate_Subsystem_Test_wSlangCheck {
+  val lines: ISZ[String] =
+    ops.StringOps(ops.StringOps(Os.path(implicitly[sourcecode.File].value).read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
 }

@@ -143,15 +143,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-description_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L118">DisplayTemp__Normal</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L120">DisplayTemp__Normal</a></th>
 </tr><tr>
 <td>Description:</td><td>DisplayTemp; Normal</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L527">sysProp_NormalDisplayTemp</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L529">sysProp_NormalDisplayTemp</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -160,15 +160,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L73">HC__Failing__CT____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L75">HC__Failing__CT____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>HC; Failing; CT => Heat Off</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L469">sysProp_InvalidCTNormalModeHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L471">sysProp_InvalidCTNormalModeHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -177,15 +177,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L106">HC__Failing__Error_Condition____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L108">HC__Failing__Error_Condition____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>HC; Failing; Error Condition => Heat Off</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L510">sysProp_ErrorConditionHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L512">sysProp_ErrorConditionHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -194,15 +194,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L97">HC__Failing__Internal_Failure____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L99">HC__Failing__Internal_Failure____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>HC; Failing; Internal Failure => Heat Off</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L500">sysProp_InternalFailureNormalModeHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L502">sysProp_InternalFailureNormalModeHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -211,15 +211,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L89">HC__Failing__LDT____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L91">HC__Failing__LDT____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>HC; Failing; LDT => Heat Off</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L489">sysProp_InvalidLDTNormalModeHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L491">sysProp_InvalidLDTNormalModeHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -228,15 +228,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L81">HC__Failing__UDT____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L83">HC__Failing__UDT____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>HC; Failing; UDT => Heat Off</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L479">sysProp_InvalidUDTNormalModeHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L481">sysProp_InvalidUDTNormalModeHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -245,15 +245,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L63">HC__Normal_____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L65">HC__Normal_____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>HC; Normal; => Heat Off</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L452">sysProp_NormalModeHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L454">sysProp_NormalModeHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -262,15 +262,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L56">HC__Normal_____Heat_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L58">HC__Normal_____Heat_On</a></th>
 </tr><tr>
 <td>Description:</td><td>HC; Normal; => Heat On</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L436">sysProp_NormalModeHeatOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L438">sysProp_NormalModeHeatOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -279,15 +279,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L203">Mode_Impl__Failed____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L205">Mode_Impl__Failed____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Impl: Failed => Heat Off</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L553">sysProp_FailedModeImpliesHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L555">sysProp_FailedModeImpliesHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -296,15 +296,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L195">Mode_Impl__Init____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L197">Mode_Impl__Init____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Impl: Init => Heat Off</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L541">sysProp_InitModeImpliesHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L543">sysProp_InitModeImpliesHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -313,15 +313,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L140">Mode_Trans___Normal__Failed__CT_Invalid</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L142">Mode_Trans___Normal__Failed__CT_Invalid</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed; CT Invalid</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L603">sysProp_InvalidCTNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L605">sysProp_InvalidCTNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -330,15 +330,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L169">Mode_Trans___Normal__Failed__Error_Condition</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L171">Mode_Trans___Normal__Failed__Error_Condition</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed; Error Condition</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L622">sysProp_ErrorConditionNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L624">sysProp_ErrorConditionNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -347,15 +347,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L161">Mode_Trans___Normal__Failed__Internal_Failure</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L163">Mode_Trans___Normal__Failed__Internal_Failure</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed; Internal Failure</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L612">sysProp_InternalFailureNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L614">sysProp_InternalFailureNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -364,15 +364,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L154">Mode_Trans___Normal__Failed__LDT_Invalid</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L156">Mode_Trans___Normal__Failed__LDT_Invalid</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed; LDT Invalid</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L594">sysProp_InvalidLDTNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L596">sysProp_InvalidLDTNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -381,15 +381,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L147">Mode_Trans___Normal__Failed__UDT_Invalid</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L149">Mode_Trans___Normal__Failed__UDT_Invalid</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed; UDT Invalid</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L584">sysProp_InvalidUDTNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L586">sysProp_InvalidUDTNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -398,15 +398,15 @@ likely would be excluded in a release build
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration_content_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L131">Mode_Trans___Normal__Normal</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L133">Mode_Trans___Normal__Normal</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Normal</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L575">sysProp_NormalToNormalMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L577">sysProp_NormalToNormalMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L266)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -419,15 +419,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-description_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L87">MA__Failing__CT____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L89">MA__Failing__CT____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>Failure due to invalid currentTemp should result in Alarm On</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L413">sysProp_InvalidCTNormalModeAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L415">sysProp_InvalidCTNormalModeAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -436,15 +436,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L117">MA__Failing__Error_Condition____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L119">MA__Failing__Error_Condition____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>observe any failure condition (combining the input failures and internal failures above) should result in Alarm On</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L465">sysProp_ErrorConditionAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L467">sysProp_ErrorConditionAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -453,15 +453,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L110">MA__Failing__Internal_Failure____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L112">MA__Failing__Internal_Failure____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>Failure due to internal failure should result in Alarm On</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L452">sysProp_InternalFailureNormalModeAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L454">sysProp_InternalFailureNormalModeAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -470,15 +470,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L94">MA__Failing__LAT____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L96">MA__Failing__LAT____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>Failure due to invalid lower alarm should result in Alarm On</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L426">sysProp_InvalidLATNormalModeAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L428">sysProp_InvalidLATNormalModeAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -487,15 +487,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L101">MA__Failing__UAT____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L103">MA__Failing__UAT____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>Failure due to invalid upper alarm should result in Alarm On</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L439">sysProp_InvalidUATNormalModeAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L441">sysProp_InvalidUATNormalModeAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -504,15 +504,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L77">MA__Normal_____Alarm_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L79">MA__Normal_____Alarm_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>MA; Normal; => Alarm Off</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L394">sysProp_NormalModeAlarmOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L396">sysProp_NormalModeAlarmOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -521,15 +521,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L49">MA__Normal_____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L51">MA__Normal_____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>MA; Normal; => Alarm On</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L368">sysProp_NormalModeAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L370">sysProp_NormalModeAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -538,15 +538,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L56">MA__Normal_____Alarm_Unchanged</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L58">MA__Normal_____Alarm_Unchanged</a></th>
 </tr><tr>
 <td>Description:</td><td>MA; Normal; => Alarm Unchanged</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L379">sysProp_NormalModeAlarmUnchanged</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L381">sysProp_NormalModeAlarmUnchanged</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -555,15 +555,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L63">MA__Normal_____Alarm_Unchanged_left</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L65">MA__Normal_____Alarm_Unchanged_left</a></th>
 </tr><tr>
 <td>Description:</td><td>MA; Normal; => Alarm Unchanged, stress left partition</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L379">sysProp_NormalModeAlarmUnchanged</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L381">sysProp_NormalModeAlarmUnchanged</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L205)">currentTemp-in-left-partition</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L207)">currentTemp-in-left-partition</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -572,15 +572,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L70">MA__Normal_____Alarm_Unchanged_right</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L72">MA__Normal_____Alarm_Unchanged_right</a></th>
 </tr><tr>
 <td>Description:</td><td>MA; Normal; => Alarm Unchanged, stress right partition</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L379">sysProp_NormalModeAlarmUnchanged</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L381">sysProp_NormalModeAlarmUnchanged</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L218)">currentTemp-in-right-partition</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L220)">currentTemp-in-right-partition</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -589,15 +589,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L180">Mode_Impl__Failed____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L182">Mode_Impl__Failed____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>If in Failed mode then the alarm should be On</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L575">sysProp_FailedModeImpliesAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L577">sysProp_FailedModeImpliesAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -606,15 +606,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L173">Mode_Impl__Init____Alarm_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L175">Mode_Impl__Init____Alarm_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>If in Init mode then the alarm should be off</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L565">sysProp_InitModeImpliesAlarmOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L567">sysProp_InitModeImpliesAlarmOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -623,15 +623,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L136">Mode_Trans___Normal__Failed__CT_Invalid</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L138">Mode_Trans___Normal__Failed__CT_Invalid</a></th>
 </tr><tr>
 <td>Description:</td><td>If in normal, but CT is invalid then should transition to Failed</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L495">sysProp_InvalidCTNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L497">sysProp_InvalidCTNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -640,15 +640,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L165">Mode_Trans___Normal__Failed__Error_Condition</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L167">Mode_Trans___Normal__Failed__Error_Condition</a></th>
 </tr><tr>
 <td>Description:</td><td>If in normal, but there is an internal or interface failure then should transition to Failed</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L550">sysProp_ErrorConditionNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L552">sysProp_ErrorConditionNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -657,15 +657,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L158">Mode_Trans___Normal__Failed__Internal_Failure</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L160">Mode_Trans___Normal__Failed__Internal_Failure</a></th>
 </tr><tr>
 <td>Description:</td><td>If in normal, but there is an internal failure then should transition to Failed</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L536">sysProp_InternalFailureNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L538">sysProp_InternalFailureNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -674,15 +674,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L143">Mode_Trans___Normal__Failed__LAT_Invalid</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L145">Mode_Trans___Normal__Failed__LAT_Invalid</a></th>
 </tr><tr>
 <td>Description:</td><td>If in normal, but LAT is invalid then should transition to Failed</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L509">sysProp_InvalidLATNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L511">sysProp_InvalidLATNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -691,15 +691,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L150">Mode_Trans___Normal__Failed__UAT_Invalid</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L152">Mode_Trans___Normal__Failed__UAT_Invalid</a></th>
 </tr><tr>
 <td>Description:</td><td>If in normal, but UAT is invalid then should transition to Failed</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L522">sysProp_InvalidUATNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L524">sysProp_InvalidUATNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -708,15 +708,15 @@ likely would be excluded in a release build
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration_content_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_start-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L128">Mode_Trans___Normal__Normal</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L130">Mode_Trans___Normal__Normal</a></th>
 </tr><tr>
 <td>Description:</td><td>If no error condition and in normal then stay  in Normal</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L482">sysProp_NormalToNormalMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L484">sysProp_NormalToNormalMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L594)">Valid Ranges Profile</a></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td>TODO</td>
 </tr>
@@ -771,14 +771,14 @@ __Regulator subsystem__
 
   System Test Suite Class: [Regulate_Subsystem_Test_wSlangCheck.scala](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala)
 
-  Test run configurations are specified via entries in the [testMatrix](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L49). For example,
-  the [HC__Normal_____Heat_On](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L56) configuration uses the following:
+  Test run configurations are specified via entries in the [testMatrix](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L51). For example,
+  the [HC__Normal_____Heat_On](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L58) configuration uses the following:
 
   | | |
   |:--|--|
-  | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299) |
-  | Property: | [sysProp_NormalModeHeatOn](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L436) |
-  | Randomization Profile: | [validRanges](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L261) |
+  | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L301) |
+  | Property: | [sysProp_NormalModeHeatOn](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L438) |
+  | Randomization Profile: | [validRanges](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L263) |
   | Random Vector Filter: | [system_Pre_Container](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Inputs_Container_GumboX.scala#L46) |
 
   How to run:
@@ -796,15 +796,15 @@ __Monitor subsystem__
 
   System Test Suite Class: [Monitor_Subsystem_Test_wSlangCheck.scala](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala)
 
-  Test run configurations are specified via entries in the [testMatrix](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L48). For example,
-  the [MA__Normal_____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L49) configuration uses the following:
+  Test run configurations are specified via entries in the [testMatrix](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L50). For example,
+  the [MA__Normal_____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L51) configuration uses the following:
 
   | | |
   |:--|--|
-  | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303) |
-  | Property: | [sysProp_NormalModeAlarmOn](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L368) |
-  | Randomization Profile: | [validRanges](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L589) |
-  | Random Vector Filter: | [assumeFigureA_7](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L299) |
+  | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305) |
+  | Property: | [sysProp_NormalModeAlarmOn](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L370) |
+  | Randomization Profile: | [validRanges](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L591) |
+  | Random Vector Filter: | [assumeFigureA_7](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301) |
 
   How to run:
 

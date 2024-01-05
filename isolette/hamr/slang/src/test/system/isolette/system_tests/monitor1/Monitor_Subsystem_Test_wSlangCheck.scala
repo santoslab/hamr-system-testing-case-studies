@@ -5,8 +5,10 @@ import art.scheduling.static._
 import isolette.Isolette_Data_Model.{Monitor_Mode, On_Off, ValueStatus}
 import isolette.Monitor.{Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_SystemTestAPI => MonMA, Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_SystemTestAPI => MonMMI, Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_SystemTestAPI => MonMMM}
 import isolette._
-import isolette.system_tests.monitor1.Monitor_Subsystem_Inputs_Container_SlangCheck.{NameProvider, TestRow}
+import isolette.system_tests.monitor1.Monitor_Subsystem_Inputs_Container_SlangCheck.{NameProvider1, NameProvider2, TestConfiguration}
 import org.sireum._
+
+import scala.language.implicitConversions
 
 class Monitor_Subsystem_Test_wSlangCheck
   extends Monitor_Subsystem_Inputs_Container_SlangCheck {
@@ -45,144 +47,144 @@ class Monitor_Subsystem_Test_wSlangCheck
   val maxTests = 100
   var verbose: B = T
 
-  val testMatrix: Map[String, TestRow] = Map.empty ++ ISZ(
-    "MA__Normal_____Alarm_On" ~> TestRow(
-      testDescription = "MA; Normal; => Alarm On",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+  val testMatrix: Map[String, TestConfiguration] = Map.empty ++ ISZ(
+    "MA__Normal_____Alarm_On" ~> TestConfiguration(
+      description = "MA; Normal; => Alarm On",
+      schema = Monitor_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_NormalModeAlarmOn", (sysProp_NormalModeAlarmOn _).asInstanceOf[(Any, Any) => B])
+      filter = assumeFigureA_7 _,
+      property = sysProp_NormalModeAlarmOn _
     ),
-    "MA__Normal_____Alarm_Unchanged" ~> TestRow(
-      testDescription = "MA; Normal; => Alarm Unchanged",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "MA__Normal_____Alarm_Unchanged" ~> TestConfiguration(
+      description = "MA; Normal; => Alarm Unchanged",
+      schema = Monitor_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_NormalModeAlarmUnchanged", (sysProp_NormalModeAlarmUnchanged _).asInstanceOf[(Any, Any) => B])
+      filter = assumeFigureA_7 _,
+      property = sysProp_NormalModeAlarmUnchanged _
     ),
-    "MA__Normal_____Alarm_Unchanged_left" ~> TestRow(
-      testDescription = "MA; Normal; => Alarm Unchanged, stress left partition",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "MA__Normal_____Alarm_Unchanged_left" ~> TestConfiguration(
+      description = "MA; Normal; => Alarm Unchanged, stress left partition",
+      schema = Monitor_1HP_script_schema _,
       profile = validRanges.copy(name = "currentTemp-in-left-partition"),
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_NormalModeAlarmUnchanged", (sysProp_NormalModeAlarmUnchanged _).asInstanceOf[(Any, Any) => B])
+      filter = assumeFigureA_7 _,
+      property = sysProp_NormalModeAlarmUnchanged _
     ),
-    "MA__Normal_____Alarm_Unchanged_right" ~> TestRow(
-      testDescription = "MA; Normal; => Alarm Unchanged, stress right partition",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "MA__Normal_____Alarm_Unchanged_right" ~> TestConfiguration(
+      description = "MA; Normal; => Alarm Unchanged, stress right partition",
+      schema = Monitor_1HP_script_schema _,
       profile = validRanges.copy(name = "currentTemp-in-right-partition"),
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_NormalModeAlarmUnchanged", (sysProp_NormalModeAlarmUnchanged _).asInstanceOf[(Any, Any) => B])
+      filter = assumeFigureA_7 _,
+      property = sysProp_NormalModeAlarmUnchanged _
     ),
-    "MA__Normal_____Alarm_Off" ~> TestRow(
-      testDescription = "MA; Normal; => Alarm Off",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "MA__Normal_____Alarm_Off" ~> TestConfiguration(
+      description = "MA; Normal; => Alarm Off",
+      schema = Monitor_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_NormalModeAlarmOff", (sysProp_NormalModeAlarmOff _).asInstanceOf[(Any, Any) => B])
-    ),
-
-
-
-    "MA__Failing__CT____Alarm_On" ~> TestRow(
-      testDescription = "Failure due to invalid currentTemp should result in Alarm On",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
-      profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InvalidCTNormalModeAlarmOn", (sysProp_InvalidCTNormalModeAlarmOn _).asInstanceOf[(Any, Any) => B])
-    ),
-    "MA__Failing__LAT____Alarm_On" ~> TestRow(
-      testDescription = "Failure due to invalid lower alarm should result in Alarm On",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
-      profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InvalidLATNormalModeAlarmOn", (sysProp_InvalidLATNormalModeAlarmOn _).asInstanceOf[(Any, Any) => B])
-    ),
-    "MA__Failing__UAT____Alarm_On" ~> TestRow(
-      testDescription = "Failure due to invalid upper alarm should result in Alarm On",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
-      profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InvalidUATNormalModeAlarmOn", (sysProp_InvalidUATNormalModeAlarmOn _).asInstanceOf[(Any, Any) => B])
+      filter = assumeFigureA_7 _,
+      property = sysProp_NormalModeAlarmOff _
     ),
 
 
-    "MA__Failing__Internal_Failure____Alarm_On" ~> TestRow(
-      testDescription = "Failure due to internal failure should result in Alarm On",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+
+    "MA__Failing__CT____Alarm_On" ~> TestConfiguration(
+      description = "Failure due to invalid currentTemp should result in Alarm On",
+      schema = Monitor_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InternalFailureNormalModeAlarmOn", (sysProp_InternalFailureNormalModeAlarmOn _).asInstanceOf[(Any, Any) => B])
+      filter = assumeFigureA_7 _,
+      property = sysProp_InvalidCTNormalModeAlarmOn _
     ),
-    "MA__Failing__Error_Condition____Alarm_On" ~> TestRow(
-      testDescription = "observe any failure condition (combining the input failures and internal failures above) should result in Alarm On",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "MA__Failing__LAT____Alarm_On" ~> TestConfiguration(
+      description = "Failure due to invalid lower alarm should result in Alarm On",
+      schema = Monitor_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_ErrorConditionAlarmOn", (sysProp_ErrorConditionAlarmOn _).asInstanceOf[(Any, Any) => B])
+      filter = assumeFigureA_7 _,
+      property = sysProp_InvalidLATNormalModeAlarmOn _
+    ),
+    "MA__Failing__UAT____Alarm_On" ~> TestConfiguration(
+      description = "Failure due to invalid upper alarm should result in Alarm On",
+      schema = Monitor_1HP_script_schema _,
+      profile = validRanges,
+      filter = assumeFigureA_7 _,
+      property = sysProp_InvalidUATNormalModeAlarmOn _
+    ),
+
+
+    "MA__Failing__Internal_Failure____Alarm_On" ~> TestConfiguration(
+      description = "Failure due to internal failure should result in Alarm On",
+      schema = Monitor_1HP_script_schema _,
+      profile = validRanges,
+      filter = assumeFigureA_7 _,
+      property = sysProp_InternalFailureNormalModeAlarmOn _
+    ),
+    "MA__Failing__Error_Condition____Alarm_On" ~> TestConfiguration(
+      description = "observe any failure condition (combining the input failures and internal failures above) should result in Alarm On",
+      schema = Monitor_1HP_script_schema _,
+      profile = validRanges,
+      filter = assumeFigureA_7 _,
+      property = sysProp_ErrorConditionAlarmOn _
     ),
 
 
 
     // Normal --> Normal  Transitions
-    "Mode_Trans___Normal__Normal" ~> TestRow(
-      testDescription = "If no error condition and in normal then stay  in Normal",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Trans___Normal__Normal" ~> TestConfiguration(
+      description = "If no error condition and in normal then stay  in Normal",
+      schema = Monitor_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_NormalToNormalMode", (sysProp_NormalToNormalMode _).asInstanceOf[(Any, Any) => B])
+      filter = assumeFigureA_7 _,
+      property = sysProp_NormalToNormalMode _
     ),
 
-    "Mode_Trans___Normal__Failed__CT_Invalid" ~> TestRow(
-      testDescription = "If in normal, but CT is invalid then should transition to Failed",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Trans___Normal__Failed__CT_Invalid" ~> TestConfiguration(
+      description = "If in normal, but CT is invalid then should transition to Failed",
+      schema = Monitor_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InvalidCTNormalToFailedMode", (sysProp_InvalidCTNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+      filter = assumeFigureA_7 _,
+      property = sysProp_InvalidCTNormalToFailedMode _
     ),
-    "Mode_Trans___Normal__Failed__LAT_Invalid" ~> TestRow(
-      testDescription = "If in normal, but LAT is invalid then should transition to Failed",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Trans___Normal__Failed__LAT_Invalid" ~> TestConfiguration(
+      description = "If in normal, but LAT is invalid then should transition to Failed",
+      schema = Monitor_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InvalidLATNormalToFailedMode", (sysProp_InvalidLATNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+      filter = assumeFigureA_7 _,
+      property = sysProp_InvalidLATNormalToFailedMode _
     ),
-    "Mode_Trans___Normal__Failed__UAT_Invalid" ~> TestRow(
-      testDescription = "If in normal, but UAT is invalid then should transition to Failed",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Trans___Normal__Failed__UAT_Invalid" ~> TestConfiguration(
+      description = "If in normal, but UAT is invalid then should transition to Failed",
+      schema = Monitor_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InvalidUATNormalToFailedMode", (sysProp_InvalidUATNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
-    ),
-
-    "Mode_Trans___Normal__Failed__Internal_Failure" ~> TestRow(
-      testDescription = "If in normal, but there is an internal failure then should transition to Failed",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
-      profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InternalFailureNormalToFailedMode", (sysProp_InternalFailureNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
-    ),
-    "Mode_Trans___Normal__Failed__Error_Condition" ~> TestRow(
-      testDescription = "If in normal, but there is an internal or interface failure then should transition to Failed",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
-      profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_ErrorConditionNormalToFailedMode", (sysProp_ErrorConditionNormalToFailedMode _).asInstanceOf[(Any, Any) => B])
+      filter = assumeFigureA_7 _,
+      property = sysProp_InvalidUATNormalToFailedMode _
     ),
 
-    "Mode_Impl__Init____Alarm_Off" ~> TestRow(
-      testDescription = "If in Init mode then the alarm should be off",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Trans___Normal__Failed__Internal_Failure" ~> TestConfiguration(
+      description = "If in normal, but there is an internal failure then should transition to Failed",
+      schema = Monitor_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_InitModeImpliesAlarmOff", (sysProp_InitModeImpliesAlarmOff _).asInstanceOf[(Any, Any) => B])
+      filter = assumeFigureA_7 _,
+      property = sysProp_InternalFailureNormalToFailedMode _
     ),
-    "Mode_Impl__Failed____Alarm_On" ~> TestRow(
-      testDescription = "If in Failed mode then the alarm should be On",
-      testMethod = NameProvider("Monitor_1HP_script_schema", (Monitor_1HP_script_schema _).asInstanceOf[(Any, Any) => B]),
+    "Mode_Trans___Normal__Failed__Error_Condition" ~> TestConfiguration(
+      description = "If in normal, but there is an internal or interface failure then should transition to Failed",
+      schema = Monitor_1HP_script_schema _,
       profile = validRanges,
-      preStateCheck = (assumeFigureA_7 _).asInstanceOf[Any => B],
-      property = NameProvider("sysProp_FailedModeImpliesAlarmOn", (sysProp_FailedModeImpliesAlarmOn _).asInstanceOf[(Any, Any) => B])
+      filter = assumeFigureA_7 _,
+      property = sysProp_ErrorConditionNormalToFailedMode _
+    ),
+
+    "Mode_Impl__Init____Alarm_Off" ~> TestConfiguration(
+      description = "If in Init mode then the alarm should be off",
+      schema = Monitor_1HP_script_schema _,
+      profile = validRanges,
+      filter = assumeFigureA_7 _,
+      property = sysProp_InitModeImpliesAlarmOff _
+    ),
+    "Mode_Impl__Failed____Alarm_On" ~> TestConfiguration(
+      description = "If in Failed mode then the alarm should be On",
+      schema = Monitor_1HP_script_schema _,
+      profile = validRanges,
+      filter = assumeFigureA_7 _,
+      property = sysProp_FailedModeImpliesAlarmOn _
     ),
   )
 
@@ -190,13 +192,13 @@ class Monitor_Subsystem_Test_wSlangCheck
     run(testRow._1, testRow._2)
   }
 
-  def genTestName(testFamilyName: String, testRow: TestRow): String = {
-    return s"${testFamilyName}: ${testRow.testMethod.name}: ${testRow.property.name}: ${testRow.profile.name}"
+  def genTestName(testFamilyName: String, testRow: TestConfiguration): String = {
+    return s"${testFamilyName}: ${testRow.schema.name}: ${testRow.property.name}: ${testRow.profile.name}"
   }
 
-  def genTestNameJson(testFamilyName: String, testRow: TestRow): String = {
+  def genTestNameJson(testFamilyName: String, testRow: TestConfiguration): String = {
     @strictpure def p(str: String): ST = Json.Printer.printString(str)
-    return st"""{"testFamilyName" : ${p(testFamilyName)}, "testDescription" : ${p(testRow.testDescription)}, "testMethodName": ${p(testRow.testMethod.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}}"""".render
+    return st"""{"testFamilyName" : ${p(testFamilyName)}, "testDescription" : ${p(testRow.description)}, "testMethodName": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}}"""".render
   }
 
   override def next(profile: Monitor_Subsystem_Inputs_Container_Profile): Option[Monitor_Subsystem_Inputs_Container] = {
@@ -243,7 +245,7 @@ class Monitor_Subsystem_Test_wSlangCheck
     }
   }
 
-  def run(testFamilyName: String, testRow: TestRow): Unit = {
+  def run(testFamilyName: String, testRow: TestConfiguration): Unit = {
 
     for (i <- 0 until maxTests) {
       val testName = s"${genTestName(testFamilyName, testRow)}_$i"
@@ -258,10 +260,10 @@ class Monitor_Subsystem_Test_wSlangCheck
 
           next(testRow.profile) match {
             case Some(container) =>
-              if (!testRow.preStateCheck(container)) {
+              if (!testRow.filter.function(container)) {
                 // retry
               } else {
-                assert(testRow.testMethod.function(container, testRow.property.function))
+                assert(testRow.schema.function(container, testRow.property.function))
                 retry = F
               }
             case _ =>
@@ -614,4 +616,20 @@ class Monitor_Subsystem_Test_wSlangCheck
     // return completed profile
     return p
   }
+
+  implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line) : NameProvider1 = {
+    val l = ops.StringOps(Monitor_Subsystem_Test_wSlangCheck.lines(line.value - 1))
+    return NameProvider1(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
+  }
+  implicit def toNameProvider2[X, Y](eta: (X, Y) => B)(implicit line: sourcecode.Line) : NameProvider2 = {
+    val l = ops.StringOps(Monitor_Subsystem_Test_wSlangCheck.lines(line.value - 1))
+    return NameProvider2(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
+  }
+  implicit def oneToGen[X](eta: (X) => B): Any => B = eta.asInstanceOf[Any => B]
+  implicit def twoToGen[X, Y](eta: (X, Y) => B): (Any, Any) => B = eta.asInstanceOf[(Any, Any) => B]
+}
+
+object Monitor_Subsystem_Test_wSlangCheck {
+  val lines: ISZ[String] =
+    ops.StringOps(ops.StringOps(Os.path(implicitly[sourcecode.File].value).read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
 }
