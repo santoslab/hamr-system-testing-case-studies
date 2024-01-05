@@ -79,10 +79,20 @@ object Report {
     return ret
   }
 
-  def createAadlComponentLink(textToDisplay: String,
-                              componentType: String,
-                              linkToImplementation: B,
-                              classifier: Classifier, aadlDir: Os.Path, rootDir: Os.Path): ST = {
+  import org.sireum.hamr.ir
+  def createAadlComponentLink(linkToImplementation: B,
+                              component: org.sireum.hamr.ir.Component,
+                              isRoot: B,
+                              aadlDir: Os.Path,
+                              rootDir: Os.Path): ST = {
+    val componentType: String = component.category match {
+      case ir.ComponentCategory.System => "system"
+      case ir.ComponentCategory.Process => "process"
+      case ir.ComponentCategory.Processor => "processor"
+      case ir.ComponentCategory.Thread => "thread"
+      case _ => "??"
+    }
+    val classifier = component.classifier.get
     val name = ops.StringOps(ops.StringOps(classifier.name).replaceAllLiterally("::", ":")).split(c => c == ':')
     val fileCands = Os.Path.walk(aadlDir, T, F,
       p =>
@@ -92,16 +102,17 @@ object Report {
     assert (fileCands.size == 1)
 
     val file = fileCands(0)
-    val searchStr: String = {
+    val (searchStr, textToDisplay): (String, String) = {
       val nameSplit = ops.StringOps(name(1)).split(c => c == '.')
-      if (nameSplit.size == 1) s"$componentType ${name(1)}" // no period
-      else if (linkToImplementation) s"$componentType implementation ${name(1)}"
-      else s"$componentType ${nameSplit(0)}"
+      if (nameSplit.size == 1) (s"$componentType ${name(1)}", name(1)) // no period
+      else if (linkToImplementation) (s"$componentType implementation ${name(1)}", name(1))
+      else (s"$componentType ${nameSplit(0)}", nameSplit(0))
     }
 
+    val declPos = component.identifier.pos.get
     val lines = file.readLines
-    for(i <- 0 until lines.size if ops.StringOps(lines(i)).contains(searchStr)) {
-      return st"[${textToDisplay}](${rootDir.relativize(file).value}#L${i + 1})"
+    for(i <- 0 until lines.size if ops.StringOps(lines(i)).contains(searchStr) && (isRoot || declPos.beginLine != i + 1)) {
+      return st"[${name(0)}::${textToDisplay}](${rootDir.relativize(file).value}#L${i + 1})"
     }
     halt(s"Infeasible: couldn't find $searchStr in $file")
   }
@@ -869,8 +880,7 @@ import Report._
     val tagPrefix = "aadl-arch-component-info"
 
     val header: ST =
-      createAadlComponentLink(table.rootSystem.identifier, "system", T,
-        table.rootSystem.component.classifier.get, aadlRootDir, project.projectRootDir)
+      createAadlComponentLink(T, table.rootSystem.component, T, aadlRootDir, project.projectRootDir)
 
     var systemProps =
       st"""|System: ${header} |
@@ -907,15 +917,11 @@ import Report._
         createLinkFromPos(name, pos, aadlRootDir, project.projectRootDir)
       }
 
-      val componentType = createAadlComponentLink(
-        AadlModelUtil.getComponentTypeName(thread), "thread", F,
-        thread.component.classifier.get, aadlRootDir, project.projectRootDir)
+      val componentType = createAadlComponentLink(F, thread.component, F, aadlRootDir, project.projectRootDir)
 
       val componentImpl: Option[ST] =
         if (AadlModelUtil.isImplementation(thread)) {
-          val link = createAadlComponentLink(
-            thread.component.classifier.get.name, "thread", T,
-            thread.component.classifier.get, aadlRootDir, project.projectRootDir)
+          val link = createAadlComponentLink(T, thread.component, F, aadlRootDir, project.projectRootDir)
           Some(st"<br>Implementation: ${link}")
         }
         else {
