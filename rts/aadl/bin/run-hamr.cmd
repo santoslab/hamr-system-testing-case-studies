@@ -84,6 +84,12 @@ codegenArgs = codegenArgs :+ (aadlDir / ".system").string
 
 val results = Os.proc(osireum ++ codegenArgs).echo.console.run()
 
+if (results.ok) {
+  val hamrBinDir = aadlDir.up / "hamr" / "slang" / "bin"
+  proc"${hamrBinDir / "sergen-sys.cmd"}".echo.console.runCheck()
+  proc"${hamrBinDir / "slangcheck-sys.cmd"}".echo.console.runCheck()
+}
+
 // Running under windows results in 23 which is an indication 
 // a platform restart was requested. Codegen completes 
 // successfully and the cli app returns 0 so 

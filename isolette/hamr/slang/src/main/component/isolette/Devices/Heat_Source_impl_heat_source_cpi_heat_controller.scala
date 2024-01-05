@@ -28,13 +28,7 @@ object Heat_Source_impl_heat_source_cpi_heat_controller {
       }
   }
 
-  def activate(api: Heat_Source_impl_Operational_Api): Unit = { }
-
-  def deactivate(api: Heat_Source_impl_Operational_Api): Unit = { }
-
   def finalise(api: Heat_Source_impl_Operational_Api): Unit = { }
-
-  def recover(api: Heat_Source_impl_Operational_Api): Unit = { }
 }
 
 @ext object Heat_Source_Native {

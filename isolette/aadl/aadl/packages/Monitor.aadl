@@ -120,9 +120,7 @@ public
 			Period => Isolette_Properties::ThreadPeriod;
 
 			Stack_Size => Isolette_Properties::StackSize;
-	end Manage_Monitor_Interface;
 
-	thread implementation Manage_Monitor_Interface.impl
 		-- The AADL GUMBO Annex formally specifies behavioral properties of the thread.
 		-- Each natural language requirement from AR-08-32 Section A.5.1.1 (e.g., REQ-MRI-1) is rendered as
 		-- a GUMBO specification clause.  These contracts are translated to code-level contracts by the HAMR
@@ -203,7 +201,10 @@ public
 							guarantee 
 								interface_failure.value ~~>: T;
 							
-		**};
+		**};			
+	end Manage_Monitor_Interface;
+
+	thread implementation Manage_Monitor_Interface.impl
 	end Manage_Monitor_Interface.impl;
 
 -- ===========================================================================================================
@@ -235,9 +236,6 @@ public
 			Period => Isolette_Properties::ThreadPeriod;
 
 			Stack_Size => Isolette_Properties::StackSize;
-	end Manage_Monitor_Mode;
-
-	thread implementation Manage_Monitor_Mode.impl
 		annex GUMBO {**
 			state
 				lastMonitorMode: Isolette_Data_Model::Monitor_Mode;
@@ -282,7 +280,10 @@ public
 										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 " :
 							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
 							guarantee timeout_condition_satisfied() == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
-		**};
+		**};			
+	end Manage_Monitor_Mode;
+
+	thread implementation Manage_Monitor_Mode.impl
 	end Manage_Monitor_Mode.impl;
 
 -- ===========================================================================================================
@@ -316,9 +317,6 @@ public
 			Period => Isolette_Properties::ThreadPeriod;
 
 			Stack_Size => Isolette_Properties::StackSize;
-	end Manage_Alarm;
-
-	thread implementation Manage_Alarm.impl
 		annex GUMBO {**
 			state
 				lastCmd: Isolette_Data_Model::On_Off;
@@ -408,7 +406,10 @@ public
 						guarantee alarm_control == Isolette_Data_Model::On_Off.Onn
 							&
 							lastCmd == Isolette_Data_Model::On_Off.Onn;
-		**};
+		**};			
+	end Manage_Alarm;
+
+	thread implementation Manage_Alarm.impl
 	end Manage_Alarm.impl;
 
 

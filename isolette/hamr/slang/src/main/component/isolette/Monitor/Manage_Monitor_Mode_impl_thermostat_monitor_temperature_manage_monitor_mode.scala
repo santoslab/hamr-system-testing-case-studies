@@ -124,11 +124,5 @@ object Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mo
     //api.logInfo(s"Sent on monitor_mode: $lastMonitorMode")
   }
 
-  def activate(api: Manage_Monitor_Mode_impl_Operational_Api): Unit = { }
-
-  def deactivate(api: Manage_Monitor_Mode_impl_Operational_Api): Unit = { }
-
   def finalise(api: Manage_Monitor_Mode_impl_Operational_Api): Unit = { }
-
-  def recover(api: Manage_Monitor_Mode_impl_Operational_Api): Unit = { }
 }

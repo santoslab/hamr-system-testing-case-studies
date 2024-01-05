@@ -153,11 +153,5 @@ object Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm {
     api.put_alarm_control(currentCmd)
   }
 
-  def activate(api: Manage_Alarm_impl_Operational_Api): Unit = { }
-
-  def deactivate(api: Manage_Alarm_impl_Operational_Api): Unit = { }
-
   def finalise(api: Manage_Alarm_impl_Operational_Api): Unit = { }
-
-  def recover(api: Manage_Alarm_impl_Operational_Api): Unit = { }
 }

@@ -137,11 +137,5 @@ object Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_sourc
     lastCmd = currentCmd
   }
 
-  def activate(api: Manage_Heat_Source_impl_Operational_Api): Unit = { }
-
-  def deactivate(api: Manage_Heat_Source_impl_Operational_Api): Unit = { }
-
   def finalise(api: Manage_Heat_Source_impl_Operational_Api): Unit = { }
-
-  def recover(api: Manage_Heat_Source_impl_Operational_Api): Unit = { }
 }

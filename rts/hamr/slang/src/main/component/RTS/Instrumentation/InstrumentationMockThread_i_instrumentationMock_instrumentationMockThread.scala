@@ -116,11 +116,5 @@ object InstrumentationMockThread_i_instrumentationMock_instrumentationMockThread
     api.put_unit2_saturationLogic_channel4(unit2TripSignals._12)
   }
 
-  def activate(api: InstrumentationMockThread_i_Operational_Api): Unit = { }
-
-  def deactivate(api: InstrumentationMockThread_i_Operational_Api): Unit = { }
-
   def finalise(api: InstrumentationMockThread_i_Operational_Api): Unit = { }
-
-  def recover(api: InstrumentationMockThread_i_Operational_Api): Unit = { }
 }

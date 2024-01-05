@@ -62,11 +62,5 @@ object OrLogic_i_actuationSubsystem_actuationUnit2_tempPressureTripOut_orLogic {
     api.put_actuate(result)
   }
 
-  def activate(api: OrLogic_i_Operational_Api): Unit = { }
-
-  def deactivate(api: OrLogic_i_Operational_Api): Unit = { }
-
   def finalise(api: OrLogic_i_Operational_Api): Unit = { }
-
-  def recover(api: OrLogic_i_Operational_Api): Unit = { }
 }

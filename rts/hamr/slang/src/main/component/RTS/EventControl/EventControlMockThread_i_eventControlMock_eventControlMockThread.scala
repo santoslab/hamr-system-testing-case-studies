@@ -60,11 +60,5 @@ object EventControlMockThread_i_eventControlMock_eventControlMockThread {
     api.put_manualActuatorInput2(manualActuatorInputs._2)
   }
 
-  def activate(api: EventControlMockThread_i_Operational_Api): Unit = { }
-
-  def deactivate(api: EventControlMockThread_i_Operational_Api): Unit = { }
-
   def finalise(api: EventControlMockThread_i_Operational_Api): Unit = { }
-
-  def recover(api: EventControlMockThread_i_Operational_Api): Unit = { }
 }

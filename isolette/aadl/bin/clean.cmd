@@ -23,7 +23,7 @@ val slangDir = hamrDir / "slang"
 
 val toKeep = ops.ISZOps(ISZ(
   (slangDir / ".idea"),
-  (slangDir / "bin"),
+  (slangDir / "bin")
   
   (slangDir / "src" / "main" / "architecture" / "isolette" / "Demo.scala"),
   (slangDir / "src" / "main" / "component"),

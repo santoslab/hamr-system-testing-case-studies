@@ -173,11 +173,5 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
     }
   }
 
-  def activate(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = { }
-
-  def deactivate(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = { }
-
   def finalise(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = { }
-
-  def recover(api: Manage_Monitor_Interface_impl_Operational_Api): Unit = { }
 }

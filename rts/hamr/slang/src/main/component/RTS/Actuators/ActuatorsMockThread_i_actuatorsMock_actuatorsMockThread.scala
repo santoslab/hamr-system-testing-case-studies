@@ -14,11 +14,5 @@ object ActuatorsMockThread_i_actuatorsMock_actuatorsMockThread {
   def timeTriggered(api: ActuatorsMockThread_i_Operational_Api): Unit = {
   }
 
-  def activate(api: ActuatorsMockThread_i_Operational_Api): Unit = { }
-
-  def deactivate(api: ActuatorsMockThread_i_Operational_Api): Unit = { }
-
   def finalise(api: ActuatorsMockThread_i_Operational_Api): Unit = { }
-
-  def recover(api: ActuatorsMockThread_i_Operational_Api): Unit = { }
 }

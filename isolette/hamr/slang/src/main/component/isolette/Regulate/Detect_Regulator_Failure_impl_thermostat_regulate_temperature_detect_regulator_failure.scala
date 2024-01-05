@@ -15,11 +15,5 @@ object Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regu
 
   def timeTriggered(api: Detect_Regulator_Failure_impl_Operational_Api): Unit = {  }
 
-  def activate(api: Detect_Regulator_Failure_impl_Operational_Api): Unit = { }
-
-  def deactivate(api: Detect_Regulator_Failure_impl_Operational_Api): Unit = { }
-
   def finalise(api: Detect_Regulator_Failure_impl_Operational_Api): Unit = { }
-
-  def recover(api: Detect_Regulator_Failure_impl_Operational_Api): Unit = { }
 }

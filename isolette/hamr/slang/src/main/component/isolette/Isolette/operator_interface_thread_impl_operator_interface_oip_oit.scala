@@ -78,11 +78,5 @@ object operator_interface_thread_impl_operator_interface_oip_oit {
     }
   }
 
-  def activate(api: operator_interface_thread_impl_Operational_Api): Unit = { }
-
-  def deactivate(api: operator_interface_thread_impl_Operational_Api): Unit = { }
-
   def finalise(api: operator_interface_thread_impl_Operational_Api): Unit = { }
-
-  def recover(api: operator_interface_thread_impl_Operational_Api): Unit = { }
 }

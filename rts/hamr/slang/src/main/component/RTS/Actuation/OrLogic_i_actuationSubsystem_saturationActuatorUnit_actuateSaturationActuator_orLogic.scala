@@ -62,11 +62,5 @@ object OrLogic_i_actuationSubsystem_saturationActuatorUnit_actuateSaturationActu
     api.put_actuate(result)
   }
 
-  def activate(api: OrLogic_i_Operational_Api): Unit = { }
-
-  def deactivate(api: OrLogic_i_Operational_Api): Unit = { }
-
   def finalise(api: OrLogic_i_Operational_Api): Unit = { }
-
-  def recover(api: OrLogic_i_Operational_Api): Unit = { }
 }

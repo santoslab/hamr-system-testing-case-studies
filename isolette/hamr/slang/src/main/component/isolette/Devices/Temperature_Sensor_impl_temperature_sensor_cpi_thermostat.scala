@@ -28,13 +28,7 @@ object Temperature_Sensor_impl_temperature_sensor_cpi_thermostat {
     api.logInfo(s"Sensed temperature: ${t.value}")
   }
 
-  def activate(api: Temperature_Sensor_impl_Operational_Api): Unit = { }
-
-  def deactivate(api: Temperature_Sensor_impl_Operational_Api): Unit = { }
-
   def finalise(api: Temperature_Sensor_impl_Operational_Api): Unit = { }
-
-  def recover(api: Temperature_Sensor_impl_Operational_Api): Unit = { }
 }
 
 @ext object Temperature_Sensor__InjectionProvider {

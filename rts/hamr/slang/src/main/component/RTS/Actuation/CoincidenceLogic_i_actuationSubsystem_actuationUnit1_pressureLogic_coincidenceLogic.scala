@@ -86,11 +86,5 @@ object CoincidenceLogic_i_actuationSubsystem_actuationUnit1_pressureLogic_coinci
     api.put_actuate(result)
   }
 
-  def activate(api: CoincidenceLogic_i_Operational_Api): Unit = { }
-
-  def deactivate(api: CoincidenceLogic_i_Operational_Api): Unit = { }
-
   def finalise(api: CoincidenceLogic_i_Operational_Api): Unit = { }
-
-  def recover(api: CoincidenceLogic_i_Operational_Api): Unit = { }
 }

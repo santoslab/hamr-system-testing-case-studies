@@ -61,11 +61,5 @@ object Actuator_i_actuationSubsystem_saturationActuatorUnit_saturationActuator_a
     api.put_output(output)
   }
 
-  def activate(api: Actuator_i_Operational_Api): Unit = { }
-
-  def deactivate(api: Actuator_i_Operational_Api): Unit = { }
-
   def finalise(api: Actuator_i_Operational_Api): Unit = { }
-
-  def recover(api: Actuator_i_Operational_Api): Unit = { }
 }
