@@ -78,40 +78,40 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_InvalidCTNormalModeHeatOff _
-      ),
+    ),
 
-   "HC__Failing__UDT____Heat_Off" ~> TestConfiguration(
-     description = "HC; Failing; UDT => Heat Off",
-     schema = Regulator_1HP_script_schema _,
-     profile = validRanges,
-     filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-     property = sysProp_InvalidUDTNormalModeHeatOff _
-   ),
+    "HC__Failing__UDT____Heat_Off" ~> TestConfiguration(
+      description = "HC; Failing; UDT => Heat Off",
+      schema = Regulator_1HP_script_schema _,
+      profile = validRanges,
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_InvalidUDTNormalModeHeatOff _
+    ),
 
-  "HC__Failing__LDT____Heat_Off" ~> TestConfiguration(
-    description = "HC; Failing; LDT => Heat Off",
-    schema = Regulator_1HP_script_schema _,
-    profile = validRanges,
-    filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-    property = sysProp_InvalidLDTNormalModeHeatOff _
-  ),
+    "HC__Failing__LDT____Heat_Off" ~> TestConfiguration(
+      description = "HC; Failing; LDT => Heat Off",
+      schema = Regulator_1HP_script_schema _,
+      profile = validRanges,
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_InvalidLDTNormalModeHeatOff _
+    ),
 
-  "HC__Failing__Internal_Failure____Heat_Off" ~> TestConfiguration(
-    description = "HC; Failing; Internal Failure => Heat Off",
-    schema = Regulator_1HP_script_schema _,
-    profile = validRanges,
-    filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-    property = sysProp_InternalFailureNormalModeHeatOff _
-  ),
+    "HC__Failing__Internal_Failure____Heat_Off" ~> TestConfiguration(
+      description = "HC; Failing; Internal Failure => Heat Off",
+      schema = Regulator_1HP_script_schema _,
+      profile = validRanges,
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_InternalFailureNormalModeHeatOff _
+    ),
 
     // observe any failure condition (combining the input failures and internal failures above)
-  "HC__Failing__Error_Condition____Heat_Off" ~> TestConfiguration(
-    description = "HC; Failing; Error Condition => Heat Off",
-    schema = Regulator_1HP_script_schema _,
-    profile = validRanges,
-    filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-    property = sysProp_ErrorConditionHeatOff _
-  ),
+    "HC__Failing__Error_Condition____Heat_Off" ~> TestConfiguration(
+      description = "HC; Failing; Error Condition => Heat Off",
+      schema = Regulator_1HP_script_schema _,
+      profile = validRanges,
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_ErrorConditionHeatOff _
+    ),
     // ======================
     //  Output: Display Temp
     //=======================
@@ -221,6 +221,7 @@ class Regulate_Subsystem_Test_wSlangCheck
 
   def genTestNameJson(testFamilyName: String, testRow: TestConfiguration): String = {
     @strictpure def p(str: String): ST = Json.Printer.printString(str)
+
     return st"""{"testFamilyName" : ${p(testFamilyName)}, "testDescription" : ${p(testRow.description)}, "testMethodName": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}}""".render
   }
 
@@ -288,7 +289,7 @@ class Regulate_Subsystem_Test_wSlangCheck
   }
 
 
-//=============================================================
+  //=============================================================
   //  Test Script Schemas
   //
   //   I believe that this could eventually be auto-generated from
@@ -577,7 +578,7 @@ class Regulate_Subsystem_Test_wSlangCheck
   def sysProp_NormalToNormalMode(inputs_container: Regulate_Subsystem_Inputs_Container,
                                  outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = (!helper_RegulatorErrorCondition(inputs_container)
-                            & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+      & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
     val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
     return (triggerCondition.->:(desiredCondition))
   }
@@ -641,16 +642,19 @@ class Regulate_Subsystem_Test_wSlangCheck
   @strictpure def compute_spec_lower_is_not_higher_than_upper_assume(container: Regulate_Subsystem_Inputs_Container): B =
     container.lowerDesiredTempWStatus.value <= container.upperDesiredTempWStatus.value
 
-  
-  implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line) : NameProvider1 = {
+
+  implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line): NameProvider1 = {
     val l = ops.StringOps(Regulate_Subsystem_Test_wSlangCheck.lines(line.value - 1))
     return NameProvider1(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
   }
-  implicit def toNameProvider2[X, Y](eta: (X, Y) => B)(implicit line: sourcecode.Line) : NameProvider2 = {
+
+  implicit def toNameProvider2[X, Y](eta: (X, Y) => B)(implicit line: sourcecode.Line): NameProvider2 = {
     val l = ops.StringOps(Regulate_Subsystem_Test_wSlangCheck.lines(line.value - 1))
     return NameProvider2(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
   }
+
   implicit def oneToGen[X](eta: (X) => B): Any => B = eta.asInstanceOf[Any => B]
+
   implicit def twoToGen[X, Y](eta: (X, Y) => B): (Any, Any) => B = eta.asInstanceOf[(Any, Any) => B]
 }
 

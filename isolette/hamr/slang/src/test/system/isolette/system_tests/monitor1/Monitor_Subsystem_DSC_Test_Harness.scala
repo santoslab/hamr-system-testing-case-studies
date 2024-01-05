@@ -29,11 +29,11 @@ object Monitor_Subsystem_DSC_Test_Harness extends App {
     for (e <- families) {
       val familyName = e._1
 
-      assert (!ops.StringOps(familyName).contains(" "), s"keys cannot contain spaces: $familyName")
+      assert(!ops.StringOps(familyName).contains(" "), s"keys cannot contain spaces: $familyName")
 
       val fargs = args :+ ("DSC_TEST_FAMILY_NAME", familyName)
 
-      val data = for(f <- fargs) yield s"--data ${f._1}=${f._2}"
+      val data = for (f <- fargs) yield s"--data ${f._1}=${f._2}"
       val command = st"${(data, " ")}"
 
       println(command.render)
@@ -45,7 +45,7 @@ object Monitor_Subsystem_DSC_Test_Harness extends App {
 
 class Monitor_Subsystem_DSC_Test_Harness
   extends Monitor_Subsystem_Test_wSlangCheck
-  with Monitor_Subsystem_Inputs_Container_DSC_Test_Harness {
+    with Monitor_Subsystem_Inputs_Container_DSC_Test_Harness {
 
   override def next(): isolette.system_tests.monitor1.Monitor_Subsystem_Inputs_Container = {
     val testRow = testMatrix.get(getTestId()).get

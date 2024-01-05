@@ -50,7 +50,7 @@ class Example_Regulate_Subsystem_Inputs_Container_Test_wSlangCheck
     "testFamilyName" ~> TestConfiguration(
       description = "test-description",
       schema = NameProvider2("Schema-Name", (input_container: Any, property_function: Any) => T),
-      profile =getDefaultProfile,
+      profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = NameProvider2("Property-Name", (input_container: Any, output_container: Any) => T)
     )
@@ -66,6 +66,7 @@ class Example_Regulate_Subsystem_Inputs_Container_Test_wSlangCheck
 
   def genTestNameJson(testFamilyName: String, testRow: TestConfiguration): String = {
     @strictpure def p(str: String): ST = Json.Printer.printString(str)
+
     return st"""{"testFamilyName" : ${p(testFamilyName)}, "testDescription" : ${p(testRow.description)}, "testMethodName": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}}"""".render
   }
 
@@ -107,15 +108,18 @@ class Example_Regulate_Subsystem_Inputs_Container_Test_wSlangCheck
   }
 
 
-  implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line) : NameProvider1 = {
+  implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line): NameProvider1 = {
     val l = ops.StringOps(Example_Regulate_Subsystem_Inputs_Container_Test_wSlangCheck.lines(line.value - 1))
     return NameProvider1(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
   }
-  implicit def toNameProvider2[X, Y](eta: (X, Y) => B)(implicit line: sourcecode.Line) : NameProvider2 = {
+
+  implicit def toNameProvider2[X, Y](eta: (X, Y) => B)(implicit line: sourcecode.Line): NameProvider2 = {
     val l = ops.StringOps(Example_Regulate_Subsystem_Inputs_Container_Test_wSlangCheck.lines(line.value - 1))
     return NameProvider2(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
   }
+
   implicit def oneToGen[X](eta: (X) => B): Any => B = eta.asInstanceOf[Any => B]
+
   implicit def twoToGen[X, Y](eta: (X, Y) => B): (Any, Any) => B = eta.asInstanceOf[(Any, Any) => B]
 }
 

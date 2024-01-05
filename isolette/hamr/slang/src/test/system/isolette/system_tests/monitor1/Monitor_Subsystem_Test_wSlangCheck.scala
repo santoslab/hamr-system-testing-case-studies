@@ -85,7 +85,6 @@ class Monitor_Subsystem_Test_wSlangCheck
     ),
 
 
-
     "MA__Failing__CT____Alarm_On" ~> TestConfiguration(
       description = "Failure due to invalid currentTemp should result in Alarm On",
       schema = Monitor_1HP_script_schema _,
@@ -198,6 +197,7 @@ class Monitor_Subsystem_Test_wSlangCheck
 
   def genTestNameJson(testFamilyName: String, testRow: TestConfiguration): String = {
     @strictpure def p(str: String): ST = Json.Printer.printString(str)
+
     return st"""{"testFamilyName" : ${p(testFamilyName)}, "testDescription" : ${p(testRow.description)}, "testMethodName": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}}"""".render
   }
 
@@ -207,7 +207,7 @@ class Monitor_Subsystem_Test_wSlangCheck
         case string"currentTemp-in-left-partition" =>
           val la = profile.lowerAlarmTempWStatus.nextIsolette_Data_ModelTempWstatus_impl()
           val nextCt = profile.currentTempWStatus.set_Config_F32(profile.currentTempWStatus.get_Config_F32(
-            low = Some(la.value),         // currentTemp >= lowerAlarm
+            low = Some(la.value), // currentTemp >= lowerAlarm
             high = Some(la.value + 0.49f) // currentTemp < lowerAlarm + 0.5
           ))
           val ct = nextCt.nextIsolette_Data_ModelTempWstatus_impl()
@@ -220,8 +220,8 @@ class Monitor_Subsystem_Test_wSlangCheck
         case string"currentTemp-in-right-partition" =>
           val ua = profile.upperAlarmTempWStatus.nextIsolette_Data_ModelTempWstatus_impl()
           val nextCt = profile.currentTempWStatus.set_Config_F32(profile.currentTempWStatus.get_Config_F32(
-            low = Some(ua.value -  0.49f), // currentTemp > upperAlarm - 0.5
-            high = Some(ua.value)          // currentTemp <= upperAlarm
+            low = Some(ua.value - 0.49f), // currentTemp > upperAlarm - 0.5
+            high = Some(ua.value) // currentTemp <= upperAlarm
           ))
           val ct = nextCt.nextIsolette_Data_ModelTempWstatus_impl()
           return Some(Monitor_Subsystem_Inputs_Container(
@@ -401,15 +401,12 @@ class Monitor_Subsystem_Test_wSlangCheck
       !helper_MonitorErrorCondition(inputs_Container) &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode &
         !helper_AlarmShouldBeOn(inputs_Container)
-        !helper_AlarmShouldBeUnchanged(inputs_Container)
+    !helper_AlarmShouldBeUnchanged(inputs_Container)
 
     val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Off
 
     return triggerCondition.->:(desiredCondition)
   }
-
-
-
 
 
   def sysProp_InvalidCTNormalModeAlarmOn(inputs_Container: Monitor_Subsystem_Inputs_Container,
@@ -426,7 +423,7 @@ class Monitor_Subsystem_Test_wSlangCheck
   }
 
   def sysProp_InvalidLATNormalModeAlarmOn(inputs_Container: Monitor_Subsystem_Inputs_Container,
-                                         outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+                                          outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
     val triggerCondition: B =
@@ -475,7 +472,7 @@ class Monitor_Subsystem_Test_wSlangCheck
 
     val desiredCondition: B =
       outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode &
-      outputs_Containers(1).alarm_control == On_Off.Onn
+        outputs_Containers(1).alarm_control == On_Off.Onn
 
     return triggerCondition.->:(desiredCondition)
   }
@@ -495,7 +492,7 @@ class Monitor_Subsystem_Test_wSlangCheck
   }
 
   def sysProp_InvalidCTNormalToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
-                                           outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+                                          outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
     val triggerCondition: B =
@@ -521,6 +518,7 @@ class Monitor_Subsystem_Test_wSlangCheck
 
     return triggerCondition.->:(desiredCondition)
   }
+
   def sysProp_InvalidUATNormalToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                            outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
@@ -565,7 +563,7 @@ class Monitor_Subsystem_Test_wSlangCheck
 
 
   def sysProp_InitModeImpliesAlarmOff(inputs_Container: Monitor_Subsystem_Inputs_Container,
-                                     outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+                                      outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
     val triggerCondition: B = outputs_Containers(1).monitor_mode == Monitor_Mode.Init_Monitor_Mode
@@ -617,15 +615,18 @@ class Monitor_Subsystem_Test_wSlangCheck
     return p
   }
 
-  implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line) : NameProvider1 = {
+  implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line): NameProvider1 = {
     val l = ops.StringOps(Monitor_Subsystem_Test_wSlangCheck.lines(line.value - 1))
     return NameProvider1(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
   }
-  implicit def toNameProvider2[X, Y](eta: (X, Y) => B)(implicit line: sourcecode.Line) : NameProvider2 = {
+
+  implicit def toNameProvider2[X, Y](eta: (X, Y) => B)(implicit line: sourcecode.Line): NameProvider2 = {
     val l = ops.StringOps(Monitor_Subsystem_Test_wSlangCheck.lines(line.value - 1))
     return NameProvider2(l.substring(l.lastIndexOf('=') + 1, l.lastIndexOf('_') - 1), eta)
   }
+
   implicit def oneToGen[X](eta: (X) => B): Any => B = eta.asInstanceOf[Any => B]
+
   implicit def twoToGen[X, Y](eta: (X, Y) => B): (Any, Any) => B = eta.asInstanceOf[(Any, Any) => B]
 }
 
