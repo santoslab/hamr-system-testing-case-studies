@@ -366,7 +366,7 @@ import Report._
 
           val content =
             st"""<table>
-                |<tr><th colspan=2>${Util.locateTextD(T, T, configName, mtfContents, mtf)}</th>
+                |<tr><th colspan=2 align="left">${Util.locateTextD(T, T, configName, mtfContents, mtf)}</th>
                 |</tr><tr>
                 |<td>Description:</td><td>${jsonContent.get("testDescription")}</td>
                 |</tr><tr>
@@ -381,13 +381,9 @@ import Report._
                 |</table>
                 |"""
 
-
           val configReport = ReportBlock(
             tag = s"${harnessName}_${configName}_configuration_content",
-            //title = Some(st"${Util.locateText(configName, mtfContents, mtf)}"),
-            //description = None(),
             content = Some(content)
-            //subLevels = ISZ()
           )
           val subEntries: ISZ[ReportBlock] = entries.get(harnessName) match {
             case Some(existing) => existing

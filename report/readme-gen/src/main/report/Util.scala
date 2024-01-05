@@ -88,7 +88,7 @@ object Util {
       }
     } else {
       for (i <- 0 until lines.size if ops.StringOps(lines(i)).contains(s)) {
-        return mkLink(makeHtmlLinks, s, s"${linkPrefix}#L${i + 1})")
+        return mkLink(makeHtmlLinks, s, s"${linkPrefix}#L${i + 1}")
       }
     }
     return s"Didn't find $s in $linkPrefix"
@@ -112,7 +112,7 @@ object Util {
     }
     val deffy = s"def $methodName"
     for (i <- 0 until lines.size if ops.StringOps(lines(i)).contains(deffy)) {
-      return mkLink(makeHtmlLinks, methodName, s"{linkPrefix}#L${i+1})")
+      return mkLink(makeHtmlLinks, methodName, s"${linkPrefix}#L${i+1}")
     }
     return s"Didn't find $methodName in $linkPrefix"
   }
