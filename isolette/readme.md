@@ -141,484 +141,452 @@ likely would be excluded in a release build
 #### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-title_start-->Configurations for Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-title_end-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-description_start-->
 <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-description_end-->
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration-title_start-->[DisplayTemp__Normal](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L118)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration_content_start-->
-| | |
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration_content_start-->
+<details><summary>[DisplayTemp__Normal](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L118)</summary>
+
+|
 |:--|--|
 | Description: | DisplayTemp; Normal |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_NormalDisplayTemp](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L527)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration_content_start-->
+<details><summary>[HC__Failing__CT____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L73)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration-title_start-->[HC__Failing__CT____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L73)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | HC; Failing; CT => Heat Off |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_InvalidCTNormalModeHeatOff](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L469)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration_content_start-->
+<details><summary>[HC__Failing__Error_Condition____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L106)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration-title_start-->[HC__Failing__Error_Condition____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L106)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | HC; Failing; Error Condition => Heat Off |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_ErrorConditionHeatOff](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L510)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration_content_start-->
+<details><summary>[HC__Failing__Internal_Failure____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L97)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration-title_start-->[HC__Failing__Internal_Failure____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L97)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | HC; Failing; Internal Failure => Heat Off |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_InternalFailureNormalModeHeatOff](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L500)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration_content_start-->
+<details><summary>[HC__Failing__LDT____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L89)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration-title_start-->[HC__Failing__LDT____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L89)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | HC; Failing; LDT => Heat Off |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_InvalidLDTNormalModeHeatOff](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L489)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration_content_start-->
+<details><summary>[HC__Failing__UDT____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L81)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration-title_start-->[HC__Failing__UDT____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L81)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | HC; Failing; UDT => Heat Off |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_InvalidUDTNormalModeHeatOff](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L479)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration_content_start-->
+<details><summary>[HC__Normal_____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L63)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration-title_start-->[HC__Normal_____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L63)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | HC; Normal; => Heat Off |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_NormalModeHeatOff](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L452)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration_content_start-->
+<details><summary>[HC__Normal_____Heat_On](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L56)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration-title_start-->[HC__Normal_____Heat_On](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L56)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | HC; Normal; => Heat On |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_NormalModeHeatOn](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L436)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration_content_start-->
+<details><summary>[Mode_Impl__Failed____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L203)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration-title_start-->[Mode_Impl__Failed____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L203)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | Mode Impl: Failed => Heat Off |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_FailedModeImpliesHeatOff](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L553)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration_content_start-->
+<details><summary>[Mode_Impl__Init____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L195)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration-title_start-->[Mode_Impl__Init____Heat_Off](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L195)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | Mode Impl: Init => Heat Off |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_InitModeImpliesHeatOff](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L541)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_start-->
+<details><summary>[Mode_Trans___Normal__Failed__CT_Invalid](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L140)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration-title_start-->[Mode_Trans___Normal__Failed__CT_Invalid](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L140)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | Mode Trans:  Normal->Failed; CT Invalid |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_InvalidCTNormalToFailedMode](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L603)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_start-->
+<details><summary>[Mode_Trans___Normal__Failed__Error_Condition](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L169)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration-title_start-->[Mode_Trans___Normal__Failed__Error_Condition](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L169)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | Mode Trans:  Normal->Failed; Error Condition |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_ErrorConditionNormalToFailedMode](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L622)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_start-->
+<details><summary>[Mode_Trans___Normal__Failed__Internal_Failure](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L161)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration-title_start-->[Mode_Trans___Normal__Failed__Internal_Failure](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L161)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | Mode Trans:  Normal->Failed; Internal Failure |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_InternalFailureNormalToFailedMode](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L612)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration_content_start-->
+<details><summary>[Mode_Trans___Normal__Failed__LDT_Invalid](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L154)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration-title_start-->[Mode_Trans___Normal__Failed__LDT_Invalid](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L154)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | Mode Trans:  Normal->Failed; LDT Invalid |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_InvalidLDTNormalToFailedMode](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L594)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration_content_start-->
+<details><summary>[Mode_Trans___Normal__Failed__UDT_Invalid](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L147)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration-title_start-->[Mode_Trans___Normal__Failed__UDT_Invalid](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L147)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | Mode Trans:  Normal->Failed; UDT Invalid |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_InvalidUDTNormalToFailedMode](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L584)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_start-->
+<details><summary>[Mode_Trans___Normal__Normal](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L131)</summary>
 
-##### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration-title_start-->[Mode_Trans___Normal__Normal](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L131)<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | Mode Trans:  Normal->Normal |
 | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L299)|
 | Property: | [sysProp_NormalToNormalMode](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L575)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_end-->
+<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_end-->
 
 #### <!--Monitor_Subsystem_DSC_Test_Harness_configurations-title_start-->Configurations for Monitor_Subsystem_DSC_Test_Harness<!--Monitor_Subsystem_DSC_Test_Harness_configurations-title_end-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-description_start-->
 <!--Monitor_Subsystem_DSC_Test_Harness_configurations-description_end-->
-##### <!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration-title_start-->[MA__Failing__CT____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L87)<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration_content_start-->
-| | |
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration_content_start-->
+<details><summary>[MA__Failing__CT____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L87)</summary>
+
+|
 |:--|--|
 | Description: | Failure due to invalid currentTemp should result in Alarm On |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_InvalidCTNormalModeAlarmOn](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L413)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration_content_start-->
+<details><summary>[MA__Failing__Error_Condition____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L117)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration-title_start-->[MA__Failing__Error_Condition____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L117)<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | observe any failure condition (combining the input failures and internal failures above) should result in Alarm On |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_ErrorConditionAlarmOn](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L465)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration_content_start-->
+<details><summary>[MA__Failing__Internal_Failure____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L110)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration-title_start-->[MA__Failing__Internal_Failure____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L110)<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | Failure due to internal failure should result in Alarm On |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_InternalFailureNormalModeAlarmOn](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L452)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration_content_start-->
+<details><summary>[MA__Failing__LAT____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L94)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration-title_start-->[MA__Failing__LAT____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L94)<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | Failure due to invalid lower alarm should result in Alarm On |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_InvalidLATNormalModeAlarmOn](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L426)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration_content_start-->
+<details><summary>[MA__Failing__UAT____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L101)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration-title_start-->[MA__Failing__UAT____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L101)<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | Failure due to invalid upper alarm should result in Alarm On |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_InvalidUATNormalModeAlarmOn](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L439)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration_content_start-->
+<details><summary>[MA__Normal_____Alarm_Off](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L77)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration-title_start-->[MA__Normal_____Alarm_Off](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L77)<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | MA; Normal; => Alarm Off |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_NormalModeAlarmOff](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L394)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration_content_start-->
+<details><summary>[MA__Normal_____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L49)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration-title_start-->[MA__Normal_____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L49)<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | MA; Normal; => Alarm On |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_NormalModeAlarmOn](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L368)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration_content_start-->
+<details><summary>[MA__Normal_____Alarm_Unchanged](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L56)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration-title_start-->[MA__Normal_____Alarm_Unchanged](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L56)<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | MA; Normal; => Alarm Unchanged |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_NormalModeAlarmUnchanged](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L379)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration_content_start-->
+<details><summary>[MA__Normal_____Alarm_Unchanged_left](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L63)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration-title_start-->[MA__Normal_____Alarm_Unchanged_left](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L63)<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | MA; Normal; => Alarm Unchanged, stress left partition |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_NormalModeAlarmUnchanged](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L379)|
 | Randomization Profile: | [currentTemp-in-left-partition](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L205)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration_content_start-->
+<details><summary>[MA__Normal_____Alarm_Unchanged_right](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L70)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration-title_start-->[MA__Normal_____Alarm_Unchanged_right](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L70)<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | MA; Normal; => Alarm Unchanged, stress right partition |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_NormalModeAlarmUnchanged](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L379)|
 | Randomization Profile: | [currentTemp-in-right-partition](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L218)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration_content_start-->
+<details><summary>[Mode_Impl__Failed____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L180)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration-title_start-->[Mode_Impl__Failed____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L180)<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | If in Failed mode then the alarm should be On |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_FailedModeImpliesAlarmOn](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L575)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration_content_start-->
+<details><summary>[Mode_Impl__Init____Alarm_Off](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L173)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration-title_start-->[Mode_Impl__Init____Alarm_Off](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L173)<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | If in Init mode then the alarm should be off |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_InitModeImpliesAlarmOff](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L565)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_start-->
+<details><summary>[Mode_Trans___Normal__Failed__CT_Invalid](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L136)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration-title_start-->[Mode_Trans___Normal__Failed__CT_Invalid](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L136)<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | If in normal, but CT is invalid then should transition to Failed |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_InvalidCTNormalToFailedMode](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L495)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_start-->
+<details><summary>[Mode_Trans___Normal__Failed__Error_Condition](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L165)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration-title_start-->[Mode_Trans___Normal__Failed__Error_Condition](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L165)<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | If in normal, but there is an internal or interface failure then should transition to Failed |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_ErrorConditionNormalToFailedMode](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L550)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_start-->
+<details><summary>[Mode_Trans___Normal__Failed__Internal_Failure](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L158)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration-title_start-->[Mode_Trans___Normal__Failed__Internal_Failure](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L158)<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | If in normal, but there is an internal failure then should transition to Failed |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_InternalFailureNormalToFailedMode](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L536)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration_content_start-->
+<details><summary>[Mode_Trans___Normal__Failed__LAT_Invalid](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L143)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration-title_start-->[Mode_Trans___Normal__Failed__LAT_Invalid](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L143)<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | If in normal, but LAT is invalid then should transition to Failed |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_InvalidLATNormalToFailedMode](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L509)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration_content_start-->
+<details><summary>[Mode_Trans___Normal__Failed__UAT_Invalid](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L150)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration-title_start-->[Mode_Trans___Normal__Failed__UAT_Invalid](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L150)<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | If in normal, but UAT is invalid then should transition to Failed |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_InvalidUATNormalToFailedMode](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L522)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_start-->
+<details><summary>[Mode_Trans___Normal__Normal](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L128)</summary>
 
-##### <!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration-title_start-->[Mode_Trans___Normal__Normal](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L128)<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | If no error condition and in normal then stay  in Normal |
 | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L303)|
 | Property: | [sysProp_NormalToNormalMode](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L482)|
 | Randomization Profile: | [Valid Ranges Profile](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_end-->
+<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_end-->
 
 ## <!--how-to-run-title_start-->How to Run<!--how-to-run-title_end-->
 <!--how-to-run-description_start-->

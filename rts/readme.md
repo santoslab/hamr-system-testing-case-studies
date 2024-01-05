@@ -184,159 +184,149 @@ likely would be excluded in a release build
 #### <!--Actuation_Subsystem_DSC_Test_Harness_configurations-title_start-->Configurations for Actuation_Subsystem_DSC_Test_Harness<!--Actuation_Subsystem_DSC_Test_Harness_configurations-title_end-->
 <!--Actuation_Subsystem_DSC_Test_Harness_configurations-description_start-->
 <!--Actuation_Subsystem_DSC_Test_Harness_configurations-description_end-->
-##### <!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-title_start-->[ALU_Satisfies_Oracle](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L154)<!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-title_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-description_start-->
-<!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-description_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration_content_start-->
-| | |
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration_content_start-->
+<details><summary>[ALU_Satisfies_Oracle](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L154)</summary>
+
+|
 |:--|--|
 | Description: | ALU Satisfies Oracle |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_ALU_Satisfies_Functional_Oracle](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L540)|
 | Randomization Profile: | getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration_content_start-->
+<details><summary>[AU1PressTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L96)</summary>
 
-##### <!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-title_start-->[AU1PressTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L96)<!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-title_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-description_start-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-description_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | AU1PressTrip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_AU1PressTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L443)|
 | Randomization Profile: | getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration_content_start-->
+<details><summary>[AU1SatTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L103)</summary>
 
-##### <!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-title_start-->[AU1SatTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L103)<!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-title_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-description_start-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-description_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | AU1SatTrip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_AU1SatTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L454)|
 | Randomization Profile: | getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration_content_start-->
+<details><summary>[AU1TempTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L89)</summary>
 
-##### <!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-title_start-->[AU1TempTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L89)<!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-title_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-description_start-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-description_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | AU1TempTrip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_AU1TempTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L432)|
 | Randomization Profile: | getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration_content_start-->
+<details><summary>[AU2PressTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L120)</summary>
 
-##### <!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-title_start-->[AU2PressTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L120)<!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-title_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-description_start-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-description_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | AU2PressTrip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_AU2PressTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L479)|
 | Randomization Profile: | getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration_content_start-->
+<details><summary>[AU2SatTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L127)</summary>
 
-##### <!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-title_start-->[AU2SatTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L127)<!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-title_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-description_start-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-description_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | AU2SatTrip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_AU2SatTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L490)|
 | Randomization Profile: | getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration_content_start-->
+<details><summary>[AU2TempTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L113)</summary>
 
-##### <!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-title_start-->[AU2TempTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L113)<!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-title_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-description_start-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-description_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | AU2TempTrip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_AU2TempTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L468)|
 | Randomization Profile: | getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration_content_start-->
+<details><summary>[SatTripCausality](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L144)</summary>
 
-##### <!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-title_start-->[SatTripCausality](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L144)<!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-title_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-description_start-->
-<!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-description_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | SatTripCausality |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_SatTripCausality](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L504)|
 | Randomization Profile: | getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration_content_start-->
+<details><summary>[Saturation_Manual_Trip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L79)</summary>
 
-##### <!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-title_start-->[Saturation_Manual_Trip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L79)<!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-title_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-description_start-->
-<!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-description_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | Saturation Manual Trip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_TempPressManualTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L399)|
 | Randomization Profile: | getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration_content_start-->
+<details><summary>[TempPressTripCausality](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L137)</summary>
 
-##### <!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-title_start-->[TempPressTripCausality](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L137)<!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-title_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-description_start-->
-<!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-description_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | TempPressTripCausality |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_TempPressTripCausality](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L518)|
 | Randomization Profile: | getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration_content_start-->
+<details><summary>[TempPress_Manual_Trip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L72)</summary>
 
-##### <!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-title_start-->[TempPress_Manual_Trip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L72)<!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-title_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-description_start-->
-<!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-description_end-->
-<!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration_content_start-->
-| | |
+|
 |:--|--|
 | Description: | TempPress Manual Trip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_TempPressManualTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L399)|
 | Randomization Profile: | getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_|
 | Random Vector Filter: | TODO|
+</details>
 
-<!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration_content_end-->
+<!--Actuation_Subsystem_DSC_Test_Harness_configurations-Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration_content_end-->
 
 ## <!--how-to-run-title_start-->How to Run<!--how-to-run-title_end-->
 <!--how-to-run-description_start-->

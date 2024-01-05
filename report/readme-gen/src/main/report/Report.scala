@@ -328,7 +328,7 @@ import Report._
   def genTestingSection(project: Project, table: SymbolTable): ReportLevel = {
 
     val configs: ISZ[ReportLevel] = {
-      var entries: HashSMap[String, ISZ[ReportLevel]] = HashSMap.empty
+      var entries: HashSMap[String, ISZ[ReportBlock]] = HashSMap.empty
       for (config <- project.testConfigs) {
         val projDir: String = {
           if (project.title == "Isolette") "isolette"
@@ -354,25 +354,26 @@ import Report._
           val filter = "TODO"
           //Util.locateMethodDefinition(jsonContent.get("filter").get, mtfContents, mtf)
           val content =
-            st"""| | |
+            st"""<details><summary>${Util.locateText(configName, mtfContents, mtf)}</summary>
+                 |
+                 ||
                  ||:--|--|
                  || Description: | ${jsonContent.get("testDescription")} |
                  || Script Schema: | ${Util.locateMethodDefinition(jsonContent.get("testMethodName").get, mtfContents, mtf)}|
                  || Property: | ${Util.locateMethodDefinition(jsonContent.get("property").get, mtfContents, mtf)}|
                  || Randomization Profile: | ${Util.locateTextD(T, jsonContent.get("profile").get, mtfContents, mtf)}|
                  || Random Vector Filter: | ${filter}|
+                 |</details>
                  |"""
 
-          val configReport = ReportLevel(
-            tag = s"${harnessName}_${configName}_configuration",
-            title = Some(st"${Util.locateText(configName, mtfContents, mtf)}"),
-            description = None(),
-            content = ISZ(ReportBlock(
-              tag = s"${harnessName}_${configName}_configuration_content",
-              content = Some(content))),
-            subLevels = ISZ()
+          val configReport = ReportBlock(
+            tag = s"${harnessName}_${configName}_configuration_content",
+            //title = Some(st"${Util.locateText(configName, mtfContents, mtf)}"),
+            //description = None(),
+            content = Some(content)
+            //subLevels = ISZ()
           )
-          val subEntries: ISZ[ReportLevel] = entries.get(harnessName) match {
+          val subEntries: ISZ[ReportBlock] = entries.get(harnessName) match {
             case Some(existing) => existing
             case _ => ISZ()
           }
@@ -386,8 +387,8 @@ import Report._
           tag = s"${e._1}_configurations",
           title = Some(st"Configurations for ${e._1}"),
           description = None(),
-          content = ISZ(),
-          subLevels = e._2
+          content = e._2,
+          subLevels = ISZ()
         )
       }
       ret
