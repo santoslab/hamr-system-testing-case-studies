@@ -9,11 +9,11 @@
 <!--arch-section-aadl-arch-diagram_end-->
 <!--arch-section-aadl-arch-component-info-RTS_i_Instance_start-->
 |System: [RTS::RTS.i](aadl/packages/RTS.aadl#L35) |
-|--|
+|:--|
 <!--arch-section-aadl-arch-component-info-RTS_i_Instance_end-->
 <!--arch-section-aadl-arch-component-info-actuator_start-->
 |Thread: [actuator](aadl/packages/Actuation.aadl#L240) |
-|--|
+|:--|
 |Type: [Actuation::Actuator](aadl/packages/Actuation.aadl#L187)<br>Implementation: [Actuation::Actuator.i](aadl/packages/Actuation.aadl#L216)|
 |Periodic: 1000 ms|
 |Domain: 14|
@@ -21,7 +21,7 @@
 <!--arch-section-aadl-arch-component-info-actuator_end-->
 <!--arch-section-aadl-arch-component-info-actuator_start-->
 |Thread: [actuator](aadl/packages/Actuation.aadl#L240) |
-|--|
+|:--|
 |Type: [Actuation::Actuator](aadl/packages/Actuation.aadl#L187)<br>Implementation: [Actuation::Actuator.i](aadl/packages/Actuation.aadl#L216)|
 |Periodic: 1000 ms|
 |Domain: 16|
@@ -29,7 +29,7 @@
 <!--arch-section-aadl-arch-component-info-actuator_end-->
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
 |Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
-|--|
+|:--|
 |Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
 |Periodic: 1000 ms|
 |Domain: 5|
@@ -37,7 +37,7 @@
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
 |Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
-|--|
+|:--|
 |Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
 |Periodic: 1000 ms|
 |Domain: 6|
@@ -45,7 +45,7 @@
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
 |Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
-|--|
+|:--|
 |Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
 |Periodic: 1000 ms|
 |Domain: 7|
@@ -53,7 +53,7 @@
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
 |Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
-|--|
+|:--|
 |Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
 |Periodic: 1000 ms|
 |Domain: 9|
@@ -61,7 +61,7 @@
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
 |Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
-|--|
+|:--|
 |Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
 |Periodic: 1000 ms|
 |Domain: 10|
@@ -69,7 +69,7 @@
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
 |Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
-|--|
+|:--|
 |Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
 |Periodic: 1000 ms|
 |Domain: 11|
@@ -77,7 +77,7 @@
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
 <!--arch-section-aadl-arch-component-info-orLogic_start-->
 |Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
-|--|
+|:--|
 |Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
 |Periodic: 1000 ms|
 |Domain: 8|
@@ -85,7 +85,7 @@
 <!--arch-section-aadl-arch-component-info-orLogic_end-->
 <!--arch-section-aadl-arch-component-info-orLogic_start-->
 |Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
-|--|
+|:--|
 |Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
 |Periodic: 1000 ms|
 |Domain: 12|
@@ -93,7 +93,7 @@
 <!--arch-section-aadl-arch-component-info-orLogic_end-->
 <!--arch-section-aadl-arch-component-info-orLogic_start-->
 |Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
-|--|
+|:--|
 |Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
 |Periodic: 1000 ms|
 |Domain: 13|
@@ -101,7 +101,7 @@
 <!--arch-section-aadl-arch-component-info-orLogic_end-->
 <!--arch-section-aadl-arch-component-info-orLogic_start-->
 |Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
-|--|
+|:--|
 |Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
 |Periodic: 1000 ms|
 |Domain: 15|
@@ -109,7 +109,7 @@
 <!--arch-section-aadl-arch-component-info-orLogic_end-->
 <!--arch-section-aadl-arch-component-info-actuatorsMockThread_start-->
 |Thread: [actuatorsMockThread](aadl/packages/Actuators.aadl#L48) |
-|--|
+|:--|
 |Type: [Actuators::ActuatorsMockThread](aadl/packages/Actuators.aadl#L16)<br>Implementation: [Actuators::ActuatorsMockThread.i](aadl/packages/Actuators.aadl#L23)|
 |Periodic: 1000 ms|
 |Domain: 4|
@@ -117,7 +117,7 @@
 <!--arch-section-aadl-arch-component-info-actuatorsMockThread_end-->
 <!--arch-section-aadl-arch-component-info-eventControlMockThread_start-->
 |Thread: [eventControlMockThread](aadl/packages/EventControl.aadl#L69) |
-|--|
+|:--|
 |Type: [EventControl::EventControlMockThread](aadl/packages/EventControl.aadl#L16)<br>Implementation: [EventControl::EventControlMockThread.i](aadl/packages/EventControl.aadl#L37)|
 |Periodic: 1000 ms|
 |Domain: 3|
@@ -125,7 +125,7 @@
 <!--arch-section-aadl-arch-component-info-eventControlMockThread_end-->
 <!--arch-section-aadl-arch-component-info-instrumentationMockThread_start-->
 |Thread: [instrumentationMockThread](aadl/packages/Instrumentation.aadl#L195) |
-|--|
+|:--|
 |Type: [Instrumentation::InstrumentationMockThread](aadl/packages/Instrumentation.aadl#L14)<br>Implementation: [Instrumentation::InstrumentationMockThread.i](aadl/packages/Instrumentation.aadl#L97)|
 |Periodic: 1000 ms|
 |Domain: 2|
@@ -140,7 +140,7 @@
 <!---description_end-->
 <!---_start-->
 | | |
-|--|--|
+|:--|:--|
 |Threads|15|
 |Ports|76|
 |Connections|38|
@@ -168,7 +168,7 @@ The number of lines of code written by the developer.
 "Log" are lines of code used for logging that
 likely would be excluded in a release build
  |Type|code |
- |--|--:|
+ |:--|--:|
  |Behavior|156|
  |Log|6|
  |--------|--------|
@@ -189,7 +189,7 @@ likely would be excluded in a release build
 <!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-description_end-->
 <!--Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration-Actuation_Subsystem_DSC_Test_Harness_ALU_Satisfies_Oracle_configuration_content_start-->
 | | |
-|--|--|
+|:--|--|
 | Description: | ALU Satisfies Oracle |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_ALU_Satisfies_Functional_Oracle](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L540)|
@@ -203,7 +203,7 @@ likely would be excluded in a release build
 <!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-description_end-->
 <!--Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1PressTrip_configuration_content_start-->
 | | |
-|--|--|
+|:--|--|
 | Description: | AU1PressTrip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_AU1PressTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L443)|
@@ -217,7 +217,7 @@ likely would be excluded in a release build
 <!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-description_end-->
 <!--Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1SatTrip_configuration_content_start-->
 | | |
-|--|--|
+|:--|--|
 | Description: | AU1SatTrip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_AU1SatTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L454)|
@@ -231,7 +231,7 @@ likely would be excluded in a release build
 <!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-description_end-->
 <!--Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU1TempTrip_configuration_content_start-->
 | | |
-|--|--|
+|:--|--|
 | Description: | AU1TempTrip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_AU1TempTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L432)|
@@ -245,7 +245,7 @@ likely would be excluded in a release build
 <!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-description_end-->
 <!--Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2PressTrip_configuration_content_start-->
 | | |
-|--|--|
+|:--|--|
 | Description: | AU2PressTrip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_AU2PressTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L479)|
@@ -259,7 +259,7 @@ likely would be excluded in a release build
 <!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-description_end-->
 <!--Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2SatTrip_configuration_content_start-->
 | | |
-|--|--|
+|:--|--|
 | Description: | AU2SatTrip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_AU2SatTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L490)|
@@ -273,7 +273,7 @@ likely would be excluded in a release build
 <!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-description_end-->
 <!--Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration-Actuation_Subsystem_DSC_Test_Harness_AU2TempTrip_configuration_content_start-->
 | | |
-|--|--|
+|:--|--|
 | Description: | AU2TempTrip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_AU2TempTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L468)|
@@ -287,7 +287,7 @@ likely would be excluded in a release build
 <!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-description_end-->
 <!--Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration-Actuation_Subsystem_DSC_Test_Harness_SatTripCausality_configuration_content_start-->
 | | |
-|--|--|
+|:--|--|
 | Description: | SatTripCausality |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_SatTripCausality](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L504)|
@@ -301,7 +301,7 @@ likely would be excluded in a release build
 <!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-description_end-->
 <!--Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration-Actuation_Subsystem_DSC_Test_Harness_Saturation_Manual_Trip_configuration_content_start-->
 | | |
-|--|--|
+|:--|--|
 | Description: | Saturation Manual Trip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_TempPressManualTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L399)|
@@ -315,7 +315,7 @@ likely would be excluded in a release build
 <!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-description_end-->
 <!--Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration-Actuation_Subsystem_DSC_Test_Harness_TempPressTripCausality_configuration_content_start-->
 | | |
-|--|--|
+|:--|--|
 | Description: | TempPressTripCausality |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_TempPressTripCausality](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L518)|
@@ -329,7 +329,7 @@ likely would be excluded in a release build
 <!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-description_end-->
 <!--Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration-Actuation_Subsystem_DSC_Test_Harness_TempPress_Manual_Trip_configuration_content_start-->
 | | |
-|--|--|
+|:--|--|
 | Description: | TempPress Manual Trip |
 | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272)|
 | Property: | [sysProp_TempPressManualTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L399)|
@@ -389,7 +389,7 @@ __Actuator subsystem__
   the [TempPress_Manual_Trip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L72) configuration uses the following:
 
   | | |
-  |--|--|
+  |:--|--|
   | Script Schema: | [Actuation_Subsystem_1HP_script_schema](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L272) |
   | Property: | [sysProp_SaturationManualTrip](hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L414) |
   | Randomization Profile: | getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_ |
@@ -488,7 +488,7 @@ starting with the results from a specific run of DSC and then walking
 up the report directory hierarchy.
 
 ||
-|-|
+|:--|
 |[RTS/Actuation_Subsystem_DSC_Test_Harness/TempPress_Manual_Trip/1](https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/RTS/Actuation_Subsystem_DSC_Test_Harness/TempPress_Manual_Trip/1/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for the TempPress_Manual_Trip configuration with a 1 second timeout<br><br>__NOTE__ this is what DSC was actually run on.  The following rows are simply aggregate information |
 |[RTS/Actuation_Subsystem_DSC_Test_Harness/TempPress_Manual_Trip](https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/RTS/Actuation_Subsystem_DSC_Test_Harness/TempPress_Manual_Trip/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for the MA__Failing__CT____Alarm_On configuration using timeouts of 1, 5, and 10 seconds |
 |[RTS/Actuation_Subsystem_DSC_Test_Harness](https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/RTS/Actuation_Subsystem_DSC_Test_Harness/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for running all the configurations through Actuation_Subsystem_DSC_Test_Harness using timeouts of 1, 5, and 10 seconds |

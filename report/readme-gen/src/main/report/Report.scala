@@ -227,7 +227,7 @@ import Report._
 
     val ret: ST =
       st"""| | |
-           ||--|--|
+           ||:--|:--|
            ||Threads|${threads.size}|
            ||Ports|${ports}|
            ||Connections|${connections.size}|"""
@@ -264,7 +264,7 @@ import Report._
 
     val ret: ST =
       st"""|Type|code |
-           ||--|--:|
+           ||:--|--:|
            ||Behavior|${(code - log)}|
            ||Log|${log}|
            ||--------|--------|
@@ -355,7 +355,7 @@ import Report._
           //Util.locateMethodDefinition(jsonContent.get("filter").get, mtfContents, mtf)
           val content =
             st"""| | |
-                 ||--|--|
+                 ||:--|--|
                  || Description: | ${jsonContent.get("testDescription")} |
                  || Script Schema: | ${Util.locateMethodDefinition(jsonContent.get("testMethodName").get, mtfContents, mtf)}|
                  || Property: | ${Util.locateMethodDefinition(jsonContent.get("property").get, mtfContents, mtf)}|
@@ -476,7 +476,7 @@ import Report._
               |the ${Util.locateText(tconfig.exampleTestConfig.name, daconfigcontents, mtf)} configuration uses the following:
               |
               || | |
-              ||--|--|
+              ||:--|--|
               || Script Schema: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.schema, daconfigcontents, mtf)} |
               || Property: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.property, daconfigcontents, mtf)} |
               || Randomization Profile: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.profile, daconfigcontents, mtf)} |
@@ -617,7 +617,7 @@ import Report._
                              |up the report directory hierarchy.
                              |
                              |||
-                             ||-|
+                             ||:--|
                              ||[$lt1]($l1/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for the ${config} configuration with a 1 second timeout<br><br>__NOTE__ this is what DSC was actually run on.  The following rows are simply aggregate information |
                              ||[$lt2]($l2/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for the MA__Failing__CT____Alarm_On configuration using timeouts of 1, 5, and 10 seconds |
                              ||[$lt3]($l3/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for running all the configurations through ${harness} using timeouts of 1, 5, and 10 seconds |
@@ -767,7 +767,7 @@ import Report._
               |Raw Data: [csv](${project.projectRootDir.relativize(csvFile(0))})
               |
               |EntryPoint|VC|SAT|TTime|ITCTime|VTime|
-              ||--|--|--|--|--|--|
+              ||:--|:--|:--|:--|:--|:--|
               |${(entries, "\n")}"""
 
         subLevels = subLevels :+ ReportBlock(
@@ -884,7 +884,7 @@ import Report._
 
     var systemProps =
       st"""|System: ${header} |
-           ||--|"""
+           ||:--|"""
 
 
     if (table.rootSystem.getUseRawConnection()) {
@@ -932,7 +932,7 @@ import Report._
         s"${tagPrefix}-${thread.identifier}",
         Some(
           st"""|Thread: ${header} |
-               ||--|
+               ||:--|
                ||Type: ${componentType}${componentImpl}|
                ${compType}
                ||${typ}|
