@@ -5,6 +5,66 @@ package report
 import org.sireum._
 
 object Util {
+  val threadNicknames: Map[String, String] = Map.empty ++ ISZ(
+    "instrumentationMock_instrumentationMockThread" ~> "instrumentationMockThread",
+    "eventControlMock_eventControlMockThread" ~> "eventControlMockThread",
+    "actuatorsMock_actuatorsMockThread" ~> "actuatorsMockThread",
+
+    "actuationSubsystem_actuationUnit1_temperatureLogic_coincidenceLogic" ~> "au1_temp_coincidenceLogic",
+    "actuationSubsystem_actuationUnit1_pressureLogic_coincidenceLogic" ~> "au1_press_coincidenceLogic",
+    "actuationSubsystem_actuationUnit1_saturationLogic_coincidenceLogic" ~> "au1_satLogic_coincidenceLogic",
+    "actuationSubsystem_actuationUnit1_tempPressureTripOut_orLogic" ~> "au1_tempPressTripOut_orLogic",
+
+    "actuationSubsystem_actuationUnit2_temperatureLogic_coincidenceLogic" ~> "au2_temp_coincidenceLogic",
+    "actuationSubsystem_actuationUnit2_pressureLogic_coincidenceLogic" ~> "au2_press_coincidenceLogic",
+    "actuationSubsystem_actuationUnit2_saturationLogic_coincidenceLogic" ~> "au2_sat_coincidenceLogic",
+    "actuationSubsystem_actuationUnit2_tempPressureTripOut_orLogic" ~> "au2_tempPressTripOut_orLogic",
+
+    "actuationSubsystem_tempPressureActuatorUnit_actuateTempPressureActuator_orLogic" ~> "TPAU_actTempPA_orLogic",
+    "actuationSubsystem_tempPressureActuatorUnit_tempPressureActuator_actuator" ~> "TPAU_tempPressA_actuator",
+    "actuationSubsystem_saturationActuatorUnit_actuateSaturationActuator_orLogic" ~> "SAU_actSatActuator_orLogic",
+    "actuationSubsystem_saturationActuatorUnit_saturationActuator_actuator" ~> "SAU_satActuator_actuator",
+
+    "operator_interface_oip_oit" ~> "OpInterface",
+
+    "thermostat_regulate_temperature_manage_heat_source" ~> "RegMHS",
+    "thermostat_regulate_temperature_manage_regulator_interface" ~> "RegMRI",
+    "thermostat_regulate_temperature_manage_regulator_mode" ~> "RegMRM",
+
+    "thermostat_monitor_temperature_manage_monitor_interface" ~> "MonMMI",
+    "thermostat_monitor_temperature_manage_alarm" ~> "MonMA",
+    "thermostat_monitor_temperature_manage_monitor_mode" ~> "MonMMM",
+
+    "heat_source_cpi_heat_controller" ~> "HS",
+    "thermostat_regulate_temperature_detect_regulator_failure" ~> "DRF",
+    "thermostat_monitor_temperature_detect_monitor_failure" ~> "DMF",
+    "temperature_sensor_cpi_thermostat" ~> "TS"
+
+
+  )
+
+  def hackyFind(dir: Os.Path, suffix: String): Option[Os.Path] = {
+    assert(dir.isDir, s"${dir}")
+    for(f <- dir.list if f.isFile) {
+      if (ops.StringOps(f.name).endsWith(suffix)) {
+        return Some(f)
+      }
+    }
+    for(subdir <- dir.list if subdir.isDir) {
+      hackyFind(subdir, suffix) match {
+        case Some(matchy) => return Some(matchy)
+        case _ =>
+      }
+    }
+    return None()
+  }
+
+  def readLines(s: String, sep: C): ISZ[String] = {
+    // sireum's split does not preserve blank lines so a space.
+    // TODO drop the space
+    return ops.StringOps(ops.StringOps(s).replaceAllLiterally(s"$sep", s" $sep")).split(c => c == sep)
+  }
+
   def parseJson(str: String): HashSMap[String, String] = {
     val p = org.sireum.Json.Parser.create(str)
     p.parseObjectBegin()

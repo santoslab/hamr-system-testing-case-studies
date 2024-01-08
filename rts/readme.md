@@ -12,103 +12,103 @@
 |:--|
 <!--arch-section-aadl-arch-component-info-RTS_i_Instance_end-->
 <!--arch-section-aadl-arch-component-info-actuator_start-->
-|Thread: [actuator](aadl/packages/Actuation.aadl#L240) |
+|Thread: TPAU_tempPressA_actuator <!--[actuator](aadl/packages/Actuation.aadl#L240)--> |
 |:--|
-|Type: [Actuation::Actuator](aadl/packages/Actuation.aadl#L187)<br>Implementation: [Actuation::Actuator.i](aadl/packages/Actuation.aadl#L216)|
+|Type: [Actuation::Actuator](aadl/packages/Actuation.aadl#L187)<br>Implementation: [Actuation::Actuator.i](aadl/packages/Actuation.aadl#L216)<br>Behavior Specification: [GUMBO](aadl/packages/Actuation.aadl#L202)|
 |Periodic: 1000 ms|
 |Domain: 14|
 
 <!--arch-section-aadl-arch-component-info-actuator_end-->
 <!--arch-section-aadl-arch-component-info-actuator_start-->
-|Thread: [actuator](aadl/packages/Actuation.aadl#L240) |
+|Thread: SAU_satActuator_actuator <!--[actuator](aadl/packages/Actuation.aadl#L240)--> |
 |:--|
-|Type: [Actuation::Actuator](aadl/packages/Actuation.aadl#L187)<br>Implementation: [Actuation::Actuator.i](aadl/packages/Actuation.aadl#L216)|
+|Type: [Actuation::Actuator](aadl/packages/Actuation.aadl#L187)<br>Implementation: [Actuation::Actuator.i](aadl/packages/Actuation.aadl#L216)<br>Behavior Specification: [GUMBO](aadl/packages/Actuation.aadl#L202)|
 |Periodic: 1000 ms|
 |Domain: 16|
 
 <!--arch-section-aadl-arch-component-info-actuator_end-->
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
-|Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
+|Thread: au1_temp_coincidenceLogic <!--[coincidenceLogic](aadl/packages/Actuation.aadl#L86)--> |
 |:--|
-|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)<br>Behavior Specification: [GUMBO](aadl/packages/Actuation.aadl#L40)|
 |Periodic: 1000 ms|
 |Domain: 5|
 
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
-|Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
+|Thread: au1_press_coincidenceLogic <!--[coincidenceLogic](aadl/packages/Actuation.aadl#L86)--> |
 |:--|
-|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)<br>Behavior Specification: [GUMBO](aadl/packages/Actuation.aadl#L40)|
 |Periodic: 1000 ms|
 |Domain: 6|
 
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
-|Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
+|Thread: au1_satLogic_coincidenceLogic <!--[coincidenceLogic](aadl/packages/Actuation.aadl#L86)--> |
 |:--|
-|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)<br>Behavior Specification: [GUMBO](aadl/packages/Actuation.aadl#L40)|
 |Periodic: 1000 ms|
 |Domain: 7|
 
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
-|Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
+|Thread: au2_temp_coincidenceLogic <!--[coincidenceLogic](aadl/packages/Actuation.aadl#L86)--> |
 |:--|
-|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)<br>Behavior Specification: [GUMBO](aadl/packages/Actuation.aadl#L40)|
 |Periodic: 1000 ms|
 |Domain: 9|
 
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
-|Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
+|Thread: au2_press_coincidenceLogic <!--[coincidenceLogic](aadl/packages/Actuation.aadl#L86)--> |
 |:--|
-|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)<br>Behavior Specification: [GUMBO](aadl/packages/Actuation.aadl#L40)|
 |Periodic: 1000 ms|
 |Domain: 10|
 
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_start-->
-|Thread: [coincidenceLogic](aadl/packages/Actuation.aadl#L86) |
+|Thread: au2_sat_coincidenceLogic <!--[coincidenceLogic](aadl/packages/Actuation.aadl#L86)--> |
 |:--|
-|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)|
+|Type: [Actuation::CoincidenceLogic](aadl/packages/Actuation.aadl#L22)<br>Implementation: [Actuation::CoincidenceLogic.i](aadl/packages/Actuation.aadl#L59)<br>Behavior Specification: [GUMBO](aadl/packages/Actuation.aadl#L40)|
 |Periodic: 1000 ms|
 |Domain: 11|
 
 <!--arch-section-aadl-arch-component-info-coincidenceLogic_end-->
 <!--arch-section-aadl-arch-component-info-orLogic_start-->
-|Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
+|Thread: au1_tempPressTripOut_orLogic <!--[orLogic](aadl/packages/Actuation.aadl#L152)--> |
 |:--|
-|Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
+|Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)<br>Behavior Specification: [GUMBO](aadl/packages/Actuation.aadl#L119)|
 |Periodic: 1000 ms|
 |Domain: 8|
 
 <!--arch-section-aadl-arch-component-info-orLogic_end-->
 <!--arch-section-aadl-arch-component-info-orLogic_start-->
-|Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
+|Thread: au2_tempPressTripOut_orLogic <!--[orLogic](aadl/packages/Actuation.aadl#L152)--> |
 |:--|
-|Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
+|Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)<br>Behavior Specification: [GUMBO](aadl/packages/Actuation.aadl#L119)|
 |Periodic: 1000 ms|
 |Domain: 12|
 
 <!--arch-section-aadl-arch-component-info-orLogic_end-->
 <!--arch-section-aadl-arch-component-info-orLogic_start-->
-|Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
+|Thread: TPAU_actTempPA_orLogic <!--[orLogic](aadl/packages/Actuation.aadl#L152)--> |
 |:--|
-|Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
+|Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)<br>Behavior Specification: [GUMBO](aadl/packages/Actuation.aadl#L119)|
 |Periodic: 1000 ms|
 |Domain: 13|
 
 <!--arch-section-aadl-arch-component-info-orLogic_end-->
 <!--arch-section-aadl-arch-component-info-orLogic_start-->
-|Thread: [orLogic](aadl/packages/Actuation.aadl#L152) |
+|Thread: SAU_actSatActuator_orLogic <!--[orLogic](aadl/packages/Actuation.aadl#L152)--> |
 |:--|
-|Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)|
+|Type: [Actuation::OrLogic](aadl/packages/Actuation.aadl#L101)<br>Implementation: [Actuation::OrLogic.i](aadl/packages/Actuation.aadl#L128)<br>Behavior Specification: [GUMBO](aadl/packages/Actuation.aadl#L119)|
 |Periodic: 1000 ms|
 |Domain: 15|
 
 <!--arch-section-aadl-arch-component-info-orLogic_end-->
 <!--arch-section-aadl-arch-component-info-actuatorsMockThread_start-->
-|Thread: [actuatorsMockThread](aadl/packages/Actuators.aadl#L48) |
+|Thread: actuatorsMockThread <!--[actuatorsMockThread](aadl/packages/Actuators.aadl#L48)--> |
 |:--|
 |Type: [Actuators::ActuatorsMockThread](aadl/packages/Actuators.aadl#L16)<br>Implementation: [Actuators::ActuatorsMockThread.i](aadl/packages/Actuators.aadl#L23)|
 |Periodic: 1000 ms|
@@ -116,7 +116,7 @@
 
 <!--arch-section-aadl-arch-component-info-actuatorsMockThread_end-->
 <!--arch-section-aadl-arch-component-info-eventControlMockThread_start-->
-|Thread: [eventControlMockThread](aadl/packages/EventControl.aadl#L69) |
+|Thread: eventControlMockThread <!--[eventControlMockThread](aadl/packages/EventControl.aadl#L69)--> |
 |:--|
 |Type: [EventControl::EventControlMockThread](aadl/packages/EventControl.aadl#L16)<br>Implementation: [EventControl::EventControlMockThread.i](aadl/packages/EventControl.aadl#L37)|
 |Periodic: 1000 ms|
@@ -124,13 +124,77 @@
 
 <!--arch-section-aadl-arch-component-info-eventControlMockThread_end-->
 <!--arch-section-aadl-arch-component-info-instrumentationMockThread_start-->
-|Thread: [instrumentationMockThread](aadl/packages/Instrumentation.aadl#L195) |
+|Thread: instrumentationMockThread <!--[instrumentationMockThread](aadl/packages/Instrumentation.aadl#L195)--> |
 |:--|
 |Type: [Instrumentation::InstrumentationMockThread](aadl/packages/Instrumentation.aadl#L14)<br>Implementation: [Instrumentation::InstrumentationMockThread.i](aadl/packages/Instrumentation.aadl#L97)|
 |Periodic: 1000 ms|
 |Domain: 2|
 
 <!--arch-section-aadl-arch-component-info-instrumentationMockThread_end-->
+
+## <!--behavior-code-title_start-->Behavior Code<!--behavior-code-title_end-->
+<!--behavior-code-description_start-->
+<!--behavior-code-description_end-->
+<!--behavior-code-slang-code-instrumentationMockThread_start-->
+[instrumentationMockThread](hamr/slang/src/main/component/RTS/Instrumentation/InstrumentationMockThread_i_instrumentationMock_instrumentationMockThread.scala)
+
+<!--behavior-code-slang-code-instrumentationMockThread_end-->
+<!--behavior-code-slang-code-eventControlMockThread_start-->
+[eventControlMockThread](hamr/slang/src/main/component/RTS/EventControl/EventControlMockThread_i_eventControlMock_eventControlMockThread.scala)
+
+<!--behavior-code-slang-code-eventControlMockThread_end-->
+<!--behavior-code-slang-code-actuatorsMockThread_start-->
+[actuatorsMockThread](hamr/slang/src/main/component/RTS/Actuators/ActuatorsMockThread_i_actuatorsMock_actuatorsMockThread.scala)
+
+<!--behavior-code-slang-code-actuatorsMockThread_end-->
+<!--behavior-code-slang-code-coincidenceLogic_start-->
+[au1_temp_coincidenceLogic](hamr/slang/src/main/component/RTS/Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit1_temperatureLogic_coincidenceLogic.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/RTS/Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit1_temperatureLogic_coincidenceLogic_GumboX.scala)
+<!--behavior-code-slang-code-coincidenceLogic_end-->
+<!--behavior-code-slang-code-coincidenceLogic_start-->
+[au1_press_coincidenceLogic](hamr/slang/src/main/component/RTS/Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit1_pressureLogic_coincidenceLogic.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/RTS/Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit1_pressureLogic_coincidenceLogic_GumboX.scala)
+<!--behavior-code-slang-code-coincidenceLogic_end-->
+<!--behavior-code-slang-code-coincidenceLogic_start-->
+[au1_satLogic_coincidenceLogic](hamr/slang/src/main/component/RTS/Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit1_saturationLogic_coincidenceLogic.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/RTS/Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit1_saturationLogic_coincidenceLogic_GumboX.scala)
+<!--behavior-code-slang-code-coincidenceLogic_end-->
+<!--behavior-code-slang-code-orLogic_start-->
+[au1_tempPressTripOut_orLogic](hamr/slang/src/main/component/RTS/Actuation/OrLogic_i_actuationSubsystem_actuationUnit1_tempPressureTripOut_orLogic.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/RTS/Actuation/OrLogic_i_actuationSubsystem_actuationUnit1_tempPressureTripOut_orLogic_GumboX.scala)
+<!--behavior-code-slang-code-orLogic_end-->
+<!--behavior-code-slang-code-coincidenceLogic_start-->
+[au2_temp_coincidenceLogic](hamr/slang/src/main/component/RTS/Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit2_temperatureLogic_coincidenceLogic.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/RTS/Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit2_temperatureLogic_coincidenceLogic_GumboX.scala)
+<!--behavior-code-slang-code-coincidenceLogic_end-->
+<!--behavior-code-slang-code-coincidenceLogic_start-->
+[au2_press_coincidenceLogic](hamr/slang/src/main/component/RTS/Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit2_pressureLogic_coincidenceLogic.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/RTS/Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit2_pressureLogic_coincidenceLogic_GumboX.scala)
+<!--behavior-code-slang-code-coincidenceLogic_end-->
+<!--behavior-code-slang-code-coincidenceLogic_start-->
+[au2_sat_coincidenceLogic](hamr/slang/src/main/component/RTS/Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit2_saturationLogic_coincidenceLogic.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/RTS/Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit2_saturationLogic_coincidenceLogic_GumboX.scala)
+<!--behavior-code-slang-code-coincidenceLogic_end-->
+<!--behavior-code-slang-code-orLogic_start-->
+[au2_tempPressTripOut_orLogic](hamr/slang/src/main/component/RTS/Actuation/OrLogic_i_actuationSubsystem_actuationUnit2_tempPressureTripOut_orLogic.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/RTS/Actuation/OrLogic_i_actuationSubsystem_actuationUnit2_tempPressureTripOut_orLogic_GumboX.scala)
+<!--behavior-code-slang-code-orLogic_end-->
+<!--behavior-code-slang-code-orLogic_start-->
+[TPAU_actTempPA_orLogic](hamr/slang/src/main/component/RTS/Actuation/OrLogic_i_actuationSubsystem_tempPressureActuatorUnit_actuateTempPressureActuator_orLogic.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/RTS/Actuation/OrLogic_i_actuationSubsystem_tempPressureActuatorUnit_actuateTempPressureActuator_orLogic_GumboX.scala)
+<!--behavior-code-slang-code-orLogic_end-->
+<!--behavior-code-slang-code-actuator_start-->
+[TPAU_tempPressA_actuator](hamr/slang/src/main/component/RTS/Actuation/Actuator_i_actuationSubsystem_tempPressureActuatorUnit_tempPressureActuator_actuator.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/RTS/Actuation/Actuator_i_actuationSubsystem_tempPressureActuatorUnit_tempPressureActuator_actuator_GumboX.scala)
+<!--behavior-code-slang-code-actuator_end-->
+<!--behavior-code-slang-code-orLogic_start-->
+[SAU_actSatActuator_orLogic](hamr/slang/src/main/component/RTS/Actuation/OrLogic_i_actuationSubsystem_saturationActuatorUnit_actuateSaturationActuator_orLogic.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/RTS/Actuation/OrLogic_i_actuationSubsystem_saturationActuatorUnit_actuateSaturationActuator_orLogic_GumboX.scala)
+<!--behavior-code-slang-code-orLogic_end-->
+<!--behavior-code-slang-code-actuator_start-->
+[SAU_satActuator_actuator](hamr/slang/src/main/component/RTS/Actuation/Actuator_i_actuationSubsystem_saturationActuatorUnit_saturationActuator_actuator.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/RTS/Actuation/Actuator_i_actuationSubsystem_saturationActuatorUnit_saturationActuator_actuator_GumboX.scala)
+<!--behavior-code-slang-code-actuator_end-->
 
 ## <!---title_start-->Metrics<!---title_end-->
 <!---description_start-->

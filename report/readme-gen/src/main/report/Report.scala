@@ -8,6 +8,7 @@ import org.sireum.hamr.ir.Classifier
 import org.sireum.message.{Position, Reporter}
 import report.ReadmeGen.{Project, main, projects, repoRootDir}
 import org.sireum.U32._
+import org.sireum.hamr.arsit.ProjectDirectories
 
 @datatype class ReportBlock(val tag: String,
                             content: Option[ST])
@@ -59,24 +60,6 @@ object Report {
 
   def genReport(project: Project, packageName: String, aadlRootDir: Os.Path, rootDir: Os.Path, reporter: Reporter): ReportLevel = {
     return Report(packageName, aadlRootDir, repoRootDir).genReport(project)
-  }
-
-  def createLinkFromPos(text: String, pos: Position,
-                        aadlDir: Os.Path, rootDir: Os.Path): ST = {
-    val ret: ST = pos match {
-      case org.sireum.message.FlatPos(Some(uriOpt), beginLine, _, _, _, _, _) =>
-        val sops = ops.StringOps(uriOpt)
-        assert(sops.startsWith("/"))
-        val pos = sops.indexOfFrom('/', 1)
-        val stripped = sops.substring(pos, sops.size)
-        val uri = aadlDir / stripped
-
-        val line = conversions.U32.toZ(beginLine)
-        st"[${text}](${rootDir.relativize(uri).value}#L${line})"
-
-      case _ => halt(s"Infeasible: not a FlatPos - ${pos}")
-    }
-    return ret
   }
 
   import org.sireum.hamr.ir
@@ -656,6 +639,8 @@ import Report._
 
     val arch: ReportLevel = genArchitectureSection(project, table)
 
+    val behaviorCode: ReportLevel = genBehaviorCodeSection(project, table)
+
     val metrics: ReportLevel = genCodeMetrics(project)
 
     val systemTesting: ReportLevel = genTestingSection(project, table)
@@ -668,7 +653,7 @@ import Report._
       title = Some(st"${project.title}"),
       description = None(),
       content = ISZ(),
-      subLevels = ISZ(arch, metrics, systemTesting, howToRun)
+      subLevels = ISZ(arch, behaviorCode, metrics, systemTesting, howToRun)
     )
   }
 
@@ -920,7 +905,7 @@ import Report._
 
       val header: ST = {
         val pos: Position = thread.component.identifier.pos.get
-        createLinkFromPos(name, pos, aadlRootDir, project.projectRootDir)
+        AadlModelUtil.createLinkFromPos(name, pos, aadlRootDir, project.projectRootDir)
       }
 
       val componentType = createAadlComponentLink(F, thread.component, F, aadlRootDir, project.projectRootDir)
@@ -934,12 +919,22 @@ import Report._
           None()
         }
 
+      val gumbo : Option[ST] = AadlModelUtil.getGumboSubclause(thread, table) match {
+        case Some(g) =>
+          val pos = AadlModelUtil.getGumboSubclausePos(g, aadlRootDir)
+          Some(st"<br>Behavior Specification: ${AadlModelUtil.createLinkFromPos("GUMBO", pos, aadlRootDir, project.projectRootDir )}")
+        case _ => None()
+      }
+
+      val tpath = st"${(ops.ISZOps(thread.path).drop(1), "_")}".render
+      val tnick = Util.threadNicknames.get(tpath).get
+
       blocks = blocks :+ ReportBlock(
         s"${tagPrefix}-${thread.identifier}",
         Some(
-          st"""|Thread: ${header} |
+          st"""|Thread: $tnick <!--${header}--> |
                ||:--|
-               ||Type: ${componentType}${componentImpl}|
+               ||Type: ${componentType}${componentImpl}${gumbo}|
                ${compType}
                ||${typ}|
                |${domain}
@@ -965,6 +960,38 @@ import Report._
       title = Some(st"AADL Architecture"),
       description = None(),
       content = blocks,
+      subLevels = ISZ()
+    )
+  }
+
+  def genBehaviorCodeSection(project: ReadmeGen.Project, table: SymbolTable): ReportLevel = {
+    var threads: ISZ[ReportBlock] = ISZ()
+
+    val bridgesDir = project.projectRootDir / "hamr" / "slang" / "src" / "main" / "bridge"
+    val componentsDir = project.projectRootDir / "hamr" / "slang" / "src" / "main" / "component"
+
+    for (thread <- table.getThreads()) {
+      val tpath = st"${(ops.ISZOps(thread.path).drop(1), "_")}".render
+      val tnick = Util.threadNicknames.get(tpath).get
+      val gumbox = Util.hackyFind(bridgesDir, s"${tpath}_GumboX.scala")
+      val behavior = Util.hackyFind(componentsDir, s"${tpath}.scala")
+      val gumboxOpt: Option[ST] = if (gumbox.nonEmpty)
+        Some(st"<br>[GumboX](${project.projectRootDir.relativize(gumbox.get)})")
+      else None()
+
+      threads = threads :+
+        ReportBlock(
+          tag = s"slang-code-${thread.identifier}",
+          content = Some(
+            st"""[${tnick}](${project.projectRootDir.relativize(behavior.get)})
+                |${gumboxOpt}""")
+        )
+    }
+    return ReportLevel(
+      tag = "behavior-code",
+      title = Some(st"Behavior Code"),
+      description = None(),
+      content = threads,
       subLevels = ISZ()
     )
   }

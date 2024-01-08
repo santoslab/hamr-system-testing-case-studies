@@ -12,82 +12,130 @@
 |:--|
 <!--arch-section-aadl-arch-component-info-isolette_single_sensor_Instance_end-->
 <!--arch-section-aadl-arch-component-info-heat_controller_start-->
-|Thread: [heat_controller](aadl/aadl/packages/Devices.aadl#L118) |
+|Thread: HS <!--[heat_controller](aadl/aadl/packages/Devices.aadl#L118)--> |
 |:--|
 |Type: [Devices::Heat_Source](aadl/aadl/packages/Devices.aadl#L124)<br>Implementation: [Devices::Heat_Source.impl](aadl/aadl/packages/Devices.aadl#L135)|
 |Periodic: 1000 ms|
 
 <!--arch-section-aadl-arch-component-info-heat_controller_end-->
 <!--arch-section-aadl-arch-component-info-thermostat_start-->
-|Thread: [thermostat](aadl/aadl/packages/Devices.aadl#L73) |
+|Thread: TS <!--[thermostat](aadl/aadl/packages/Devices.aadl#L73)--> |
 |:--|
 |Type: [Devices::Temperature_Sensor](aadl/aadl/packages/Devices.aadl#L79)<br>Implementation: [Devices::Temperature_Sensor.impl](aadl/aadl/packages/Devices.aadl#L90)|
 |Periodic: 1000 ms|
 
 <!--arch-section-aadl-arch-component-info-thermostat_end-->
 <!--arch-section-aadl-arch-component-info-oit_start-->
-|Thread: [oit](aadl/aadl/packages/Isolette.aadl#L274) |
+|Thread: OpInterface <!--[oit](aadl/aadl/packages/Isolette.aadl#L274)--> |
 |:--|
 |Type: [Isolette::operator_interface_thread](aadl/aadl/packages/Isolette.aadl#L287)<br>Implementation: [Isolette::operator_interface_thread.impl](aadl/aadl/packages/Isolette.aadl#L307)|
 |Periodic: 1000 ms|
 
 <!--arch-section-aadl-arch-component-info-oit_end-->
 <!--arch-section-aadl-arch-component-info-detect_monitor_failure_start-->
-|Thread: [detect_monitor_failure](aadl/aadl/packages/Monitor.aadl#L43) |
+|Thread: DMF <!--[detect_monitor_failure](aadl/aadl/packages/Monitor.aadl#L43)--> |
 |:--|
 |Type: [Monitor::Detect_Monitor_Failure](aadl/aadl/packages/Monitor.aadl#L428)<br>Implementation: [Monitor::Detect_Monitor_Failure.impl](aadl/aadl/packages/Monitor.aadl#L440)|
 |Periodic: 1000 ms|
 
 <!--arch-section-aadl-arch-component-info-detect_monitor_failure_end-->
 <!--arch-section-aadl-arch-component-info-manage_alarm_start-->
-|Thread: [manage_alarm](aadl/aadl/packages/Monitor.aadl#L39) |
+|Thread: MonMA <!--[manage_alarm](aadl/aadl/packages/Monitor.aadl#L39)--> |
 |:--|
-|Type: [Monitor::Manage_Alarm](aadl/aadl/packages/Monitor.aadl#L300)<br>Implementation: [Monitor::Manage_Alarm.impl](aadl/aadl/packages/Monitor.aadl#L412)|
+|Type: [Monitor::Manage_Alarm](aadl/aadl/packages/Monitor.aadl#L300)<br>Implementation: [Monitor::Manage_Alarm.impl](aadl/aadl/packages/Monitor.aadl#L412)<br>Behavior Specification: [GUMBO](aadl/aadl/packages/Monitor.aadl#L320)|
 |Periodic: 1000 ms|
 
 <!--arch-section-aadl-arch-component-info-manage_alarm_end-->
 <!--arch-section-aadl-arch-component-info-manage_monitor_interface_start-->
-|Thread: [manage_monitor_interface](aadl/aadl/packages/Monitor.aadl#L37) |
+|Thread: MonMMI <!--[manage_monitor_interface](aadl/aadl/packages/Monitor.aadl#L37)--> |
 |:--|
-|Type: [Monitor::Manage_Monitor_Interface](aadl/aadl/packages/Monitor.aadl#L96)<br>Implementation: [Monitor::Manage_Monitor_Interface.impl](aadl/aadl/packages/Monitor.aadl#L207)|
+|Type: [Monitor::Manage_Monitor_Interface](aadl/aadl/packages/Monitor.aadl#L96)<br>Implementation: [Monitor::Manage_Monitor_Interface.impl](aadl/aadl/packages/Monitor.aadl#L207)<br>Behavior Specification: [GUMBO](aadl/aadl/packages/Monitor.aadl#L129)|
 |Periodic: 1000 ms|
 
 <!--arch-section-aadl-arch-component-info-manage_monitor_interface_end-->
 <!--arch-section-aadl-arch-component-info-manage_monitor_mode_start-->
-|Thread: [manage_monitor_mode](aadl/aadl/packages/Monitor.aadl#L41) |
+|Thread: MonMMM <!--[manage_monitor_mode](aadl/aadl/packages/Monitor.aadl#L41)--> |
 |:--|
-|Type: [Monitor::Manage_Monitor_Mode](aadl/aadl/packages/Monitor.aadl#L221)<br>Implementation: [Monitor::Manage_Monitor_Mode.impl](aadl/aadl/packages/Monitor.aadl#L286)|
+|Type: [Monitor::Manage_Monitor_Mode](aadl/aadl/packages/Monitor.aadl#L221)<br>Implementation: [Monitor::Manage_Monitor_Mode.impl](aadl/aadl/packages/Monitor.aadl#L286)<br>Behavior Specification: [GUMBO](aadl/aadl/packages/Monitor.aadl#L239)|
 |Periodic: 1000 ms|
 
 <!--arch-section-aadl-arch-component-info-manage_monitor_mode_end-->
 <!--arch-section-aadl-arch-component-info-detect_regulator_failure_start-->
-|Thread: [detect_regulator_failure](aadl/aadl/packages/Regulate.aadl#L48) |
+|Thread: DRF <!--[detect_regulator_failure](aadl/aadl/packages/Regulate.aadl#L48)--> |
 |:--|
 |Type: [Regulate::Detect_Regulator_Failure](aadl/aadl/packages/Regulate.aadl#L506)<br>Implementation: [Regulate::Detect_Regulator_Failure.impl](aadl/aadl/packages/Regulate.aadl#L518)|
 |Periodic: 1000 ms|
 
 <!--arch-section-aadl-arch-component-info-detect_regulator_failure_end-->
 <!--arch-section-aadl-arch-component-info-manage_heat_source_start-->
-|Thread: [manage_heat_source](aadl/aadl/packages/Regulate.aadl#L42) |
+|Thread: RegMHS <!--[manage_heat_source](aadl/aadl/packages/Regulate.aadl#L42)--> |
 |:--|
-|Type: [Regulate::Manage_Heat_Source](aadl/aadl/packages/Regulate.aadl#L398)<br>Implementation: [Regulate::Manage_Heat_Source.impl](aadl/aadl/packages/Regulate.aadl#L489)|
+|Type: [Regulate::Manage_Heat_Source](aadl/aadl/packages/Regulate.aadl#L398)<br>Implementation: [Regulate::Manage_Heat_Source.impl](aadl/aadl/packages/Regulate.aadl#L489)<br>Behavior Specification: [GUMBO](aadl/aadl/packages/Regulate.aadl#L426)|
 |Periodic: 1000 ms|
 
 <!--arch-section-aadl-arch-component-info-manage_heat_source_end-->
 <!--arch-section-aadl-arch-component-info-manage_regulator_interface_start-->
-|Thread: [manage_regulator_interface](aadl/aadl/packages/Regulate.aadl#L38) |
+|Thread: RegMRI <!--[manage_regulator_interface](aadl/aadl/packages/Regulate.aadl#L38)--> |
 |:--|
-|Type: [Regulate::Manage_Regulator_Interface](aadl/aadl/packages/Regulate.aadl#L106)<br>Implementation: [Regulate::Manage_Regulator_Interface.impl](aadl/aadl/packages/Regulate.aadl#L256)|
+|Type: [Regulate::Manage_Regulator_Interface](aadl/aadl/packages/Regulate.aadl#L106)<br>Implementation: [Regulate::Manage_Regulator_Interface.impl](aadl/aadl/packages/Regulate.aadl#L256)<br>Behavior Specification: [GUMBO](aadl/aadl/packages/Regulate.aadl#L170)|
 |Periodic: 1000 ms|
 
 <!--arch-section-aadl-arch-component-info-manage_regulator_interface_end-->
 <!--arch-section-aadl-arch-component-info-manage_regulator_mode_start-->
-|Thread: [manage_regulator_mode](aadl/aadl/packages/Regulate.aadl#L46) |
+|Thread: RegMRM <!--[manage_regulator_mode](aadl/aadl/packages/Regulate.aadl#L46)--> |
 |:--|
-|Type: [Regulate::Manage_Regulator_Mode](aadl/aadl/packages/Regulate.aadl#L270)<br>Implementation: [Regulate::Manage_Regulator_Mode.impl](aadl/aadl/packages/Regulate.aadl#L383)|
+|Type: [Regulate::Manage_Regulator_Mode](aadl/aadl/packages/Regulate.aadl#L270)<br>Implementation: [Regulate::Manage_Regulator_Mode.impl](aadl/aadl/packages/Regulate.aadl#L383)<br>Behavior Specification: [GUMBO](aadl/aadl/packages/Regulate.aadl#L296)|
 |Periodic: 1000 ms|
 
 <!--arch-section-aadl-arch-component-info-manage_regulator_mode_end-->
+
+## <!--behavior-code-title_start-->Behavior Code<!--behavior-code-title_end-->
+<!--behavior-code-description_start-->
+<!--behavior-code-description_end-->
+<!--behavior-code-slang-code-manage_regulator_interface_start-->
+[RegMRI](hamr/slang/src/main/component/isolette/Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/isolette/Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_GumboX.scala)
+<!--behavior-code-slang-code-manage_regulator_interface_end-->
+<!--behavior-code-slang-code-manage_heat_source_start-->
+[RegMHS](hamr/slang/src/main/component/isolette/Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/isolette/Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_GumboX.scala)
+<!--behavior-code-slang-code-manage_heat_source_end-->
+<!--behavior-code-slang-code-manage_regulator_mode_start-->
+[RegMRM](hamr/slang/src/main/component/isolette/Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/isolette/Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode_GumboX.scala)
+<!--behavior-code-slang-code-manage_regulator_mode_end-->
+<!--behavior-code-slang-code-detect_regulator_failure_start-->
+[DRF](hamr/slang/src/main/component/isolette/Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure.scala)
+
+<!--behavior-code-slang-code-detect_regulator_failure_end-->
+<!--behavior-code-slang-code-manage_monitor_interface_start-->
+[MonMMI](hamr/slang/src/main/component/isolette/Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/isolette/Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_GumboX.scala)
+<!--behavior-code-slang-code-manage_monitor_interface_end-->
+<!--behavior-code-slang-code-manage_alarm_start-->
+[MonMA](hamr/slang/src/main/component/isolette/Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/isolette/Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_GumboX.scala)
+<!--behavior-code-slang-code-manage_alarm_end-->
+<!--behavior-code-slang-code-manage_monitor_mode_start-->
+[MonMMM](hamr/slang/src/main/component/isolette/Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/isolette/Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_GumboX.scala)
+<!--behavior-code-slang-code-manage_monitor_mode_end-->
+<!--behavior-code-slang-code-detect_monitor_failure_start-->
+[DMF](hamr/slang/src/main/component/isolette/Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure.scala)
+
+<!--behavior-code-slang-code-detect_monitor_failure_end-->
+<!--behavior-code-slang-code-oit_start-->
+[OpInterface](hamr/slang/src/main/component/isolette/Isolette/operator_interface_thread_impl_operator_interface_oip_oit.scala)
+
+<!--behavior-code-slang-code-oit_end-->
+<!--behavior-code-slang-code-thermostat_start-->
+[TS](hamr/slang/src/main/component/isolette/Devices/Temperature_Sensor_impl_temperature_sensor_cpi_thermostat.scala)
+
+<!--behavior-code-slang-code-thermostat_end-->
+<!--behavior-code-slang-code-heat_controller_start-->
+[HS](hamr/slang/src/main/component/isolette/Devices/Heat_Source_impl_heat_source_cpi_heat_controller.scala)
+
+<!--behavior-code-slang-code-heat_controller_end-->
 
 ## <!---title_start-->Metrics<!---title_end-->
 <!---description_start-->
