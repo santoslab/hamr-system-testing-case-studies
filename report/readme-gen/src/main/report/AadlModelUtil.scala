@@ -13,7 +13,7 @@ import org.sireum.message.{FlatPos, Position, Reporter}
 
 object AadlModelUtil {
   def getGumboSubclausePos(g: GclAnnexClauseInfo, aadlDir: Os.Path): Position = {
-    val p: Position = //
+    val p: Position = // find 'nearest' posOpt to the start of the subclause
       if (g.getAnnex.state.nonEmpty)
         g.getAnnex.state(0).posOpt.get
       else if (g.getAnnex.methods.nonEmpty)

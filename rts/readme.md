@@ -258,7 +258,7 @@ likely would be excluded in a release build
 </tr><tr>
 <td>Property:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L391">sysProp_TempPressManualTrip</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td>getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_</td>
+<td>Randomization Profile:</td><td>getDefaultProfile, <i>i.e. uses default configurations as provided by SlangCheck</i></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L207)">examplePreStateContainerFilter</a></td>
 </tr>
@@ -275,7 +275,7 @@ likely would be excluded in a release build
 </tr><tr>
 <td>Property:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L406">sysProp_SaturationManualTrip</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td>getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_</td>
+<td>Randomization Profile:</td><td>getDefaultProfile, <i>i.e. uses default configurations as provided by SlangCheck</i></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L207)">examplePreStateContainerFilter</a></td>
 </tr>
@@ -292,7 +292,7 @@ likely would be excluded in a release build
 </tr><tr>
 <td>Property:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L424">sysProp_AU1TempTrip</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td>getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_</td>
+<td>Randomization Profile:</td><td>getDefaultProfile, <i>i.e. uses default configurations as provided by SlangCheck</i></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L207)">examplePreStateContainerFilter</a></td>
 </tr>
@@ -309,7 +309,7 @@ likely would be excluded in a release build
 </tr><tr>
 <td>Property:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L435">sysProp_AU1PressTrip</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td>getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_</td>
+<td>Randomization Profile:</td><td>getDefaultProfile, <i>i.e. uses default configurations as provided by SlangCheck</i></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L207)">examplePreStateContainerFilter</a></td>
 </tr>
@@ -326,7 +326,7 @@ likely would be excluded in a release build
 </tr><tr>
 <td>Property:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L446">sysProp_AU1SatTrip</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td>getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_</td>
+<td>Randomization Profile:</td><td>getDefaultProfile, <i>i.e. uses default configurations as provided by SlangCheck</i></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L207)">examplePreStateContainerFilter</a></td>
 </tr>
@@ -343,7 +343,7 @@ likely would be excluded in a release build
 </tr><tr>
 <td>Property:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L460">sysProp_AU2TempTrip</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td>getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_</td>
+<td>Randomization Profile:</td><td>getDefaultProfile, <i>i.e. uses default configurations as provided by SlangCheck</i></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L207)">examplePreStateContainerFilter</a></td>
 </tr>
@@ -360,7 +360,7 @@ likely would be excluded in a release build
 </tr><tr>
 <td>Property:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L471">sysProp_AU2PressTrip</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td>getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_</td>
+<td>Randomization Profile:</td><td>getDefaultProfile, <i>i.e. uses default configurations as provided by SlangCheck</i></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L207)">examplePreStateContainerFilter</a></td>
 </tr>
@@ -377,7 +377,7 @@ likely would be excluded in a release build
 </tr><tr>
 <td>Property:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L482">sysProp_AU2SatTrip</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td>getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_</td>
+<td>Randomization Profile:</td><td>getDefaultProfile, <i>i.e. uses default configurations as provided by SlangCheck</i></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L207)">examplePreStateContainerFilter</a></td>
 </tr>
@@ -394,7 +394,7 @@ likely would be excluded in a release build
 </tr><tr>
 <td>Property:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L510">sysProp_TempPressTripCausality</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td>getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_</td>
+<td>Randomization Profile:</td><td>getDefaultProfile, <i>i.e. uses default configurations as provided by SlangCheck</i></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L207)">examplePreStateContainerFilter</a></td>
 </tr>
@@ -411,7 +411,7 @@ likely would be excluded in a release build
 </tr><tr>
 <td>Property:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L496">sysProp_SatTripCausality</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td>getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_</td>
+<td>Randomization Profile:</td><td>getDefaultProfile, <i>i.e. uses default configurations as provided by SlangCheck</i></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L207)">examplePreStateContainerFilter</a></td>
 </tr>
@@ -428,7 +428,7 @@ likely would be excluded in a release build
 </tr><tr>
 <td>Property:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L532">sysProp_ALU_Satisfies_Functional_Oracle</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td>getDefaultProfile, _i.e. uses default configurations as provided by SlangCheck_</td>
+<td>Randomization Profile:</td><td>getDefaultProfile, <i>i.e. uses default configurations as provided by SlangCheck</i></td>
 </tr><tr>
 <td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/RTS/system_tests/rts1/Actuation_Subsystem_Test_wSlangCheck.scala#L207)">examplePreStateContainerFilter</a></td>
 </tr>
