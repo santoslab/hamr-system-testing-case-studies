@@ -1,4 +1,6 @@
 # <!---title_start-->Isolette<!---title_end-->
+
+The data, links, and images in this file are auto-generated from HAMR's report generation facility.  Additional text explanations have been added for readability. 
 <!---description_start-->
 <!---description_end-->
 ## <!--arch-section-title_start-->AADL Architecture<!--arch-section-title_end-->
@@ -7,6 +9,13 @@
 <!--arch-section-aadl-arch-diagram_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.svg)
 <!--arch-section-aadl-arch-diagram_end-->
+
+The following documentation blocks provide links to AADL textual representation source of the Thread components in the system.
+* "Type" links to the AADL component type declaration (providing the port-based interface for the component)
+* "Behavior Specification" (when present) links to the GUMBO behavior contract for the component.  HAMR automatically compiles the GUMBO contract 
+   to both an code-level contract used for Logika code verification as well as an executable representation of the contract 
+   (as pure boolean functions) used in unit and system testing.
+
 <!--arch-section-aadl-arch-component-info-isolette_single_sensor_Instance_start-->
 |System: [Isolette::isolette.single_sensor](aadl/aadl/packages/Isolette.aadl#L71) |
 |:--|
@@ -32,13 +41,9 @@
 |Periodic: 1000 ms|
 
 <!--arch-section-aadl-arch-component-info-oit_end-->
-<!--arch-section-aadl-arch-component-info-detect_monitor_failure_start-->
-|Thread: DMF <!--[detect_monitor_failure](aadl/aadl/packages/Monitor.aadl#L43)--> |
-|:--|
-|Type: [Monitor::Detect_Monitor_Failure](aadl/aadl/packages/Monitor.aadl#L428)<br>Implementation: [Monitor::Detect_Monitor_Failure.impl](aadl/aadl/packages/Monitor.aadl#L440)|
-|Periodic: 1000 ms|
 
-<!--arch-section-aadl-arch-component-info-detect_monitor_failure_end-->
+The following Thread components will house the application logic for the Isolette's safety monitoring (**Monitor**) subsystem.  Each of these components has a GUMBO contract that is used in the component and system implementations for component-level SMT-based verification, unit testing, and system testing.
+
 <!--arch-section-aadl-arch-component-info-manage_alarm_start-->
 |Thread: MonMA <!--[manage_alarm](aadl/aadl/packages/Monitor.aadl#L39)--> |
 |:--|
@@ -58,15 +63,18 @@
 |:--|
 |Type: [Monitor::Manage_Monitor_Mode](aadl/aadl/packages/Monitor.aadl#L221)<br>Implementation: [Monitor::Manage_Monitor_Mode.impl](aadl/aadl/packages/Monitor.aadl#L286)<br>Behavior Specification: [GUMBO](aadl/aadl/packages/Monitor.aadl#L239)|
 |Periodic: 1000 ms|
-
 <!--arch-section-aadl-arch-component-info-manage_monitor_mode_end-->
-<!--arch-section-aadl-arch-component-info-detect_regulator_failure_start-->
-|Thread: DRF <!--[detect_regulator_failure](aadl/aadl/packages/Regulate.aadl#L48)--> |
-|:--|
-|Type: [Regulate::Detect_Regulator_Failure](aadl/aadl/packages/Regulate.aadl#L506)<br>Implementation: [Regulate::Detect_Regulator_Failure.impl](aadl/aadl/packages/Regulate.aadl#L518)|
-|Periodic: 1000 ms|
 
-<!--arch-section-aadl-arch-component-info-detect_regulator_failure_end-->
+<!--arch-section-aadl-arch-component-info-detect_monitor_failure_start-->
+|Thread: DMF <!--[detect_monitor_failure](aadl/aadl/packages/Monitor.aadl#L43)--> |
+|:--|
+|Type: [Monitor::Detect_Monitor_Failure](aadl/aadl/packages/Monitor.aadl#L428)<br>Implementation: [Monitor::Detect_Monitor_Failure.impl](aadl/aadl/packages/Monitor.aadl#L440)|
+|Periodic: 1000 ms|
+<!--arch-section-aadl-arch-component-info-detect_monitor_failure_end-->
+
+The following Thread components will house the application logic for the Isolette's control (**Regulate**) subsystem.  Each of these components has a GUMBO contract that is used in the component and system implementations for component-level SMT-based verification, unit testing, and system testing.
+
+
 <!--arch-section-aadl-arch-component-info-manage_heat_source_start-->
 |Thread: RegMHS <!--[manage_heat_source](aadl/aadl/packages/Regulate.aadl#L42)--> |
 |:--|
@@ -89,25 +97,25 @@
 
 <!--arch-section-aadl-arch-component-info-manage_regulator_mode_end-->
 
+<!--arch-section-aadl-arch-component-info-detect_regulator_failure_start-->
+|Thread: DRF <!--[detect_regulator_failure](aadl/aadl/packages/Regulate.aadl#L48)--> |
+|:--|
+|Type: [Regulate::Detect_Regulator_Failure](aadl/aadl/packages/Regulate.aadl#L506)<br>Implementation: [Regulate::Detect_Regulator_Failure.impl](aadl/aadl/packages/Regulate.aadl#L518)|
+|Periodic: 1000 ms|
+
+<!--arch-section-aadl-arch-component-info-detect_regulator_failure_end-->
+
 ## <!--behavior-code-title_start-->Behavior Code<!--behavior-code-title_end-->
+
+The following items link to the Slang source code for the application logic of each thread.  In the HAMR development workflow, skeletons for these files are automatically created, along with APIs for communicating over model-declared ports in the component type.  GUMBO component contracts in the AADL model are automatically translated to Slang/Logika contracts and included in the generated skeletons.  Then, the application developer uses a conventional development approach for coding the application logic in Slang (C workflows are also supported).  Logika can be applied to verify that the user's application code conforms to the generated Logika contracts (which are derived automatically from model-level GUMBO contracts).  The HAMR build framework will integrate the user-code application logic for each component (below) with auto-generated threading and communication infrastructure code, along with HAMR's implementation of AADL run-time (based on AADL's standardized Run-Time Services).   Note that HAMR is smart enough to accomodate changes to model-level interface declarations (ports, etc.) as well as changes to GUMBO contracts -- user code will not be clobbered when the model is changed and HAMR code generation is rerun.  Instead, HAMR uses specially designed delimiters in the application code files to, e.g., re-weave updated contracts into the application code.
+
+Executable Slang versions of the GUMBO contracts (referred to as "GUMBOX" contracts) are also automatically generated in the code generation process.  These executable contracts are automatically integrated into the system testing process:  appropriate portions of the executable contracts are invoked in the pre-state and the post-state of a thread dispatch to dynamically check that the thread's behavior for that particular dispatch conforms to the model-level GUMBO contracts.
+
 <!--behavior-code-description_start-->
 <!--behavior-code-description_end-->
-<!--behavior-code-slang-code-manage_regulator_interface_start-->
-[RegMRI](hamr/slang/src/main/component/isolette/Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface.scala)
-<br>[GumboX](hamr/slang/src/main/bridge/isolette/Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_GumboX.scala)
-<!--behavior-code-slang-code-manage_regulator_interface_end-->
-<!--behavior-code-slang-code-manage_heat_source_start-->
-[RegMHS](hamr/slang/src/main/component/isolette/Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source.scala)
-<br>[GumboX](hamr/slang/src/main/bridge/isolette/Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_GumboX.scala)
-<!--behavior-code-slang-code-manage_heat_source_end-->
-<!--behavior-code-slang-code-manage_regulator_mode_start-->
-[RegMRM](hamr/slang/src/main/component/isolette/Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode.scala)
-<br>[GumboX](hamr/slang/src/main/bridge/isolette/Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode_GumboX.scala)
-<!--behavior-code-slang-code-manage_regulator_mode_end-->
-<!--behavior-code-slang-code-detect_regulator_failure_start-->
-[DRF](hamr/slang/src/main/component/isolette/Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure.scala)
 
-<!--behavior-code-slang-code-detect_regulator_failure_end-->
+### Monitor Sub-system Behavior (Application) Code and Executable Contracts
+
 <!--behavior-code-slang-code-manage_monitor_interface_start-->
 [MonMMI](hamr/slang/src/main/component/isolette/Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface.scala)
 <br>[GumboX](hamr/slang/src/main/bridge/isolette/Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_GumboX.scala)
@@ -124,6 +132,28 @@
 [DMF](hamr/slang/src/main/component/isolette/Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure.scala)
 
 <!--behavior-code-slang-code-detect_monitor_failure_end-->
+
+### Regulate Sub-system Behavior (Application) Code and Executable Contracts
+
+<!--behavior-code-slang-code-manage_regulator_interface_start-->
+[RegMRI](hamr/slang/src/main/component/isolette/Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/isolette/Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_GumboX.scala)
+<!--behavior-code-slang-code-manage_regulator_interface_end-->
+<!--behavior-code-slang-code-manage_heat_source_start-->
+[RegMHS](hamr/slang/src/main/component/isolette/Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/isolette/Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_GumboX.scala)
+<!--behavior-code-slang-code-manage_heat_source_end-->
+<!--behavior-code-slang-code-manage_regulator_mode_start-->
+[RegMRM](hamr/slang/src/main/component/isolette/Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode.scala)
+<br>[GumboX](hamr/slang/src/main/bridge/isolette/Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode_GumboX.scala)
+<!--behavior-code-slang-code-manage_regulator_mode_end-->
+<!--behavior-code-slang-code-detect_regulator_failure_start-->
+[DRF](hamr/slang/src/main/component/isolette/Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure.scala)
+
+<!--behavior-code-slang-code-detect_regulator_failure_end-->
+
+### Operator Interface and Sensing/Actuation Devices 
+
 <!--behavior-code-slang-code-oit_start-->
 [OpInterface](hamr/slang/src/main/component/isolette/Isolette/operator_interface_thread_impl_operator_interface_oip_oit.scala)
 
@@ -143,6 +173,9 @@
 ### <!---title_start-->AADL Metrics<!---title_end-->
 <!---description_start-->
 <!---description_end-->
+
+The following section provides statistics about the AADL model to give a rough idea of its size (in terms of number of AADL modeling elements that impact the size of the deployed system).
+
 <!---_start-->
 | | |
 |:--|:--|
@@ -154,6 +187,9 @@
 ### <!---title_start-->JVM Metrics<!---title_end-->
 <!---description_start-->
 <!---description_end-->
+
+The following section provides statistics about the Slang source code.
+
 <!---Isolette_code_metrics_start-->
 Directories Scanned Using [https://github.com/AlDanial/cloc](https://github.com/AlDanial/cloc) v1.94:
 - [hamr/slang/src/main](hamr/slang/src/main)
