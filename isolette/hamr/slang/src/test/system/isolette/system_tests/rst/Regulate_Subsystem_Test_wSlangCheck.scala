@@ -56,14 +56,14 @@ class Regulate_Subsystem_Test_wSlangCheck
     //   Output: Heat Control;  Normal Mode Properties
     // -----
     "HC__Normal_____Heat_On" ~> TestConfiguration(
-      description = "HC; Normal; => Heat On",
+      description = "Heat Control control laws; NORMAL mode => Heat ON result state",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_NormalModeHeatOn _
     ),
     "HC__Normal_____Heat_Off" ~> TestConfiguration(
-      description = "HC; Normal; => Heat Off",
+      description = "Heat Control control laws; NORMAL mode => Heat OFF result state",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
@@ -73,7 +73,7 @@ class Regulate_Subsystem_Test_wSlangCheck
     //   Output: Heat Control;  Failure properties
     // -----
     "HC__Failing__CT____Heat_Off" ~> TestConfiguration(
-      description = "HC; Failing; CT => Heat Off",
+      description = "Heat Control control laws; Failing scenario (Current Temp) => Heat OFF result state",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
@@ -81,7 +81,7 @@ class Regulate_Subsystem_Test_wSlangCheck
     ),
 
     "HC__Failing__UDT____Heat_Off" ~> TestConfiguration(
-      description = "HC; Failing; UDT => Heat Off",
+      description = "Heat Control control laws; Failing scenario (Upper Desired Temperature) => Heat OFF result state",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
@@ -89,7 +89,7 @@ class Regulate_Subsystem_Test_wSlangCheck
     ),
 
     "HC__Failing__LDT____Heat_Off" ~> TestConfiguration(
-      description = "HC; Failing; LDT => Heat Off",
+      description = "Heat Control control laws; Failing scenario (Lower Desired Temperature) => Heat OFF result state",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
@@ -97,7 +97,7 @@ class Regulate_Subsystem_Test_wSlangCheck
     ),
 
     "HC__Failing__Internal_Failure____Heat_Off" ~> TestConfiguration(
-      description = "HC; Failing; Internal Failure => Heat Off",
+      description = "Heat Control control laws; Failing scenario (internal failure) => Heat OFF result state",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
@@ -106,7 +106,7 @@ class Regulate_Subsystem_Test_wSlangCheck
 
     // observe any failure condition (combining the input failures and internal failures above)
     "HC__Failing__Error_Condition____Heat_Off" ~> TestConfiguration(
-      description = "HC; Failing; Error Condition => Heat Off",
+      description = "Heat Control control laws; Failing scenario (combined failure condition) => Heat OFF result state",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
@@ -118,7 +118,7 @@ class Regulate_Subsystem_Test_wSlangCheck
 
     // observe any failure condition (combining the input failures and internal failures above)
     "DisplayTemp__Normal" ~> TestConfiguration(
-      description = "DisplayTemp; Normal",
+      description = "Display temp control laws; NORMAL mode => correct deplay result state",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
@@ -140,28 +140,28 @@ class Regulate_Subsystem_Test_wSlangCheck
 
     // Normal --> Failed  Transitions
     "Mode_Trans___Normal__Failed__CT_Invalid" ~> TestConfiguration(
-      description = "Mode Trans:  Normal->Failed; CT Invalid",
+      description = "Mode Trans:  Normal->Failed because Current Temperature Invalid",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_InvalidCTNormalToFailedMode _
     ),
     "Mode_Trans___Normal__Failed__UDT_Invalid" ~> TestConfiguration(
-      description = "Mode Trans:  Normal->Failed; UDT Invalid",
+      description = "Mode Trans:  Normal->Failed because Upper Desired Temperature Invalid",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_InvalidUDTNormalToFailedMode _
     ),
     "Mode_Trans___Normal__Failed__LDT_Invalid" ~> TestConfiguration(
-      description = "Mode Trans:  Normal->Failed; LDT Invalid",
+      description = "Mode Trans:  Normal->Failed because Lower Desired Temperature Invalid",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_InvalidLDTNormalToFailedMode _
     ),
     "Mode_Trans___Normal__Failed__Internal_Failure" ~> TestConfiguration(
-      description = "Mode Trans:  Normal->Failed; Internal Failure",
+      description = "Mode Trans:  Normal->Failed because Internal Failure",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
@@ -169,7 +169,7 @@ class Regulate_Subsystem_Test_wSlangCheck
     ),
     // Combinded Error Condition
     "Mode_Trans___Normal__Failed__Error_Condition" ~> TestConfiguration(
-      description = "Mode Trans:  Normal->Failed; Error Condition",
+      description = "Mode Trans:  Normal->Failed because combined error condition",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
@@ -195,7 +195,7 @@ class Regulate_Subsystem_Test_wSlangCheck
     // -----
     // Heat Control Output
     "Mode_Impl__Init____Heat_Off" ~> TestConfiguration(
-      description = "Mode Impl: Init => Heat Off",
+      description = "Mode Implication: Init => Heat Off",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
@@ -203,7 +203,7 @@ class Regulate_Subsystem_Test_wSlangCheck
     ),
 
     "Mode_Impl__Failed____Heat_Off" ~> TestConfiguration(
-      description = "Mode Impl: Failed => Heat Off",
+      description = "Mode Implication: Failed => Heat Off",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,

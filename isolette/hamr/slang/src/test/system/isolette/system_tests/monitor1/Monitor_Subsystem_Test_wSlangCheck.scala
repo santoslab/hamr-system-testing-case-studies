@@ -49,35 +49,35 @@ class Monitor_Subsystem_Test_wSlangCheck
 
   val testMatrix: Map[String, TestConfiguration] = Map.empty ++ ISZ(
     "MA__Normal_____Alarm_On" ~> TestConfiguration(
-      description = "MA; Normal; => Alarm On",
+      description = "Alarm control laws; NORMAL mode with temp range violation => Alarm ON result state",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_NormalModeAlarmOn _
     ),
     "MA__Normal_____Alarm_Unchanged" ~> TestConfiguration(
-      description = "MA; Normal; => Alarm Unchanged",
+      description = "Alarm control laws; NORMAL mode => Alarm status unchanged",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_NormalModeAlarmUnchanged _
     ),
     "MA__Normal_____Alarm_Unchanged_left" ~> TestConfiguration(
-      description = "MA; Normal; => Alarm Unchanged, stress left partition",
+      description = "Alarm control laws; NORMAL mode => Alarm status unchanged (stress left partition)",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges.copy(name = "currentTemp-in-left-partition"),
       filter = assumeFigureA_7 _,
       property = sysProp_NormalModeAlarmUnchanged _
     ),
     "MA__Normal_____Alarm_Unchanged_right" ~> TestConfiguration(
-      description = "MA; Normal; => Alarm Unchanged, stress right partition",
+      description = "Alarm control laws; NORMAL mode => Alarm status unchanged (stress right partition)",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges.copy(name = "currentTemp-in-right-partition"),
       filter = assumeFigureA_7 _,
       property = sysProp_NormalModeAlarmUnchanged _
     ),
     "MA__Normal_____Alarm_Off" ~> TestConfiguration(
-      description = "MA; Normal; => Alarm Off",
+      description = "Alarm control laws; NORMAL mode => Alarm OFF result state",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
@@ -86,21 +86,21 @@ class Monitor_Subsystem_Test_wSlangCheck
 
 
     "MA__Failing__CT____Alarm_On" ~> TestConfiguration(
-      description = "Failure due to invalid currentTemp should result in Alarm On",
+      description = "Alarm control laws; Failing scenario (due to invalid currentTemp) => Alarm ON result state",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InvalidCTNormalModeAlarmOn _
     ),
     "MA__Failing__LAT____Alarm_On" ~> TestConfiguration(
-      description = "Failure due to invalid lower alarm should result in Alarm On",
+      description = "Alarm control laws; Failing scenario (due to invalid lower alarm) => Alarm ON result",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InvalidLATNormalModeAlarmOn _
     ),
     "MA__Failing__UAT____Alarm_On" ~> TestConfiguration(
-      description = "Failure due to invalid upper alarm should result in Alarm On",
+      description = "Alarm control laws; Failing scenario (due to invalid upper alarm) => Alarm ON result",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
@@ -109,14 +109,14 @@ class Monitor_Subsystem_Test_wSlangCheck
 
 
     "MA__Failing__Internal_Failure____Alarm_On" ~> TestConfiguration(
-      description = "Failure due to internal failure should result in Alarm On",
+      description = "Alarm control laws; Failing scenario (internal failure) => Alarm ON result",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InternalFailureNormalModeAlarmOn _
     ),
     "MA__Failing__Error_Condition____Alarm_On" ~> TestConfiguration(
-      description = "observe any failure condition (combining the input failures and internal failures above) should result in Alarm On",
+      description = "Alarm control laws; Failing scenario (combined failure condition) => Alarm ON result",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
@@ -127,7 +127,7 @@ class Monitor_Subsystem_Test_wSlangCheck
 
     // Normal --> Normal  Transitions
     "Mode_Trans___Normal__Normal" ~> TestConfiguration(
-      description = "If no error condition and in normal then stay  in Normal",
+      description = "Mode Trans:  Normal->Normal",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
@@ -135,21 +135,21 @@ class Monitor_Subsystem_Test_wSlangCheck
     ),
 
     "Mode_Trans___Normal__Failed__CT_Invalid" ~> TestConfiguration(
-      description = "If in normal, but CT is invalid then should transition to Failed",
+      description = "Mode Trans:  Normal->Failed because Current Temperature Invalid",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InvalidCTNormalToFailedMode _
     ),
     "Mode_Trans___Normal__Failed__LAT_Invalid" ~> TestConfiguration(
-      description = "If in normal, but LAT is invalid then should transition to Failed",
+      description = "Mode Trans:  Normal->Failed because Lower Alarm Temperature Invalid",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InvalidLATNormalToFailedMode _
     ),
     "Mode_Trans___Normal__Failed__UAT_Invalid" ~> TestConfiguration(
-      description = "If in normal, but UAT is invalid then should transition to Failed",
+      description = "Mode Trans:  Normal->Failed because Upper Alarm Temperature Invalid",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
@@ -157,14 +157,14 @@ class Monitor_Subsystem_Test_wSlangCheck
     ),
 
     "Mode_Trans___Normal__Failed__Internal_Failure" ~> TestConfiguration(
-      description = "If in normal, but there is an internal failure then should transition to Failed",
+      description = "Mode Trans:  Normal->Failed because Internal Failure",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InternalFailureNormalToFailedMode _
     ),
     "Mode_Trans___Normal__Failed__Error_Condition" ~> TestConfiguration(
-      description = "If in normal, but there is an internal or interface failure then should transition to Failed",
+      description = "Mode Trans:  Normal->Failed because combined error condition",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
@@ -172,14 +172,14 @@ class Monitor_Subsystem_Test_wSlangCheck
     ),
 
     "Mode_Impl__Init____Alarm_Off" ~> TestConfiguration(
-      description = "If in Init mode then the alarm should be off",
+      description = "Alarm control laws; INIT mode => Alarm OFF result state",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InitModeImpliesAlarmOff _
     ),
     "Mode_Impl__Failed____Alarm_On" ~> TestConfiguration(
-      description = "If in Failed mode then the alarm should be On",
+      description = "Alarm control laws; FAILED mode => Alarm OFF result state",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
