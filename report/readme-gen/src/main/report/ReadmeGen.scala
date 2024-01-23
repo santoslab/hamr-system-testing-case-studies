@@ -13,7 +13,7 @@ object ReadmeGen extends App {
   val localResultsRootDir: Os.Path = Os.path("/opt") / "santos" / "jenkins" / "dsc_sys" / "dsc_tester"
 
   val runCodegen: B = F
-  val replaceReadmes: B = T
+  val replaceReadmes: B = F
 
   val repoRootDir: Os.Path = {
     val c = Os.path(".").up.up.up

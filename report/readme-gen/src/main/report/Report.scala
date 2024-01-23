@@ -4,26 +4,31 @@ package report
 import org.sireum._
 import org.sireum.hamr.codegen.common.StringUtil
 import org.sireum.hamr.codegen.common.symbols.{AadlComponent, AadlThread, SymbolTable}
-import org.sireum.hamr.ir.Classifier
+import org.sireum.hamr.ir
 import org.sireum.message.{Position, Reporter}
-import report.ReadmeGen.{Project, main, projects, repoRootDir}
-import org.sireum.U32._
-import org.sireum.hamr.arsit.ProjectDirectories
+import report.ReadmeGen.{Project, repoRootDir}
+import report.Report._
+
+@sig trait Level {
+  def tag: String
+}
 
 @datatype class ReportBlock(val tag: String,
-                            content: Option[ST])
+                            val content: Option[ST]) extends Level
 
 @datatype class ReportLevel(val tag: String,
                             val title: Option[ST],
                             val description: Option[ST],
                             val content: ISZ[ReportBlock],
-                            val subLevels: ISZ[ReportLevel])
+                            val subLevels: ISZ[ReportLevel]) extends Level
 
 object Report {
   val htmlDir: String = "https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies"
 
   def wrapWithTag(tag: String, isTitle: B, content: Option[ST]): ST = {
-    val (start, end): (String, String) = (s"<!--${tag}_start-->", s"<!--${tag}_end-->")
+    assert (!seenTags.contains(tag), s"$tag already exists")
+    seenTags = seenTags + tag
+    val (start, end): (String, String) = (s"<!--start__${tag}-->", s"<!--end____${tag}-->")
     val ret: ST = {
       if (isTitle) st"${start}${content}${end}"
       else
@@ -34,35 +39,90 @@ object Report {
     return ret
   }
 
-  def weave(readmeLoc: Os.Path, readmeContent: ReportLevel): Unit = {
-  }
+  @strictpure def getCookies(cookies: ISZ[Level]): ST = if(cookies.isEmpty) st"" else st"${(for (c <- cookies) yield c.tag, "_")}_"
+  @strictpure def getBlockTag(block: ReportBlock, cookies: ISZ[Level]): String = st"${getCookies(cookies)}${block.tag}".render
+  @strictpure def getTitleTag(reportLevel: ReportLevel, cookies: ISZ[Level]): String = st"${getCookies(cookies)}${reportLevel.tag}-title".render
 
-  def overwrite(readmeLoc: Os.Path, level: ReportLevel): Unit = {
-    def renderLevel(l: ReportLevel, pos: Z): ST = {
+  @strictpure def getDescTag(reportLevel: ReportLevel, cookies: ISZ[Level]): String = st"${getCookies(cookies)}${reportLevel.tag}-description".render
+
+  def overwrite(readmeLoc: Os.Path, report: ReportLevel): Unit = {
+    def renderLevel(l: ReportLevel, pos: Z, cookies: ISZ[Level]): ST = {
       val hashes = st"${(for (i <- 0 to pos) yield "#", "")}"
 
       def renderBlock(block: ReportBlock): ST = {
-        wrapWithTag(s"${l.tag}-${block.tag}", F, block.content)
+        wrapWithTag(getBlockTag(block, cookies :+ l), F, block.content)
       }
 
       return (
-        st"""$hashes ${wrapWithTag(s"${l.tag}-title", T, l.title)}
-            |${wrapWithTag(s"${l.tag}-description", F, l.description)}
+        st"""$hashes ${wrapWithTag(getTitleTag(l, cookies), T, l.title)}
+            |${wrapWithTag(getDescTag(l, cookies), F, l.description)}
             |${(for (b <- l.content) yield renderBlock(b), "\n")}
-            |${(for (sl <- l.subLevels) yield renderLevel(sl, pos + 1), "\n")}""")
+            |${(for (sl <- l.subLevels) yield renderLevel(sl, pos + 1, cookies :+ l), "\n")}""")
     }
 
-    val content = renderLevel(level, 0)
+    val content = renderLevel(report, 0, ISZ())
     readmeLoc.writeOver(content.render)
     println(s"Wrote: ${readmeLoc}")
   }
 
 
+  def weave(readmeLoc: Os.Path, readmeContent: ReportLevel): Unit = {
+    var existing = ops.StringOps(readmeLoc.read)
+
+    def replaceContent(tag: String, content: ST, addNewLines: B): Unit = {
+      val (start, end): (String, String) = (s"<!--start__${tag}-->", s"<!--end____${tag}-->")
+      val posStart = existing.stringIndexOf(start) + start.size // include the tag
+      if (posStart > 0) {
+        val posEnd = existing.stringIndexOfFrom(end, posStart)
+        if (posEnd > 0) {
+          val prelude: String = existing.substring(0, posStart)
+          val postlude: String = existing.substring(posEnd, existing.size)
+          val newContent: String =
+            if (addNewLines)
+              st"""$prelude
+                  |$content
+                  |$postlude""".render
+            else st"$prelude$content$postlude".render
+          existing = ops.StringOps(newContent)
+        } else {
+          cprintln(T, s"didn't find end tag ${end}")
+        }
+      } else {
+        cprintln(T, s"didn't find start tag ${start}")
+      }
+    }
+
+    def walk(level: Level, cookies: ISZ[Level]): Unit = {
+      level match {
+        case r: ReportLevel =>
+          if (r.title.nonEmpty) {
+            replaceContent(getTitleTag(r, cookies), r.title.get, F)
+          }
+          if (r.description.nonEmpty) {
+            replaceContent(getDescTag(r, cookies), r.description.get, T)
+          }
+          for (rb <- r.content) {
+            replaceContent(getBlockTag(rb, cookies :+ level), rb.content.get, T)
+          }
+          for (sl <- r.subLevels) {
+            walk(sl, cookies :+ level)
+          }
+        case x => halt("Infeasible")
+      }
+    }
+    walk(readmeContent, ISZ())
+
+    readmeLoc.writeOver(existing.s)
+    println(s"Replaced: ${readmeLoc}")
+  }
+
+  var seenTags: Set[String] = Set.empty
+
   def genReport(project: Project, packageName: String, aadlRootDir: Os.Path, rootDir: Os.Path, reporter: Reporter): ReportLevel = {
+    seenTags = Set.empty
     return Report(packageName, aadlRootDir, repoRootDir).genReport(project)
   }
 
-  import org.sireum.hamr.ir
   def createAadlComponentLink(linkToImplementation: B,
                               component: org.sireum.hamr.ir.Component,
                               isRoot: B,
@@ -82,7 +142,7 @@ object Report {
         p.isFile && p.ext == "aadl" &&
           ops.ISZOps(p.readLines).exists(l => ops.StringOps(l).trim == s"package ${name(0)}")
     )
-    assert (fileCands.size == 1)
+    assert(fileCands.size == 1)
 
     val file = fileCands(0)
     val (searchStr, textToDisplay): (String, String) = {
@@ -94,7 +154,7 @@ object Report {
 
     val declPos = component.identifier.pos.get
     val lines = file.readLines
-    for(i <- 0 until lines.size if ops.StringOps(lines(i)).contains(searchStr) && (isRoot || declPos.beginLine != i + 1)) {
+    for (i <- 0 until lines.size if ops.StringOps(lines(i)).contains(searchStr) && (isRoot || declPos.beginLine != i + 1)) {
       return st"[${name(0)}::${textToDisplay}](${rootDir.relativize(file).value}#L${i + 1})"
     }
     halt(s"Infeasible: couldn't find $searchStr in $file")
@@ -102,7 +162,7 @@ object Report {
 
   def sortThreads(threads: ISZ[AadlThread], symbolTable: SymbolTable): ISZ[AadlThread] = {
     return (
-      ops.ISZOps(threads()).sortWith((a,b) => a.component.classifier.get.name < b.component.classifier.get.name))
+      ops.ISZOps(threads()).sortWith((a, b) => a.component.classifier.get.name < b.component.classifier.get.name))
   }
 
   def createHyperLink(title: String, target: String): ST = {
@@ -131,7 +191,7 @@ object Report {
     return (o(0), o(1))
   }
 
-  def sanitize(s: String) : String = {
+  def sanitize(s: String): String = {
     return ops.StringOps(s).replaceAllLiterally(".", "_")
   }
 
@@ -149,24 +209,21 @@ object Report {
     }
     halt(s"Infeasible, didn't find $key in $f")
   }
-
 }
 
-import Report._
-
 @datatype class Report(packageName: String, aadlRootDir: Os.Path, repoRoot: Os.Path) {
-
 
   def runCloc(dirs: ISZ[Os.Path]): ST = {
 
     // define a language processing filter for camkes
-    val camkesClocDef = st"""CAmkES
-                            |    filter rm_comments_in_strings " /* */
-                            |    filter rm_comments_in_strings " //
-                            |    filter call_regexp_common C++
-                            |    extension camkes
-                            |    3rd_gen_scale 2.00
-                            |    end_of_line_continuation \\$$"""
+    val camkesClocDef =
+      st"""CAmkES
+          |    filter rm_comments_in_strings " /* */
+          |    filter rm_comments_in_strings " //
+          |    filter call_regexp_common C++
+          |    extension camkes
+          |    3rd_gen_scale 2.00
+          |    end_of_line_continuation \\$$"""
     val temp = Os.temp()
     temp.writeOver(camkesClocDef.render)
 
@@ -188,14 +245,15 @@ import Report._
   def dirsScanned(project: Project, dirs: ISZ[Os.Path]): ST = {
     val rdirs = dirs.map((m: Os.Path) => project.projectRootDir.relativize(m)).map((m: Os.Path) => st"- [${m}]($m)")
 
-    val _dirs: ST = st"""Directories Scanned Using [https://github.com/AlDanial/cloc](https://github.com/AlDanial/cloc) v1.94:
-                        |${(rdirs, "\n")}"""
+    val _dirs: ST =
+      st"""Directories Scanned Using [https://github.com/AlDanial/cloc](https://github.com/AlDanial/cloc) v1.94:
+          |${(rdirs, "\n")}"""
     return _dirs
   }
 
-   def genAadlMetrics(project: Project): ReportLevel = {
+  def genAadlMetrics(project: Project): ReportLevel = {
 
-    assert (project.configs.size == 1)
+    assert(project.configs.size == 1)
     val model = AadlModelUtil.getModel(project.air, F)
     val symbolTable = AadlModelUtil.getSymbolTable(model, project.configs(0).packageName.get, project.configs(0))
 
@@ -204,7 +262,7 @@ import Report._
     val connections = symbolTable.connections
 
     var ports: Z = 0
-    for(t <- threads) {
+    for (t <- threads) {
       ports = ports + t.getPorts().size
     }
 
@@ -216,11 +274,13 @@ import Report._
            ||Connections|${connections.size}|"""
 
     return ReportLevel(
-      tag = "",
+      tag = createTag("AADL Metrics"),
       title = Some(st"AADL Metrics"),
-      description = None(),
+      description = Some(
+        st"""The following section provides statistics about the AADL model to give a rough idea of
+            |its size (in terms of number of AADL modeling elements that impact the size of the deployed system)."""),
       content = ISZ(ReportBlock(
-        tag = "",
+        tag = createTag("AADL Metrics content block"),
         content = Some(ret))),
       subLevels = ISZ()
     )
@@ -231,18 +291,19 @@ import Report._
     var log: Z = 0
 
     def process(d: Os.Path): Unit = {
-      if(d.isDir) {
-        for(f <- d.list) {
+      if (d.isDir) {
+        for (f <- d.list) {
           process(f)
         }
       } else {
-        if(d.ext == "loc") {
+        if (d.ext == "loc") {
           val props = d.properties
           code = code + Z(props.getOrElse("code", "0")).get
           log = log + Z(props.getOrElse("log", "0")).get
         }
       }
     }
+
     process(root)
 
     val ret: ST =
@@ -258,7 +319,7 @@ import Report._
 
   def genJVMMetrics(project: Project): ReportLevel = {
 
-    assert (project.configs.size == 1)
+    assert(project.configs.size == 1)
 
     val mainDir = Os.path(project.configs(0).outputDir.get) / "src" / "main"
     assert(mainDir.exists && mainDir.isDir)
@@ -285,13 +346,13 @@ import Report._
           | ${userCloc}"""
 
     val block = ReportBlock(
-      tag = s"${project.title}_code_metrics",
+      tag = createTag(s"${project.title}_code_metrics"),
       content = Some(ret))
 
     return ReportLevel(
-      tag = "",
+      tag = createTag("JVM Metrics"),
       title = Some(st"JVM Metrics"),
-      description = None(),
+      description = Some(st"The following section provides statistics about the Slang source code."),
       content = ISZ(block),
       subLevels = ISZ()
     )
@@ -300,7 +361,7 @@ import Report._
   def genCodeMetrics(project: Project): ReportLevel = {
 
     return ReportLevel(
-      tag = "",
+      tag = createTag("Metrics"),
       title = Some(st"Metrics"),
       description = None(),
       content = ISZ(),
@@ -322,7 +383,7 @@ import Report._
         val mtf = project.projectRootDir.relativize(manualTestingFile)
 
         val dscHarnessFile = config.dscHarnessFile
-        assert (dscHarnessFile.exists, dscHarnessFile)
+        assert(dscHarnessFile.exists, dscHarnessFile)
 
         for (json <- jsons) {
           val harnessName = config.simpleDscHarnessName
@@ -332,14 +393,14 @@ import Report._
 
           val content: ST = if (emitMarkDown)
             st"""${Util.locateText(configName, mtfContents, mtf)}
-                 ||||
-                 ||:--|--|
-                 || Description: | ${json.get("description").get} |
-                 || Script Schema: | ${Util.locateMethodDefinition(json.get("schema").get, mtfContents, mtf)}|
-                 || Property: | ${Util.locateMethodDefinition(json.get("property").get, mtfContents, mtf)}|
-                 || Randomization Profile: | ${Util.locateTextD(T, F, json.get("profile").get, mtfContents, mtf)}|
-                 || Random Vector Filter: | ${Util.locateTextD(T, F, json.get("filter").get, mtfContents, mtf)}|
-                 |"""
+                ||||
+                ||:--|--|
+                || Description: | ${json.get("description").get}|
+                || Script Schema: | ${Util.locateMethodDefinition(json.get("schema").get, mtfContents, mtf)}|
+                || Property: | ${Util.locateMethodDefinition(json.get("property").get, mtfContents, mtf)}|
+                || Randomization Profile: | ${Util.locateTextD(T, F, json.get("profile").get, mtfContents, mtf)}|
+                || Random Vector Filter: | ${Util.locateTextD(T, F, json.get("filter").get, mtfContents, mtf)}|
+                |"""
           else
             st"""<table>
                 |<tr><th colspan=2 align="left">${Util.locateTextD(F, T, configName, mtfContents, mtf)}</th>
@@ -358,7 +419,7 @@ import Report._
                 |"""
 
           val configReport = ReportBlock(
-            tag = s"${harnessName}_${configName}_configuration_content",
+            tag = createTag(s"${harnessName}_${configName}_configuration_content"),
             content = Some(content)
           )
           val subEntries: ISZ[ReportBlock] = entries.get(harnessName) match {
@@ -372,7 +433,7 @@ import Report._
       var ret: ISZ[ReportLevel] = ISZ()
       for (e <- entries.entries) {
         ret = ret :+ ReportLevel(
-          tag = s"${e._1}_configurations",
+          tag = createTag(s"${e._1}_configurations"),
           title = Some(st"Configurations for ${e._1}"),
           description = None(),
           content = e._2,
@@ -383,7 +444,7 @@ import Report._
     }
 
     val configurations: ReportLevel = ReportLevel(
-      tag = "configurations",
+      tag = createTag("configurations"),
       title = Some(st"Test Run Configurations"),
       description = None(),
       content = ISZ(),
@@ -391,7 +452,7 @@ import Report._
     )
 
     val ret: ReportLevel = ReportLevel(
-      tag = "system-testing-setup",
+      tag = createTag("system-testing-setup"),
       title = Some(st"System Testing"),
       description = None(),
       content = ISZ(),
@@ -413,7 +474,7 @@ import Report._
     val exDSCRel = testOutputDirRel / s"${exTestConfig.exampleTestFrameworkPrefix}_DSC_Test_Harness.scala"
 
     val framework: ReportLevel = ReportLevel(
-      tag = "framework-generation",
+      tag = createTag("framework-generation"),
       title = Some(st"Framework Generation"),
       description = Some(
         st"""1. Build the System Testing Artifact Generator following the instructions at
@@ -443,8 +504,10 @@ import Report._
       subLevels = ISZ()
     )
 
-    val subSystemsX: ISZ[String] = for(sub <- project.testConfigs) yield sub.systemName
-    val subSystems: String = if (subSystemsX.size == 1) { subSystemsX(0)}
+    val subSystemsX: ISZ[String] = for (sub <- project.testConfigs) yield sub.systemName
+    val subSystems: String = if (subSystemsX.size == 1) {
+      subSystemsX(0)
+    }
     else {
       val o = ops.ISZOps(subSystemsX)
       st"${(o.dropRight(1), ", ")} and ${o.last}".render
@@ -466,10 +529,10 @@ import Report._
               |
               || | |
               ||:--|--|
-              || Script Schema: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.schema, daconfigcontents, mtf)} |
-              || Property: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.property, daconfigcontents, mtf)} |
-              || Randomization Profile: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.profile, daconfigcontents, mtf)} |
-              || Random Vector Filter: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.filter, daconfigcontents, mtf)} |
+              || Script Schema: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.schema, daconfigcontents, mtf)}|
+              || Property: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.property, daconfigcontents, mtf)}|
+              || Randomization Profile: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.profile, daconfigcontents, mtf)}|
+              || Random Vector Filter: | ${Util.locateMethodDefinition(tconfig.exampleTestConfig.filter, daconfigcontents, mtf)}|
               |
               |How to run:
               |
@@ -481,7 +544,7 @@ import Report._
               |"""
 
         mbs = mbs :+ ReportBlock(
-          tag = s"${tconfig.systemName}_block",
+          tag = createTag(s"${tconfig.systemName}_block"),
           content = Some(
             st"""__${tconfig.systemName}__
                 |
@@ -493,7 +556,7 @@ import Report._
     }
 
     val manualTesting: ReportLevel = ReportLevel(
-      tag = "manual-testing",
+      tag = createTag("manual-testing"),
       title = Some(st"Manual System Testing"),
       description = Some(
         st"""The example system test suites described previously were used to write
@@ -524,100 +587,101 @@ import Report._
     val l4 = s"$htmlDir/$lt4"
 
     val dscTesting: ReportLevel = ReportLevel(
-      tag = "dsc-testing",
+      tag = createTag("dsc-testing"),
       title = Some(st"Distributed SlangCheck System Testing"),
-      description = Some(st"""Background:
-                             |
-                             |System testing as put forth in this paper uses SlangCheck to generate input/injection test vectors.
-                             |SlangCheck is Sireum's randomized
-                             |test generator framework similar to ScalaCheck and Haskell's QuickCheck.
-                             |Distributed SlangCheck (DSC) adds a framework that allows test vector
-                             |generation to be run via a server cluster up to a user specified timeout. Increasing
-                             |the timeout allows more vectors to be produced which may lead to increased code
-                             |coverage during testing. DSC passes the vectors to user defined unit tests
-                             |and serializes the
-                             |passing and failing vectors to seperate files so that they can be replayed if needed.
-                             |DSC uses JaCoCo to produce code coverage information.
-                             |
-                             |Approach:
-                             |
-                             |The ${config} configuration of ${title}'s
-                             |${project.testConfigs(0).simpleManualTestSuiteName} test suite will be used to
-                             |illustrate how system testing can employ DSC.  The actual results reported in the next
-                             |section simply automated the following steps such that each configuration was run with timeouts
-                             |of 1, 5, and 10 seconds using a Jenkins cluster.
-                             |
-                             |Create a jar file for this project that includes the sources and tests suites
-                             |
-                             |```
-                             |cd hamr-system-testing-case-studies
-                             |
-                             |sireum proyek assemble --include-sources --include-tests ${pdir}/hamr/slang
-                             |```
-                             |
-                             |Set the environment variable ``DSC_TEST_FAMILY_NAME`` to indicate which configuration
-                             |should be used
-                             |
-                             |```
-                             |export DSC_TEST_FAMILY_NAME=${config}
-                             |```
-                             |
-                             |The following will repeatedly call ${harness}'s next method for 1 second to generate test vectors
-                             |and store them in a local file (DSC can be
-                             |configured to scp the results to a remote server where they can be combined with vectors
-                             |generated from other 'generating' servers)
-                             |```
-                             |sireum tools slangcheck runner$bs
-                             |  -t 1$bs
-                             |  -o $$(pwd)/${pdir}-dsc.jsons$bs
-                             |  -c ${pdir}/hamr/slang/out/slang/assemble/slang.jar$bs
-                             |  ${project.testConfigs(0).dscFQName}
-                             |```
-                             |
-                             |DSC is designed to only report passing and failing test vectors.  The generated DSC
-                             |test harness test methods extend this by invoking the configuration's random vector filter and
-                             |writing out unsat vectors to a file specified via the ``DSC_SAVE_LOC`` environment variable.
-                             |```
-                             |export DSC_SAVE_LOC=$$(pwd)/${pdir}-dsc-output.unsat
-                             |touch $$DSC_SAVE_LOC
-                             |```
-                             |
-                             |The following will pass each test vector to the ${harness}'s test method,
-                             |record the passing/failing/unsat test vectors in separate files and generate an HTML
-                             |report that combines the coverage information across all the runs.
-                             |```
-                             |sireum tools slangcheck tester$bs
-                             |  -i $$(pwd)/${pdir}-dsc.jsons.dsc.7z$bs
-                             |  -o $$(pwd)/${pdir}-dsc-output$bs
-                             |  --coverage $$(pwd)/${pdir}-jacoco$bs
-                             |  -c ${pdir}/hamr/slang/out/slang/assemble/slang.jar$bs
-                             |  --sourcepath ${pdir}/hamr/slang/out/slang/assemble/slang.jar$bs
-                             |  ${project.testConfigs(0).dscFQName}
-                             |```
-                             |
-                             |Results:
-                             |
-                             |The full experimental results for the ${title} are available at:<br>
-                             |[$l4]($l4/report.html)
-                             |
-                             |<br><br>
-                             |The following table explains the report directory structure,
-                             |starting with the results from a specific run of DSC and then walking
-                             |up the report directory hierarchy.
-                             |
-                             |||
-                             ||:--|
-                             ||[$lt1]($l1/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for the ${config} configuration with a 1 second timeout<br><br>__NOTE__ this is what DSC was actually run on.  The following rows are simply aggregate information |
-                             ||[$lt2]($l2/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for the MA__Failing__CT____Alarm_On configuration using timeouts of 1, 5, and 10 seconds |
-                             ||[$lt3]($l3/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for running all the configurations through ${harness} using timeouts of 1, 5, and 10 seconds |
-                             ||[$lt4]($l4/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for each of the ${title}'s subsystems under testing using timeouts of 1, 5, and 10 seconds |
-                             |"""),
+      description = Some(
+        st"""Background:
+            |
+            |System testing as put forth in this paper uses SlangCheck to generate input/injection test vectors.
+            |SlangCheck is Sireum's randomized
+            |test generator framework similar to ScalaCheck and Haskell's QuickCheck.
+            |Distributed SlangCheck (DSC) adds a framework that allows test vector
+            |generation to be run via a server cluster up to a user specified timeout. Increasing
+            |the timeout allows more vectors to be produced which may lead to increased code
+            |coverage during testing. DSC passes the vectors to user defined unit tests
+            |and serializes the
+            |passing and failing vectors to seperate files so that they can be replayed if needed.
+            |DSC uses JaCoCo to produce code coverage information.
+            |
+            |Approach:
+            |
+            |The ${config} configuration of ${title}'s
+            |${project.testConfigs(0).simpleManualTestSuiteName} test suite will be used to
+            |illustrate how system testing can employ DSC.  The actual results reported in the next
+            |section simply automated the following steps such that each configuration was run with timeouts
+            |of 1, 5, and 10 seconds using a Jenkins cluster.
+            |
+            |Create a jar file for this project that includes the sources and tests suites
+            |
+            |```
+            |cd hamr-system-testing-case-studies
+            |
+            |sireum proyek assemble --include-sources --include-tests ${pdir}/hamr/slang
+            |```
+            |
+            |Set the environment variable ``DSC_TEST_FAMILY_NAME`` to indicate which configuration
+            |should be used
+            |
+            |```
+            |export DSC_TEST_FAMILY_NAME=${config}
+            |```
+            |
+            |The following will repeatedly call ${harness}'s next method for 1 second to generate test vectors
+            |and store them in a local file (DSC can be
+            |configured to scp the results to a remote server where they can be combined with vectors
+            |generated from other 'generating' servers)
+            |```
+            |sireum tools slangcheck runner$bs
+            |  -t 1$bs
+            |  -o $$(pwd)/${pdir}-dsc.jsons$bs
+            |  -c ${pdir}/hamr/slang/out/slang/assemble/slang.jar$bs
+            |  ${project.testConfigs(0).dscFQName}
+            |```
+            |
+            |DSC is designed to only report passing and failing test vectors.  The generated DSC
+            |test harness test methods extend this by invoking the configuration's random vector filter and
+            |writing out unsat vectors to a file specified via the ``DSC_SAVE_LOC`` environment variable.
+            |```
+            |export DSC_SAVE_LOC=$$(pwd)/${pdir}-dsc-output.unsat
+            |touch $$DSC_SAVE_LOC
+            |```
+            |
+            |The following will pass each test vector to the ${harness}'s test method,
+            |record the passing/failing/unsat test vectors in separate files and generate an HTML
+            |report that combines the coverage information across all the runs.
+            |```
+            |sireum tools slangcheck tester$bs
+            |  -i $$(pwd)/${pdir}-dsc.jsons.dsc.7z$bs
+            |  -o $$(pwd)/${pdir}-dsc-output$bs
+            |  --coverage $$(pwd)/${pdir}-jacoco$bs
+            |  -c ${pdir}/hamr/slang/out/slang/assemble/slang.jar$bs
+            |  --sourcepath ${pdir}/hamr/slang/out/slang/assemble/slang.jar$bs
+            |  ${project.testConfigs(0).dscFQName}
+            |```
+            |
+            |Results:
+            |
+            |The full experimental results for the ${title} are available at:<br>
+            |[$l4]($l4/report.html)
+            |
+            |<br><br>
+            |The following table explains the report directory structure,
+            |starting with the results from a specific run of DSC and then walking
+            |up the report directory hierarchy.
+            |
+            |||
+            ||:--|
+            ||[$lt1]($l1/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for the ${config} configuration with a 1 second timeout<br><br>__NOTE__ this is what DSC was actually run on.  The following rows are simply aggregate information |
+            ||[$lt2]($l2/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for the MA__Failing__CT____Alarm_On configuration using timeouts of 1, 5, and 10 seconds |
+            ||[$lt3]($l3/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for running all the configurations through ${harness} using timeouts of 1, 5, and 10 seconds |
+            ||[$lt4]($l4/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for each of the ${title}'s subsystems under testing using timeouts of 1, 5, and 10 seconds |
+            |"""),
       content = ISZ(),
       subLevels = ISZ()
     )
 
     return ReportLevel(
-      tag = "how-to-run",
+      tag = createTag("how-to-run"),
       title = Some(st"How to Run"),
       description = Some(
         st"""System testing requires a Sireum distribution. Instructions on how to obtain a
@@ -649,9 +713,9 @@ import Report._
     val howToRun: ReportLevel = genHowToRunSection(project, table)
 
     return ReportLevel(
-      tag = "",
+      tag = createTag(project.title),
       title = Some(st"${project.title}"),
-      description = None(),
+      description = Some(st"The data, links, and images in this file are auto-generated from HAMR's report generation facility. Additional text explanations have been added for readability."),
       content = ISZ(),
       subLevels = ISZ(arch, behaviorCode, metrics, systemTesting, howToRun)
     )
@@ -680,15 +744,15 @@ import Report._
   def formatTime(s: Z): String = {
     val cis = conversions.String.toCis(s.string)
     var ret: ISZ[org.sireum.C] = ISZ()
-    for(ix <- cis.size -1 to 0 by -1) {
+    for (ix <- cis.size - 1 to 0 by -1) {
       ret = cis(ix) +: ret
-      if (ret.size == 3){
+      if (ret.size == 3) {
         ret = '.' +: ret
       }
     }
-    val r :String = conversions.String.fromCis(ret)
-    return if(ret.size == 2) s"0.0$r"
-    else if(ret.size == 3) s"0.$r"
+    val r: String = conversions.String.fromCis(ret)
+    return if (ret.size == 2) s"0.0$r"
+    else if (ret.size == 3) s"0.$r"
     else if (ret.size == 4) s"0$r"
     else r
   }
@@ -696,15 +760,15 @@ import Report._
   def processResults(csv: Os.Path): HashSMap[String, ST] = {
 
     val rawlines = csv.readLines
-    assert (rawlines(0) == "entrypoint,cliTime,logikaTime,processBegin,processCheck,vcsNum,vcsTime,satNum,satTime,timeStamp,kekikianBuild,timeout,rlimit,par,par-branch,par-branch-mode,System Version,Computer Name,Model Identifier,Processor,Memory")
+    assert(rawlines(0) == "entrypoint,cliTime,logikaTime,processBegin,processCheck,vcsNum,vcsTime,satNum,satTime,timeStamp,kekikianBuild,timeout,rlimit,par,par-branch,par-branch-mode,System Version,Computer Name,Model Identifier,Processor,Memory")
     val lines: ISZ[ISZ[String]] = for (l <- ops.ISZOps(rawlines).drop(1)) yield ops.StringOps(l).split(c => c == ',')
 
-    var entrypoints : Set[String] = Set.empty
-    for(l <- lines) {
+    var entrypoints: Set[String] = Set.empty
+    for (l <- lines) {
       entrypoints = entrypoints + l(0)
     }
     var ret = HashSMap.empty[String, ST]
-    for(entryPoint <- entrypoints.elements) {
+    for (entryPoint <- entrypoints.elements) {
       val entries = ops.ISZOps(lines).filter(p => p(0) == entryPoint)
       val cliTime = collect(1, entries)
       val logikaTime = collect(2, entries)
@@ -730,8 +794,8 @@ import Report._
   // NOTE: ignore tipe warning that SymbolTable cannot be resolved as the source
   //       for that is in the jitpack jar file and thus not accessible to tipe
   def genLogikaSection(project: ReadmeGen.Project, table: SymbolTable): ReportLevel = {
-    var subLevels:ISZ[ReportBlock] = ISZ()
-    for(t <- table.getThreads()) {
+    var subLevels: ISZ[ReportBlock] = ISZ()
+    for (t <- table.getThreads()) {
       val cimplname: String = sanitize(splitClassifier(t)._2)
       val sp = st"${(ops.ISZOps(t.path).drop(1), "_")}".render
       val fnamePrefix: String = s"${cimplname}_${sp}"
@@ -744,9 +808,9 @@ import Report._
       val scalaFile = Os.Path.walk(componentDir, T, F, p => p.name == scalaFilename)(0)
 
       if (csvFile.nonEmpty) {
-        val tag = s"logika-${fnamePrefix}"
+        val tag = createTag(s"logika-${fnamePrefix}")
         var entries: ISZ[ST] = ISZ()
-        for(r <- processResults(csvFile(0)).entries) {
+        for (r <- processResults(csvFile(0)).entries) {
           val lineNum = findMethod(r._1, scalaFile)
           val elink = st"[${r._1}](${project.projectRootDir.relativize(scalaFile)}#L${lineNum})"
           entries = entries :+ st"|${elink}${r._2}"
@@ -764,7 +828,7 @@ import Report._
         subLevels = subLevels :+ ReportBlock(
           tag = tag,
           content = Some(table)
-        )/*
+        ) /*
         subLevels = subLevels :+ Level(
           tag = tag,
           title = Some(st"${t.identifier}"),
@@ -776,7 +840,7 @@ import Report._
     }
 
     val results = ReportLevel(
-      tag = "logiak-results",
+      tag = createTag("logiak-results"),
       title = Some(st"Results"),
       description = None(),
       content = subLevels,
@@ -786,37 +850,38 @@ import Report._
     val relSlashScript = project.projectRootDir.relativize(slashScript)
 
     val howToRun = ReportLevel(
-      tag = "how-to-run",
+      tag = createTag("how-to-run"),
       title = Some(st"How to replicate"),
-      description = Some(st"""To run the experiments, first install Sireum Kekinian (optionally choosing the
-                             |commit tip used for the experiments, ie. [843ede1](https://github.com/sireum/kekinian/tree/843ede1120e6e75fde089db0928ab66a3c9a3e73))
-                             |
-                             |```
-                             |git clone --rec https://github.com/sireum/kekinian.git
-                             |cd kekinian
-                             |git checkout 843ede1
-                             |git pull --rec
-                             |bin/build.cmd
-                             |
-                             |export SIREUM_HOME=$$(pwd)
-                             |export PATH=$$SIREUM_HOME/bin:$$PATH
-                             |```
-                             |
-                             |Then run the following Slash script specifying the number of number of times to rerun Logika
-                             |on each entrypoint: [${relSlashScript}](${relSlashScript})
-                             |
-                             |```
-                             |${relSlashScript} run 25
-                             |```
-                             |
-                             |The results will be appended to the csv file corresponding to the component
-                             |being evaluated. The line ``val projects: Map[String, Project] = Map.empty + isolette + rts + tcP + tcS``
-                             |in the script can be modified if you want to run a subset of the projects"""),
+      description = Some(
+        st"""To run the experiments, first install Sireum Kekinian (optionally choosing the
+            |commit tip used for the experiments, ie. [843ede1](https://github.com/sireum/kekinian/tree/843ede1120e6e75fde089db0928ab66a3c9a3e73))
+            |
+            |```
+            |git clone --rec https://github.com/sireum/kekinian.git
+            |cd kekinian
+            |git checkout 843ede1
+            |git pull --rec
+            |bin/build.cmd
+            |
+            |export SIREUM_HOME=$$(pwd)
+            |export PATH=$$SIREUM_HOME/bin:$$PATH
+            |```
+            |
+            |Then run the following Slash script specifying the number of number of times to rerun Logika
+            |on each entrypoint: [${relSlashScript}](${relSlashScript})
+            |
+            |```
+            |${relSlashScript} run 25
+            |```
+            |
+            |The results will be appended to the csv file corresponding to the component
+            |being evaluated. The line ``val projects: Map[String, Project] = Map.empty + isolette + rts + tcP + tcS``
+            |in the script can be modified if you want to run a subset of the projects"""),
       content = ISZ(), subLevels = ISZ()
     )
 
     return ReportLevel(
-      tag = "logika",
+      tag = createTag("logika"),
       title = Some(st"Logika"),
       description = Some(
         st"""The following reports the experimental data obtained by running Logika
@@ -858,12 +923,24 @@ import Report._
 
     var blocks: ISZ[ReportBlock] = ISZ()
 
+    var archDescription: ST = st""
     AadlModelUtil.getAadlArchDiagram(aadlRootDir) match {
       case Some(p) =>
         val rootDir = project.projectRootDir
         val rel = rootDir.relativize(p)
         val link = createHyperLink("AADL Arch", rel.value)
-        blocks = blocks :+ ReportBlock("aadl-arch-diagram", Some(st"!${link}"))
+        //blocks = blocks :+ ReportBlock(
+        //  tag = createTag("aadl-arch-diagram"),
+        //  content = Some(st"!${link}"))
+        archDescription =
+          st"""!${link}
+              |
+              |The following documentation blocks provide links to AADL textual representation source of the Thread components in the system.
+              |
+              |"Type" links to the AADL component type declaration (providing the port-based interface for the component)
+              |"Behavior Specification" (when present) links to the GUMBO behavior contract for the component. HAMR automatically
+              |compiles the GUMBO contract to both an code-level contract used for Logika code verification as well as an executable
+              |representation of the contract (as pure boolean functions) used in unit and system testing."""
       case _ =>
         halt(s"Didn't find AADL arch diagram: ${project.title}")
     }
@@ -874,7 +951,7 @@ import Report._
       createAadlComponentLink(T, table.rootSystem.component, T, aadlRootDir, project.projectRootDir)
 
     var systemProps =
-      st"""|System: ${header} |
+      st"""|System: ${header}|
            ||:--|"""
 
 
@@ -883,7 +960,9 @@ import Report._
         st"""${systemProps}
             ||Wire Protocol|"""
     }
-    blocks = blocks :+ ReportBlock(s"${tagPrefix}-${table.rootSystem.identifier}", Some(systemProps))
+    blocks = blocks :+ ReportBlock(
+      tag = createTag(s"${tagPrefix}-${table.rootSystem.identifier}"),
+      content = Some(systemProps))
 
     val threads: ISZ[AadlThread] = sortThreads(table.getThreads(), table)
     for (thread <- threads) {
@@ -895,7 +974,7 @@ import Report._
       val compType: Option[String] =
         if (thread.isCakeMLComponent()) Some("||CakeML|")
         else if (thread.getParent(table).toVirtualMachine(table)) Some("||Virtual Machine|")
-        else None()//"Native"
+        else None() //"Native"
 
       val domain: Option[ST] = if (thread.getParent(table).getDomain(table).nonEmpty) {
         Some(st"""|Domain: ${thread.getParent(table).getDomain(table).get}|""")
@@ -919,10 +998,10 @@ import Report._
           None()
         }
 
-      val gumbo : Option[ST] = AadlModelUtil.getGumboSubclause(thread, table) match {
+      val gumbo: Option[ST] = AadlModelUtil.getGumboSubclause(thread, table) match {
         case Some(g) =>
           val pos = AadlModelUtil.getGumboSubclausePos(g, aadlRootDir)
-          Some(st"<br>Behavior Specification: ${AadlModelUtil.createLinkFromPos("GUMBO", pos, aadlRootDir, project.projectRootDir )}")
+          Some(st"<br>Behavior Specification: ${AadlModelUtil.createLinkFromPos("GUMBO", pos, aadlRootDir, project.projectRootDir)}")
         case _ => None()
       }
 
@@ -930,8 +1009,8 @@ import Report._
       val tnick = Util.threadNicknames.get(tpath).get
 
       blocks = blocks :+ ReportBlock(
-        s"${tagPrefix}-${thread.identifier}",
-        Some(
+        tag = createTag(s"${tagPrefix}-${thread.identifier}-$tnick"),
+        content = Some(
           st"""|Thread: $tnick <!--${header}--> |
                ||:--|
                ||Type: ${componentType}${componentImpl}${gumbo}|
@@ -956,9 +1035,9 @@ import Report._
     */
 
     return ReportLevel(
-      tag = "arch-section",
+      tag = createTag("arch-section"),
       title = Some(st"AADL Architecture"),
-      description = None(),
+      description = Some(archDescription),
       content = blocks,
       subLevels = ISZ()
     )
@@ -981,16 +1060,39 @@ import Report._
 
       threads = threads :+
         ReportBlock(
-          tag = s"slang-code-${thread.identifier}",
+          tag = createTag(s"slang-code-${thread.identifier}-$tnick"),
           content = Some(
             st"""[${tnick}](${project.projectRootDir.relativize(behavior.get)})
                 |${gumboxOpt}""")
         )
     }
+    val description = st"""The following items link to the Slang source code for the application logic of each thread.
+                          |In the HAMR development workflow, skeletons for these files are automatically created,
+                          |along with APIs for communicating over model-declared ports in the component type.
+                          |GUMBO component contracts in the AADL model are automatically translated to Slang/Logika
+                          |contracts and included in the generated skeletons. Then, the application developer uses a
+                          |conventional development approach for coding the application logic in Slang
+                          |(C workflows are also supported). Logika can be applied to verify that the user's
+                          |application code conforms to the generated Logika contracts (which are derived
+                          |automatically from model-level GUMBO contracts). The HAMR build framework will integrate
+                          |the user-code application logic for each component (below) with auto-generated threading
+                          |and communication infrastructure code, along with HAMR's implementation of AADL run-time
+                          |(based on AADL's standardized Run-Time Services). Note that HAMR is smart enough to
+                          |accomodate changes to model-level interface declarations (ports, etc.) as well as changes
+                          |to GUMBO contracts -- user code will not be clobbered when the model is changed and HAMR
+                          |code generation is rerun. Instead, HAMR uses specially designed delimiters in the
+                          |application code files to, e.g., re-weave updated contracts into the application code.
+                          |
+                          |Executable Slang versions of the GUMBO contracts (referred to as "GUMBOX" contracts)
+                          |are also automatically generated in the code generation process. These executable
+                          |contracts are automatically integrated into the system testing process: appropriate
+                          |portions of the executable contracts are invoked in the pre-state and the post-state
+                          |of a thread dispatch to dynamically check that the thread's behavior for that particular
+                          |dispatch conforms to the model-level GUMBO contracts."""
     return ReportLevel(
-      tag = "behavior-code",
+      tag = createTag("behavior-code"),
       title = Some(st"Behavior Code"),
-      description = None(),
+      description = Some(description),
       content = threads,
       subLevels = ISZ()
     )

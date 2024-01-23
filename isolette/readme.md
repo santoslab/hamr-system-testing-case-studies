@@ -1,196 +1,203 @@
-# <!---title_start-->Isolette<!---title_end-->
-
-The data, links, and images in this file are auto-generated from HAMR's report generation facility.  Additional text explanations have been added for readability. 
-<!---description_start-->
-<!---description_end-->
-## <!--arch-section-title_start-->AADL Architecture<!--arch-section-title_end-->
-<!--arch-section-description_start-->
-<!--arch-section-description_end-->
-<!--arch-section-aadl-arch-diagram_start-->
+# <!--start__isolette-title-->Isolette<!--end____isolette-title-->
+<!--start__isolette-description-->
+The data, links, and images in this file are auto-generated from HAMR's report generation facility. Additional text explanations have been added for readability.
+<!--end____isolette-description-->
+## <!--start__isolette_arch-section-title-->AADL Architecture<!--end____isolette_arch-section-title-->
+<!--start__isolette_arch-section-description-->
 ![AADL Arch](aadl/diagrams/aadl-arch.svg)
-<!--arch-section-aadl-arch-diagram_end-->
 
 The following documentation blocks provide links to AADL textual representation source of the Thread components in the system.
-* "Type" links to the AADL component type declaration (providing the port-based interface for the component)
-* "Behavior Specification" (when present) links to the GUMBO behavior contract for the component.  HAMR automatically compiles the GUMBO contract 
-   to both an code-level contract used for Logika code verification as well as an executable representation of the contract 
-   (as pure boolean functions) used in unit and system testing.
 
-<!--arch-section-aadl-arch-component-info-isolette_single_sensor_Instance_start-->
-|System: [Isolette::isolette.single_sensor](aadl/aadl/packages/Isolette.aadl#L71) |
+"Type" links to the AADL component type declaration (providing the port-based interface for the component)
+"Behavior Specification" (when present) links to the GUMBO behavior contract for the component. HAMR automatically
+compiles the GUMBO contract to both an code-level contract used for Logika code verification as well as an executable
+representation of the contract (as pure boolean functions) used in unit and system testing.
+<!--end____isolette_arch-section-description-->
+<!--start__isolette_arch-section_aadl-arch-component-info-isolette_single_sensor_instance-->
+|System: [Isolette::isolette.single_sensor](aadl/aadl/packages/Isolette.aadl#L71)|
 |:--|
-<!--arch-section-aadl-arch-component-info-isolette_single_sensor_Instance_end-->
-<!--arch-section-aadl-arch-component-info-heat_controller_start-->
+<!--end____isolette_arch-section_aadl-arch-component-info-isolette_single_sensor_instance-->
+<!--start__isolette_arch-section_aadl-arch-component-info-heat_controller-hs-->
 |Thread: HS <!--[heat_controller](aadl/aadl/packages/Devices.aadl#L118)--> |
 |:--|
 |Type: [Devices::Heat_Source](aadl/aadl/packages/Devices.aadl#L124)<br>Implementation: [Devices::Heat_Source.impl](aadl/aadl/packages/Devices.aadl#L135)|
 |Periodic: 1000 ms|
 
-<!--arch-section-aadl-arch-component-info-heat_controller_end-->
-<!--arch-section-aadl-arch-component-info-thermostat_start-->
+<!--end____isolette_arch-section_aadl-arch-component-info-heat_controller-hs-->
+<!--start__isolette_arch-section_aadl-arch-component-info-thermostat-ts-->
 |Thread: TS <!--[thermostat](aadl/aadl/packages/Devices.aadl#L73)--> |
 |:--|
 |Type: [Devices::Temperature_Sensor](aadl/aadl/packages/Devices.aadl#L79)<br>Implementation: [Devices::Temperature_Sensor.impl](aadl/aadl/packages/Devices.aadl#L90)|
 |Periodic: 1000 ms|
 
-<!--arch-section-aadl-arch-component-info-thermostat_end-->
-<!--arch-section-aadl-arch-component-info-oit_start-->
+<!--end____isolette_arch-section_aadl-arch-component-info-thermostat-ts-->
+<!--start__isolette_arch-section_aadl-arch-component-info-oit-opinterface-->
 |Thread: OpInterface <!--[oit](aadl/aadl/packages/Isolette.aadl#L274)--> |
 |:--|
 |Type: [Isolette::operator_interface_thread](aadl/aadl/packages/Isolette.aadl#L287)<br>Implementation: [Isolette::operator_interface_thread.impl](aadl/aadl/packages/Isolette.aadl#L307)|
 |Periodic: 1000 ms|
 
-<!--arch-section-aadl-arch-component-info-oit_end-->
-
-The following Thread components will house the application logic for the Isolette's safety monitoring (**Monitor**) subsystem.  Each of these components has a GUMBO contract that is used in the component and system implementations for component-level SMT-based verification, unit testing, and system testing.
-
-<!--arch-section-aadl-arch-component-info-manage_alarm_start-->
+<!--end____isolette_arch-section_aadl-arch-component-info-oit-opinterface-->
+The following Thread components will house the application logic for the Isolette's safety monitoring (Monitor) subsystem. Each of these components has a GUMBO contract that is used in the component and system implementations for component-level SMT-based verification, unit testing, and system testing.
+<!--start__isolette_arch-section_aadl-arch-component-info-manage_alarm-monma-->
 |Thread: MonMA <!--[manage_alarm](aadl/aadl/packages/Monitor.aadl#L39)--> |
 |:--|
 |Type: [Monitor::Manage_Alarm](aadl/aadl/packages/Monitor.aadl#L300)<br>Implementation: [Monitor::Manage_Alarm.impl](aadl/aadl/packages/Monitor.aadl#L412)<br>Behavior Specification: [GUMBO](aadl/aadl/packages/Monitor.aadl#L320)|
 |Periodic: 1000 ms|
 
-<!--arch-section-aadl-arch-component-info-manage_alarm_end-->
-<!--arch-section-aadl-arch-component-info-manage_monitor_interface_start-->
+<!--end____isolette_arch-section_aadl-arch-component-info-manage_alarm-monma-->
+<!--start__isolette_arch-section_aadl-arch-component-info-manage_monitor_interface-monmmi-->
 |Thread: MonMMI <!--[manage_monitor_interface](aadl/aadl/packages/Monitor.aadl#L37)--> |
 |:--|
 |Type: [Monitor::Manage_Monitor_Interface](aadl/aadl/packages/Monitor.aadl#L96)<br>Implementation: [Monitor::Manage_Monitor_Interface.impl](aadl/aadl/packages/Monitor.aadl#L207)<br>Behavior Specification: [GUMBO](aadl/aadl/packages/Monitor.aadl#L129)|
 |Periodic: 1000 ms|
 
-<!--arch-section-aadl-arch-component-info-manage_monitor_interface_end-->
-<!--arch-section-aadl-arch-component-info-manage_monitor_mode_start-->
+<!--end____isolette_arch-section_aadl-arch-component-info-manage_monitor_interface-monmmi-->
+<!--start__isolette_arch-section_aadl-arch-component-info-manage_monitor_mode-monmmm-->
 |Thread: MonMMM <!--[manage_monitor_mode](aadl/aadl/packages/Monitor.aadl#L41)--> |
 |:--|
 |Type: [Monitor::Manage_Monitor_Mode](aadl/aadl/packages/Monitor.aadl#L221)<br>Implementation: [Monitor::Manage_Monitor_Mode.impl](aadl/aadl/packages/Monitor.aadl#L286)<br>Behavior Specification: [GUMBO](aadl/aadl/packages/Monitor.aadl#L239)|
 |Periodic: 1000 ms|
-<!--arch-section-aadl-arch-component-info-manage_monitor_mode_end-->
 
-<!--arch-section-aadl-arch-component-info-detect_monitor_failure_start-->
+<!--end____isolette_arch-section_aadl-arch-component-info-manage_monitor_mode-monmmm-->
+<!--start__isolette_arch-section_aadl-arch-component-info-detect_monitor_failure-dmf-->
 |Thread: DMF <!--[detect_monitor_failure](aadl/aadl/packages/Monitor.aadl#L43)--> |
 |:--|
 |Type: [Monitor::Detect_Monitor_Failure](aadl/aadl/packages/Monitor.aadl#L428)<br>Implementation: [Monitor::Detect_Monitor_Failure.impl](aadl/aadl/packages/Monitor.aadl#L440)|
 |Periodic: 1000 ms|
-<!--arch-section-aadl-arch-component-info-detect_monitor_failure_end-->
 
-The following Thread components will house the application logic for the Isolette's control (**Regulate**) subsystem.  Each of these components has a GUMBO contract that is used in the component and system implementations for component-level SMT-based verification, unit testing, and system testing.
-
-
-<!--arch-section-aadl-arch-component-info-manage_heat_source_start-->
+<!--end____isolette_arch-section_aadl-arch-component-info-detect_monitor_failure-dmf-->
+The following Thread components will house the application logic for the Isolette's control (Regulate) subsystem. Each of these components has a GUMBO contract that is used in the component and system implementations for component-level SMT-based verification, unit testing, and system testing.
+<!--start__isolette_arch-section_aadl-arch-component-info-manage_heat_source-regmhs-->
 |Thread: RegMHS <!--[manage_heat_source](aadl/aadl/packages/Regulate.aadl#L42)--> |
 |:--|
 |Type: [Regulate::Manage_Heat_Source](aadl/aadl/packages/Regulate.aadl#L398)<br>Implementation: [Regulate::Manage_Heat_Source.impl](aadl/aadl/packages/Regulate.aadl#L489)<br>Behavior Specification: [GUMBO](aadl/aadl/packages/Regulate.aadl#L426)|
 |Periodic: 1000 ms|
 
-<!--arch-section-aadl-arch-component-info-manage_heat_source_end-->
-<!--arch-section-aadl-arch-component-info-manage_regulator_interface_start-->
+<!--end____isolette_arch-section_aadl-arch-component-info-manage_heat_source-regmhs-->
+<!--start__isolette_arch-section_aadl-arch-component-info-manage_regulator_interface-regmri-->
 |Thread: RegMRI <!--[manage_regulator_interface](aadl/aadl/packages/Regulate.aadl#L38)--> |
 |:--|
 |Type: [Regulate::Manage_Regulator_Interface](aadl/aadl/packages/Regulate.aadl#L106)<br>Implementation: [Regulate::Manage_Regulator_Interface.impl](aadl/aadl/packages/Regulate.aadl#L256)<br>Behavior Specification: [GUMBO](aadl/aadl/packages/Regulate.aadl#L170)|
 |Periodic: 1000 ms|
 
-<!--arch-section-aadl-arch-component-info-manage_regulator_interface_end-->
-<!--arch-section-aadl-arch-component-info-manage_regulator_mode_start-->
+<!--end____isolette_arch-section_aadl-arch-component-info-manage_regulator_interface-regmri-->
+<!--start__isolette_arch-section_aadl-arch-component-info-manage_regulator_mode-regmrm-->
 |Thread: RegMRM <!--[manage_regulator_mode](aadl/aadl/packages/Regulate.aadl#L46)--> |
 |:--|
 |Type: [Regulate::Manage_Regulator_Mode](aadl/aadl/packages/Regulate.aadl#L270)<br>Implementation: [Regulate::Manage_Regulator_Mode.impl](aadl/aadl/packages/Regulate.aadl#L383)<br>Behavior Specification: [GUMBO](aadl/aadl/packages/Regulate.aadl#L296)|
 |Periodic: 1000 ms|
 
-<!--arch-section-aadl-arch-component-info-manage_regulator_mode_end-->
-
-<!--arch-section-aadl-arch-component-info-detect_regulator_failure_start-->
+<!--end____isolette_arch-section_aadl-arch-component-info-manage_regulator_mode-regmrm-->
+<!--start__isolette_arch-section_aadl-arch-component-info-detect_regulator_failure-drf-->
 |Thread: DRF <!--[detect_regulator_failure](aadl/aadl/packages/Regulate.aadl#L48)--> |
 |:--|
 |Type: [Regulate::Detect_Regulator_Failure](aadl/aadl/packages/Regulate.aadl#L506)<br>Implementation: [Regulate::Detect_Regulator_Failure.impl](aadl/aadl/packages/Regulate.aadl#L518)|
 |Periodic: 1000 ms|
 
-<!--arch-section-aadl-arch-component-info-detect_regulator_failure_end-->
+<!--end____isolette_arch-section_aadl-arch-component-info-detect_regulator_failure-drf-->
 
-## <!--behavior-code-title_start-->Behavior Code<!--behavior-code-title_end-->
+## <!--start__isolette_behavior-code-title-->Behavior Code<!--end____isolette_behavior-code-title-->
+<!--start__isolette_behavior-code-description-->
+The following items link to the Slang source code for the application logic of each thread.
+In the HAMR development workflow, skeletons for these files are automatically created,
+along with APIs for communicating over model-declared ports in the component type.
+GUMBO component contracts in the AADL model are automatically translated to Slang/Logika
+contracts and included in the generated skeletons. Then, the application developer uses a
+conventional development approach for coding the application logic in Slang
+(C workflows are also supported). Logika can be applied to verify that the user's
+application code conforms to the generated Logika contracts (which are derived
+automatically from model-level GUMBO contracts). The HAMR build framework will integrate
+the user-code application logic for each component (below) with auto-generated threading
+and communication infrastructure code, along with HAMR's implementation of AADL run-time
+(based on AADL's standardized Run-Time Services). Note that HAMR is smart enough to
+accomodate changes to model-level interface declarations (ports, etc.) as well as changes
+to GUMBO contracts -- user code will not be clobbered when the model is changed and HAMR
+code generation is rerun. Instead, HAMR uses specially designed delimiters in the
+application code files to, e.g., re-weave updated contracts into the application code.
 
-The following items link to the Slang source code for the application logic of each thread.  In the HAMR development workflow, skeletons for these files are automatically created, along with APIs for communicating over model-declared ports in the component type.  GUMBO component contracts in the AADL model are automatically translated to Slang/Logika contracts and included in the generated skeletons.  Then, the application developer uses a conventional development approach for coding the application logic in Slang (C workflows are also supported).  Logika can be applied to verify that the user's application code conforms to the generated Logika contracts (which are derived automatically from model-level GUMBO contracts).  The HAMR build framework will integrate the user-code application logic for each component (below) with auto-generated threading and communication infrastructure code, along with HAMR's implementation of AADL run-time (based on AADL's standardized Run-Time Services).   Note that HAMR is smart enough to accomodate changes to model-level interface declarations (ports, etc.) as well as changes to GUMBO contracts -- user code will not be clobbered when the model is changed and HAMR code generation is rerun.  Instead, HAMR uses specially designed delimiters in the application code files to, e.g., re-weave updated contracts into the application code.
-
-Executable Slang versions of the GUMBO contracts (referred to as "GUMBOX" contracts) are also automatically generated in the code generation process.  These executable contracts are automatically integrated into the system testing process:  appropriate portions of the executable contracts are invoked in the pre-state and the post-state of a thread dispatch to dynamically check that the thread's behavior for that particular dispatch conforms to the model-level GUMBO contracts.
-
-<!--behavior-code-description_start-->
-<!--behavior-code-description_end-->
+Executable Slang versions of the GUMBO contracts (referred to as "GUMBOX" contracts)
+are also automatically generated in the code generation process. These executable
+contracts are automatically integrated into the system testing process: appropriate
+portions of the executable contracts are invoked in the pre-state and the post-state
+of a thread dispatch to dynamically check that the thread's behavior for that particular
+dispatch conforms to the model-level GUMBO contracts.
+<!--end____isolette_behavior-code-description-->
 
 ### Monitor Sub-system Behavior (Application) Code and Executable Contracts
 
-<!--behavior-code-slang-code-manage_monitor_interface_start-->
+<!--start__isolette_behavior-code_slang-code-manage_monitor_interface-monmmi-->
 [MonMMI](hamr/slang/src/main/component/isolette/Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface.scala)
 <br>[GumboX](hamr/slang/src/main/bridge/isolette/Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface_GumboX.scala)
-<!--behavior-code-slang-code-manage_monitor_interface_end-->
-<!--behavior-code-slang-code-manage_alarm_start-->
+<!--end____isolette_behavior-code_slang-code-manage_monitor_interface-monmmi-->
+<!--start__isolette_behavior-code_slang-code-manage_alarm-monma-->
 [MonMA](hamr/slang/src/main/component/isolette/Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm.scala)
 <br>[GumboX](hamr/slang/src/main/bridge/isolette/Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm_GumboX.scala)
-<!--behavior-code-slang-code-manage_alarm_end-->
-<!--behavior-code-slang-code-manage_monitor_mode_start-->
+<!--end____isolette_behavior-code_slang-code-manage_alarm-monma-->
+<!--start__isolette_behavior-code_slang-code-manage_monitor_mode-monmmm-->
 [MonMMM](hamr/slang/src/main/component/isolette/Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode.scala)
 <br>[GumboX](hamr/slang/src/main/bridge/isolette/Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode_GumboX.scala)
-<!--behavior-code-slang-code-manage_monitor_mode_end-->
-<!--behavior-code-slang-code-detect_monitor_failure_start-->
+<!--end____isolette_behavior-code_slang-code-manage_monitor_mode-monmmm-->
+<!--start__isolette_behavior-code_slang-code-detect_monitor_failure-dmf-->
 [DMF](hamr/slang/src/main/component/isolette/Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure.scala)
 
-<!--behavior-code-slang-code-detect_monitor_failure_end-->
+<!--end____isolette_behavior-code_slang-code-detect_monitor_failure-dmf-->
+
 
 ### Regulate Sub-system Behavior (Application) Code and Executable Contracts
-
-<!--behavior-code-slang-code-manage_regulator_interface_start-->
+<!--start__isolette_behavior-code_slang-code-manage_regulator_interface-regmri-->
 [RegMRI](hamr/slang/src/main/component/isolette/Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface.scala)
 <br>[GumboX](hamr/slang/src/main/bridge/isolette/Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_GumboX.scala)
-<!--behavior-code-slang-code-manage_regulator_interface_end-->
-<!--behavior-code-slang-code-manage_heat_source_start-->
+<!--end____isolette_behavior-code_slang-code-manage_regulator_interface-regmri-->
+<!--start__isolette_behavior-code_slang-code-manage_heat_source-regmhs-->
 [RegMHS](hamr/slang/src/main/component/isolette/Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source.scala)
 <br>[GumboX](hamr/slang/src/main/bridge/isolette/Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_GumboX.scala)
-<!--behavior-code-slang-code-manage_heat_source_end-->
-<!--behavior-code-slang-code-manage_regulator_mode_start-->
+<!--end____isolette_behavior-code_slang-code-manage_heat_source-regmhs-->
+<!--start__isolette_behavior-code_slang-code-manage_regulator_mode-regmrm-->
 [RegMRM](hamr/slang/src/main/component/isolette/Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode.scala)
 <br>[GumboX](hamr/slang/src/main/bridge/isolette/Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode_GumboX.scala)
-<!--behavior-code-slang-code-manage_regulator_mode_end-->
-<!--behavior-code-slang-code-detect_regulator_failure_start-->
+<!--end____isolette_behavior-code_slang-code-manage_regulator_mode-regmrm-->
+<!--start__isolette_behavior-code_slang-code-detect_regulator_failure-drf-->
 [DRF](hamr/slang/src/main/component/isolette/Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure.scala)
 
-<!--behavior-code-slang-code-detect_regulator_failure_end-->
+<!--end____isolette_behavior-code_slang-code-detect_regulator_failure-drf-->
 
-### Operator Interface and Sensing/Actuation Devices 
+### Operator Interface and Sensing/Actuation Devices
 
-<!--behavior-code-slang-code-oit_start-->
+<!--start__isolette_behavior-code_slang-code-oit-opinterface-->
 [OpInterface](hamr/slang/src/main/component/isolette/Isolette/operator_interface_thread_impl_operator_interface_oip_oit.scala)
 
-<!--behavior-code-slang-code-oit_end-->
-<!--behavior-code-slang-code-thermostat_start-->
+<!--end____isolette_behavior-code_slang-code-oit-opinterface-->
+<!--start__isolette_behavior-code_slang-code-thermostat-ts-->
 [TS](hamr/slang/src/main/component/isolette/Devices/Temperature_Sensor_impl_temperature_sensor_cpi_thermostat.scala)
 
-<!--behavior-code-slang-code-thermostat_end-->
-<!--behavior-code-slang-code-heat_controller_start-->
+<!--end____isolette_behavior-code_slang-code-thermostat-ts-->
+<!--start__isolette_behavior-code_slang-code-heat_controller-hs-->
 [HS](hamr/slang/src/main/component/isolette/Devices/Heat_Source_impl_heat_source_cpi_heat_controller.scala)
 
-<!--behavior-code-slang-code-heat_controller_end-->
+<!--end____isolette_behavior-code_slang-code-heat_controller-hs-->
 
-## <!---title_start-->Metrics<!---title_end-->
-<!---description_start-->
-<!---description_end-->
-### <!---title_start-->AADL Metrics<!---title_end-->
-<!---description_start-->
-<!---description_end-->
-
-The following section provides statistics about the AADL model to give a rough idea of its size (in terms of number of AADL modeling elements that impact the size of the deployed system).
-
-<!---_start-->
+## <!--start__isolette_metrics-title-->Metrics<!--end____isolette_metrics-title-->
+<!--start__isolette_metrics-description-->
+<!--end____isolette_metrics-description-->
+### <!--start__isolette_metrics_aadl-metrics-title-->AADL Metrics<!--end____isolette_metrics_aadl-metrics-title-->
+<!--start__isolette_metrics_aadl-metrics-description-->
+The following section provides statistics about the AADL model to give a rough idea of
+its size (in terms of number of AADL modeling elements that impact the size of the deployed system).
+<!--end____isolette_metrics_aadl-metrics-description-->
+<!--start__isolette_metrics_aadl-metrics_aadl-metrics-content-block-->
 | | |
 |:--|:--|
 |Threads|11|
 |Ports|49|
 |Connections|27|
-<!---_end-->
+<!--end____isolette_metrics_aadl-metrics_aadl-metrics-content-block-->
 
-### <!---title_start-->JVM Metrics<!---title_end-->
-<!---description_start-->
-<!---description_end-->
-
+### <!--start__isolette_metrics_jvm-metrics-title-->JVM Metrics<!--end____isolette_metrics_jvm-metrics-title-->
+<!--start__isolette_metrics_jvm-metrics-description-->
 The following section provides statistics about the Slang source code.
-
-<!---Isolette_code_metrics_start-->
+<!--end____isolette_metrics_jvm-metrics-description-->
+<!--start__isolette_metrics_jvm-metrics_isolette_code_metrics-->
 Directories Scanned Using [https://github.com/AlDanial/cloc](https://github.com/AlDanial/cloc) v1.94:
 - [hamr/slang/src/main](hamr/slang/src/main)
 
@@ -214,22 +221,22 @@ likely would be excluded in a release build
  |Log|16|
  |--------|--------|
  |SUM:|200|
-<!---Isolette_code_metrics_end-->
+<!--end____isolette_metrics_jvm-metrics_isolette_code_metrics-->
 
-## <!--system-testing-setup-title_start-->System Testing<!--system-testing-setup-title_end-->
-<!--system-testing-setup-description_start-->
-<!--system-testing-setup-description_end-->
-### <!--configurations-title_start-->Test Run Configurations<!--configurations-title_end-->
-<!--configurations-description_start-->
-<!--configurations-description_end-->
-#### <!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-title_start-->Configurations for Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-title_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-description_start-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-description_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration_content_start-->
+## <!--start__isolette_system-testing-setup-title-->System Testing<!--end____isolette_system-testing-setup-title-->
+<!--start__isolette_system-testing-setup-description-->
+<!--end____isolette_system-testing-setup-description-->
+### <!--start__isolette_system-testing-setup_configurations-title-->Test Run Configurations<!--end____isolette_system-testing-setup_configurations-title-->
+<!--start__isolette_system-testing-setup_configurations-description-->
+<!--end____isolette_system-testing-setup_configurations-description-->
+#### <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations-title-->Configurations for Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations-title-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations-description-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations-description-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__normal_____heat_on_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L58">HC__Normal_____Heat_On</a></th>
 </tr><tr>
-<td>Description:</td><td>HC; Normal; => Heat On</td>
+<td>Description:</td><td>Heat Control control laws; NORMAL mode => Heat ON result state</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -241,12 +248,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_On_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__normal_____heat_on_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__normal_____heat_off_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L65">HC__Normal_____Heat_Off</a></th>
 </tr><tr>
-<td>Description:</td><td>HC; Normal; => Heat Off</td>
+<td>Description:</td><td>Heat Control control laws; NORMAL mode => Heat OFF result state</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -258,12 +265,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Normal_____Heat_Off_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__normal_____heat_off_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__ct____heat_off_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L75">HC__Failing__CT____Heat_Off</a></th>
 </tr><tr>
-<td>Description:</td><td>HC; Failing; CT => Heat Off</td>
+<td>Description:</td><td>Heat Control control laws; Failing scenario (Current Temp) => Heat OFF result state</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -275,12 +282,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__CT____Heat_Off_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__ct____heat_off_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__udt____heat_off_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L83">HC__Failing__UDT____Heat_Off</a></th>
 </tr><tr>
-<td>Description:</td><td>HC; Failing; UDT => Heat Off</td>
+<td>Description:</td><td>Heat Control control laws; Failing scenario (Upper Desired Temperature) => Heat OFF result state</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -292,12 +299,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__UDT____Heat_Off_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__udt____heat_off_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__ldt____heat_off_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L91">HC__Failing__LDT____Heat_Off</a></th>
 </tr><tr>
-<td>Description:</td><td>HC; Failing; LDT => Heat Off</td>
+<td>Description:</td><td>Heat Control control laws; Failing scenario (Lower Desired Temperature) => Heat OFF result state</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -309,12 +316,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__LDT____Heat_Off_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__ldt____heat_off_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__internal_failure____heat_off_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L99">HC__Failing__Internal_Failure____Heat_Off</a></th>
 </tr><tr>
-<td>Description:</td><td>HC; Failing; Internal Failure => Heat Off</td>
+<td>Description:</td><td>Heat Control control laws; Failing scenario (internal failure) => Heat OFF result state</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -326,12 +333,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Internal_Failure____Heat_Off_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__internal_failure____heat_off_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__error_condition____heat_off_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L108">HC__Failing__Error_Condition____Heat_Off</a></th>
 </tr><tr>
-<td>Description:</td><td>HC; Failing; Error Condition => Heat Off</td>
+<td>Description:</td><td>Heat Control control laws; Failing scenario (combined failure condition) => Heat OFF result state</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -343,12 +350,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_HC__Failing__Error_Condition____Heat_Off_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__error_condition____heat_off_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_displaytemp__normal_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L120">DisplayTemp__Normal</a></th>
 </tr><tr>
-<td>Description:</td><td>DisplayTemp; Normal</td>
+<td>Description:</td><td>Display temp control laws; NORMAL mode => correct deplay result state</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -360,8 +367,8 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_DisplayTemp__Normal_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_displaytemp__normal_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__normal_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L133">Mode_Trans___Normal__Normal</a></th>
 </tr><tr>
@@ -377,12 +384,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__normal_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__ct_invalid_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L142">Mode_Trans___Normal__Failed__CT_Invalid</a></th>
 </tr><tr>
-<td>Description:</td><td>Mode Trans:  Normal->Failed; CT Invalid</td>
+<td>Description:</td><td>Mode Trans:  Normal->Failed because Current Temperature Invalid</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -394,12 +401,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__ct_invalid_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__udt_invalid_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L149">Mode_Trans___Normal__Failed__UDT_Invalid</a></th>
 </tr><tr>
-<td>Description:</td><td>Mode Trans:  Normal->Failed; UDT Invalid</td>
+<td>Description:</td><td>Mode Trans:  Normal->Failed because Upper Desired Temperature Invalid</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -411,12 +418,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__UDT_Invalid_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__udt_invalid_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__ldt_invalid_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L156">Mode_Trans___Normal__Failed__LDT_Invalid</a></th>
 </tr><tr>
-<td>Description:</td><td>Mode Trans:  Normal->Failed; LDT Invalid</td>
+<td>Description:</td><td>Mode Trans:  Normal->Failed because Lower Desired Temperature Invalid</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -428,12 +435,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__LDT_Invalid_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__ldt_invalid_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__internal_failure_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L163">Mode_Trans___Normal__Failed__Internal_Failure</a></th>
 </tr><tr>
-<td>Description:</td><td>Mode Trans:  Normal->Failed; Internal Failure</td>
+<td>Description:</td><td>Mode Trans:  Normal->Failed because Internal Failure</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -445,12 +452,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__internal_failure_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__error_condition_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L171">Mode_Trans___Normal__Failed__Error_Condition</a></th>
 </tr><tr>
-<td>Description:</td><td>Mode Trans:  Normal->Failed; Error Condition</td>
+<td>Description:</td><td>Mode Trans:  Normal->Failed because combined error condition</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -462,12 +469,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__error_condition_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_impl__init____heat_off_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L197">Mode_Impl__Init____Heat_Off</a></th>
 </tr><tr>
-<td>Description:</td><td>Mode Impl: Init => Heat Off</td>
+<td>Description:</td><td>Mode Implication: Init => Heat Off</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -479,12 +486,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Init____Heat_Off_configuration_content_end-->
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_impl__init____heat_off_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_impl__failed____heat_off_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L205">Mode_Impl__Failed____Heat_Off</a></th>
 </tr><tr>
-<td>Description:</td><td>Mode Impl: Failed => Heat Off</td>
+<td>Description:</td><td>Mode Implication: Failed => Heat Off</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
 </tr><tr>
@@ -496,16 +503,16 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_configurations-Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness_Mode_Impl__Failed____Heat_Off_configuration_content_end-->
+<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_impl__failed____heat_off_configuration_content-->
 
-#### <!--Monitor_Subsystem_DSC_Test_Harness_configurations-title_start-->Configurations for Monitor_Subsystem_DSC_Test_Harness<!--Monitor_Subsystem_DSC_Test_Harness_configurations-title_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-description_start-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-description_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration_content_start-->
+#### <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations-title-->Configurations for Monitor_Subsystem_DSC_Test_Harness<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations-title-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations-description-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations-description-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_on_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L51">MA__Normal_____Alarm_On</a></th>
 </tr><tr>
-<td>Description:</td><td>MA; Normal; => Alarm On</td>
+<td>Description:</td><td>Alarm control laws; NORMAL mode with temp range violation => Alarm ON result state</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -517,12 +524,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_On_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_on_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_unchanged_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L58">MA__Normal_____Alarm_Unchanged</a></th>
 </tr><tr>
-<td>Description:</td><td>MA; Normal; => Alarm Unchanged</td>
+<td>Description:</td><td>Alarm control laws; NORMAL mode => Alarm status unchanged</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -534,12 +541,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_unchanged_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_unchanged_left_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L65">MA__Normal_____Alarm_Unchanged_left</a></th>
 </tr><tr>
-<td>Description:</td><td>MA; Normal; => Alarm Unchanged, stress left partition</td>
+<td>Description:</td><td>Alarm control laws; NORMAL mode => Alarm status unchanged (stress left partition)</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -551,12 +558,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_left_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_unchanged_left_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_unchanged_right_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L72">MA__Normal_____Alarm_Unchanged_right</a></th>
 </tr><tr>
-<td>Description:</td><td>MA; Normal; => Alarm Unchanged, stress right partition</td>
+<td>Description:</td><td>Alarm control laws; NORMAL mode => Alarm status unchanged (stress right partition)</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -568,12 +575,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Unchanged_right_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_unchanged_right_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_off_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L79">MA__Normal_____Alarm_Off</a></th>
 </tr><tr>
-<td>Description:</td><td>MA; Normal; => Alarm Off</td>
+<td>Description:</td><td>Alarm control laws; NORMAL mode => Alarm OFF result state</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -585,12 +592,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Normal_____Alarm_Off_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_off_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__ct____alarm_on_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L88">MA__Failing__CT____Alarm_On</a></th>
 </tr><tr>
-<td>Description:</td><td>Failure due to invalid currentTemp should result in Alarm On</td>
+<td>Description:</td><td>Alarm control laws; Failing scenario (due to invalid currentTemp) => Alarm ON result state</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -602,12 +609,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__CT____Alarm_On_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__ct____alarm_on_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__lat____alarm_on_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L95">MA__Failing__LAT____Alarm_On</a></th>
 </tr><tr>
-<td>Description:</td><td>Failure due to invalid lower alarm should result in Alarm On</td>
+<td>Description:</td><td>Alarm control laws; Failing scenario (due to invalid lower alarm) => Alarm ON result</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -619,12 +626,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__LAT____Alarm_On_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__lat____alarm_on_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__uat____alarm_on_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L102">MA__Failing__UAT____Alarm_On</a></th>
 </tr><tr>
-<td>Description:</td><td>Failure due to invalid upper alarm should result in Alarm On</td>
+<td>Description:</td><td>Alarm control laws; Failing scenario (due to invalid upper alarm) => Alarm ON result</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -636,12 +643,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__UAT____Alarm_On_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__uat____alarm_on_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__internal_failure____alarm_on_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L111">MA__Failing__Internal_Failure____Alarm_On</a></th>
 </tr><tr>
-<td>Description:</td><td>Failure due to internal failure should result in Alarm On</td>
+<td>Description:</td><td>Alarm control laws; Failing scenario (internal failure) => Alarm ON result</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -653,12 +660,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Internal_Failure____Alarm_On_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__internal_failure____alarm_on_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__error_condition____alarm_on_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L118">MA__Failing__Error_Condition____Alarm_On</a></th>
 </tr><tr>
-<td>Description:</td><td>observe any failure condition (combining the input failures and internal failures above) should result in Alarm On</td>
+<td>Description:</td><td>Alarm control laws; Failing scenario (combined failure condition) => Alarm ON result</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -670,12 +677,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_MA__Failing__Error_Condition____Alarm_On_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__error_condition____alarm_on_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__normal_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L129">Mode_Trans___Normal__Normal</a></th>
 </tr><tr>
-<td>Description:</td><td>If no error condition and in normal then stay  in Normal</td>
+<td>Description:</td><td>Mode Trans:  Normal->Normal</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -687,12 +694,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Normal_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__normal_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__ct_invalid_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L137">Mode_Trans___Normal__Failed__CT_Invalid</a></th>
 </tr><tr>
-<td>Description:</td><td>If in normal, but CT is invalid then should transition to Failed</td>
+<td>Description:</td><td>Mode Trans:  Normal->Failed because Current Temperature Invalid</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -704,12 +711,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__CT_Invalid_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__ct_invalid_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__lat_invalid_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L144">Mode_Trans___Normal__Failed__LAT_Invalid</a></th>
 </tr><tr>
-<td>Description:</td><td>If in normal, but LAT is invalid then should transition to Failed</td>
+<td>Description:</td><td>Mode Trans:  Normal->Failed because Lower Alarm Temperature Invalid</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -721,12 +728,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__LAT_Invalid_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__lat_invalid_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__uat_invalid_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L151">Mode_Trans___Normal__Failed__UAT_Invalid</a></th>
 </tr><tr>
-<td>Description:</td><td>If in normal, but UAT is invalid then should transition to Failed</td>
+<td>Description:</td><td>Mode Trans:  Normal->Failed because Upper Alarm Temperature Invalid</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -738,12 +745,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__UAT_Invalid_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__uat_invalid_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__internal_failure_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L159">Mode_Trans___Normal__Failed__Internal_Failure</a></th>
 </tr><tr>
-<td>Description:</td><td>If in normal, but there is an internal failure then should transition to Failed</td>
+<td>Description:</td><td>Mode Trans:  Normal->Failed because Internal Failure</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -755,12 +762,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Internal_Failure_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__internal_failure_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__error_condition_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L166">Mode_Trans___Normal__Failed__Error_Condition</a></th>
 </tr><tr>
-<td>Description:</td><td>If in normal, but there is an internal or interface failure then should transition to Failed</td>
+<td>Description:</td><td>Mode Trans:  Normal->Failed because combined error condition</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -772,12 +779,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Trans___Normal__Failed__Error_Condition_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__error_condition_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_impl__init____alarm_off_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L174">Mode_Impl__Init____Alarm_Off</a></th>
 </tr><tr>
-<td>Description:</td><td>If in Init mode then the alarm should be off</td>
+<td>Description:</td><td>Alarm control laws; INIT mode => Alarm OFF result state</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -789,12 +796,12 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Init____Alarm_Off_configuration_content_end-->
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration_content_start-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_impl__init____alarm_off_configuration_content-->
+<!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_impl__failed____alarm_on_configuration_content-->
 <table>
 <tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L181">Mode_Impl__Failed____Alarm_On</a></th>
 </tr><tr>
-<td>Description:</td><td>If in Failed mode then the alarm should be On</td>
+<td>Description:</td><td>Alarm control laws; FAILED mode => Alarm OFF result state</td>
 </tr><tr>
 <td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
 </tr><tr>
@@ -806,10 +813,10 @@ likely would be excluded in a release build
 </tr>
 </table>
 
-<!--Monitor_Subsystem_DSC_Test_Harness_configurations-Monitor_Subsystem_DSC_Test_Harness_Mode_Impl__Failed____Alarm_On_configuration_content_end-->
+<!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_impl__failed____alarm_on_configuration_content-->
 
-## <!--how-to-run-title_start-->How to Run<!--how-to-run-title_end-->
-<!--how-to-run-description_start-->
+## <!--start__isolette_how-to-run-title-->How to Run<!--end____isolette_how-to-run-title-->
+<!--start__isolette_how-to-run-description-->
 System testing requires a Sireum distribution. Instructions on how to obtain a
 distribution are available at [https://sireum.org/getting-started/](https://sireum.org/getting-started/).
 The rest of this documentation assumes the ``SIREUM_HOME`` environmental variable has been set and that
@@ -817,9 +824,9 @@ sireum's bin directory has been added to your path (e.g. for Linux/MacOS ``expor
 or Windows ``set PATH=%PATH%\bin;%PATH%``
 
 
-<!--how-to-run-description_end-->
-### <!--framework-generation-title_start-->Framework Generation<!--framework-generation-title_end-->
-<!--framework-generation-description_start-->
+<!--end____isolette_how-to-run-description-->
+### <!--start__isolette_how-to-run_framework-generation-title-->Framework Generation<!--end____isolette_how-to-run_framework-generation-title-->
+<!--start__isolette_how-to-run_framework-generation-description-->
 1. Build the System Testing Artifact Generator following the instructions at
    [SystemTestArtifactGen/readme.md](../report/util/SystemTestArtifactGen/readme.md)
 1. Run the generator by passing it the paths to one or more files that contain
@@ -843,14 +850,14 @@ will generate the following artifacts:
    ``DSC_TEST_FAMILY_NAME`` to determine which test run configuration should be used.
 
 
-<!--framework-generation-description_end-->
+<!--end____isolette_how-to-run_framework-generation-description-->
 
-### <!--manual-testing-title_start-->Manual System Testing<!--manual-testing-title_end-->
-<!--manual-testing-description_start-->
+### <!--start__isolette_how-to-run_manual-testing-title-->Manual System Testing<!--end____isolette_how-to-run_manual-testing-title-->
+<!--start__isolette_how-to-run_manual-testing-description-->
 The example system test suites described previously were used to write
 system tests for the Regulator subsystem and Monitor subsystem as follows:
-<!--manual-testing-description_end-->
-<!--manual-testing-Regulator subsystem_block_start-->
+<!--end____isolette_how-to-run_manual-testing-description-->
+<!--start__isolette_how-to-run_manual-testing_regulator-subsystem_block-->
 __Regulator subsystem__
 
   System Test Suite Class: [Regulate_Subsystem_Test_wSlangCheck.scala](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala)
@@ -860,10 +867,10 @@ __Regulator subsystem__
 
   | | |
   |:--|--|
-  | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302) |
-  | Property: | [sysProp_NormalModeHeatOn](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L439) |
-  | Randomization Profile: | [validRanges](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264) |
-  | Random Vector Filter: | [system_Pre_Container](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Inputs_Container_GumboX.scala#L46) |
+  | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302)|
+  | Property: | [sysProp_NormalModeHeatOn](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L439)|
+  | Randomization Profile: | [validRanges](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
+  | Random Vector Filter: | [system_Pre_Container](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Inputs_Container_GumboX.scala#L46)|
 
   How to run:
 
@@ -874,8 +881,8 @@ __Regulator subsystem__
   ```
 
 
-<!--manual-testing-Regulator subsystem_block_end-->
-<!--manual-testing-Monitor subsystem_block_start-->
+<!--end____isolette_how-to-run_manual-testing_regulator-subsystem_block-->
+<!--start__isolette_how-to-run_manual-testing_monitor-subsystem_block-->
 __Monitor subsystem__
 
   System Test Suite Class: [Monitor_Subsystem_Test_wSlangCheck.scala](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala)
@@ -885,10 +892,10 @@ __Monitor subsystem__
 
   | | |
   |:--|--|
-  | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305) |
-  | Property: | [sysProp_NormalModeAlarmOn](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L370) |
-  | Randomization Profile: | [validRanges](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L589) |
-  | Random Vector Filter: | [assumeFigureA_7](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301) |
+  | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305)|
+  | Property: | [sysProp_NormalModeAlarmOn](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L370)|
+  | Randomization Profile: | [validRanges](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L589)|
+  | Random Vector Filter: | [assumeFigureA_7](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)|
 
   How to run:
 
@@ -899,10 +906,10 @@ __Monitor subsystem__
   ```
 
 
-<!--manual-testing-Monitor subsystem_block_end-->
+<!--end____isolette_how-to-run_manual-testing_monitor-subsystem_block-->
 
-### <!--dsc-testing-title_start-->Distributed SlangCheck System Testing<!--dsc-testing-title_end-->
-<!--dsc-testing-description_start-->
+### <!--start__isolette_how-to-run_dsc-testing-title-->Distributed SlangCheck System Testing<!--end____isolette_how-to-run_dsc-testing-title-->
+<!--start__isolette_how-to-run_dsc-testing-description-->
 Background:
 
 System testing as put forth in this paper uses SlangCheck to generate input/injection test vectors.
@@ -989,4 +996,4 @@ up the report directory hierarchy.
 |[isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness](https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for running all the configurations through Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness using timeouts of 1, 5, and 10 seconds |
 |[isolette](https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/report.html)<br><br>The combined coverage information along with the number of passing/failing/unsat test vectors for each of the Isolette's subsystems under testing using timeouts of 1, 5, and 10 seconds |
 
-<!--dsc-testing-description_end-->
+<!--end____isolette_how-to-run_dsc-testing-description-->
