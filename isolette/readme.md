@@ -7,9 +7,8 @@ The data, links, and images in this file are auto-generated from HAMR's report g
 ![AADL Arch](aadl/diagrams/aadl-arch.svg)
 
 The following documentation blocks provide links to AADL textual representation source of the Thread components in the system.
-
-"Type" links to the AADL component type declaration (providing the port-based interface for the component)
-"Behavior Specification" (when present) links to the GUMBO behavior contract for the component. HAMR automatically
+* "Type" links to the AADL component type declaration (providing the port-based interface for the component)
+* "Behavior Specification" (when present) links to the GUMBO behavior contract for the component. HAMR automatically
 compiles the GUMBO contract to both an code-level contract used for Logika code verification as well as an executable
 representation of the contract (as pure boolean functions) used in unit and system testing.
 <!--end____isolette_arch-section-description-->
