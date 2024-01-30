@@ -9,9 +9,6 @@ import org.sireum.justification.Auto
 // This file will not be overwritten so is safe to edit
 object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface {
 
-  // BEGIN FUNCTIONS
-  @strictpure def timeout_condition_satisfied(): Base_Types.Boolean = T
-  // END FUNCTIONS
   // BEGIN STATE VARS
   var lastCmd: Isolette_Data_Model.On_Off.Type = Isolette_Data_Model.On_Off.byOrdinal(0).get
   // END STATE VARS

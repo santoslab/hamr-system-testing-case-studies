@@ -52,7 +52,8 @@ class Example_Regulate_Subsystem_Inputs_Container_Test_wSlangCheck
       schema = NameProvider2("Schema-Name", (input_container: Any, property_function: Any) => T),
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
-      property = NameProvider2("Property-Name", (input_container: Any, output_container: Any) => T)
+      property = NameProvider2("Property-Name", (input_container: Any, output_container: Any) => T),
+      components = ISZ()
     )
   )
 
@@ -66,8 +67,8 @@ class Example_Regulate_Subsystem_Inputs_Container_Test_wSlangCheck
 
   def genTestNameJson(testConfigurationName: String, testRow: TestConfiguration): String = {
     @strictpure def p(str: String): ST = Json.Printer.printString(str)
-
-    return st"""{"testConfigurationName" : ${p(testConfigurationName)}, "description" : ${p(testRow.description)}, "schema": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}, "filter" : ${p(testRow.filter.name)}}"""".render
+    val componentsx = st"${(testRow.components, ",")}".render
+    return st"""{"testConfigurationName" : ${p(testConfigurationName)}, "description" : ${p(testRow.description)}, "schema": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}, "filter" : ${p(testRow.filter.name)}, "components" : ${p(componentsx)}}""".render
   }
 
   def run(testFamilyName: String, testRow: TestConfiguration): Unit = {
@@ -127,12 +128,30 @@ object Example_Regulate_Subsystem_Inputs_Container_Test_wSlangCheck {
   val lines: ISZ[String] =
     ops.StringOps(ops.StringOps(Os.path(implicitly[sourcecode.File].value).read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
 
+  @strictpure def p(str: String): ST = Json.Printer.printString(str)
+
   val dummy: B = {
     val inst = new Example_Regulate_Subsystem_Inputs_Container_Test_wSlangCheck()
     val entries = for (entry <- inst.testMatrix.entries) yield inst.genTestNameJson(entry._1, entry._2)
     val thisFile = Os.path(implicitly[sourcecode.File].value)
     val outFile = thisFile.up / s"${thisFile.name}.json"
     outFile.writeOver(st"${(entries, "\n")}".render)
+
+    // emit schedule as JSON
+    val nickNames: ISZ[ST] = for(e <- StaticSchedulerCust.threadNickNames.entries) yield
+      st"${e._1}:${Arch.ad.components(e._2).name}"
+    val nickNamesS = st"${(nickNames, ",")}".render
+    val sched: ISZ[ST] = for(e <- StaticSchedulerCust.domainToBridgeIdMap) yield
+      st"""${StaticSchedulerCust.revThreadNickNames.get(e).get}"""
+    val schedS = st"${(sched, ",")}".render
+    val schedFile = thisFile.up / s"${thisFile.name}_schedule.json"
+    schedFile.writeOver(
+      st"""{
+          |  "nickNames": ${p(nickNamesS)},
+          |  "scheduleProvider": ${p(StaticSchedulerCust.getClass.getName)},
+          |  "schedule": ${p(schedS)}
+          |}""".render)
+
     F
   }
 }

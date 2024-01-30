@@ -48,6 +48,14 @@ class Regulate_Subsystem_Test_wSlangCheck
   val maxTests = 100
   var verbose: B = T
 
+  // Regulator threads being tested
+  val components: ISZ[String] = ISZ(
+    StaticSchedulerCust.revThreadNickNames.get(Arch.isolette_single_sensor_Instance_thermostat_regulate_temperature_manage_regulator_interface.id).get,
+    StaticSchedulerCust.revThreadNickNames.get(Arch.isolette_single_sensor_Instance_thermostat_regulate_temperature_manage_regulator_mode.id).get,
+    StaticSchedulerCust.revThreadNickNames.get(Arch.isolette_single_sensor_Instance_thermostat_regulate_temperature_manage_heat_source.id).get,
+    StaticSchedulerCust.revThreadNickNames.get(Arch.isolette_single_sensor_Instance_thermostat_regulate_temperature_detect_regulator_failure.id).get
+  )
+
   val testMatrix: Map[String, TestConfiguration] = Map.empty ++ ISZ(
     // ======================
     //  Output: Heat Control
@@ -60,14 +68,16 @@ class Regulate_Subsystem_Test_wSlangCheck
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_NormalModeHeatOn _
+      property = sysProp_NormalModeHeatOn _,
+      components = components
     ),
     "HC__Normal_____Heat_Off" ~> TestConfiguration(
       description = "Heat Control control laws; NORMAL mode => Heat OFF result state",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_NormalModeHeatOff _
+      property = sysProp_NormalModeHeatOff _,
+      components = components
     ),
     // -----
     //   Output: Heat Control;  Failure properties
@@ -77,7 +87,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_InvalidCTNormalModeHeatOff _
+      property = sysProp_InvalidCTNormalModeHeatOff _,
+      components = components
     ),
 
     "HC__Failing__UDT____Heat_Off" ~> TestConfiguration(
@@ -85,7 +96,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_InvalidUDTNormalModeHeatOff _
+      property = sysProp_InvalidUDTNormalModeHeatOff _,
+      components = components
     ),
 
     "HC__Failing__LDT____Heat_Off" ~> TestConfiguration(
@@ -93,7 +105,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_InvalidLDTNormalModeHeatOff _
+      property = sysProp_InvalidLDTNormalModeHeatOff _,
+      components = components
     ),
 
     "HC__Failing__Internal_Failure____Heat_Off" ~> TestConfiguration(
@@ -101,7 +114,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_InternalFailureNormalModeHeatOff _
+      property = sysProp_InternalFailureNormalModeHeatOff _,
+      components = components
     ),
 
     // observe any failure condition (combining the input failures and internal failures above)
@@ -110,7 +124,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_ErrorConditionHeatOff _
+      property = sysProp_ErrorConditionHeatOff _,
+      components = components
     ),
     // ======================
     //  Output: Display Temp
@@ -122,7 +137,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_NormalDisplayTemp _
+      property = sysProp_NormalDisplayTemp _,
+      components = components
     ),
 
     // ======================
@@ -135,7 +151,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_NormalToNormalMode _
+      property = sysProp_NormalToNormalMode _,
+      components = components
     ),
 
     // Normal --> Failed  Transitions
@@ -144,28 +161,32 @@ class Regulate_Subsystem_Test_wSlangCheck
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_InvalidCTNormalToFailedMode _
+      property = sysProp_InvalidCTNormalToFailedMode _,
+      components = components
     ),
     "Mode_Trans___Normal__Failed__UDT_Invalid" ~> TestConfiguration(
       description = "Mode Trans:  Normal->Failed because Upper Desired Temperature Invalid",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_InvalidUDTNormalToFailedMode _
+      property = sysProp_InvalidUDTNormalToFailedMode _,
+      components = components
     ),
     "Mode_Trans___Normal__Failed__LDT_Invalid" ~> TestConfiguration(
       description = "Mode Trans:  Normal->Failed because Lower Desired Temperature Invalid",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_InvalidLDTNormalToFailedMode _
+      property = sysProp_InvalidLDTNormalToFailedMode _,
+      components = components
     ),
     "Mode_Trans___Normal__Failed__Internal_Failure" ~> TestConfiguration(
       description = "Mode Trans:  Normal->Failed because Internal Failure",
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_InternalFailureNormalToFailedMode _
+      property = sysProp_InternalFailureNormalToFailedMode _,
+      components = components
     ),
     // Combinded Error Condition
     "Mode_Trans___Normal__Failed__Error_Condition" ~> TestConfiguration(
@@ -173,7 +194,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_ErrorConditionNormalToFailedMode _
+      property = sysProp_ErrorConditionNormalToFailedMode _,
+      components = components
     ),
 
     /*
@@ -183,7 +205,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       testMethod = Regulator_1HP_script_schema _,
       profile = validRanges,
       preStateCheck = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_FailedToFailedMode _
+      property = sysProp_FailedToFailedMode _,
+      components = components
     ),
     */
 
@@ -199,7 +222,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_InitModeImpliesHeatOff _
+      property = sysProp_InitModeImpliesHeatOff _,
+      components = components
     ),
 
     "Mode_Impl__Failed____Heat_Off" ~> TestConfiguration(
@@ -207,7 +231,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       schema = Regulator_1HP_script_schema _,
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
-      property = sysProp_FailedModeImpliesHeatOff _
+      property = sysProp_FailedModeImpliesHeatOff _,
+      components = components
     )
   )
 
@@ -221,8 +246,8 @@ class Regulate_Subsystem_Test_wSlangCheck
 
   def genTestNameJson(testConfigurationName: String, testRow: TestConfiguration): String = {
     @strictpure def p(str: String): ST = Json.Printer.printString(str)
-
-    return st"""{"testConfigurationName" : ${p(testConfigurationName)}, "description" : ${p(testRow.description)}, "schema": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}, "filter" : ${p(testRow.filter.name)}}""".render
+    val componentsx = st"${(testRow.components, ",")}".render
+    return st"""{"testConfigurationName" : ${p(testConfigurationName)}, "description" : ${p(testRow.description)}, "schema": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}, "filter" : ${p(testRow.filter.name)}, "components" : ${p(componentsx)}}""".render
   }
 
   def run(testFamilyName: String, testRow: TestConfiguration): Unit = {
@@ -662,12 +687,31 @@ object Regulate_Subsystem_Test_wSlangCheck {
   val lines: ISZ[String] =
     ops.StringOps(ops.StringOps(Os.path(implicitly[sourcecode.File].value).read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
 
+  @strictpure def p(str: String): ST = Json.Printer.printString(str)
+
   val dummy: B = {
+    // emit test configs as JSON
     val inst = new Regulate_Subsystem_Test_wSlangCheck()
     val entries = for (entry <- inst.testMatrix.entries) yield inst.genTestNameJson(entry._1, entry._2)
     val thisFile = Os.path(implicitly[sourcecode.File].value)
     val outFile = thisFile.up / s"${thisFile.name}.json"
     outFile.writeOver(st"${(entries, "\n")}".render)
+
+    // emit schedule as JSON
+    val nickNames: ISZ[ST] = for(e <- StaticSchedulerCust.threadNickNames.entries) yield
+      st"${e._1}:${Arch.ad.components(e._2).name}"
+    val nickNamesS = st"${(nickNames, ",")}".render
+    val sched: ISZ[ST] = for(e <- StaticSchedulerCust.domainToBridgeIdMap) yield
+      st"""${StaticSchedulerCust.revThreadNickNames.get(e).get}"""
+    val schedS = st"${(sched, ",")}".render
+    val schedFile = thisFile.up / s"${thisFile.name}_schedule.json"
+    schedFile.writeOver(
+      st"""{
+          |  "nickNames": ${p(nickNamesS)},
+          |  "scheduleProvider": ${p(StaticSchedulerCust.getClass.getName)},
+          |  "schedule": ${p(schedS)}
+          |}""".render)
+
     F
   }
 }

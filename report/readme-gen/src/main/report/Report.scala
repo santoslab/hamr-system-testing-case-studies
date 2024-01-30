@@ -369,14 +369,42 @@ object Report {
     )
   }
 
+  def processNickNames(names: String, table: SymbolTable): Map[String, AadlComponent] = {
+    var ret: Map[String, AadlComponent] = Map.empty
+    for(n <- ops.StringOps(names).split(c => c == ',')) {
+      val split = ops.StringOps(n).split(c => c == ':')
+      val compCand = table.componentMap.values.filter(p => p.pathAsString("_") == split(1))
+      assert (compCand.size == 1, compCand.size)
+      ret = ret + split(0) ~> compCand(0)
+    }
+    return ret
+  }
+
   def genTestingSection(project: Project, table: SymbolTable): ReportLevel = {
+    var scheduleProviderCand: String = ""
+    var scheduleCand: String = ""
+    var nickNamesCand: Map[String, AadlComponent] = Map.empty
 
     val configs: ISZ[ReportLevel] = {
       var entries: HashSMap[String, ISZ[ReportBlock]] = HashSMap.empty
       for (config <- project.testConfigs) {
 
+        val scheduleFile = config.systemTestOutputDir / s"${config.manualTestingFilename}_schedule.json"
+        val schedulesJsons: HashSMap[String, String] = Util.parseJson(scheduleFile.read, ISZ("nickNames", "scheduleProvider", "schedule"))
+
+        if (scheduleCand == "") {
+          scheduleProviderCand = schedulesJsons.get("scheduleProvider").get
+          scheduleCand = schedulesJsons.get("schedule").get
+          nickNamesCand = processNickNames(schedulesJsons.get("nickNames").get, table)
+        } else {
+          assert (scheduleProviderCand == schedulesJsons.get("scheduleProvider").get)
+          assert (scheduleCand == schedulesJsons.get("schedule").get)
+          assert (nickNamesCand == processNickNames(schedulesJsons.get("nickNames").get, table))
+        }
+
+        val keys = ISZ[String]("testConfigurationName", "description", "schema", "property", "profile", "filter", "components")
         val jsonsFile = config.systemTestOutputDir / s"${config.manualTestingFilename}.json"
-        val jsons: ISZ[HashSMap[String, String]] = for (l <- jsonsFile.readLines) yield Util.parseJson(l)
+        val jsons: ISZ[HashSMap[String, String]] = for (l <- jsonsFile.readLines) yield Util.parseJson(l, keys)
 
         val manualTestingFile = config.manualTestingFile
         val mtfContents = ops.StringOps(ops.StringOps(manualTestingFile.read).replaceAllLiterally("\n", " \n")).split(c => c == '\n')
@@ -391,6 +419,33 @@ object Report {
 
           val emitMarkDown = F
 
+          val coverageLinks: ISZ[ST] = {
+            val phtmldir: String = {
+              if (project.title == "Isolette") "isolette"
+              else if (project.title == "RTS") "RTS"
+              else "??"
+            }
+            val harness = project.testConfigs(0).simpleDscHarnessName
+            val config = project.testConfigs(0).exampleTestConfig.name
+            val rootConfigCoverage = s"$htmlDir/$phtmldir/$harness/$config"
+            val rootJacoco = s"$rootConfigCoverage/jacocoCoverage"
+            val components = ops.StringOps(json.get("components").get).split(c => c == ',')
+            var ret: ISZ[ST] = ISZ()
+            for (c <- components) {
+              val comp = nickNamesCand.get(c).get
+              val base = project.configs(0).packageName.get
+              val names = org.sireum.hamr.arsit.Util.nameProvider(comp.component, base)
+              val packageName = names.classifier(0)
+              val l2 = s"$rootJacoco/${base}.${packageName}/${names.componentSingletonType}$$.html"
+              if (emitMarkDown) {
+                ret = ret :+ st"[$c](${l2})"
+              } else {
+                ret = ret :+ st"""<a href="$l2">$c</a>"""
+              }
+            }
+            ret
+          }
+
           val content: ST = if (emitMarkDown)
             st"""${Util.locateText(configName, mtfContents, mtf)}
                 ||||
@@ -400,6 +455,7 @@ object Report {
                 || Property: | ${Util.locateMethodDefinition(json.get("property").get, mtfContents, mtf)}|
                 || Randomization Profile: | ${Util.locateTextD(T, F, json.get("profile").get, mtfContents, mtf)}|
                 || Random Vector Filter: | ${Util.locateTextD(T, F, json.get("filter").get, mtfContents, mtf)}|
+                || Relevant Coverage: | ${(coverageLinks, ", ")} |
                 |"""
           else
             st"""<table>
@@ -414,6 +470,8 @@ object Report {
                 |<td>Randomization Profile:</td><td>${Util.locateTextD(T, T, json.get("profile").get, mtfContents, mtf)}</td>
                 |</tr><tr>
                 |<td>Random Vector Filter:</td><td>${Util.locateTextD(T, T, json.get("filter").get, mtfContents, mtf)}</td>
+                |</tr><tr>
+                |<td>Relevant Coverage:</td><td>${(coverageLinks, ", ")}</td>
                 |</tr>
                 |</table>
                 |"""
@@ -443,10 +501,32 @@ object Report {
       ret
     }
 
+    val provider: Os.Path = {
+      val path = ops.StringOps(ops.StringOps(scheduleProviderCand).replaceAllLiterally(".", "/")).replaceAllLiterally("$", "")
+      val lookingFor = s"${path}.scala"
+      val cands = ops.ISZOps((Os.path(project.configs(0).outputDir.get) / "src" / "main").list).filter(p => (p / lookingFor).exists)
+      assert (cands.size == 1, s"didn't find $lookingFor")
+      cands(0) / lookingFor
+    }
+
+    val schedule: ISZ[ST] = {
+      var ret: ISZ[ST] = ISZ()
+      for ( s <- ops.StringOps(scheduleCand).split(c => c == ',')) {
+        val comp = nickNamesCand.get(s).get
+        val tpath = st"${(ops.ISZOps(comp.path).drop(1), "_")}".render
+        val (behavior, _) = findBehaviorCode(tpath, project)
+        ret = ret :+ st"[${s}](${project.projectRootDir.relativize(behavior.get)})"
+      }
+      ret
+    }
+
     val configurations: ReportLevel = ReportLevel(
       tag = createTag("configurations"),
       title = Some(st"Test Run Configurations"),
-      description = None(),
+      description = Some(
+        st"""All configurations use the following static schedule provided by [${provider.name}](${project.projectRootDir.relativize(provider)})
+            |
+            |- ${(schedule, ", ")}"""),
       content = ISZ(),
       subLevels = configs
     )
@@ -459,6 +539,16 @@ object Report {
       subLevels = ISZ(configurations)
     )
     return ret
+  }
+
+  def findBehaviorCode(path: String, project: ReadmeGen.Project): (Option[Os.Path], Option[Os.Path]) = {
+    val bridgesDir = project.projectRootDir / "hamr" / "slang" / "src" / "main" / "bridge"
+    val componentsDir = project.projectRootDir / "hamr" / "slang" / "src" / "main" / "component"
+
+    val behavior = Util.hackyFind(componentsDir, s"${path}.scala")
+    val gumbox = Util.hackyFind(bridgesDir, s"${path}_GumboX.scala")
+
+    return (behavior, gumbox)
   }
 
   def genHowToRunSection(project: Project, table: SymbolTable): ReportLevel = {
@@ -1045,14 +1135,10 @@ object Report {
   def genBehaviorCodeSection(project: ReadmeGen.Project, table: SymbolTable): ReportLevel = {
     var threads: ISZ[ReportBlock] = ISZ()
 
-    val bridgesDir = project.projectRootDir / "hamr" / "slang" / "src" / "main" / "bridge"
-    val componentsDir = project.projectRootDir / "hamr" / "slang" / "src" / "main" / "component"
-
     for (thread <- table.getThreads()) {
       val tpath = st"${(ops.ISZOps(thread.path).drop(1), "_")}".render
       val tnick = Util.threadNicknames.get(tpath).get
-      val gumbox = Util.hackyFind(bridgesDir, s"${tpath}_GumboX.scala")
-      val behavior = Util.hackyFind(componentsDir, s"${tpath}.scala")
+      val (behavior, gumbox) = findBehaviorCode(tpath, project)
       val gumboxOpt: Option[ST] = if (gumbox.nonEmpty)
         Some(st"<br>[GumboX](${project.projectRootDir.relativize(gumbox.get)})")
       else None()

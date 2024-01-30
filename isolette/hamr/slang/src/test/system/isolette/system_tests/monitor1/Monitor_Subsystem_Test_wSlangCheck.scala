@@ -47,41 +47,54 @@ class Monitor_Subsystem_Test_wSlangCheck
   val maxTests = 100
   var verbose: B = T
 
+  // Monitor threads being tested
+  val components: ISZ[String] = ISZ(
+    StaticSchedulerCust.revThreadNickNames.get(Arch.isolette_single_sensor_Instance_thermostat_monitor_temperature_manage_monitor_interface.id).get,
+    StaticSchedulerCust.revThreadNickNames.get(Arch.isolette_single_sensor_Instance_thermostat_monitor_temperature_manage_monitor_mode.id).get,
+    StaticSchedulerCust.revThreadNickNames.get(Arch.isolette_single_sensor_Instance_thermostat_monitor_temperature_manage_alarm.id).get,
+    StaticSchedulerCust.revThreadNickNames.get(Arch.isolette_single_sensor_Instance_thermostat_monitor_temperature_detect_monitor_failure.id).get
+  )
+
   val testMatrix: Map[String, TestConfiguration] = Map.empty ++ ISZ(
     "MA__Normal_____Alarm_On" ~> TestConfiguration(
       description = "Alarm control laws; NORMAL mode with temp range violation => Alarm ON result state",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_NormalModeAlarmOn _
+      property = sysProp_NormalModeAlarmOn _,
+      components = components
     ),
     "MA__Normal_____Alarm_Unchanged" ~> TestConfiguration(
       description = "Alarm control laws; NORMAL mode => Alarm status unchanged",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_NormalModeAlarmUnchanged _
+      property = sysProp_NormalModeAlarmUnchanged _,
+      components = components
     ),
     "MA__Normal_____Alarm_Unchanged_left" ~> TestConfiguration(
       description = "Alarm control laws; NORMAL mode => Alarm status unchanged (stress left partition)",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges.copy(name = "currentTemp-in-left-partition"),
       filter = assumeFigureA_7 _,
-      property = sysProp_NormalModeAlarmUnchanged _
+      property = sysProp_NormalModeAlarmUnchanged _,
+      components = components
     ),
     "MA__Normal_____Alarm_Unchanged_right" ~> TestConfiguration(
       description = "Alarm control laws; NORMAL mode => Alarm status unchanged (stress right partition)",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges.copy(name = "currentTemp-in-right-partition"),
       filter = assumeFigureA_7 _,
-      property = sysProp_NormalModeAlarmUnchanged _
+      property = sysProp_NormalModeAlarmUnchanged _,
+      components = components
     ),
     "MA__Normal_____Alarm_Off" ~> TestConfiguration(
       description = "Alarm control laws; NORMAL mode => Alarm OFF result state",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_NormalModeAlarmOff _
+      property = sysProp_NormalModeAlarmOff _,
+      components = components
     ),
 
 
@@ -90,21 +103,24 @@ class Monitor_Subsystem_Test_wSlangCheck
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_InvalidCTNormalModeAlarmOn _
+      property = sysProp_InvalidCTNormalModeAlarmOn _,
+      components = components
     ),
     "MA__Failing__LAT____Alarm_On" ~> TestConfiguration(
       description = "Alarm control laws; Failing scenario (due to invalid lower alarm) => Alarm ON result",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_InvalidLATNormalModeAlarmOn _
+      property = sysProp_InvalidLATNormalModeAlarmOn _,
+      components = components
     ),
     "MA__Failing__UAT____Alarm_On" ~> TestConfiguration(
       description = "Alarm control laws; Failing scenario (due to invalid upper alarm) => Alarm ON result",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_InvalidUATNormalModeAlarmOn _
+      property = sysProp_InvalidUATNormalModeAlarmOn _,
+      components = components
     ),
 
 
@@ -113,14 +129,16 @@ class Monitor_Subsystem_Test_wSlangCheck
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_InternalFailureNormalModeAlarmOn _
+      property = sysProp_InternalFailureNormalModeAlarmOn _,
+      components = components
     ),
     "MA__Failing__Error_Condition____Alarm_On" ~> TestConfiguration(
       description = "Alarm control laws; Failing scenario (combined failure condition) => Alarm ON result",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_ErrorConditionAlarmOn _
+      property = sysProp_ErrorConditionAlarmOn _,
+      components = components
     ),
 
 
@@ -131,7 +149,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_NormalToNormalMode _
+      property = sysProp_NormalToNormalMode _,
+      components = components
     ),
 
     "Mode_Trans___Normal__Failed__CT_Invalid" ~> TestConfiguration(
@@ -139,21 +158,24 @@ class Monitor_Subsystem_Test_wSlangCheck
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_InvalidCTNormalToFailedMode _
+      property = sysProp_InvalidCTNormalToFailedMode _,
+      components = components
     ),
     "Mode_Trans___Normal__Failed__LAT_Invalid" ~> TestConfiguration(
       description = "Mode Trans:  Normal->Failed because Lower Alarm Temperature Invalid",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_InvalidLATNormalToFailedMode _
+      property = sysProp_InvalidLATNormalToFailedMode _,
+      components = components
     ),
     "Mode_Trans___Normal__Failed__UAT_Invalid" ~> TestConfiguration(
       description = "Mode Trans:  Normal->Failed because Upper Alarm Temperature Invalid",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_InvalidUATNormalToFailedMode _
+      property = sysProp_InvalidUATNormalToFailedMode _,
+      components = components
     ),
 
     "Mode_Trans___Normal__Failed__Internal_Failure" ~> TestConfiguration(
@@ -161,14 +183,16 @@ class Monitor_Subsystem_Test_wSlangCheck
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_InternalFailureNormalToFailedMode _
+      property = sysProp_InternalFailureNormalToFailedMode _,
+      components = components
     ),
     "Mode_Trans___Normal__Failed__Error_Condition" ~> TestConfiguration(
       description = "Mode Trans:  Normal->Failed because combined error condition",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_ErrorConditionNormalToFailedMode _
+      property = sysProp_ErrorConditionNormalToFailedMode _,
+      components = components
     ),
 
     "Mode_Impl__Init____Alarm_Off" ~> TestConfiguration(
@@ -176,14 +200,16 @@ class Monitor_Subsystem_Test_wSlangCheck
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_InitModeImpliesAlarmOff _
+      property = sysProp_InitModeImpliesAlarmOff _,
+      components = components
     ),
     "Mode_Impl__Failed____Alarm_On" ~> TestConfiguration(
       description = "Alarm control laws; FAILED mode => Alarm OFF result state",
       schema = Monitor_1HP_script_schema _,
       profile = validRanges,
       filter = assumeFigureA_7 _,
-      property = sysProp_FailedModeImpliesAlarmOn _
+      property = sysProp_FailedModeImpliesAlarmOn _,
+      components = components
     )
   )
 
@@ -197,8 +223,8 @@ class Monitor_Subsystem_Test_wSlangCheck
 
   def genTestNameJson(testConfigurationName: String, testRow: TestConfiguration): String = {
     @strictpure def p(str: String): ST = Json.Printer.printString(str)
-
-    return st"""{"testConfigurationName" : ${p(testConfigurationName)}, "description" : ${p(testRow.description)}, "schema": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}, "filter" : ${p(testRow.filter.name)}}"""".render
+    val componentsx = st"${(testRow.components, ",")}".render
+    return st"""{"testConfigurationName" : ${p(testConfigurationName)}, "description" : ${p(testRow.description)}, "schema": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}, "filter" : ${p(testRow.filter.name)}, "components" : ${p(componentsx)}}""".render
   }
 
   override def next(profile: Monitor_Subsystem_Inputs_Container_Profile): Option[Monitor_Subsystem_Inputs_Container] = {
@@ -634,12 +660,31 @@ object Monitor_Subsystem_Test_wSlangCheck {
   val lines: ISZ[String] =
     ops.StringOps(ops.StringOps(Os.path(implicitly[sourcecode.File].value).read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
 
+  @strictpure def p(str: String): ST = Json.Printer.printString(str)
+
   val dummy: B = {
+    // emit test configs as JSON
     val inst = new Monitor_Subsystem_Test_wSlangCheck()
     val entries = for (entry <- inst.testMatrix.entries) yield inst.genTestNameJson(entry._1, entry._2)
     val thisFile = Os.path(implicitly[sourcecode.File].value)
     val outFile = thisFile.up / s"${thisFile.name}.json"
     outFile.writeOver(st"${(entries, "\n")}".render)
+
+    // emit schedule as JSON
+    val nickNames: ISZ[ST] = for(e <- StaticSchedulerCust.threadNickNames.entries) yield
+      st"${e._1}:${Arch.ad.components(e._2).name}"
+    val nickNamesS = st"${(nickNames, ",")}".render
+    val sched: ISZ[ST] = for(e <- StaticSchedulerCust.domainToBridgeIdMap) yield
+      st"""${StaticSchedulerCust.revThreadNickNames.get(e).get}"""
+    val schedS = st"${(sched, ",")}".render
+    val schedFile = thisFile.up / s"${thisFile.name}_schedule.json"
+    schedFile.writeOver(
+      st"""{
+          |  "nickNames": ${p(nickNamesS)},
+          |  "scheduleProvider": ${p(StaticSchedulerCust.getClass.getName)},
+          |  "schedule": ${p(schedS)}
+          |}""".render)
+
     F
   }
 }

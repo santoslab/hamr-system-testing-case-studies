@@ -18,7 +18,9 @@ object Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mo
 
   def initialise(api: Manage_Monitor_Mode_impl_Initialization_Api): Unit = {
     Contract(
-      Modifies(api),
+      Modifies(
+        api,
+        lastMonitorMode),
       Ensures(
         // BEGIN INITIALIZES ENSURES
         // guarantee REQ_MMM_1

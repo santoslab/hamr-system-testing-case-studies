@@ -205,9 +205,9 @@ Directories Scanned Using [https://github.com/AlDanial/cloc](https://github.com/
 Total number of HAMR-generated and developer-written lines of code
 Language|files|blank|comment|code
 :-------|-------:|-------:|-------:|-------:
-Scala|144|5655|2910|25327
+Scala|144|5663|2910|25327
 --------|--------|--------|--------|--------
-SUM:|144|5655|2910|25327
+SUM:|144|5663|2910|25327
 
 <u><b>User LOC</b></u>
 
@@ -227,278 +227,313 @@ likely would be excluded in a release build
 <!--end____isolette_system-testing-setup-description-->
 ### <!--start__isolette_system-testing-setup_configurations-title-->Test Run Configurations<!--end____isolette_system-testing-setup_configurations-title-->
 <!--start__isolette_system-testing-setup_configurations-description-->
+All configurations use the following static schedule provided by [StaticSchedulerCust.scala](hamr/slang/src/main/component/isolette/StaticSchedulerCust.scala)
+
+- [OpInterface](hamr/slang/src/main/component/isolette/Isolette/operator_interface_thread_impl_operator_interface_oip_oit.scala), [TS](hamr/slang/src/main/component/isolette/Devices/Temperature_Sensor_impl_temperature_sensor_cpi_thermostat.scala), [DRF](hamr/slang/src/main/component/isolette/Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure.scala), [DMF](hamr/slang/src/main/component/isolette/Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure.scala), [RegMRI](hamr/slang/src/main/component/isolette/Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface.scala), [RegMRM](hamr/slang/src/main/component/isolette/Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode.scala), [RegMHS](hamr/slang/src/main/component/isolette/Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source.scala), [MonMMI](hamr/slang/src/main/component/isolette/Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface.scala), [MonMMM](hamr/slang/src/main/component/isolette/Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode.scala), [MonMA](hamr/slang/src/main/component/isolette/Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm.scala), [HS](hamr/slang/src/main/component/isolette/Devices/Heat_Source_impl_heat_source_cpi_heat_controller.scala)
 <!--end____isolette_system-testing-setup_configurations-description-->
 #### <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations-title-->Configurations for Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness<!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations-title-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations-description-->
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations-description-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__normal_____heat_on_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L58">HC__Normal_____Heat_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L66">HC__Normal_____Heat_On</a></th>
 </tr><tr>
 <td>Description:</td><td>Heat Control control laws; NORMAL mode => Heat ON result state</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L439">sysProp_NormalModeHeatOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L464">sysProp_NormalModeHeatOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__normal_____heat_on_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__normal_____heat_off_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L65">HC__Normal_____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L74">HC__Normal_____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>Heat Control control laws; NORMAL mode => Heat OFF result state</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L455">sysProp_NormalModeHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L480">sysProp_NormalModeHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__normal_____heat_off_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__ct____heat_off_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L75">HC__Failing__CT____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L85">HC__Failing__CT____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>Heat Control control laws; Failing scenario (Current Temp) => Heat OFF result state</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L472">sysProp_InvalidCTNormalModeHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L497">sysProp_InvalidCTNormalModeHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__ct____heat_off_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__udt____heat_off_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L83">HC__Failing__UDT____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L94">HC__Failing__UDT____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>Heat Control control laws; Failing scenario (Upper Desired Temperature) => Heat OFF result state</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L482">sysProp_InvalidUDTNormalModeHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L507">sysProp_InvalidUDTNormalModeHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__udt____heat_off_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__ldt____heat_off_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L91">HC__Failing__LDT____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L103">HC__Failing__LDT____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>Heat Control control laws; Failing scenario (Lower Desired Temperature) => Heat OFF result state</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L492">sysProp_InvalidLDTNormalModeHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L517">sysProp_InvalidLDTNormalModeHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__ldt____heat_off_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__internal_failure____heat_off_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L99">HC__Failing__Internal_Failure____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L112">HC__Failing__Internal_Failure____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>Heat Control control laws; Failing scenario (internal failure) => Heat OFF result state</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L503">sysProp_InternalFailureNormalModeHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L528">sysProp_InternalFailureNormalModeHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__internal_failure____heat_off_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__error_condition____heat_off_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L108">HC__Failing__Error_Condition____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L122">HC__Failing__Error_Condition____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>Heat Control control laws; Failing scenario (combined failure condition) => Heat OFF result state</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L513">sysProp_ErrorConditionHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L538">sysProp_ErrorConditionHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_hc__failing__error_condition____heat_off_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_displaytemp__normal_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L120">DisplayTemp__Normal</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L135">DisplayTemp__Normal</a></th>
 </tr><tr>
 <td>Description:</td><td>Display temp control laws; NORMAL mode => correct deplay result state</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L530">sysProp_NormalDisplayTemp</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L555">sysProp_NormalDisplayTemp</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_displaytemp__normal_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__normal_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L133">Mode_Trans___Normal__Normal</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L149">Mode_Trans___Normal__Normal</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Normal</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L578">sysProp_NormalToNormalMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L603">sysProp_NormalToNormalMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__normal_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__ct_invalid_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L142">Mode_Trans___Normal__Failed__CT_Invalid</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L159">Mode_Trans___Normal__Failed__CT_Invalid</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed because Current Temperature Invalid</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L606">sysProp_InvalidCTNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L631">sysProp_InvalidCTNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__ct_invalid_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__udt_invalid_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L149">Mode_Trans___Normal__Failed__UDT_Invalid</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L167">Mode_Trans___Normal__Failed__UDT_Invalid</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed because Upper Desired Temperature Invalid</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L587">sysProp_InvalidUDTNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L612">sysProp_InvalidUDTNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__udt_invalid_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__ldt_invalid_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L156">Mode_Trans___Normal__Failed__LDT_Invalid</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L175">Mode_Trans___Normal__Failed__LDT_Invalid</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed because Lower Desired Temperature Invalid</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L597">sysProp_InvalidLDTNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L622">sysProp_InvalidLDTNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__ldt_invalid_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__internal_failure_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L163">Mode_Trans___Normal__Failed__Internal_Failure</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L183">Mode_Trans___Normal__Failed__Internal_Failure</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed because Internal Failure</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L615">sysProp_InternalFailureNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L640">sysProp_InternalFailureNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__internal_failure_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__error_condition_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L171">Mode_Trans___Normal__Failed__Error_Condition</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L192">Mode_Trans___Normal__Failed__Error_Condition</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed because combined error condition</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L625">sysProp_ErrorConditionNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L650">sysProp_ErrorConditionNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_trans___normal__failed__error_condition_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_impl__init____heat_off_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L197">Mode_Impl__Init____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L220">Mode_Impl__Init____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Implication: Init => Heat Off</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L544">sysProp_InitModeImpliesHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L569">sysProp_InitModeImpliesHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_impl__init____heat_off_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_configurations_regulate_subsystem_test_wslangcheck_dsc_test_harness_mode_impl__failed____heat_off_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L205">Mode_Impl__Failed____Heat_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L229">Mode_Impl__Failed____Heat_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Implication: Failed => Heat Off</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302">Regulator_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327">Regulator_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L556">sysProp_FailedModeImpliesHeatOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L581">sysProp_FailedModeImpliesHeatOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L267)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L292)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L642)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L667)">compute_spec_lower_is_not_higher_than_upper_assume</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface$.html">RegMRI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode$.html">RegMRM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source$.html">RegMHS</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure$.html">DRF</a></td>
 </tr>
 </table>
 
@@ -509,306 +544,342 @@ likely would be excluded in a release build
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations-description-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_on_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L51">MA__Normal_____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L59">MA__Normal_____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>Alarm control laws; NORMAL mode with temp range violation => Alarm ON result state</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L370">sysProp_NormalModeAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L396">sysProp_NormalModeAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_on_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_unchanged_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L58">MA__Normal_____Alarm_Unchanged</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L67">MA__Normal_____Alarm_Unchanged</a></th>
 </tr><tr>
 <td>Description:</td><td>Alarm control laws; NORMAL mode => Alarm status unchanged</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L381">sysProp_NormalModeAlarmUnchanged</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L407">sysProp_NormalModeAlarmUnchanged</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_unchanged_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_unchanged_left_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L65">MA__Normal_____Alarm_Unchanged_left</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L75">MA__Normal_____Alarm_Unchanged_left</a></th>
 </tr><tr>
 <td>Description:</td><td>Alarm control laws; NORMAL mode => Alarm status unchanged (stress left partition)</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L381">sysProp_NormalModeAlarmUnchanged</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L407">sysProp_NormalModeAlarmUnchanged</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L207)">currentTemp-in-left-partition</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L233)">currentTemp-in-left-partition</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_unchanged_left_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_unchanged_right_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L72">MA__Normal_____Alarm_Unchanged_right</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L83">MA__Normal_____Alarm_Unchanged_right</a></th>
 </tr><tr>
 <td>Description:</td><td>Alarm control laws; NORMAL mode => Alarm status unchanged (stress right partition)</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L381">sysProp_NormalModeAlarmUnchanged</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L407">sysProp_NormalModeAlarmUnchanged</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L220)">currentTemp-in-right-partition</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L246)">currentTemp-in-right-partition</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_unchanged_right_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_off_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L79">MA__Normal_____Alarm_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L91">MA__Normal_____Alarm_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>Alarm control laws; NORMAL mode => Alarm OFF result state</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L396">sysProp_NormalModeAlarmOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L422">sysProp_NormalModeAlarmOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__normal_____alarm_off_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__ct____alarm_on_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L88">MA__Failing__CT____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L101">MA__Failing__CT____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>Alarm control laws; Failing scenario (due to invalid currentTemp) => Alarm ON result state</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L412">sysProp_InvalidCTNormalModeAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L438">sysProp_InvalidCTNormalModeAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__ct____alarm_on_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__lat____alarm_on_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L95">MA__Failing__LAT____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L109">MA__Failing__LAT____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>Alarm control laws; Failing scenario (due to invalid lower alarm) => Alarm ON result</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L425">sysProp_InvalidLATNormalModeAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L451">sysProp_InvalidLATNormalModeAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__lat____alarm_on_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__uat____alarm_on_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L102">MA__Failing__UAT____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L117">MA__Failing__UAT____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>Alarm control laws; Failing scenario (due to invalid upper alarm) => Alarm ON result</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L438">sysProp_InvalidUATNormalModeAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L464">sysProp_InvalidUATNormalModeAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__uat____alarm_on_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__internal_failure____alarm_on_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L111">MA__Failing__Internal_Failure____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L127">MA__Failing__Internal_Failure____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>Alarm control laws; Failing scenario (internal failure) => Alarm ON result</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L451">sysProp_InternalFailureNormalModeAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L477">sysProp_InternalFailureNormalModeAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__internal_failure____alarm_on_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__error_condition____alarm_on_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L118">MA__Failing__Error_Condition____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L135">MA__Failing__Error_Condition____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>Alarm control laws; Failing scenario (combined failure condition) => Alarm ON result</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L464">sysProp_ErrorConditionAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L490">sysProp_ErrorConditionAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_ma__failing__error_condition____alarm_on_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__normal_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L129">Mode_Trans___Normal__Normal</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L147">Mode_Trans___Normal__Normal</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Normal</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L481">sysProp_NormalToNormalMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L507">sysProp_NormalToNormalMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__normal_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__ct_invalid_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L137">Mode_Trans___Normal__Failed__CT_Invalid</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L156">Mode_Trans___Normal__Failed__CT_Invalid</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed because Current Temperature Invalid</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L494">sysProp_InvalidCTNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L520">sysProp_InvalidCTNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__ct_invalid_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__lat_invalid_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L144">Mode_Trans___Normal__Failed__LAT_Invalid</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L164">Mode_Trans___Normal__Failed__LAT_Invalid</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed because Lower Alarm Temperature Invalid</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L508">sysProp_InvalidLATNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L534">sysProp_InvalidLATNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__lat_invalid_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__uat_invalid_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L151">Mode_Trans___Normal__Failed__UAT_Invalid</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L172">Mode_Trans___Normal__Failed__UAT_Invalid</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed because Upper Alarm Temperature Invalid</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L522">sysProp_InvalidUATNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L548">sysProp_InvalidUATNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__uat_invalid_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__internal_failure_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L159">Mode_Trans___Normal__Failed__Internal_Failure</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L181">Mode_Trans___Normal__Failed__Internal_Failure</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed because Internal Failure</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L536">sysProp_InternalFailureNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L562">sysProp_InternalFailureNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__internal_failure_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__error_condition_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L166">Mode_Trans___Normal__Failed__Error_Condition</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L189">Mode_Trans___Normal__Failed__Error_Condition</a></th>
 </tr><tr>
 <td>Description:</td><td>Mode Trans:  Normal->Failed because combined error condition</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L550">sysProp_ErrorConditionNormalToFailedMode</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L576">sysProp_ErrorConditionNormalToFailedMode</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_trans___normal__failed__error_condition_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_impl__init____alarm_off_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L174">Mode_Impl__Init____Alarm_Off</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L198">Mode_Impl__Init____Alarm_Off</a></th>
 </tr><tr>
 <td>Description:</td><td>Alarm control laws; INIT mode => Alarm OFF result state</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L565">sysProp_InitModeImpliesAlarmOff</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L591">sysProp_InitModeImpliesAlarmOff</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
 <!--end____isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_impl__init____alarm_off_configuration_content-->
 <!--start__isolette_system-testing-setup_configurations_monitor_subsystem_dsc_test_harness_configurations_monitor_subsystem_dsc_test_harness_mode_impl__failed____alarm_on_configuration_content-->
 <table>
-<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L181">Mode_Impl__Failed____Alarm_On</a></th>
+<tr><th colspan=2 align="left"><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L206">Mode_Impl__Failed____Alarm_On</a></th>
 </tr><tr>
 <td>Description:</td><td>Alarm control laws; FAILED mode => Alarm OFF result state</td>
 </tr><tr>
-<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305">Monitor_1HP_script_schema</a></td>
+<td>Script Schema:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331">Monitor_1HP_script_schema</a></td>
 </tr><tr>
-<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L575">sysProp_FailedModeImpliesAlarmOn</a></td>
+<td>Property:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L601">sysProp_FailedModeImpliesAlarmOn</a></td>
 </tr><tr>
-<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L592)">Valid Ranges Profile</a></td>
+<td>Randomization Profile:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L618)">Valid Ranges Profile</a></td>
 </tr><tr>
-<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)">assumeFigureA_7</a></td>
+<td>Random Vector Filter:</td><td><a href="hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)">assumeFigureA_7</a></td>
+</tr><tr>
+<td>Relevant Coverage:</td><td><a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface$.html">MonMMI</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode$.html">MonMMM</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm$.html">MonMA</a>, <a href="https://people.cs.ksu.edu/~santos_jenkins/pub/hamr-system-testing-case-studies/isolette/Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness/HC__Normal_____Heat_On/jacocoCoverage/isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure$.html">DMF</a></td>
 </tr>
 </table>
 
@@ -861,14 +932,14 @@ __Regulator subsystem__
 
   System Test Suite Class: [Regulate_Subsystem_Test_wSlangCheck.scala](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala)
 
-  Test run configurations are specified via entries in the [testMatrix](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L51). For example,
-  the [HC__Normal_____Heat_On](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L58) configuration uses the following:
+  Test run configurations are specified via entries in the [testMatrix](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L59). For example,
+  the [HC__Normal_____Heat_On](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L66) configuration uses the following:
 
   | | |
   |:--|--|
-  | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L302)|
-  | Property: | [sysProp_NormalModeHeatOn](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L439)|
-  | Randomization Profile: | [validRanges](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L264)|
+  | Script Schema: | [Regulator_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L327)|
+  | Property: | [sysProp_NormalModeHeatOn](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L464)|
+  | Randomization Profile: | [validRanges](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L289)|
   | Random Vector Filter: | [system_Pre_Container](hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Inputs_Container_GumboX.scala#L46)|
 
   How to run:
@@ -886,15 +957,15 @@ __Monitor subsystem__
 
   System Test Suite Class: [Monitor_Subsystem_Test_wSlangCheck.scala](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala)
 
-  Test run configurations are specified via entries in the [testMatrix](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L50). For example,
-  the [MA__Normal_____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L51) configuration uses the following:
+  Test run configurations are specified via entries in the [testMatrix](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L58). For example,
+  the [MA__Normal_____Alarm_On](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L59) configuration uses the following:
 
   | | |
   |:--|--|
-  | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L305)|
-  | Property: | [sysProp_NormalModeAlarmOn](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L370)|
-  | Randomization Profile: | [validRanges](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L589)|
-  | Random Vector Filter: | [assumeFigureA_7](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L301)|
+  | Script Schema: | [Monitor_1HP_script_schema](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L331)|
+  | Property: | [sysProp_NormalModeAlarmOn](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L396)|
+  | Randomization Profile: | [validRanges](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L615)|
+  | Random Vector Filter: | [assumeFigureA_7](hamr/slang/src/test/system/isolette/system_tests/monitor1/Monitor_Subsystem_Test_wSlangCheck.scala#L327)|
 
   How to run:
 

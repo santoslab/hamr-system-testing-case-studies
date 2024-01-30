@@ -52,7 +52,8 @@ class Example_Actuation_Subsystem_Inputs_Container_Test_wSlangCheck
       schema = NameProvider2("Schema-Name", (input_container: Any, property_function: Any) => T),
       profile = getDefaultProfile,
       filter = NameProvider1("Filter-Name", examplePreStateContainerFilter _),
-      property = NameProvider2("Property-Name", (input_container: Any, output_container: Any) => T)
+      property = NameProvider2("Property-Name", (input_container: Any, output_container: Any) => T),
+      components = ISZ()
     )
   )
 

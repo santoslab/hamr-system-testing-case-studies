@@ -57,6 +57,7 @@ class Actuation_Subsystem_Test_wSlangCheck
   val maxTests = 100
   var verbose: B = T
 
+  val components = ISZ[String]()
   val testMatrix: Map[String, TestConfiguration] = Map.empty ++ ISZ(
     // -------------
     //  Operator Override Properties
@@ -66,14 +67,16 @@ class Actuation_Subsystem_Test_wSlangCheck
       schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
-      property = sysProp_TempPressManualTrip _
+      property = sysProp_TempPressManualTrip _,
+      components = components
     ),
     "Saturation_Manual_Trip" ~> TestConfiguration(
       description = "Saturation Manual Trip",
       schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
-      property = sysProp_SaturationManualTrip _
+      property = sysProp_SaturationManualTrip _,
+      components = components
     ),
     // -------------
     //  AU1 Properties
@@ -83,21 +86,24 @@ class Actuation_Subsystem_Test_wSlangCheck
       schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
-      property = sysProp_AU1TempTrip _
+      property = sysProp_AU1TempTrip _,
+      components = components
     ),
     "AU1PressTrip" ~> TestConfiguration(
       description = "AU1PressTrip",
       schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
-      property = sysProp_AU1PressTrip _
+      property = sysProp_AU1PressTrip _,
+      components = components
     ),
     "AU1SatTrip" ~> TestConfiguration(
       description = "AU1SatTrip",
       schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
-      property = sysProp_AU1SatTrip _
+      property = sysProp_AU1SatTrip _,
+      components = components
     ),
     // -------------
     //  AU2 Properties
@@ -107,21 +113,24 @@ class Actuation_Subsystem_Test_wSlangCheck
       schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
-      property = sysProp_AU2TempTrip _
+      property = sysProp_AU2TempTrip _,
+      components = components
     ),
     "AU2PressTrip" ~> TestConfiguration(
       description = "AU2PressTrip",
       schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
-      property = sysProp_AU2PressTrip _
+      property = sysProp_AU2PressTrip _,
+      components = components
     ),
     "AU2SatTrip" ~> TestConfiguration(
       description = "AU2SatTrip",
       schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
-      property = sysProp_AU2SatTrip _
+      property = sysProp_AU2SatTrip _,
+      components = components
     ),
     // -------------
     //  Causality Properties
@@ -131,14 +140,16 @@ class Actuation_Subsystem_Test_wSlangCheck
       schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
-      property = sysProp_TempPressTripCausality _
+      property = sysProp_TempPressTripCausality _,
+      components = components
     ),
     "SatTripCausality" ~> TestConfiguration(
       description = "SatTripCausality",
       schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
-      property = sysProp_SatTripCausality _
+      property = sysProp_SatTripCausality _,
+      components = components
     ),
     // -------------
     //  Functional Oracle Properties
@@ -148,7 +159,8 @@ class Actuation_Subsystem_Test_wSlangCheck
       schema = Actuation_Subsystem_1HP_script_schema _,
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
-      property = sysProp_ALU_Satisfies_Functional_Oracle _
+      property = sysProp_ALU_Satisfies_Functional_Oracle _,
+      components = components
     )
   )
 
@@ -163,7 +175,8 @@ class Actuation_Subsystem_Test_wSlangCheck
 
   def genTestNameJson(testConfigurationName: String, testRow: TestConfiguration): String = {
     @strictpure def p(str: String): ST = Json.Printer.printString(str)
-    return st"""{"testConfigurationName" : ${p(testConfigurationName)}, "description" : ${p(testRow.description)}, "schema": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}, "filter" : ${p(testRow.filter.name)}}"""".render
+    val componentsx = st"${(testRow.components, ",")}".render
+    return st"""{"testConfigurationName" : ${p(testConfigurationName)}, "description" : ${p(testRow.description)}, "schema": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}, "filter" : ${p(testRow.filter.name)}, "components" : ${p(componentsx)}}""".render
   }
 
   def run(testFamilyName: String, testRow: TestConfiguration): Unit = {
@@ -554,12 +567,31 @@ object Actuation_Subsystem_Test_wSlangCheck {
   val lines: ISZ[String] =
     ops.StringOps(ops.StringOps(Os.path(implicitly[sourcecode.File].value).read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
 
+  @strictpure def p(str: String): ST = Json.Printer.printString(str)
+
   val dummy: B = {
+    // emit test configs as JSON
     val inst = new Actuation_Subsystem_Test_wSlangCheck()
     val entries = for (entry <- inst.testMatrix.entries) yield inst.genTestNameJson(entry._1, entry._2)
     val thisFile = Os.path(implicitly[sourcecode.File].value)
     val outFile = thisFile.up / s"${thisFile.name}.json"
     outFile.writeOver(st"${(entries, "\n")}".render)
+
+    // emit schedule as JSON
+    val nickNames: ISZ[ST] = for(e <- CustStaticSchedule.threadNickNames.entries) yield
+      st"${e._1}:${Arch.ad.components(e._2).name}"
+    val nickNamesS = st"${(nickNames, ",")}".render
+    val sched: ISZ[ST] = for(e <- CustStaticSchedule.domainToBridgeIdMap) yield
+      st"""${CustStaticSchedule.revThreadNickNames.get(e).get}"""
+    val schedS = st"${(sched, ",")}".render
+    val schedFile = thisFile.up / s"${thisFile.name}_schedule.json"
+    schedFile.writeOver(
+      st"""{
+          |  "nickNames": ${p(nickNamesS)},
+          |  "scheduleProvider": ${p(CustStaticSchedule.getClass.getName)},
+          |  "schedule": ${p(schedS)}
+          |}""".render)
+
     F
   }
 }

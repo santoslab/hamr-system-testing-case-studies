@@ -17,7 +17,8 @@ object Actuation_Subsystem_Inputs_Container_SlangCheck {
                                description: String,
                                profile: Actuation_Subsystem_Inputs_Container_Profile,
                                filter: NameProvider1,
-                               property: NameProvider2)
+                               property: NameProvider2,
+                               components: ISZ[String])
 }
 
 trait Actuation_Subsystem_Inputs_Container_SlangCheck

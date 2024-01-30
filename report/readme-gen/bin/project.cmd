@@ -30,6 +30,7 @@ val slangModule: Module = Module(
   ivyDeps = ISZ(
     "org.sireum.kekinian::cli:",
     "org.sireum.kekinian::library:",
+    "org.sireum.kekinian::hamr-arsit:",
     "org.sireum.kekinian::hamr-codegen:",
     "org.sireum.kekinian::hamr-common-shared:"
   ),

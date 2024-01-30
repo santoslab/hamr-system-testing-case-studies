@@ -17,7 +17,9 @@ object Monitor_Subsystem_Inputs_Container_SlangCheck {
                                description: String,
                                profile: Monitor_Subsystem_Inputs_Container_Profile,
                                filter: NameProvider1,
-                               property: NameProvider2)
+                               property: NameProvider2,
+                               components: ISZ[String]
+                              )
 }
 
 trait Monitor_Subsystem_Inputs_Container_SlangCheck

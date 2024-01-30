@@ -65,13 +65,12 @@ object Util {
     return ops.StringOps(ops.StringOps(s).replaceAllLiterally(s"$sep", s" $sep")).split(c => c == sep)
   }
 
-  def parseJson(str: String): HashSMap[String, String] = {
+  def parseJson(str: String, keys: ISZ[String]): HashSMap[String, String] = {
     val p = org.sireum.Json.Parser.create(str)
     p.parseObjectBegin()
     var entries = HashSMap.empty[String, String]()
     do {
-      val key = p.parseObjectKeys(ISZ[String](
-        "testConfigurationName", "description", "schema", "property", "profile", "filter"))
+      val key = p.parseObjectKeys(keys)
       val value = p.parseString()
       entries = entries + key ~> value
     } while(p.parseObjectNext())
