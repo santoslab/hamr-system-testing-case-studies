@@ -6,6 +6,7 @@ import RTS.system_tests.rts1.Actuation_Subsystem_Inputs_Container_SlangCheck.{Na
 import art.Art
 import art.scheduling.static._
 import RTS.system_tests.rts1.Functional_Oracles._
+import Actuation_Subsystem_Test_wSlangCheck._
 
 import scala.language.implicitConversions
 
@@ -50,12 +51,39 @@ class Actuation_Subsystem_Test_wSlangCheck
     super.beforeEach()
   }
 
+  override def beforeAll(): Unit = {
+    propStatus = Map.empty
+    super.beforeAll()
+  }
+
+
+  val failOnTriviallyTrueProps: B = T
+
+  override def afterAll(): Unit = {
+    var msgs: ISZ[String] = ISZ()
+    for (p <- propStatus.entries if p._2.triggerT_desiredT == 0) {
+      // propStatus has three fields
+      //   # of F -> X
+      //   # of T -> F  --> the test case would have failed for T -> F so this should be 0
+      //   # of T -> T  --> may need to increase # of tests if this is always 0
+      msgs = msgs :+ s"Property ${p._1} was trivially true ${p._2.triggerF} times, desired failed ${p._2.triggerT_desiredF} times, and desired was never satisfied"
+    }
+    if (msgs.nonEmpty) {
+      if (failOnTriviallyTrueProps) {
+        assert(F, st"${(msgs, "\n")}".render)
+      } else {
+        cprint(T, st"${(msgs, "\n")}".render)
+      }
+    }
+    super.afterAll()
+  }
+
   //===========================================================
   //  S l a n g   C h e c k    Infrastructure
   //===========================================================
 
   val maxTests = 100
-  var verbose: B = T
+  var verbose: B = F
 
   val components = ISZ[String]()
   val testMatrix: Map[String, TestConfiguration] = Map.empty ++ ISZ(
@@ -68,7 +96,8 @@ class Actuation_Subsystem_Test_wSlangCheck
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = sysProp_TempPressManualTrip _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     "Saturation_Manual_Trip" ~> TestConfiguration(
       description = "Saturation Manual Trip",
@@ -76,7 +105,8 @@ class Actuation_Subsystem_Test_wSlangCheck
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = sysProp_SaturationManualTrip _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     // -------------
     //  AU1 Properties
@@ -87,7 +117,8 @@ class Actuation_Subsystem_Test_wSlangCheck
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = sysProp_AU1TempTrip _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     "AU1PressTrip" ~> TestConfiguration(
       description = "AU1PressTrip",
@@ -95,7 +126,8 @@ class Actuation_Subsystem_Test_wSlangCheck
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = sysProp_AU1PressTrip _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     "AU1SatTrip" ~> TestConfiguration(
       description = "AU1SatTrip",
@@ -103,7 +135,8 @@ class Actuation_Subsystem_Test_wSlangCheck
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = sysProp_AU1SatTrip _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     // -------------
     //  AU2 Properties
@@ -114,7 +147,8 @@ class Actuation_Subsystem_Test_wSlangCheck
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = sysProp_AU2TempTrip _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     "AU2PressTrip" ~> TestConfiguration(
       description = "AU2PressTrip",
@@ -122,7 +156,8 @@ class Actuation_Subsystem_Test_wSlangCheck
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = sysProp_AU2PressTrip _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     "AU2SatTrip" ~> TestConfiguration(
       description = "AU2SatTrip",
@@ -130,7 +165,8 @@ class Actuation_Subsystem_Test_wSlangCheck
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = sysProp_AU2SatTrip _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     // -------------
     //  Causality Properties
@@ -141,7 +177,8 @@ class Actuation_Subsystem_Test_wSlangCheck
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = sysProp_TempPressTripCausality _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     "SatTripCausality" ~> TestConfiguration(
       description = "SatTripCausality",
@@ -149,7 +186,8 @@ class Actuation_Subsystem_Test_wSlangCheck
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = sysProp_SatTripCausality _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     // -------------
     //  Functional Oracle Properties
@@ -160,7 +198,8 @@ class Actuation_Subsystem_Test_wSlangCheck
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = sysProp_ALU_Satisfies_Functional_Oracle _,
-      components = components
+      components = components,
+      numTests = maxTests
     )
   )
 
@@ -197,12 +236,6 @@ class Actuation_Subsystem_Test_wSlangCheck
               if (!testRow.filter.function(container)) {
                 // retry
               } else {
-                // debugging
-                //  Wierd:  if I uncomment this, I get failing tests
-//                val result = testRow.testMethod.function(container, testRow.property.function)
-//                if (!result) {
-//                  println(s"ERROR: Inputs Container: ${container}")
-//                }
                 assert(testRow.schema.function(container, testRow.property.function))
                 retry = F
               }
@@ -410,9 +443,10 @@ class Actuation_Subsystem_Test_wSlangCheck
     val triggerCondition = inputs_container.tempPressManualActuatorInput
     // Then we should have a temp/pressure actuation
     val desiredCondition = outputs_container.TPAU_tempPressA_actuator_output
-    // val result = (triggerCondition ->: desiredCondition)
-    val result = !triggerCondition | desiredCondition
-    return result
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return triggerCondition.->:(desiredCondition)
   }
 
   // test effect of operator-initiated manual TempPressure
@@ -425,10 +459,10 @@ class Actuation_Subsystem_Test_wSlangCheck
     val triggerCondition = inputs_container.satManualActuatorInput
     // Then we should have a temp/pressure actuation
     val desiredCondition = outputs_container.SAU_satActuator_actuator
-    val result1 = (triggerCondition ->: desiredCondition)
-    val result2 = (triggerCondition.->:(desiredCondition))
-    val result3 = !triggerCondition | desiredCondition
-    return result3
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return triggerCondition.->:(desiredCondition)
   }
 
   //=================================================
@@ -441,8 +475,10 @@ class Actuation_Subsystem_Test_wSlangCheck
     val triggerCondition = helper_TempTripConditionAU1(inputs_container)
     // Then we should have a temp/pressure actuation
     val desiredCondition = outputs_container.TPAU_tempPressA_actuator_output
-    val result = !triggerCondition | desiredCondition
-    return result
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_AU1PressTrip(
@@ -452,8 +488,10 @@ class Actuation_Subsystem_Test_wSlangCheck
     val triggerCondition = helper_PressTripConditionAU1(inputs_container)
     // Then we should have a temp/pressure actuation
     val desiredCondition = outputs_container.TPAU_tempPressA_actuator_output
-    val result = !triggerCondition | desiredCondition
-    return result
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_AU1SatTrip(
@@ -463,8 +501,10 @@ class Actuation_Subsystem_Test_wSlangCheck
     val triggerCondition = helper_SatTripConditionAU1(inputs_container)
     // Then we should have a temp/pressure actuation
     val desiredCondition = outputs_container.SAU_satActuator_actuator
-    val result = !triggerCondition | desiredCondition
-    return result
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return triggerCondition.->:(desiredCondition)
   }
 
   //=================================================
@@ -477,8 +517,10 @@ class Actuation_Subsystem_Test_wSlangCheck
     val triggerCondition = helper_TempTripConditionAU2(inputs_container)
     // Then we should have a temp/pressure actuation
     val desiredCondition = outputs_container.TPAU_tempPressA_actuator_output
-    val result = !triggerCondition | desiredCondition
-    return result
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_AU2PressTrip(
@@ -488,8 +530,10 @@ class Actuation_Subsystem_Test_wSlangCheck
     val triggerCondition = helper_PressTripConditionAU2(inputs_container)
     // Then we should have a temp/pressure actuation
     val desiredCondition = outputs_container.TPAU_tempPressA_actuator_output
-    val result = !triggerCondition | desiredCondition
-    return result
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_AU2SatTrip(
@@ -499,8 +543,10 @@ class Actuation_Subsystem_Test_wSlangCheck
     val triggerCondition = helper_SatTripConditionAU2(inputs_container)
     // Then we should have a temp/pressure actuation
     val desiredCondition = outputs_container.SAU_satActuator_actuator
-    val result = !triggerCondition | desiredCondition
-    return result
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return triggerCondition.->:(desiredCondition)
   }
 
   //=================================================
@@ -516,8 +562,10 @@ class Actuation_Subsystem_Test_wSlangCheck
     val au1SatTrip = helper_SatTripConditionAU1(inputs_container)
     val au2SatTrip = helper_SatTripConditionAU2(inputs_container)
     val desiredCondition = au1SatTrip | au2SatTrip | inputs_container.satManualActuatorInput
-    val result = !triggerCondition | desiredCondition
-    return result
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_TempPressTripCausality(
@@ -532,8 +580,10 @@ class Actuation_Subsystem_Test_wSlangCheck
     val au2TempTrip = helper_TempTripConditionAU2(inputs_container)
     val au2PressTrip = helper_PressTripConditionAU2(inputs_container)
     val desiredCondition = au1TempTrip | au1PressTrip | au2TempTrip | au2PressTrip | inputs_container.tempPressManualActuatorInput
-    val result = !triggerCondition | desiredCondition
-    return result
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return triggerCondition.->:(desiredCondition)
   }
 
 
@@ -551,46 +601,85 @@ class Actuation_Subsystem_Test_wSlangCheck
     return result
   }
 
-  implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line) : NameProvider1 = {
+  def bookKeep(triggerCond: B, desiredCond: B): Unit = {
+    val propName = Thread.currentThread().getStackTrace()(2).getMethodName
+    val prop = propStatus.getOrElse(propName, PropStatus(0,0,0))
+    propStatus = propStatus + propName ~> prop.copy(
+      triggerF = prop.triggerF + (if (!triggerCond) 1 else 0),
+      triggerT_desiredF = prop.triggerT_desiredF + (if (triggerCond && !desiredCond) 1 else 0),
+      triggerT_desiredT = prop.triggerT_desiredT + (if (triggerCond && desiredCond) 1 else 0)
+    )
+  }
+
+  implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line): NameProvider1 = {
     val l = ops.StringOps(Actuation_Subsystem_Test_wSlangCheck.lines(line.value - 1))
     return NameProvider1(l.substring(l.lastIndexOf('=') + 2, l.lastIndexOf('_') - 1), eta)
   }
-  implicit def toNameProvider2[X, Y](eta: (X, Y) => B)(implicit line: sourcecode.Line) : NameProvider2 = {
+
+  implicit def toNameProvider2[X, Y](eta: (X, Y) => B)(implicit line: sourcecode.Line): NameProvider2 = {
     val l = ops.StringOps(Actuation_Subsystem_Test_wSlangCheck.lines(line.value - 1))
     return NameProvider2(l.substring(l.lastIndexOf('=') + 2, l.lastIndexOf('_') - 1), eta)
   }
+
   implicit def oneToGen[X](eta: (X) => B): Any => B = eta.asInstanceOf[Any => B]
+
   implicit def twoToGen[X, Y](eta: (X, Y) => B): (Any, Any) => B = eta.asInstanceOf[(Any, Any) => B]
 }
 
 object Actuation_Subsystem_Test_wSlangCheck {
-  val lines: ISZ[String] =
-    ops.StringOps(ops.StringOps(Os.path(implicitly[sourcecode.File].value).read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
+
+  case class PropStatus (val triggerF: Z,
+                         val triggerT_desiredF: Z,
+                         val triggerT_desiredT: Z)
+
+  var propStatus: Map[String, PropStatus] = Map.empty
+
+  val lines: ISZ[String] = {
+    val ll: Os.Path = Os.env("ABS_JAR_LOC") match {
+      case Some(l) =>
+        // must be running from the jar file so need to unpack it to get the source files
+        val tempDir = Os.tempDir()
+        proc"unzip $l -d $tempDir".runCheck()
+        val name = ops.ISZOps(ops.StringOps(ops.StringOps(getClass.getName).replaceAllLiterally("$", "")).split(c => c == C('.')))
+        (tempDir /+ name.dropRight(1)) / s"${name.last}.scala"
+      case _ => Os.path(implicitly[sourcecode.File].value)
+    }
+    ops.StringOps(ops.StringOps(ll.read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
+  }
 
   @strictpure def p(str: String): ST = Json.Printer.printString(str)
 
-  val dummy: B = {
-    // emit test configs as JSON
-    val inst = new Actuation_Subsystem_Test_wSlangCheck()
-    val entries = for (entry <- inst.testMatrix.entries) yield inst.genTestNameJson(entry._1, entry._2)
-    val thisFile = Os.path(implicitly[sourcecode.File].value)
-    val outFile = thisFile.up / s"${thisFile.name}.json"
-    outFile.writeOver(st"${(entries, "\n")}".render)
+  val dummy = genJsons(F)   // doing this a var decl so that the actions are invoked when the JVM loads the object
 
-    // emit schedule as JSON
-    val nickNames: ISZ[ST] = for(e <- CustStaticSchedule.threadNickNames.entries) yield
-      st"${e._1}:${Arch.ad.components(e._2).name}"
-    val nickNamesS = st"${(nickNames, ",")}".render
-    val sched: ISZ[ST] = for(e <- CustStaticSchedule.domainToBridgeIdMap) yield
-      st"""${CustStaticSchedule.revThreadNickNames.get(e).get}"""
-    val schedS = st"${(sched, ",")}".render
-    val schedFile = thisFile.up / s"${thisFile.name}_schedule.json"
-    schedFile.writeOver(
-      st"""{
-          |  "nickNames": ${p(nickNamesS)},
-          |  "scheduleProvider": ${p(CustStaticSchedule.getClass.getName)},
-          |  "schedule": ${p(schedS)}
-          |}""".render)
+  def genJsons(echo: B): B = {
+    if (Os.env("JENKINS_HOME").isEmpty) { // don't generate these when CI
+      // emit test configs as JSON
+      val inst = new Actuation_Subsystem_Test_wSlangCheck()
+      val entries = for (entry <- inst.testMatrix.entries) yield inst.genTestNameJson(entry._1, entry._2)
+      val thisFile = Os.path(implicitly[sourcecode.File].value)
+      val outFile = thisFile.up / s"${thisFile.name}.json"
+      outFile.writeOver(st"${(entries, "\n")}".render)
+
+      // emit schedule as JSON
+      val nickNames: ISZ[ST] = for (e <- CustStaticSchedule.threadNickNames.entries) yield
+        st"${e._1}:${Arch.ad.components(e._2).name}"
+      val nickNamesS = st"${(nickNames, ",")}".render
+      val sched: ISZ[ST] = for (e <- CustStaticSchedule.domainToBridgeIdMap) yield
+        st"""${CustStaticSchedule.revThreadNickNames.get(e).get}"""
+      val schedS = st"${(sched, ",")}".render
+      val schedFile = thisFile.up / s"${thisFile.name}_schedule.json"
+      schedFile.writeOver(
+        st"""{
+            |  "nickNames": ${p(nickNamesS)},
+            |  "scheduleProvider": ${p(CustStaticSchedule.getClass.getName)},
+            |  "schedule": ${p(schedS)}
+            |}""".render)
+
+      if (echo) {
+        println(outFile)
+        println(schedFile)
+      }
+    }
 
     F
   }

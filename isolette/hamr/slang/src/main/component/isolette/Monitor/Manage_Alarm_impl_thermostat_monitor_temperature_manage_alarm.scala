@@ -130,17 +130,6 @@ object Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm {
         // REQ_MA_1
         currentCmd = Isolette_Data_Model.On_Off.Off
 
-        // COVERAGE NOTE: this case and its body will be marked as partial and not covered
-        //   respectively.  monitor_mode's value is set by the MMM thread which does send
-        //   Init_Monitor_Mode during its initialization phase.  Components cannot read from
-        //   their input ports during initialization so MA wouldn't be able to consume that
-        //   value until it enters its compute phase.  However, MMM is scheduled to be dispatched
-        //   before MA and it will send Normal_Monitor_Mode during its first compute dispatch so
-        //   that is the first value that MA will retrieve on its monitor_mode port.  REQ_MA_1
-        //   is correctly handled in MA's initialization phase, but this case is explicitly
-        //   handled here as a different schedules may allow MA to retrieve Init_Monitor_Mode
-        //   during its compute phase
-
       case Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode =>
         if (currentTemp.value < lowerAlarm.value | currentTemp.value > upperAlarm.value) {
           // REQ_MA_2

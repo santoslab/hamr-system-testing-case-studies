@@ -14,7 +14,7 @@ val testServer="e2206hm02.cs.ksu.edu" // ip address where will tests be run
 
 val DSC_PREFIX="dsc_sys" // name of the root artifacts directory on testServer
 
-val FQ_DSC_NAME = "isolette.system_tests.rst.Regulate_Subsystem_Test_wSlangCheck_DSC_Test_Harness" // fully qualified DSC test harness name
+val FQ_DSC_NAME = "RTS.system_tests.rts1.Actuation_Subsystem_DSC_Test_Harness" // fully qualified DSC test harness name
 
 //////////////////////////////////////////////////////////////////////////////////////
 // BOILER PLATE

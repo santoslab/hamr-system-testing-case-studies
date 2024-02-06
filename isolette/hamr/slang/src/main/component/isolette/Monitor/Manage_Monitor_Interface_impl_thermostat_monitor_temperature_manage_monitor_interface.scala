@@ -115,6 +115,13 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
       case Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode =>
         //  REQ-MMI-3
         monitor_status = Isolette_Data_Model.Status.Failed_Status
+
+        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to
+        //   an else branch being emitted in the byte code to handle the default case.  Tipe/Logika
+        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly
+        //   handled (i.e. "case _ => ") since there is a case clause for every Monitor_Mode value,
+        //   so we chose to exclude the unneeded default case in favor of a warning/error free report
+        //   from Tipe/Logika
     }
     api.put_monitor_status(monitor_status)
 
@@ -133,8 +140,8 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
 
     // Set the Monitor Interface Failure value based on the status values of the
     //   upper and lower temperature
-    if (!(upper_alarm_status == Isolette_Data_Model.ValueStatus.Valid) ||
-      !(lower_alarm_status == Isolette_Data_Model.ValueStatus.Valid)) {
+    if (upper_alarm_status == Isolette_Data_Model.ValueStatus.Invalid |
+      lower_alarm_status == Isolette_Data_Model.ValueStatus.Invalid) {
       //  REQ-MMI-4
       interface_failure = true
     } else {

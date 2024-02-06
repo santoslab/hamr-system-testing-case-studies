@@ -6,39 +6,11 @@ import org.sireum._
 
 object Monitor_Subsystem_DSC_Test_Harness extends App {
 
-  // main generates the Jenkins build parameters string and the JSON serialized testRow information
   override def main(args: ISZ[String]): Z = {
-    val projectName = "isolette"
+    // Regenerate the json files and emit their locations to the console. The
+    // exampleJenkinsScript.cmd will use these to get the test configurations keys
+    Monitor_Subsystem_Test_wSlangCheck.genJsons(T)
 
-    var args: ISZ[(String, String)] = ISZ()
-
-    args = args :+ ("DSC_TIMEOUT", s"$$DSC_TIMEOUT")
-
-    args = args :+ ("DSC_PROJECT_NAME", projectName)
-
-    val instance = new Monitor_Subsystem_DSC_Test_Harness()
-
-    val runnerClassName = ops.StringOps(instance.getClass.getName).replaceAllLiterally("$", "")
-    val runnerSimpleName = ops.StringOps(instance.getClass.getSimpleName).replaceAllLiterally("$", "")
-
-    args = args :+ ("DSC_RUNNER_SIMPLE_NAME", runnerSimpleName)
-    args = args :+ ("DSC_RUNNER_CLASS_NAME", runnerClassName)
-
-    val families: ISZ[(String, TestConfiguration)] = instance.testMatrix.entries
-
-    for (e <- families) {
-      val familyName = e._1
-
-      assert(!ops.StringOps(familyName).contains(" "), s"keys cannot contain spaces: $familyName")
-
-      val fargs = args :+ ("DSC_TEST_FAMILY_NAME", familyName)
-
-      val data = for (f <- fargs) yield s"--data ${f._1}=${f._2}"
-      val command = st"${(data, " ")}"
-
-      println(command.render)
-      println(instance.genTestNameJson(e._1, e._2))
-    }
     return 0
   }
 }

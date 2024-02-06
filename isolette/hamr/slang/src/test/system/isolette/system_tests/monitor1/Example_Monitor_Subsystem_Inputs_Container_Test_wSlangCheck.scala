@@ -53,7 +53,8 @@ class Example_Monitor_Subsystem_Inputs_Container_Test_wSlangCheck
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = NameProvider2("Property-Name", (input_container: Any, output_container: Any) => T),
-      components = ISZ()
+      componentsOfInterest = ISZ(),
+      numTests = maxTests
     )
   )
 
@@ -67,13 +68,13 @@ class Example_Monitor_Subsystem_Inputs_Container_Test_wSlangCheck
 
   def genTestNameJson(testConfigurationName: String, testRow: TestConfiguration): String = {
     @strictpure def p(str: String): ST = Json.Printer.printString(str)
-    val componentsx = st"${(testRow.components, ",")}".render
+    val componentsx = st"${(testRow.componentsOfInterest, ",")}".render
     return st"""{"testConfigurationName" : ${p(testConfigurationName)}, "description" : ${p(testRow.description)}, "schema": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}, "filter" : ${p(testRow.filter.name)}, "components" : ${p(componentsx)}}""".render
   }
 
   def run(testFamilyName: String, testRow: TestConfiguration): Unit = {
 
-    for (i <- 0 until maxTests) {
+    for (i <- 0 until testRow.numTests) {
       val testName = s"${genTestName(testFamilyName, testRow)}_$i"
       this.registerTest(testName) {
         var retry: B = T

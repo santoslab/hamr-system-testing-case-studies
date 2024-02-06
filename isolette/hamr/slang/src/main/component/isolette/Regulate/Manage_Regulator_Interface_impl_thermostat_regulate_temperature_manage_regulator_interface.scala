@@ -143,6 +143,13 @@ object Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_re
       case Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode =>
         // REQ-MRI-3
         regulator_status = Isolette_Data_Model.Status.Failed_Status
+
+        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to
+        //   an else branch being emitted in the byte code to handle the default case.  Tipe/Logika
+        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly
+        //   handled (i.e. "case _ => ") since there is a case clause for every Regulator_Mode value,
+        //   so we chose to exclude the unneeded default case in favor of a warning/error free report
+        //   from Tipe/Logika
     }
 
     api.put_regulator_status(regulator_status)
@@ -175,6 +182,13 @@ object Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_re
 
       case Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode => // Do nothing
       case Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode => // Do nothing
+
+        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to
+        //   an else branch being emitted in the byte code to handle the default case.  Tipe/Logika
+        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly
+        //   handled (i.e. "case _ => ") since there is a case clause for every Regulator_Mode value,
+        //   so we chose to exclude the unneeded default case in favor of a warning/error free report
+        //   from Tipe/Logika
     }
 
     api.put_displayed_temp(display_temperature)

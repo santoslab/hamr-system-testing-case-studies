@@ -7,7 +7,7 @@ import isolette.Monitor.{Manage_Alarm_impl_thermostat_monitor_temperature_manage
 import isolette._
 import isolette.system_tests.monitor1.Monitor_Subsystem_Inputs_Container_SlangCheck.{NameProvider1, NameProvider2, TestConfiguration}
 import org.sireum._
-
+import Monitor_Subsystem_Test_wSlangCheck._
 import scala.language.implicitConversions
 
 class Monitor_Subsystem_Test_wSlangCheck
@@ -40,12 +40,38 @@ class Monitor_Subsystem_Test_wSlangCheck
     super.beforeEach()
   }
 
+  override def beforeAll(): Unit = {
+    propStatus = Map.empty
+    super.beforeAll()
+  }
+
+  val failOnTriviallyTrueProps: B = T
+
+  override def afterAll(): Unit = {
+    var msgs: ISZ[String] = ISZ()
+    for (p <- propStatus.entries if p._2.triggerT_desiredT == 0) {
+      // propStatus has three fields
+      //   # of F -> X
+      //   # of T -> F  --> the test case would have failed for T -> F so this should be 0
+      //   # of T -> T  --> may need to increase # of tests if this is always 0
+      msgs = msgs :+ s"Property ${p._1} was trivially true ${p._2.triggerF} times, desired failed ${p._2.triggerT_desiredF} times, and desired was never satisfied"
+    }
+    if (msgs.nonEmpty) {
+      if (failOnTriviallyTrueProps) {
+        assert(F, st"${(msgs, "\n")}".render)
+      } else {
+        cprint(T, st"${(msgs, "\n")}".render)
+      }
+    }
+    super.afterAll()
+  }
+
   //===========================================================
   //  S l a n g   C h e c k    Infrastructure
   //===========================================================
 
   val maxTests = 100
-  var verbose: B = T
+  var verbose: B = F
 
   // Monitor threads being tested
   val components: ISZ[String] = ISZ(
@@ -62,7 +88,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_NormalModeAlarmOn _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
     "MA__Normal_____Alarm_Unchanged" ~> TestConfiguration(
       description = "Alarm control laws; NORMAL mode => Alarm status unchanged",
@@ -70,7 +97,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_NormalModeAlarmUnchanged _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
     "MA__Normal_____Alarm_Unchanged_left" ~> TestConfiguration(
       description = "Alarm control laws; NORMAL mode => Alarm status unchanged (stress left partition)",
@@ -78,7 +106,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges.copy(name = "currentTemp-in-left-partition"),
       filter = assumeFigureA_7 _,
       property = sysProp_NormalModeAlarmUnchanged _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
     "MA__Normal_____Alarm_Unchanged_right" ~> TestConfiguration(
       description = "Alarm control laws; NORMAL mode => Alarm status unchanged (stress right partition)",
@@ -86,7 +115,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges.copy(name = "currentTemp-in-right-partition"),
       filter = assumeFigureA_7 _,
       property = sysProp_NormalModeAlarmUnchanged _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
     "MA__Normal_____Alarm_Off" ~> TestConfiguration(
       description = "Alarm control laws; NORMAL mode => Alarm OFF result state",
@@ -94,7 +124,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_NormalModeAlarmOff _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
 
 
@@ -104,7 +135,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InvalidCTNormalModeAlarmOn _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
     "MA__Failing__LAT____Alarm_On" ~> TestConfiguration(
       description = "Alarm control laws; Failing scenario (due to invalid lower alarm) => Alarm ON result",
@@ -112,7 +144,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InvalidLATNormalModeAlarmOn _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
     "MA__Failing__UAT____Alarm_On" ~> TestConfiguration(
       description = "Alarm control laws; Failing scenario (due to invalid upper alarm) => Alarm ON result",
@@ -120,7 +153,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InvalidUATNormalModeAlarmOn _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
 
 
@@ -130,7 +164,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InternalFailureNormalModeAlarmOn _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
     "MA__Failing__Error_Condition____Alarm_On" ~> TestConfiguration(
       description = "Alarm control laws; Failing scenario (combined failure condition) => Alarm ON result",
@@ -138,7 +173,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_ErrorConditionAlarmOn _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
 
 
@@ -150,7 +186,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_NormalToNormalMode _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
 
     "Mode_Trans___Normal__Failed__CT_Invalid" ~> TestConfiguration(
@@ -159,7 +196,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InvalidCTNormalToFailedMode _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
     "Mode_Trans___Normal__Failed__LAT_Invalid" ~> TestConfiguration(
       description = "Mode Trans:  Normal->Failed because Lower Alarm Temperature Invalid",
@@ -167,7 +205,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InvalidLATNormalToFailedMode _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
     "Mode_Trans___Normal__Failed__UAT_Invalid" ~> TestConfiguration(
       description = "Mode Trans:  Normal->Failed because Upper Alarm Temperature Invalid",
@@ -175,7 +214,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InvalidUATNormalToFailedMode _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
 
     "Mode_Trans___Normal__Failed__Internal_Failure" ~> TestConfiguration(
@@ -184,7 +224,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InternalFailureNormalToFailedMode _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
     "Mode_Trans___Normal__Failed__Error_Condition" ~> TestConfiguration(
       description = "Mode Trans:  Normal->Failed because combined error condition",
@@ -192,7 +233,26 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_ErrorConditionNormalToFailedMode _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
+    ),
+    "Mode_Trans___Failed__Failed__Error_Condition" ~> TestConfiguration(
+      description = "Mode Trans:  Failed->Failed because failed can only be handled via a system reboot",
+      schema = Monitor_2HP_script_schema _,
+      profile = validRanges,
+      filter = assumeFigureA_7 _,
+      property = sysProp_ErrorConditionFailedToFailedMode _,
+      componentsOfInterest = components,
+      numTests = maxTests
+    ),
+    "Mode_Trans___Init__Init__Error_Condition" ~> TestConfiguration(
+      description = "Mode Trans:  Init->Init because MMM stays in init if monitor_status is false",
+      schema = Monitor_AfterInit_script_schema _,
+      profile = validRanges,
+      filter = assumeFigureA_7 _,
+      property = sysProp_ErrorConditionInitToInitMode _,
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
 
     "Mode_Impl__Init____Alarm_Off" ~> TestConfiguration(
@@ -201,7 +261,8 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_InitModeImpliesAlarmOff _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     ),
     "Mode_Impl__Failed____Alarm_On" ~> TestConfiguration(
       description = "Alarm control laws; FAILED mode => Alarm OFF result state",
@@ -209,10 +270,12 @@ class Monitor_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = assumeFigureA_7 _,
       property = sysProp_FailedModeImpliesAlarmOn _,
-      components = components
+      componentsOfInterest = components,
+      numTests = maxTests
     )
   )
 
+  //for (testRow <- testMatrix.entries if testRow._1 == string"MA__Failing__CT____Alarm_On") {
   for (testRow <- testMatrix.entries) {
     run(testRow._1, testRow._2)
   }
@@ -223,7 +286,7 @@ class Monitor_Subsystem_Test_wSlangCheck
 
   def genTestNameJson(testConfigurationName: String, testRow: TestConfiguration): String = {
     @strictpure def p(str: String): ST = Json.Printer.printString(str)
-    val componentsx = st"${(testRow.components, ",")}".render
+    val componentsx = st"${(testRow.componentsOfInterest, ",")}".render
     return st"""{"testConfigurationName" : ${p(testConfigurationName)}, "description" : ${p(testRow.description)}, "schema": ${p(testRow.schema.name)}, "property" : ${p(testRow.property.name)}, "profile" : ${p(testRow.profile.name)}, "filter" : ${p(testRow.filter.name)}, "components" : ${p(componentsx)}}""".render
   }
 
@@ -330,6 +393,25 @@ class Monitor_Subsystem_Test_wSlangCheck
 
   def Monitor_1HP_script_schema(inject_container: Monitor_Subsystem_Inputs_Container,
                                 prop: (Monitor_Subsystem_Inputs_Container, ISZ[Monitor_Subsystem_Outputs_Container]) => B): B = {
+    return Monitor_XHP_script_schema(F, 1, inject_container, prop)
+  }
+
+  def Monitor_2HP_script_schema(inject_container: Monitor_Subsystem_Inputs_Container,
+                                prop: (Monitor_Subsystem_Inputs_Container, ISZ[Monitor_Subsystem_Outputs_Container]) => B): B = {
+    return Monitor_XHP_script_schema(F, 2, inject_container, prop)
+  }
+
+  def Monitor_AfterInit_script_schema(inject_container: Monitor_Subsystem_Inputs_Container,
+                                      prop: (Monitor_Subsystem_Inputs_Container, ISZ[Monitor_Subsystem_Outputs_Container]) => B): B = {
+    return Monitor_XHP_script_schema(T, 1, inject_container, prop)
+  }
+
+  def Monitor_XHP_script_schema(injectAfterInitialization: B,
+                                numHPAfterInjection:Z,
+                                inject_container: Monitor_Subsystem_Inputs_Container,
+                                prop: (Monitor_Subsystem_Inputs_Container, ISZ[Monitor_Subsystem_Outputs_Container]) => B): B = {
+
+    assert (numHPAfterInjection > 0)
 
     Art.initializePhase(scheduler)
 
@@ -337,16 +419,14 @@ class Monitor_Subsystem_Test_wSlangCheck
 
     //  ----  r u n   t o   a r b i t r a r y    s y s t e m    s t a t e
 
-    // Abstractly, run the system an arbitrary number of steps
-
-    compute(ISZ(Hstep(2)))
+    if (!injectAfterInitialization) {
+      // Abstractly, run the system an arbitrary number of steps
+      compute(ISZ(Hstep(2)))
+    }
 
     compute(ISZ(RunToThread("MonMMI")))
 
     MonMMI.put_concrete_inputs(
-      // FIXME: MonMMI has a lastCmd state var but it's never
-      //        used in contracts or behavior code so it's likely a
-      //        copy/paste issue
       In_lastCmd = MonMMI.get_lastCmd(),
 
       api_current_tempWstatus = inject_container.currentTempWStatus,
@@ -362,7 +442,11 @@ class Monitor_Subsystem_Test_wSlangCheck
 
     val output_container_pre_step = populateOutputContainer()
 
-    compute(ISZ(Hstep(1)))
+    compute(ISZ(Hstep(1))) // run 1 HP since we're not on a HP boundary
+
+    if (numHPAfterInjection > 1) {
+      compute(ISZ(Hstep(numHPAfterInjection - 1))) // run the remaining HPs
+    }
 
     val output_container_post_step = populateOutputContainer()
 
@@ -395,11 +479,16 @@ class Monitor_Subsystem_Test_wSlangCheck
 
   @strictpure def sysProp_NormalModeAlarmOn(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                             outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
-    val triggerCondition: B = !helper_MonitorErrorCondition(inputs_Container) &
+    assert (outputs_Containers.size == 2)
+
+    val triggerCondition: B = (
+      !helper_MonitorErrorCondition(inputs_Container) &
       inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode &
-      helper_AlarmShouldBeOn(inputs_Container)
+      helper_AlarmShouldBeOn(inputs_Container))
 
     val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Onn
+
+    bookKeep(triggerCondition, desiredCondition)
 
     triggerCondition.->:(desiredCondition)
   }
@@ -408,13 +497,15 @@ class Monitor_Subsystem_Test_wSlangCheck
                                        outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition: B =
+    val triggerCondition: B = (
       !helper_MonitorErrorCondition(inputs_Container) &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode &
         !helper_AlarmShouldBeOn(inputs_Container) &
-        helper_AlarmShouldBeUnchanged(inputs_Container)
+        helper_AlarmShouldBeUnchanged(inputs_Container))
 
     val desiredCondition: B = outputs_Containers(0).alarm_control == outputs_Containers(1).alarm_control
+
+    bookKeep(triggerCondition, desiredCondition)
 
     return triggerCondition.->:(desiredCondition)
   }
@@ -423,13 +514,15 @@ class Monitor_Subsystem_Test_wSlangCheck
                                  outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition: B =
+    val triggerCondition: B = (
       !helper_MonitorErrorCondition(inputs_Container) &
         inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode &
-        !helper_AlarmShouldBeOn(inputs_Container)
-    !helper_AlarmShouldBeUnchanged(inputs_Container)
+        !helper_AlarmShouldBeOn(inputs_Container) &
+        !helper_AlarmShouldBeUnchanged(inputs_Container))
 
     val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Off
+
+    bookKeep(triggerCondition, desiredCondition)
 
     return triggerCondition.->:(desiredCondition)
   }
@@ -439,11 +532,13 @@ class Monitor_Subsystem_Test_wSlangCheck
                                          outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition: B =
+    val triggerCondition: B = (
       inputs_Container.currentTempWStatus.status == ValueStatus.Invalid &
-        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
 
     val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Onn
+
+    bookKeep(triggerCondition, desiredCondition)
 
     return triggerCondition.->:(desiredCondition)
   }
@@ -452,11 +547,13 @@ class Monitor_Subsystem_Test_wSlangCheck
                                           outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition: B =
+    val triggerCondition: B = (
       inputs_Container.lowerAlarmTempWStatus.status == ValueStatus.Invalid &
-        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
 
     val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Onn
+
+    bookKeep(triggerCondition, desiredCondition)
 
     return triggerCondition.->:(desiredCondition)
   }
@@ -465,11 +562,13 @@ class Monitor_Subsystem_Test_wSlangCheck
                                           outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition: B =
+    val triggerCondition: B = (
       inputs_Container.upperAlarmTempWStatus.status == ValueStatus.Invalid &
-        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
 
     val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Onn
+
+    bookKeep(triggerCondition, desiredCondition)
 
     return triggerCondition.->:(desiredCondition)
   }
@@ -478,11 +577,13 @@ class Monitor_Subsystem_Test_wSlangCheck
                                                outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition: B =
+    val triggerCondition: B = (
       inputs_Container.internalFailure.value &
-        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
 
     val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Onn
+
+    bookKeep(triggerCondition, desiredCondition)
 
     return triggerCondition.->:(desiredCondition)
   }
@@ -491,14 +592,16 @@ class Monitor_Subsystem_Test_wSlangCheck
                                     outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition: B =
+    val triggerCondition: B = (
       (helper_MonitorInputErrorCondition(inputs_Container) |
         helper_MonitorInternalFailureCondition(inputs_Container)) &
-        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
 
-    val desiredCondition: B =
+    val desiredCondition: B = (
       outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode &
-        outputs_Containers(1).alarm_control == On_Off.Onn
+        outputs_Containers(1).alarm_control == On_Off.Onn)
+
+    bookKeep(triggerCondition, desiredCondition)
 
     return triggerCondition.->:(desiredCondition)
   }
@@ -508,11 +611,13 @@ class Monitor_Subsystem_Test_wSlangCheck
                                  outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition: B =
+    val triggerCondition: B = (
       (!helper_MonitorErrorCondition(inputs_Container) &
-        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode))
 
     val desiredCondition: B = outputs_Containers(1).monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+
+    bookKeep(triggerCondition, desiredCondition)
 
     return triggerCondition.->:(desiredCondition)
   }
@@ -521,12 +626,14 @@ class Monitor_Subsystem_Test_wSlangCheck
                                           outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition: B =
+    val triggerCondition: B = (
       inputs_Container.currentTempWStatus.status == ValueStatus.Invalid &
-        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
 
     val desiredCondition: B =
       outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
+
+    bookKeep(triggerCondition, desiredCondition)
 
     return triggerCondition.->:(desiredCondition)
   }
@@ -535,12 +642,14 @@ class Monitor_Subsystem_Test_wSlangCheck
                                            outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition: B =
+    val triggerCondition: B = (
       inputs_Container.lowerAlarmTempWStatus.status == ValueStatus.Invalid &
-        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
 
     val desiredCondition: B =
       outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
+
+    bookKeep(triggerCondition, desiredCondition)
 
     return triggerCondition.->:(desiredCondition)
   }
@@ -549,12 +658,14 @@ class Monitor_Subsystem_Test_wSlangCheck
                                            outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition: B =
+    val triggerCondition: B = (
       inputs_Container.upperAlarmTempWStatus.status == ValueStatus.Invalid &
-        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
 
     val desiredCondition: B =
       outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
+
+    bookKeep(triggerCondition, desiredCondition)
 
     return triggerCondition.->:(desiredCondition)
   }
@@ -563,30 +674,67 @@ class Monitor_Subsystem_Test_wSlangCheck
                                                 outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition: B =
+    val triggerCondition: B = (
       helper_MonitorInternalFailureCondition(inputs_Container) &
-        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
 
     val desiredCondition: B =
       outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
 
+    bookKeep(triggerCondition, desiredCondition)
+
     return triggerCondition.->:(desiredCondition)
   }
+
 
   def sysProp_ErrorConditionNormalToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                                outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
     assert(outputs_Containers.size == 2)
 
-    val triggerCondition: B =
+    val triggerCondition: B = (
       helper_MonitorErrorCondition(inputs_Container) &
-        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
 
     val desiredCondition: B =
       outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
 
+    bookKeep(triggerCondition, desiredCondition)
+
     return triggerCondition.->:(desiredCondition)
   }
 
+  def sysProp_ErrorConditionFailedToFailedMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
+                                               outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+    assert(outputs_Containers.size == 2)
+
+    val triggerCondition: B = (
+      (inputs_Container.internalFailure.value | inputs_Container.currentTempWStatus.status == ValueStatus.Invalid) &
+        inputs_Container.monitor_mode == Monitor_Mode.Normal_Monitor_Mode)
+
+    val desiredCondition: B =
+      outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return triggerCondition.->:(desiredCondition)
+  }
+
+  def sysProp_ErrorConditionInitToInitMode(inputs_Container: Monitor_Subsystem_Inputs_Container,
+                                           outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
+    assert(outputs_Containers.size == 2)
+    // NOTE: this prop requires injection after the init phase
+
+    val triggerCondition: B = (
+      (inputs_Container.internalFailure.value | inputs_Container.currentTempWStatus.status == ValueStatus.Invalid) &
+        inputs_Container.monitor_mode == Monitor_Mode.Init_Monitor_Mode)
+
+    val desiredCondition: B =
+      outputs_Containers(1).monitor_mode == Monitor_Mode.Init_Monitor_Mode
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return triggerCondition.->:(desiredCondition)
+  }
 
   def sysProp_InitModeImpliesAlarmOff(inputs_Container: Monitor_Subsystem_Inputs_Container,
                                       outputs_Containers: ISZ[Monitor_Subsystem_Outputs_Container]): B = {
@@ -605,6 +753,8 @@ class Monitor_Subsystem_Test_wSlangCheck
     val triggerCondition: B = outputs_Containers(1).monitor_mode == Monitor_Mode.Failed_Monitor_Mode
     val desiredCondition: B = outputs_Containers(1).alarm_control == On_Off.Onn
 
+    bookKeep(triggerCondition, desiredCondition)
+
     return triggerCondition.->:(desiredCondition)
   }
 
@@ -613,7 +763,7 @@ class Monitor_Subsystem_Test_wSlangCheck
   }
 
   def validRanges: Monitor_Subsystem_Inputs_Container_Profile = {
-    var p = getDefaultProfile
+    val p = getDefaultProfile
 
     p.name = "Valid Ranges Profile"
 
@@ -641,6 +791,16 @@ class Monitor_Subsystem_Test_wSlangCheck
     return p
   }
 
+  def bookKeep(triggerCond: B, desiredCond: B): Unit = {
+    val propName = Thread.currentThread().getStackTrace()(2).getMethodName
+    val prop = propStatus.getOrElse(propName, PropStatus(0,0,0))
+    propStatus = propStatus + propName ~> prop.copy(
+      triggerF = prop.triggerF + (if (!triggerCond) 1 else 0),
+      triggerT_desiredF = prop.triggerT_desiredF + (if (triggerCond && !desiredCond) 1 else 0),
+      triggerT_desiredT = prop.triggerT_desiredT + (if (triggerCond && desiredCond) 1 else 0)
+    )
+  }
+
   implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line): NameProvider1 = {
     val l = ops.StringOps(Monitor_Subsystem_Test_wSlangCheck.lines(line.value - 1))
     return NameProvider1(l.substring(l.lastIndexOf('=') + 2, l.lastIndexOf('_') - 1), eta)
@@ -657,33 +817,59 @@ class Monitor_Subsystem_Test_wSlangCheck
 }
 
 object Monitor_Subsystem_Test_wSlangCheck {
-  val lines: ISZ[String] =
-    ops.StringOps(ops.StringOps(Os.path(implicitly[sourcecode.File].value).read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
+
+  case class PropStatus (val triggerF: Z,
+                         val triggerT_desiredF: Z,
+                         val triggerT_desiredT: Z)
+
+  var propStatus: Map[String, PropStatus] = Map.empty
+
+  val lines: ISZ[String] = {
+    val ll: Os.Path = Os.env("ABS_JAR_LOC") match {
+      case Some(l) =>
+        // must be running from the jar file so need to unpack it to get the source files
+        val tempDir = Os.tempDir()
+        proc"unzip $l -d $tempDir".runCheck()
+        val name = ops.ISZOps(ops.StringOps(ops.StringOps(getClass.getName).replaceAllLiterally("$", "")).split(c => c == C('.')))
+        (tempDir /+ name.dropRight(1)) / s"${name.last}.scala"
+      case _ => Os.path(implicitly[sourcecode.File].value)
+    }
+    ops.StringOps(ops.StringOps(ll.read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
+  }
 
   @strictpure def p(str: String): ST = Json.Printer.printString(str)
 
-  val dummy: B = {
-    // emit test configs as JSON
-    val inst = new Monitor_Subsystem_Test_wSlangCheck()
-    val entries = for (entry <- inst.testMatrix.entries) yield inst.genTestNameJson(entry._1, entry._2)
-    val thisFile = Os.path(implicitly[sourcecode.File].value)
-    val outFile = thisFile.up / s"${thisFile.name}.json"
-    outFile.writeOver(st"${(entries, "\n")}".render)
+  val dummy = genJsons(F)   // doing this a var decl so that the actions are invoked when the JVM loads the object
 
-    // emit schedule as JSON
-    val nickNames: ISZ[ST] = for(e <- StaticSchedulerCust.threadNickNames.entries) yield
-      st"${e._1}:${Arch.ad.components(e._2).name}"
-    val nickNamesS = st"${(nickNames, ",")}".render
-    val sched: ISZ[ST] = for(e <- StaticSchedulerCust.domainToBridgeIdMap) yield
-      st"""${StaticSchedulerCust.revThreadNickNames.get(e).get}"""
-    val schedS = st"${(sched, ",")}".render
-    val schedFile = thisFile.up / s"${thisFile.name}_schedule.json"
-    schedFile.writeOver(
-      st"""{
-          |  "nickNames": ${p(nickNamesS)},
-          |  "scheduleProvider": ${p(StaticSchedulerCust.getClass.getName)},
-          |  "schedule": ${p(schedS)}
-          |}""".render)
+  def genJsons(echo: B): B = {
+    if (Os.env("JENKINS_HOME").isEmpty) { // don't generate these when CI
+      // emit test configs as JSON
+      val inst = new Monitor_Subsystem_Test_wSlangCheck()
+      val entries = for (entry <- inst.testMatrix.entries) yield inst.genTestNameJson(entry._1, entry._2)
+      val thisFile = Os.path(implicitly[sourcecode.File].value)
+      val outFile = thisFile.up / s"${thisFile.name}.json"
+      outFile.writeOver(st"${(entries, "\n")}".render)
+
+      // emit schedule as JSON
+      val nickNames: ISZ[ST] = for (e <- StaticSchedulerCust.threadNickNames.entries) yield
+        st"${e._1}:${Arch.ad.components(e._2).name}"
+      val nickNamesS = st"${(nickNames, ",")}".render
+      val sched: ISZ[ST] = for (e <- StaticSchedulerCust.domainToBridgeIdMap) yield
+        st"""${StaticSchedulerCust.revThreadNickNames.get(e).get}"""
+      val schedS = st"${(sched, ",")}".render
+      val schedFile = thisFile.up / s"${thisFile.name}_schedule.json"
+      schedFile.writeOver(
+        st"""{
+            |  "nickNames": ${p(nickNamesS)},
+            |  "scheduleProvider": ${p(StaticSchedulerCust.getClass.getName)},
+            |  "schedule": ${p(schedS)}
+            |}""".render)
+
+      if (echo) {
+        println(outFile)
+        println(schedFile)
+      }
+    }
 
     F
   }

@@ -144,8 +144,16 @@ object Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulat
         }
 
       // Transitions from FAILED Mode (do nothing -- system must be rebooted)
-      case Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode =>
-      // do nothing
+      case Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode => {
+        // do nothing
+
+        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to
+        //   an else branch being emitted in the byte code to handle the default case.  Tipe/Logika
+        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly
+        //   handled (i.e. "case _ => ") since there is a case clause for every Regulator_Mode value,
+        //   so we chose to exclude the unneeded default case in favor of a warning/error free report
+        //   from Tipe/Logika
+      }
     }
 
     api.put_regulator_mode(lastRegulatorMode)

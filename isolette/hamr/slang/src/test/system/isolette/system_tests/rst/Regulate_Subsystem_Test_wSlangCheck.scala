@@ -8,7 +8,7 @@ import isolette.Isolette_Data_Model._
 import isolette.Regulate.Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface.ROUND
 import isolette.Regulate.{Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source_SystemTestAPI => RegMHS, Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface_SystemTestAPI => RegMRI, Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode_SystemTestAPI => RegMRM}
 import isolette.system_tests.rst.Regulate_Subsystem_Inputs_Container_SlangCheck.{NameProvider1, NameProvider2, TestConfiguration}
-
+import Regulate_Subsystem_Test_wSlangCheck._
 import scala.language.implicitConversions
 
 class Regulate_Subsystem_Test_wSlangCheck
@@ -41,12 +41,38 @@ class Regulate_Subsystem_Test_wSlangCheck
     super.beforeEach()
   }
 
+  override def beforeAll(): Unit = {
+    propStatus = Map.empty
+    super.beforeAll()
+  }
+
+  val failOnTriviallyTrueProps: B = T
+
+  override def afterAll(): Unit = {
+    var msgs: ISZ[String] = ISZ()
+    for (p <- propStatus.entries if p._2.triggerT_desiredT == 0) {
+      // propStatus has three fields
+      //   # of F -> X
+      //   # of T -> F  --> the test case would have failed for T -> F so this should be 0
+      //   # of T -> T  --> may need to increase # of tests if this is always 0
+      msgs = msgs :+ s"Property ${p._1} was trivially true ${p._2.triggerF} times, desired failed ${p._2.triggerT_desiredF} times, and desired was never satisfied"
+    }
+    if (msgs.nonEmpty) {
+      if (failOnTriviallyTrueProps) {
+        assert(F, st"${(msgs, "\n")}".render)
+      } else {
+        cprint(T, st"${(msgs, "\n")}".render)
+      }
+    }
+    super.afterAll()
+  }
+
   //===========================================================
   //  S l a n g   C h e c k    Infrastructure
   //===========================================================
 
   val maxTests = 100
-  var verbose: B = T
+  var verbose: B = F
 
   // Regulator threads being tested
   val components: ISZ[String] = ISZ(
@@ -69,7 +95,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_NormalModeHeatOn _,
-      components = components
+      components = components,
+      numTests = 200 //maxTests
     ),
     "HC__Normal_____Heat_Off" ~> TestConfiguration(
       description = "Heat Control control laws; NORMAL mode => Heat OFF result state",
@@ -77,8 +104,10 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_NormalModeHeatOff _,
-      components = components
+      components = components,
+      numTests = 300 //maxTests
     ),
+
     // -----
     //   Output: Heat Control;  Failure properties
     // -----
@@ -88,7 +117,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_InvalidCTNormalModeHeatOff _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
 
     "HC__Failing__UDT____Heat_Off" ~> TestConfiguration(
@@ -97,7 +127,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_InvalidUDTNormalModeHeatOff _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
 
     "HC__Failing__LDT____Heat_Off" ~> TestConfiguration(
@@ -106,7 +137,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_InvalidLDTNormalModeHeatOff _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
 
     "HC__Failing__Internal_Failure____Heat_Off" ~> TestConfiguration(
@@ -115,7 +147,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_InternalFailureNormalModeHeatOff _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
 
     // observe any failure condition (combining the input failures and internal failures above)
@@ -125,7 +158,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_ErrorConditionHeatOff _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     // ======================
     //  Output: Display Temp
@@ -138,7 +172,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_NormalDisplayTemp _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
 
     // ======================
@@ -152,7 +187,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_NormalToNormalMode _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
 
     // Normal --> Failed  Transitions
@@ -162,7 +198,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_InvalidCTNormalToFailedMode _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     "Mode_Trans___Normal__Failed__UDT_Invalid" ~> TestConfiguration(
       description = "Mode Trans:  Normal->Failed because Upper Desired Temperature Invalid",
@@ -170,7 +207,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_InvalidUDTNormalToFailedMode _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     "Mode_Trans___Normal__Failed__LDT_Invalid" ~> TestConfiguration(
       description = "Mode Trans:  Normal->Failed because Lower Desired Temperature Invalid",
@@ -178,7 +216,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_InvalidLDTNormalToFailedMode _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     "Mode_Trans___Normal__Failed__Internal_Failure" ~> TestConfiguration(
       description = "Mode Trans:  Normal->Failed because Internal Failure",
@@ -186,7 +225,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_InternalFailureNormalToFailedMode _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     // Combinded Error Condition
     "Mode_Trans___Normal__Failed__Error_Condition" ~> TestConfiguration(
@@ -195,7 +235,26 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_ErrorConditionNormalToFailedMode _,
-      components = components
+      components = components,
+      numTests = maxTests
+    ),
+    "Mode_Trans___Init__Failed__Error_Condition" ~> TestConfiguration(
+      description = "Mode Trans:  Init->Failed because regulator_status is false",
+      schema = Regulator_AfterInit_script_schema _,
+      profile = validRanges,
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_ErrorConditionInitToFailedMode _,
+      components = components,
+      numTests = maxTests
+    ),
+    "Mode_Trans___Failed__Failed__Error_Condition" ~> TestConfiguration(
+      description = "Mode Trans:  Failed->Failed because failed can only be handled via a system reboot",
+      schema = Regulator_2HP_script_schema _,
+      profile = validRanges,
+      filter = compute_spec_lower_is_not_higher_than_upper_assume _,
+      property = sysProp_ErrorConditionFailedToFailedMode _,
+      components = components,
+      numTests = maxTests
     ),
 
     /*
@@ -206,7 +265,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       preStateCheck = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_FailedToFailedMode _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
     */
 
@@ -223,7 +283,8 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_InitModeImpliesHeatOff _,
-      components = components
+      components = components,
+      numTests = maxTests
     ),
 
     "Mode_Impl__Failed____Heat_Off" ~> TestConfiguration(
@@ -232,11 +293,13 @@ class Regulate_Subsystem_Test_wSlangCheck
       profile = validRanges,
       filter = compute_spec_lower_is_not_higher_than_upper_assume _,
       property = sysProp_FailedModeImpliesHeatOff _,
-      components = components
+      components = components,
+      numTests = maxTests
     )
   )
 
-  for (testRow <- testMatrix.entries) {
+  for (testRow <- testMatrix.entries if string"Mode_Impl__Init____Heat_Off" == testRow._1) {
+  //for (testRow <- testMatrix.entries) {
     run(testRow._1, testRow._2)
   }
 
@@ -252,7 +315,7 @@ class Regulate_Subsystem_Test_wSlangCheck
 
   def run(testFamilyName: String, testRow: TestConfiguration): Unit = {
 
-    for (i <- 0 until maxTests) {
+    for (i <- 0 until testRow.numTests) {
       val testName = s"${genTestName(testFamilyName, testRow)}_$i"
       this.registerTest(testName) {
         var retry: B = T
@@ -287,7 +350,7 @@ class Regulate_Subsystem_Test_wSlangCheck
   }
 
   def validRanges: Regulate_Subsystem_Inputs_Container_Profile = {
-    var p = getDefaultProfile
+    val p = getDefaultProfile
 
     p.name = "Valid Ranges Profile"
 
@@ -313,21 +376,25 @@ class Regulate_Subsystem_Test_wSlangCheck
     return p
   }
 
-
-  //=============================================================
-  //  Test Script Schemas
-  //
-  //   I believe that this could eventually be auto-generated from
-  //   a higher-level language of trace patterns.   Ideally,
-  //   the higher-level language would be shared by a Logika-based
-  //   framework that generate Logika test scripts with the same
-  //   abstract structure.
-  //=============================================================
-
   def Regulator_1HP_script_schema(inject_container: Regulate_Subsystem_Inputs_Container,
-                                  prop: (Regulate_Subsystem_Inputs_Container, Regulate_Subsystem_Outputs_Container) =>
-                                    B
-                                 ): B = {
+                                  prop: (Regulate_Subsystem_Inputs_Container, Regulate_Subsystem_Outputs_Container) => B): B = {
+    return Regulator_XHP_script_schema(F, 1, inject_container, prop)
+  }
+
+  def Regulator_2HP_script_schema(inject_container: Regulate_Subsystem_Inputs_Container,
+                                  prop: (Regulate_Subsystem_Inputs_Container, Regulate_Subsystem_Outputs_Container) => B): B = {
+    return Regulator_XHP_script_schema(F, 2, inject_container, prop)
+  }
+
+  def Regulator_AfterInit_script_schema(inject_container: Regulate_Subsystem_Inputs_Container,
+                                  prop: (Regulate_Subsystem_Inputs_Container, Regulate_Subsystem_Outputs_Container) => B): B = {
+    return Regulator_XHP_script_schema(T, 1, inject_container, prop)
+  }
+
+  def Regulator_XHP_script_schema(injectAfterInitialization: B,
+                                  numHPAfterInjection:Z,
+                                  inject_container: Regulate_Subsystem_Inputs_Container,
+                                  prop: (Regulate_Subsystem_Inputs_Container, Regulate_Subsystem_Outputs_Container) => B): B = {
 
     // -------------------- trace prefix --------------------
 
@@ -343,7 +410,9 @@ class Regulate_Subsystem_Test_wSlangCheck
 
     // Abstractly, run the system an arbitrary number of steps
 
-    compute(ISZ(Hstep(2)))
+    if (!injectAfterInitialization) {
+      compute(ISZ(Hstep(2)))
+    }
 
     compute(ISZ(RunToThread("RegMRI")))
 
@@ -373,6 +442,10 @@ class Regulate_Subsystem_Test_wSlangCheck
 
     // run to end of current hyper-period - and check outputs of selected components
     compute(ISZ(Hstep(1)))
+
+    if (numHPAfterInjection > 1) {
+      compute(ISZ(Hstep(numHPAfterInjection - 1))) // run remaining HPs
+    }
 
     // ------------------ observe output -- build output observation vector ------------------
     //   ...eventually, auto-generated from higher-level specification of
@@ -466,7 +539,11 @@ class Regulate_Subsystem_Test_wSlangCheck
     val triggerCondition: B = (!helper_RegulatorErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode
       & inputs_container.currentTempWStatus.value < inputs_container.lowerDesiredTempWStatus.value)
+
     val desiredCondition: B = (outputs_container.heat_control == On_Off.Onn)
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -484,7 +561,25 @@ class Regulate_Subsystem_Test_wSlangCheck
     val triggerCondition: B = (!helper_RegulatorErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode
       & inputs_container.currentTempWStatus.value > inputs_container.upperDesiredTempWStatus.value)
+
     val desiredCondition: B = (outputs_container.heat_control == On_Off.Off)
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return (triggerCondition.->:(desiredCondition))
+  }
+
+  def sysProp_InitModeHeatOff(inputs_container: Regulate_Subsystem_Inputs_Container,
+
+                              outputs_container: Regulate_Subsystem_Outputs_Container): B = {
+
+    val triggerCondition: B =
+      inputs_container.mode == Regulator_Mode.Init_Regulator_Mode
+
+    val desiredCondition: B = (outputs_container.heat_control == On_Off.Off)
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -500,7 +595,11 @@ class Regulate_Subsystem_Test_wSlangCheck
                                           outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = (helper_RegulatorCTInputErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+
     val desiredCondition: B = (outputs_container.heat_control == On_Off.Off)
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -510,7 +609,11 @@ class Regulate_Subsystem_Test_wSlangCheck
                                            outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = (helper_RegulatorUDTInputErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+
     val desiredCondition: B = (outputs_container.heat_control == On_Off.Off)
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -520,7 +623,11 @@ class Regulate_Subsystem_Test_wSlangCheck
                                            outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = (helper_RegulatorLDTInputErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+
     val desiredCondition: B = (outputs_container.heat_control == On_Off.Off)
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -529,7 +636,11 @@ class Regulate_Subsystem_Test_wSlangCheck
                                                outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = (helper_RegulatorInternalFailureCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+
     val desiredCondition: B = (outputs_container.heat_control == On_Off.Off)
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -541,7 +652,11 @@ class Regulate_Subsystem_Test_wSlangCheck
                                      outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = (helper_RegulatorErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+
     val desiredCondition: B = (outputs_container.heat_control == On_Off.Off)
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -555,7 +670,11 @@ class Regulate_Subsystem_Test_wSlangCheck
   def sysProp_NormalDisplayTemp(inputs_container: Regulate_Subsystem_Inputs_Container,
                                 outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = (inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+
     val desiredCondition: B = (outputs_container.display_temperature.value == ROUND(inputs_container.currentTempWStatus.value))
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -571,18 +690,23 @@ class Regulate_Subsystem_Test_wSlangCheck
     // if the hyper-period concludes in Init mode, then heat source should be off
     // val triggerCondition: B = outputs_container.mode == Regulator_Mode.Normal_Regulator_Mode // seeded property error
     val triggerCondition: B = outputs_container.mode == Regulator_Mode.Init_Regulator_Mode // seeded property error
-    println(s"Mode: ${outputs_container.mode}")
+
     val desiredCondition: B = outputs_container.heat_control == On_Off.Off
-    println(s"Heat control: ${outputs_container.heat_control}")
-    val test_result = triggerCondition.->:(desiredCondition)
-    return test_result
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return triggerCondition.->:(desiredCondition)
   }
 
   def sysProp_FailedModeImpliesHeatOff(inputs_container: Regulate_Subsystem_Inputs_Container,
                                        outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     // if the hyper-period concludes in Init mode, then heat source should be off
     val triggerCondition: B = outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode
+
     val desiredCondition: B = outputs_container.heat_control == On_Off.Off
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -590,7 +714,11 @@ class Regulate_Subsystem_Test_wSlangCheck
                                             outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     // if the hyper-period concludes in Init mode, then heat source should be off
     val triggerCondition: B = outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode
+
     val desiredCondition: B = outputs_container.regulator_status == Status.Failed_Status
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -604,7 +732,11 @@ class Regulate_Subsystem_Test_wSlangCheck
                                  outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = (!helper_RegulatorErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+
     val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -615,7 +747,11 @@ class Regulate_Subsystem_Test_wSlangCheck
                                             outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = (helper_RegulatorUDTInputErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+
     val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -624,7 +760,11 @@ class Regulate_Subsystem_Test_wSlangCheck
                                             outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = (helper_RegulatorLDTInputErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+
     val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -633,7 +773,11 @@ class Regulate_Subsystem_Test_wSlangCheck
                                            outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = (helper_RegulatorCTInputErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+
     val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -641,7 +785,43 @@ class Regulate_Subsystem_Test_wSlangCheck
                                                 outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = (helper_RegulatorInternalFailureCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+
     val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return (triggerCondition.->:(desiredCondition))
+  }
+
+  def sysProp_ErrorConditionInitToFailedMode(inputs_container: Regulate_Subsystem_Inputs_Container,
+                                             outputs_container: Regulate_Subsystem_Outputs_Container): B = {
+
+    // NOTE: this prop requires injection after the init phase
+
+    val triggerCondition: B =
+      ((inputs_container.internalFailure.value | inputs_container.currentTempWStatus.status == ValueStatus.Invalid)
+        & inputs_container.mode == Regulator_Mode.Init_Regulator_Mode)
+
+    val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+
+    bookKeep(triggerCondition, desiredCondition)
+
+    return (triggerCondition.->:(desiredCondition))
+  }
+
+  def sysProp_ErrorConditionFailedToFailedMode(inputs_container: Regulate_Subsystem_Inputs_Container,
+                                               outputs_container: Regulate_Subsystem_Outputs_Container): B = {
+
+    // NOTE: this prop requires two hyper-periods after injection
+
+    val triggerCondition: B =
+      (inputs_container.internalFailure.value | inputs_container.currentTempWStatus.status == ValueStatus.Invalid) &
+        inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode
+
+    val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -652,7 +832,11 @@ class Regulate_Subsystem_Test_wSlangCheck
                                                 outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = (helper_RegulatorErrorCondition(inputs_container)
       & inputs_container.mode == Regulator_Mode.Normal_Regulator_Mode)
+
     val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+
+    bookKeep(triggerCondition, desiredCondition)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
@@ -660,13 +844,24 @@ class Regulate_Subsystem_Test_wSlangCheck
   def sysProp_FailedToFailedMode(inputs_container: Regulate_Subsystem_Inputs_Container,
                                  outputs_container: Regulate_Subsystem_Outputs_Container): B = {
     val triggerCondition: B = inputs_container.mode == Regulator_Mode.Failed_Regulator_Mode
+
     val desiredCondition: B = (outputs_container.mode == Regulator_Mode.Failed_Regulator_Mode)
+
     return (triggerCondition.->:(desiredCondition))
   }
 
   @strictpure def compute_spec_lower_is_not_higher_than_upper_assume(container: Regulate_Subsystem_Inputs_Container): B =
     container.lowerDesiredTempWStatus.value <= container.upperDesiredTempWStatus.value
 
+  def bookKeep(triggerCond: B, desiredCond: B): Unit = {
+    val propName = Thread.currentThread().getStackTrace()(2).getMethodName
+    val prop = propStatus.getOrElse(propName, PropStatus(0,0,0))
+    propStatus = propStatus + propName ~> prop.copy(
+      triggerF = prop.triggerF + (if (!triggerCond) 1 else 0),
+      triggerT_desiredF = prop.triggerT_desiredF + (if (triggerCond && !desiredCond) 1 else 0),
+      triggerT_desiredT = prop.triggerT_desiredT + (if (triggerCond && desiredCond) 1 else 0)
+    )
+  }
 
   implicit def toNameProvider1[X](eta: X => B)(implicit line: sourcecode.Line): NameProvider1 = {
     val l = ops.StringOps(Regulate_Subsystem_Test_wSlangCheck.lines(line.value - 1))
@@ -684,33 +879,59 @@ class Regulate_Subsystem_Test_wSlangCheck
 }
 
 object Regulate_Subsystem_Test_wSlangCheck {
-  val lines: ISZ[String] =
-    ops.StringOps(ops.StringOps(Os.path(implicitly[sourcecode.File].value).read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
+
+  case class PropStatus (val triggerF: Z,
+                         val triggerT_desiredF: Z,
+                         val triggerT_desiredT: Z)
+
+  var propStatus: Map[String, PropStatus] = Map.empty
+
+  val lines: ISZ[String] = {
+    val ll: Os.Path = Os.env("ABS_JAR_LOC") match {
+      case Some(l) =>
+        // must be running from the jar file so need to unpack it to get the source files
+        val tempDir = Os.tempDir()
+        proc"unzip $l -d $tempDir".runCheck()
+        val name = ops.ISZOps(ops.StringOps(ops.StringOps(getClass.getName).replaceAllLiterally("$", "")).split(c => c == C('.')))
+        (tempDir /+ name.dropRight(1)) / s"${name.last}.scala"
+      case _ => Os.path(implicitly[sourcecode.File].value)
+    }
+    ops.StringOps(ops.StringOps(ll.read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
+  }
 
   @strictpure def p(str: String): ST = Json.Printer.printString(str)
 
-  val dummy: B = {
-    // emit test configs as JSON
-    val inst = new Regulate_Subsystem_Test_wSlangCheck()
-    val entries = for (entry <- inst.testMatrix.entries) yield inst.genTestNameJson(entry._1, entry._2)
-    val thisFile = Os.path(implicitly[sourcecode.File].value)
-    val outFile = thisFile.up / s"${thisFile.name}.json"
-    outFile.writeOver(st"${(entries, "\n")}".render)
+  val dummy = genJsons(F)   // doing this a var decl so that the actions are invoked when the JVM loads the object
 
-    // emit schedule as JSON
-    val nickNames: ISZ[ST] = for(e <- StaticSchedulerCust.threadNickNames.entries) yield
-      st"${e._1}:${Arch.ad.components(e._2).name}"
-    val nickNamesS = st"${(nickNames, ",")}".render
-    val sched: ISZ[ST] = for(e <- StaticSchedulerCust.domainToBridgeIdMap) yield
-      st"""${StaticSchedulerCust.revThreadNickNames.get(e).get}"""
-    val schedS = st"${(sched, ",")}".render
-    val schedFile = thisFile.up / s"${thisFile.name}_schedule.json"
-    schedFile.writeOver(
-      st"""{
-          |  "nickNames": ${p(nickNamesS)},
-          |  "scheduleProvider": ${p(StaticSchedulerCust.getClass.getName)},
-          |  "schedule": ${p(schedS)}
-          |}""".render)
+  def genJsons(echo: B): B = {
+    if (Os.env("JENKINS_HOME").isEmpty) { // don't generate these when CI
+      // emit test configs as JSON
+      val inst = new Regulate_Subsystem_Test_wSlangCheck()
+      val entries = for (entry <- inst.testMatrix.entries) yield inst.genTestNameJson(entry._1, entry._2)
+      val thisFile = Os.path(implicitly[sourcecode.File].value)
+      val outFile = thisFile.up / s"${thisFile.name}.json"
+      outFile.writeOver(st"${(entries, "\n")}".render)
+
+      // emit schedule as JSON
+      val nickNames: ISZ[ST] = for (e <- StaticSchedulerCust.threadNickNames.entries) yield
+        st"${e._1}:${Arch.ad.components(e._2).name}"
+      val nickNamesS = st"${(nickNames, ",")}".render
+      val sched: ISZ[ST] = for (e <- StaticSchedulerCust.domainToBridgeIdMap) yield
+        st"""${StaticSchedulerCust.revThreadNickNames.get(e).get}"""
+      val schedS = st"${(sched, ",")}".render
+      val schedFile = thisFile.up / s"${thisFile.name}_schedule.json"
+      schedFile.writeOver(
+        st"""{
+            |  "nickNames": ${p(nickNamesS)},
+            |  "scheduleProvider": ${p(StaticSchedulerCust.getClass.getName)},
+            |  "schedule": ${p(schedS)}
+            |}""".render)
+
+      if (echo) {
+        println(outFile)
+        println(schedFile)
+      }
+    }
 
     F
   }

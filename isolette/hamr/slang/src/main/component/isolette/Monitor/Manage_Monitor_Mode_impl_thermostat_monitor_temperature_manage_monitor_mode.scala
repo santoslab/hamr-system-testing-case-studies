@@ -89,9 +89,8 @@ object Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mo
     // determine monitor status as specified in FAA REMH Table A-15
     //  monitor_status = NOT (Monitor Interface Failure OR Monitor Internal Failure)
     //                          AND Current Temperature.Status = Valid
-    val monitor_status: B = {
-      (!(interface_failure.value || internal_failure.value) && current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid)
-    }
+    val monitor_status: B =
+      !(interface_failure.value | internal_failure.value) & current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid
 
     lastMonitorMode match {
 
@@ -117,8 +116,16 @@ object Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mo
         }
 
       // Transitions from FAILED Mode (do nothing -- system must be rebooted)
-      case Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode =>
-      // do nothing
+      case Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode => {
+        // do nothing
+
+        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to
+        //   an else branch being emitted in the byte code to handle the default case.  Tipe/Logika
+        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly
+        //   handled (i.e. "case _ => ") since there is a case clause for every Monitor_Mode value,
+        //   so we chose to exclude the unneeded default case in favor of a warning/error free report
+        //   from Tipe/Logika
+      }
     }
 
     api.put_monitor_mode(lastMonitorMode)

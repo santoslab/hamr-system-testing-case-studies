@@ -53,7 +53,8 @@ class Example_Regulate_Subsystem_Inputs_Container_Test_wSlangCheck
       profile = getDefaultProfile,
       filter = examplePreStateContainerFilter _,
       property = NameProvider2("Property-Name", (input_container: Any, output_container: Any) => T),
-      components = ISZ()
+      components = ISZ(),
+      numTests = maxTests
     )
   )
 
