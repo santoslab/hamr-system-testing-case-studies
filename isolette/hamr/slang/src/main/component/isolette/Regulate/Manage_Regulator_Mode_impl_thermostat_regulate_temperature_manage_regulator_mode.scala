@@ -8,9 +8,6 @@ import isolette._
 // This file will not be overwritten so is safe to edit
 object Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode {
 
-  // BEGIN FUNCTIONS
-  @strictpure def ROUND(num: Base_Types.Float_32): Base_Types.Float_32 = num
-  // END FUNCTIONS
   // BEGIN STATE VARS
   var lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type = Isolette_Data_Model.Regulator_Mode.byOrdinal(0).get
   // END STATE VARS
@@ -147,12 +144,11 @@ object Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulat
       case Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode => {
         // do nothing
 
-        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to
-        //   an else branch being emitted in the byte code to handle the default case.  Tipe/Logika
-        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly
-        //   handled (i.e. "case _ => ") since there is a case clause for every Regulator_Mode value,
-        //   so we chose to exclude the unneeded default case in favor of a warning/error free report
-        //   from Tipe/Logika
+        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to a scala/MatchError being
+        //   emitted in the byte code as the default case is not handled (i.e. "case _ => // infeasible"). Tipe/Logika
+        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly handled since
+        //   there is a case clause for every Regulator_Mode value, so we chose to exclude the unneeded default case in
+        //   favor of a warning/error free report from Tipe/Logika
       }
     }
 

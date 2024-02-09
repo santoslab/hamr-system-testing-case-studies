@@ -147,12 +147,11 @@ object Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm {
         // REQ_MA_5
         currentCmd = Isolette_Data_Model.On_Off.Onn
 
-        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to
-        //   an else branch being emitted in the byte code to handle the default case.  Tipe/Logika
-        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly
-        //   handled (i.e. "case _ => ") since there is a case clause for every Monitor_Mode value,
-        //   so we chose to exclude the unneeded default case in favor of a warning/error free report
-        //   from Tipe/Logika
+        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to a scala/MatchError being
+        //   emitted in the byte code as the default case is not handled (i.e. "case _ => // infeasible"). Tipe/Logika
+        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly handled since
+        //   there is a case clause for every Monitor_Mode value, so we chose to exclude the unneeded default case in
+        //   favor of a warning/error free report from Tipe/Logika
     }
     lastCmd = currentCmd
     api.put_alarm_control(currentCmd)

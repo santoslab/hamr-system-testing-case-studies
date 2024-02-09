@@ -116,12 +116,11 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
         //  REQ-MMI-3
         monitor_status = Isolette_Data_Model.Status.Failed_Status
 
-        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to
-        //   an else branch being emitted in the byte code to handle the default case.  Tipe/Logika
-        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly
-        //   handled (i.e. "case _ => ") since there is a case clause for every Monitor_Mode value,
-        //   so we chose to exclude the unneeded default case in favor of a warning/error free report
-        //   from Tipe/Logika
+        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to a scala/MatchError being
+        //   emitted in the byte code as the default case is not handled (i.e. "case _ => // infeasible"). Tipe/Logika
+        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly handled since
+        //   there is a case clause for every Monitor_Mode value, so we chose to exclude the unneeded default case in
+        //   favor of a warning/error free report from Tipe/Logika
     }
     api.put_monitor_status(monitor_status)
 
@@ -142,6 +141,12 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
     //   upper and lower temperature
     if (upper_alarm_status == Isolette_Data_Model.ValueStatus.Invalid |
       lower_alarm_status == Isolette_Data_Model.ValueStatus.Invalid) {
+      // COVERAGE NOTE: jacoco coverage reports will indicate branches were missed in the preceding
+      //   condition.  This is due to the bytecode handling possible null object values.  E.g. one check is if
+      //   upper_alarm_status and Isolette_Data_Model.ValueStatus.Invalid are both null in which case they'd be
+      //   equal. Slang ensures the absence of null values and as such NULL is not in its subset of Scala. Therefore
+      //   there is no way to write a valid unit test where null is introduced so these infeasible branches can be ignored
+
       //  REQ-MMI-4
       interface_failure = true
     } else {

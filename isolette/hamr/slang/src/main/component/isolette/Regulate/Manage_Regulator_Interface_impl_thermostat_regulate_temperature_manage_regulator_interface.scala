@@ -144,12 +144,11 @@ object Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_re
         // REQ-MRI-3
         regulator_status = Isolette_Data_Model.Status.Failed_Status
 
-        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to
-        //   an else branch being emitted in the byte code to handle the default case.  Tipe/Logika
-        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly
-        //   handled (i.e. "case _ => ") since there is a case clause for every Regulator_Mode value,
-        //   so we chose to exclude the unneeded default case in favor of a warning/error free report
-        //   from Tipe/Logika
+        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to a scala/MatchError being
+        //   emitted in the byte code as the default case is not handled (i.e. "case _ => // infeasible"). Tipe/Logika
+        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly handled since
+        //   there is a case clause for every Regulator_Mode value, so we chose to exclude the unneeded default case in
+        //   favor of a warning/error free report from Tipe/Logika
     }
 
     api.put_regulator_status(regulator_status)
@@ -183,12 +182,11 @@ object Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_re
       case Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode => // Do nothing
       case Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode => // Do nothing
 
-        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to
-        //   an else branch being emitted in the byte code to handle the default case.  Tipe/Logika
-        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly
-        //   handled (i.e. "case _ => ") since there is a case clause for every Regulator_Mode value,
-        //   so we chose to exclude the unneeded default case in favor of a warning/error free report
-        //   from Tipe/Logika
+        // COVERAGE NOTE: this final case will be marked as partially covered.  This is due to a scala/MatchError being
+        //   emitted in the byte code as the default case is not handled (i.e. "case _ => // infeasible"). Tipe/Logika
+        //   will emit an "Infeasible pattern matching case" warning if the default case is explicitly handled since
+        //   there is a case clause for every Regulator_Mode value, so we chose to exclude the unneeded default case in
+        //   favor of a warning/error free report from Tipe/Logika
     }
 
     api.put_displayed_temp(display_temperature)
@@ -210,6 +208,12 @@ object Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_re
     //   upper and lower temperature
     if (!(upper_desired_temp_status == Isolette_Data_Model.ValueStatus.Valid) ||
       !(lower_desired_temp_status == Isolette_Data_Model.ValueStatus.Valid)) {
+      // COVERAGE NOTE: jacoco coverage reports will indicate at branches were missed in the preceding
+      //   condition.  This is due to the bytecode handling possible null object values.  E.g. one check is if
+      //   upper_desired_temp_status and Isolette_Data_Model.ValueStatus.Valid are both null in which case they'd be
+      //   equal. Slang ensures the absence of null values and as such NULL is not in its subset of Scala. Therefore
+      //   there is no way to write a valid unit test where null is introduced so these infeasible branches can be ignored
+
       // REQ-MRI-6
       interface_failure = true
     } else {
