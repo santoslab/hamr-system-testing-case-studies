@@ -825,16 +825,18 @@ object Monitor_Subsystem_Test_wSlangCheck {
   var propStatus: Map[String, PropStatus] = Map.empty
 
   val lines: ISZ[String] = {
-    val ll: Os.Path = Os.env("ABS_JAR_LOC") match {
+    val ll: String = Os.env("ABS_JAR_LOC") match {
       case Some(l) =>
         // must be running from the jar file so need to unpack it to get the source files
         val tempDir = Os.tempDir()
         proc"unzip $l -d $tempDir".runCheck()
         val name = ops.ISZOps(ops.StringOps(ops.StringOps(getClass.getName).replaceAllLiterally("$", "")).split(c => c == C('.')))
-        (tempDir /+ name.dropRight(1)) / s"${name.last}.scala"
-      case _ => Os.path(implicitly[sourcecode.File].value)
+        val ret = ((tempDir /+ name.dropRight(1)) / s"${name.last}.scala").read
+        tempDir.removeAll()
+        ret
+      case _ => Os.path(implicitly[sourcecode.File].value).read
     }
-    ops.StringOps(ops.StringOps(ll.read).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
+    ops.StringOps(ops.StringOps(ll).replaceAllLiterally("\n", " \n")).split(c => c == C('\n'))
   }
 
   @strictpure def p(str: String): ST = Json.Printer.printString(str)
