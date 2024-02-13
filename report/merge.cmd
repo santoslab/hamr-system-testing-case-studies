@@ -17,7 +17,8 @@ Os.Path.walk(root, F, T, p => {
   if (p.name == "sireum.version") {
     val paths = p.up.list
 
-    val testRowP = fetch(".json", p.up.up.list).get
+    val testConfigP = fetch(".scala.json", p.up.up.list).get
+    val scheduleInfoP = fetch(".scala_schedule.json", p.up.up.list).get
     val passingP = fetch(".passing", paths).get
     val failingP = fetch(".failing", paths).get
     val unsatP = fetch(".unsat", paths).get
@@ -25,13 +26,21 @@ Os.Path.walk(root, F, T, p => {
     val csvP = fetch(".csv", paths).get
     val coverageP = fetch(".coverage", paths).get
 
+    val testConfigs = parseJsonConfigs(testConfigP)
+    val project = p.up.up.up.up.name
+    val components: ISZ[String] =
+      if (testConfigs.get("components").get.size == 0) coverageMap.get(project).get.keys
+      else ops.StringOps(testConfigs.get("components").get).split(c => c == ',')
     val r = Results(
-      project = p.up.up.up.up.name,
+      project = project,
       subSystem = p.up.up.up.name,
       testFamily = p.up.up.name,
       timeout = Z(p.up.name).get,
-      testRow = parseJson(testRowP),
-      testRowP = testRowP,
+      testConfiguration = testConfigs,
+      testConfigurationP = testConfigP,
+      scheduleInfo = parseJsonH(ISZ("nickNames", "scheduleProvider", "schedule"), scheduleInfoP.read),
+      scheduleInfoP = scheduleInfoP,
+      components = components,
       passing = numVectors(passingP) - numVectors(unsatP), // remove unsat from the passing vectors
       failing = numVectors(failingP),
       unsat = numVectors(unsatP),
@@ -95,11 +104,14 @@ addRootReport(root, topLevelProjs)
 object Helper {
 
   def reportTemplate(cookieCrumbs: ST,
+                     purpose: ST,
                      project: ST,
                      system: Option[ST],
                      families: Option[ST],
                      timeouts: Option[ST],
                      stats: Option[Results],
+                     reportDir: Os.Path,
+                     isActualRun: B,
                      coverage: Option[(ST, ISZ[ST])]): ST = {
 
     @strictpure def wrap(n: String, title: String, o: Option[ST]): Option[ST] =
@@ -109,13 +121,18 @@ object Helper {
     val stats_ : Option[ST] = {
       stats match {
         case Some(s) =>
+          def optLink(num: Z, p: Os.Path): ST = {
+            return (
+              if (isActualRun && num > 0) st"""<a href="${reportDir.relativize(p)}">$num</a> (click the link to view the serialized test vectors)"""
+              else st"$num")
+          }
           Some(
             st"""<tr>
-                |  <td id=col_a title="Number of test vectors that passed">Passing:</td><td>${s.passing}</td>
+                |  <td id=col_a title="Number of test vectors that passed">Passing:</td><td>${optLink(s.passing, s.passingP)}</td>
                 |</tr><tr>
-                |  <td id=col_a title="Number of test vectors that failed">Failing:</td><td>${s.failing}</td>
+                |  <td id=col_a title="Number of test vectors that failed">Failing:</td><td>${optLink(s.failing, s.failingP)}</td>
                 |</tr><tr>
-                |  <td id=col_a title="Number of test vectors that failed to satisfy filter">Unsat:</td><td>${s.unsat}<br><br></td>
+                |  <td id=col_a title="Number of test vectors that failed to satisfy filter">Unsat:</td><td>${optLink(s.unsat, s.unsatP)}<br><br></td>
                 |</tr>""")
 
         case _ => None()
@@ -125,10 +142,11 @@ object Helper {
     val coverage_ : Option[ST] =
       if (coverage.nonEmpty)
         Some(st"""<tr>
-                 |  <td id=col_a title = "Combined code coverage information">Coverage:</td><td>${coverage.get._1}<br><br><br>
+                 |  <td id=col_a title = "Combined code coverage information">Coverage:</td><td>Components Being Tested:<br><br>
+                 |                                                                              ${(coverage.get._2, "<br>\n")}<br><br><br>
                  |
-                 |                                                                              Select Classes<br><br>
-                 |                                                                              ${(coverage.get._2, "<br>\n")}</td>
+                 |                                                                             ${coverage.get._1}
+                 |                                                                              </td>
                  |</tr>""")
       else None()
 
@@ -145,7 +163,9 @@ object Helper {
           |<pre>
           |$cookieCrumbs
           |
-          |<br><br>
+          |<br>
+          |$purpose
+          |<br>
           |
           |<table>
           |  <tr><td id=col_a title="Project name">Projects:</td><td>$project<br><br></td></tr>
@@ -167,6 +187,19 @@ object Helper {
     return st"${(x, " > ")}"
   }
 
+  def getCoverage(r: Results, reportDir: Os.Path): ISZ[ST] = {
+    return r.components.map(c => {
+      val e = coverageMap.get(r.project).get.get(c).get
+      val summary = reportDir.relativize(r.coverage / s"${e}$$.html")
+      val gumbox = r.coverage / s"${e}_GumboX$$.html"
+      val gumboxR = reportDir.relativize(gumbox)
+      val optGumbox =
+        if (gumbox.exists) Some(st" <a href=$gumboxR>GumboX</a>")
+        else None()
+      st"""<a href=$summary>$c</a>$optGumbox"""
+    })
+  }
+
   def addTimeoutReport(r: Results): Unit = {
     val root1 = r.passingP.up
 
@@ -178,13 +211,18 @@ object Helper {
     val r3 = reportDir.relativize(root / r.project / r.subSystem / r.testFamily / "report.html")
 
     val cookieCrumb = cookies(ISZ(("Report", r0), (r.project, r1), (r.subSystem, r2), (r.testFamily, r3)))
-    val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
+    val subs: ISZ[ST] = getCoverage(r, reportDir)
+
     val html = reportTemplate(cookieCrumbs = cookieCrumb,
+      purpose = st"""This presents the combined coverage information along with the number of passing/failing/unsat test vectors
+                    |for the ${r.testFamily} configuration with a ${r.timeout} second timeout""",
       project = st"""<a href="$r1">${r.project}</a>""",
       system = Some(st"""<a href="$r2">${r.subSystem}</a>"""),
-      families = Some(st"""<a href="$r3">${r.testFamily}</a> : ${r.testRow.get("testDescription").get}"""),
+      families = Some(st"""<a href="$r3">${r.testFamily}</a> : ${r.testConfiguration.get("description").get}"""),
       timeouts = Some(st"""${r.timeout}"""),
       stats = Some(r),
+      reportDir = reportDir,
+      isActualRun = T,
       coverage = Some(st"""<a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>""", subs)
     )
     val report = reportDir / "report.html"
@@ -203,13 +241,18 @@ object Helper {
     val timeOuts = for(t <- stimeouts) yield s"<a href=\"${(reportDir.relativize(reportDir / t.string / "report.html")).string}\">${t.string}</a>"
 
     val cookieCrumb = cookies(ISZ(("Report", r0), (r.project, r1), (r.subSystem, r2)))
-    val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
+    val subs: ISZ[ST] = getCoverage(r, reportDir)
+
     val html = reportTemplate(cookieCrumbs = cookieCrumb,
+      purpose = st"""This presents the combined coverage information along with the number of passing/failing/unsat test vectors
+                    |for the ${r.testFamily} configuration using timeouts of 1, 5, and 10 seconds""",
       project = st"""<a href="$r1">${r.project}</a>""",
       system = Some(st"""<a href="$r2">${r.subSystem}</a>"""),
-      families = Some(st"""${r.testFamily} : ${r.testRow.get("testDescription").get}"""),
+      families = Some(st"""${r.testFamily} : ${r.testConfiguration.get("description").get}"""),
       timeouts = Some(st"""${(timeOuts, " ")}"""),
       stats = Some(r),
+      reportDir = reportDir,
+      isActualRun = F,
       coverage = Some(st"""<a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>""", subs)
     )
     val report = reportDir / "report.html"
@@ -226,15 +269,20 @@ object Helper {
     val famOuts = for(t <- families) yield s"""<a href="${(reportDir.relativize(reportDir / t / "report.html")).string}">${t.string}</a><br>"""
 
     val cookieCrumb = cookies(ISZ(("Report", r0), (r.project, r1)))
-    val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
+    //val subs = for (c <- coverageMap.get(r.project).get.entries) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
+    val subs: ISZ[ST] = getCoverage(r, reportDir)
 
     val html = reportTemplate(
       cookieCrumbs = cookieCrumb,
+      purpose = st"""The presents the combined coverage information along with the number of passing/failing/unsat test vectors
+                     |for running all the configurations for ${r.subSystem} using timeouts of 1, 5, and 10 seconds""",
       project = st"""<a href="$r1">${r.project}</a>""",
       system = Some(st"${r.subSystem}"),
       families = Some(st"${(famOuts, " ")}"),
       timeouts= None(),
       stats = Some(r),
+      reportDir = reportDir,
+      isActualRun = F,
       coverage = Some(st"""<a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>""", subs)
     )
 
@@ -251,14 +299,20 @@ object Helper {
     val sysOuts = for(sys <- systems) yield s"<a href=\"${(reportDir.relativize(reportDir / sys / "report.html")).string}\">${sys.string}</a><br><br>"
 
     val cookieCrumb = cookies(ISZ(("Report", r0)))
-    val subs = for (c <- coverageMap.get(r.project).get) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
+    //val subs = for (c <- coverageMap.get(r.project).get.entries) yield st"""<a href="${reportDir.relativize(r.coverage / c._2)}">${c._1}</a>"""
+    val subs: ISZ[ST] = getCoverage(r, reportDir)
+
     val html = reportTemplate(
       cookieCrumbs = cookieCrumb,
+      purpose = st"""This presents the combined coverage information along with the number of passing/failing/unsat test vectors
+                    |for each of the ${r.project}'s subsystems under testing using timeouts of 1, 5, and 10 seconds""",
       project = st"${r.project}",
       system = Some(st"${(sysOuts, " ")}"),
       families = None(),
       timeouts = None(),
       stats = Some(r),
+      reportDir = reportDir,
+      isActualRun = F,
       coverage = Some(st"""<a href="${reportDir.relativize(r.coverage)}/index.html">Full Report</a>""", subs)
     )
     val report = reportDir / "report.html"
@@ -270,11 +324,14 @@ object Helper {
     val projects = for (p <- topLevelProjs) yield st"""<a href="${root.relativize(p._2 / "report.html")}">${p._1}</a>"""
     val html = reportTemplate(
       cookieCrumbs = st"",
+      purpose = st"",
       project = st"${(projects, "<br><br>")}",
       system = None(),
       families = None(),
       timeouts = None(),
       stats = None(),
+      reportDir = root,
+      F,
       coverage = None()
     )
     val f = root / "report.html"
@@ -299,37 +356,40 @@ object Helper {
     }
   }
 
-  val coverageMap: Map[String, ISZ[(String, String)]] = {
-    var m: Map[String, ISZ[(String, String)]] = Map.empty
-    m = m + "isolette" ~> ISZ(
-      ("MonDMF", "isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure.scala.html#L15"),
-      ("MonMA", "isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm.scala.html#L45"),
-      ("MonMMI", "isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface.scala.html#L40"),
-      ("MonMMM", "isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode.scala.html"),
+  val coverageMap: Map[String, HashSMap[String, String]] = {
+    var m: Map[String, HashSMap[String, String]] = Map.empty
+    m = m + "isolette" ~> (HashSMap.empty[String, String] ++ ISZ(
+      ("DMF", "isolette.Monitor/Detect_Monitor_Failure_impl_thermostat_monitor_temperature_detect_monitor_failure"),
+      ("MonMA", "isolette.Monitor/Manage_Alarm_impl_thermostat_monitor_temperature_manage_alarm"),
+      ("MonMMI", "isolette.Monitor/Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monitor_interface"),
+      ("MonMMM", "isolette.Monitor/Manage_Monitor_Mode_impl_thermostat_monitor_temperature_manage_monitor_mode"),
 
-      ("RegDRF", "isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure.scala.html#L16"),
-      ("RegMHS", "isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source.scala.html#L48"),
-      ("RegMRI", "isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface.scala.html#L39"),
-      ("RegMRM", "isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode.scala.html#L41")
-    )
-    m = m + "RTS" ~> ISZ(
-      ("SAU", "RTS.Actuation/Actuator_i_actuationSubsystem_saturationActuatorUnit_saturationActuator_actuator.scala.html#L37"),
-      ("TPA", "RTS.Actuation/Actuator_i_actuationSubsystem_tempPressureActuatorUnit_tempPressureActuator_actuator.scala.html#L36"),
+      ("DRF", "isolette.Regulate/Detect_Regulator_Failure_impl_thermostat_regulate_temperature_detect_regulator_failure"),
+      ("RegMHS", "isolette.Regulate/Manage_Heat_Source_impl_thermostat_regulate_temperature_manage_heat_source"),
+      ("RegMRI", "isolette.Regulate/Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface"),
+      ("RegMRM", "isolette.Regulate/Manage_Regulator_Mode_impl_thermostat_regulate_temperature_manage_regulator_mode")
+    ))
+    m = m + "RTS" ~> (HashSMap.empty[String, String] ++ ISZ(
+      // Actuation Unit 1 threads
+      ("au1_temp_coincidenceLogic", "RTS.Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit1_temperatureLogic_coincidenceLogic"),
+      ("au1_press_coincidenceLogic","RTS.Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit1_pressureLogic_coincidenceLogic"),
+      ("au1_satLogic_coincidenceLogic", "RTS.Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit1_saturationLogic_coincidenceLogic"),
+      ("au1_tempPressTripOut_orLogic", "RTS.Actuation/OrLogic_i_actuationSubsystem_actuationUnit1_tempPressureTripOut_orLogic"),
 
-      ("AU1_PL","RTS.Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit1_pressureLogic_coincidenceLogic.scala.html#L30"),
-      ("AU1_SL", "RTS.Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit1_saturationLogic_coincidenceLogic.scala.html#L30"),
-      ("AU1_TL", "RTS.Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit1_temperatureLogic_coincidenceLogic.scala.html#L30"),
+      // Actuation Unit 2 threads
+      ("au2_temp_coincidenceLogic", "RTS.Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit2_temperatureLogic_coincidenceLogic"),
+      ("au2_press_coincidenceLogic", "RTS.Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit2_pressureLogic_coincidenceLogic"),
+      ("au2_sat_coincidenceLogic", "RTS.Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit2_saturationLogic_coincidenceLogic"),
+      ("au2_tempPressTripOut_orLogic", "RTS.Actuation/OrLogic_i_actuationSubsystem_actuationUnit2_tempPressureTripOut_orLogic"),
 
-      ("AU2_PL", "RTS.Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit2_pressureLogic_coincidenceLogic.scala.html#L30"),
-      ("AU2_SL", "RTS.Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit2_saturationLogic_coincidenceLogic.scala.html#L30"),
-      ("AU2_TL", "RTS.Actuation/CoincidenceLogic_i_actuationSubsystem_actuationUnit2_temperatureLogic_coincidenceLogic.scala.html#L30"),
+      // Temperature/Pressure actuation
+      ("TPAU_actTempPA_orLogic","RTS.Actuation/OrLogic_i_actuationSubsystem_tempPressureActuatorUnit_actuateTempPressureActuator_orLogic"),
+      ("TPAU_tempPressA_actuator", "RTS.Actuation/Actuator_i_actuationSubsystem_tempPressureActuatorUnit_tempPressureActuator_actuator"),
 
-      ("AU1_TPTO", "RTS.Actuation/OrLogic_i_actuationSubsystem_actuationUnit1_tempPressureTripOut_orLogic.scala.html#L30"),
-      ("AU2_TPTO", "RTS.Actuation/OrLogic_i_actuationSubsystem_actuationUnit2_tempPressureTripOut_orLogic.scala.html#L30"),
-
-      ("ASA", "RTS.Actuation/OrLogic_i_actuationSubsystem_saturationActuatorUnit_actuateSaturationActuator_orLogic.scala.html#L30"),
-      ("ATPA","RTS.Actuation/OrLogic_i_actuationSubsystem_tempPressureActuatorUnit_actuateTempPressureActuator_orLogic.scala.html#L30")
-    )
+      // Saturation actuation
+      ("SAU_actSatActuator_orLogic", "RTS.Actuation/OrLogic_i_actuationSubsystem_saturationActuatorUnit_actuateSaturationActuator_orLogic"),
+      ("SAU_satActuator_actuator", "RTS.Actuation/Actuator_i_actuationSubsystem_saturationActuatorUnit_saturationActuator_actuator"),
+    ))
     m
   }
 
@@ -353,8 +413,8 @@ object Helper {
 
   }
 
-  def parseJson(p: Os.Path): HashSMap[String, String] = {
-    val keys: ISZ[String] = ISZ("testFamilyName", "testDescription", "testMethodName", "property", "profile")
+  def parseJsonConfigs(p: Os.Path): HashSMap[String, String] = {
+    val keys: ISZ[String] = ISZ("testConfigurationName", "description", "schema", "property", "profile", "filter", "components")
     return parseJsonH(keys, p.read)
   }
 
@@ -376,8 +436,13 @@ object Helper {
                           testFamily: String,
                           timeout: Z,
 
-                          val testRow:  HashSMap[String, String],
-                          val testRowP: Os.Path,
+                          val testConfiguration:  HashSMap[String, String],
+                          val testConfigurationP: Os.Path,
+
+                          val scheduleInfo: HashSMap[String, String],
+                          val scheduleInfoP: Os.Path,
+
+                          val components: ISZ[String],
 
                           val passing: Z,
                           val failing: Z,
@@ -402,15 +467,20 @@ object Helper {
     return ops.StringOps(p.read).split(c => c == '\n').size
   }
 
+  def getComponents(results: Helper.Results): ISZ[String] = {
+    return ops.StringOps(results.testConfiguration.get("components").get).split(c => c == ',')
+  }
 
   def mergeResults(results: ISZ[Results], relativeTo: Os.Path): Results = {
     var (passing, failing, unsat): (Z, Z, Z) = (0, 0, 0)
+    var components: Set[String] = Set.empty
     var execsPaths: ISZ[Os.Path] = ISZ()
     for (r <- results) {
       passing = passing + r.passing
       failing = failing + r.failing
       unsat = unsat + r.unsat
       execsPaths = execsPaths :+ r.exec
+      components = components ++ r.components
     }
 
     val jacocoOutDir = relativeTo / "jacocoCoverage"
@@ -436,7 +506,7 @@ object Helper {
       println()
     }
 
-    val x = results(0)(passing = passing, failing = failing, unsat = unsat, coverage = jacocoOutDir)
+    val x = results(0)(passing = passing, failing = failing, unsat = unsat, coverage = jacocoOutDir, components = components.elements)
 
     return x
   }
