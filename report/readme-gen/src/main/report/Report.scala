@@ -71,8 +71,9 @@ object Report {
 
     def replaceContent(tag: String, content: ST, addNewLines: B): Unit = {
       val (start, end): (String, String) = (s"<!--start__${tag}-->", s"<!--end____${tag}-->")
-      val posStart = existing.stringIndexOf(start) + start.size // include the tag
+      var posStart = existing.stringIndexOf(start)
       if (posStart > 0) {
+        posStart = posStart + start.size // include the tag
         val posEnd = existing.stringIndexOfFrom(end, posStart)
         if (posEnd > 0) {
           val prelude: String = existing.substring(0, posStart)
