@@ -198,7 +198,7 @@ object Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_re
     // =============================================
 
     // The interface_failure status defaults to TRUE (i.e., failing), which is the safe modality.
-    var interface_failure: B = true
+    var interface_failure: B = T
 
     // Extract the value status from both the upper and lower alarm range
     val upper_desired_temp_status: Isolette_Data_Model.ValueStatus.Type = upper.status
@@ -215,10 +215,10 @@ object Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_re
       //   there is no way to write a valid unit test where null is introduced so these infeasible branches can be ignored
 
       // REQ-MRI-6
-      interface_failure = true
+      interface_failure = T
     } else {
       // REQ-MRI-7
-      interface_failure = false
+      interface_failure = F
     }
 
     // create the appropriately typed value to send on the output port and set the port value

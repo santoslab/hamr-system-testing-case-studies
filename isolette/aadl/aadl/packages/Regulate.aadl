@@ -168,6 +168,10 @@ public
 		-- code generator, and the code-level Logika verification tool verifies that the Slang component implementation
 		-- conforms to the code-level contracts (and thus the GUMBO model-level contracts, and thus the requirements). 
 		annex GUMBO {**
+			-- specification helper function
+			functions
+				def ROUND(num:Base_Types::Float_32):Base_Types::Float_32 := num;
+			
 			--  ====== I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints ======
 			initialize
 				guarantee

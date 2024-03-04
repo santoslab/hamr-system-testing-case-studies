@@ -131,7 +131,7 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
     // =============================================
 
     // The interface_failure status defaults to TRUE, which is the safe modality.
-    var interface_failure: B = true
+    var interface_failure: B = T
 
     // Extract the value status from both the upper and lower alarm range
     val upper_alarm_status: Isolette_Data_Model.ValueStatus.Type = upper.status
@@ -148,10 +148,10 @@ object Manage_Monitor_Interface_impl_thermostat_monitor_temperature_manage_monit
       //   there is no way to write a valid unit test where null is introduced so these infeasible branches can be ignored
 
       //  REQ-MMI-4
-      interface_failure = true
+      interface_failure = T
     } else {
       //  REQ-MMI-5
-      interface_failure = false
+      interface_failure = F
     }
 
     // create the appropriately typed value to send on the output port and set the port value
